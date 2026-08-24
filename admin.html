@@ -14,7 +14,7 @@
     }
 
     .admin-wrap {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 40px auto;
       padding: 20px;
     }
@@ -156,7 +156,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 850px;
+      min-width: 980px;
       background: #fff;
     }
 
@@ -207,7 +207,28 @@
       margin-bottom: 5px;
     }
 
+    .delete-button {
+      background: #d93025;
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .delete-button:hover {
+      background: #b91c1c;
+    }
+
+    .delete-button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
     @media (max-width: 650px) {
+
       .grid {
         grid-template-columns: 1fr;
       }
@@ -224,6 +245,7 @@
       .admin-card {
         padding: 20px;
       }
+
     }
   </style>
 </head>
@@ -241,10 +263,11 @@
     <h1>অ্যাডমিন লগইন</h1>
 
     <p class="muted">
-      শুধুমাত্র অনুমোদিত অ্যাডমিন এখানে নতুন খতিয়ান সংযুক্ত করতে পারবেন।
+      শুধুমাত্র অনুমোদিত অ্যাডমিন এখানে নতুন খতিয়ান সংযুক্ত ও অপ্রয়োজনীয় খতিয়ান ডিলেট করতে পারবেন।
     </p>
 
     <div class="field">
+
       <label>ইমেইল</label>
 
       <input
@@ -252,11 +275,13 @@
         type="email"
         autocomplete="username"
       >
+
     </div>
 
     <br>
 
     <div class="field">
+
       <label>পাসওয়ার্ড</label>
 
       <input
@@ -264,6 +289,7 @@
         type="password"
         autocomplete="current-password"
       >
+
     </div>
 
     <div id="login-msg" class="msg"></div>
@@ -279,12 +305,14 @@
       </button>
 
       <a href="index.html">
+
         <button
           type="button"
           class="btn secondary"
         >
           হোম
         </button>
+
       </a>
 
     </div>
@@ -305,13 +333,12 @@
     <h1>খতিয়ান অ্যাডমিন প্যানেল</h1>
 
     <p class="muted">
-      এখান থেকে প্রতিবার নতুন খতিয়ান সংযুক্ত করা যাবে।
-      আগের খতিয়ান পরিবর্তন হবে না।
+      এখান থেকে নতুন খতিয়ান সংযুক্ত করতে পারবেন এবং যেগুলো দরকার নেই সেগুলো ডিলেট করতে পারবেন।
     </p>
 
 
     <!-- =========================
-         NEW RECORD BUTTON
+         NEW RECORD
     ========================== -->
 
     <div class="new-box">
@@ -319,8 +346,7 @@
       <h2>নতুন খতিয়ান</h2>
 
       <p class="muted">
-        নতুন খতিয়ানের তথ্য দিতে নিচের ফর্ম পূরণ করুন।
-        প্রতিটি নতুন খতিয়ানের জন্য আলাদা রেকর্ড ও আলাদা URL তৈরি হবে।
+        নতুন খতিয়ানের তথ্য দিন। প্রতিটি নতুন খতিয়ানের জন্য আলাদা ID এবং আলাদা URL তৈরি হবে।
       </p>
 
       <button
@@ -348,54 +374,119 @@
       <div class="grid">
 
         <div class="field">
+
           <label>খতিয়ান নং</label>
-          <input id="f_khatian">
+
+          <input
+            id="f_khatian"
+            type="text"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>মালিক</label>
-          <input id="f_owner">
+
+          <input
+            id="f_owner"
+            type="text"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>দাগ নং</label>
-          <input id="f_dag_no">
+
+          <input
+            id="f_dag_no"
+            type="text"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>সার্ভে</label>
-          <input id="f_survey">
+
+          <input
+            id="f_survey"
+            type="text"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>মৌজা</label>
-          <input id="f_mouza">
+
+          <input
+            id="f_mouza"
+            type="text"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>উপজেলা</label>
-          <input id="f_upazila">
+
+          <input
+            id="f_upazila"
+            type="text"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>জেলা</label>
-          <input id="f_district">
+
+          <input
+            id="f_district"
+            type="text"
+          >
+
         </div>
 
+
         <div class="field">
+
           <label>বিভাগ</label>
-          <input id="f_division">
+
+          <input
+            id="f_division"
+            type="text"
+          >
+
         </div>
+
 
         <div class="field full">
+
           <label>তারিখ</label>
-          <input id="f_record_date">
+
+          <input
+            id="f_record_date"
+            type="text"
+          >
+
         </div>
 
       </div>
 
 
-      <div id="save-msg" class="msg"></div>
+      <div
+        id="save-msg"
+        class="msg"
+      ></div>
 
 
       <!-- =========================
@@ -450,7 +541,7 @@
 
 
     <!-- =========================
-         HISTORY / RECORD LIST
+         HISTORY
     ========================== -->
 
     <div class="history-box">
@@ -463,6 +554,7 @@
       >
         মোট ০টি রেকর্ড
       </div>
+
 
       <div class="table-wrap">
 
@@ -488,11 +580,15 @@
 
               <th>URL</th>
 
+              <th>অ্যাকশন</th>
+
             </tr>
 
           </thead>
 
+
           <tbody id="history-body">
+
           </tbody>
 
         </table>
@@ -515,6 +611,7 @@
       >
         লগআউট
       </button>
+
 
       <a href="index.html">
 
