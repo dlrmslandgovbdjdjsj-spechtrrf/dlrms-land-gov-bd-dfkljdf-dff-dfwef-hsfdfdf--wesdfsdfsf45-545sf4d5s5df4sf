@@ -1,4 +1,5 @@
 (function () {
+
   const cfg = window.APP_CONFIG || {};
 
   const valid =
@@ -8,6 +9,7 @@
     !cfg.SUPABASE_ANON_KEY.includes("PASTE_");
 
   if (!valid || !window.supabase) {
+    console.error("Supabase configuration is missing.");
     return;
   }
 
@@ -31,8 +33,8 @@
         display:flex;
         align-items:center;
         justify-content:center;
-        padding:20px;
         margin:0;
+        padding:20px;
         background:#f5f6fa;
         font-family:
           'Noto Sans Bengali',
@@ -42,18 +44,18 @@
 
         <div style="
           width:100%;
-          max-width:520px;
-          background:#ffffff;
+          max-width:500px;
+          padding:35px 20px;
+          background:#fff;
           border:1px solid #e1e1e1;
           border-radius:10px;
           box-shadow:0 2px 10px rgba(0,0,0,.12);
-          padding:40px 25px;
           text-align:center;
         ">
 
           <h1 style="
             margin:0;
-            color:#111111;
+            color:#111;
             font-size:28px;
             font-weight:800;
           ">
@@ -85,9 +87,10 @@
       ">
 
         <h1 style="
-          color:#111111;
-          font-size:22px;
           margin:0;
+          color:#111;
+          font-size:22px;
+          font-weight:800;
         ">
           তথ্য লোড করা যাচ্ছে না
         </h1>
@@ -111,7 +114,6 @@
       "record_date"
     ];
 
-
     fields.forEach(function (field) {
 
       const element =
@@ -125,25 +127,22 @@
       }
 
     });
-
   }
 
 
   async function loadRecord() {
 
-    let query = client
-      .from("land_records")
-      .select(
-        "id,khatian,owner,dag_no,survey,mouza,upazila,district,division,record_date"
-      );
+    let query =
+      client
+        .from("land_records")
+        .select(
+          "id,khatian,owner,dag_no,survey,mouza,upazila,district,division,record_date"
+        );
 
 
-    /*
-      Specific record URL:
-      index.html?id=5
-    */
+    /* Specific record URL */
 
-    if (idParam) {
+    if (idParam !== null) {
 
       if (!/^\d+$/.test(idParam)) {
 
@@ -160,27 +159,33 @@
 
     }
 
-    /*
-      Main website without ?id=
-      will show the latest record.
-    */
+
+    /* Main page without ID */
 
     else {
 
       query =
         query
-          .order("id", {
-            ascending: false
-          })
+          .order(
+            "id",
+            {
+              ascending:false
+            }
+          )
           .limit(1);
 
     }
 
 
-    const {
-      data,
-      error
-    } = await query.maybeSingle();
+    const result =
+      await query.maybeSingle();
+
+
+    const data =
+      result.data;
+
+    const error =
+      result.error;
 
 
     if (error) {
@@ -196,9 +201,7 @@
     }
 
 
-    /*
-      Deleted record or no record.
-    */
+    /* Deleted or missing record */
 
     if (!data) {
 
@@ -213,6 +216,15 @@
   }
 
 
-  loadRecord();
+  loadRecord().catch(function (error) {
+
+    console.error(
+      "Unexpected error:",
+      error
+    );
+
+    showError();
+
+  });
 
 })();
