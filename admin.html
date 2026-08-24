@@ -14,7 +14,7 @@
     }
 
     .admin-wrap {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 40px auto;
       padding: 20px;
     }
@@ -128,7 +128,6 @@
       color: #a40000;
     }
 
-    /* নতুন রেকর্ড তৈরির বাটন */
     .new-box {
       background: #f7faf8;
       border: 1px solid #dcebe2;
@@ -137,7 +136,6 @@
       margin-bottom: 20px;
     }
 
-    /* পুরোনো রেকর্ডের তালিকা */
     .history-box {
       margin-top: 25px;
     }
@@ -158,7 +156,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 750px;
+      min-width: 850px;
       background: #fff;
     }
 
@@ -177,6 +175,16 @@
 
     tr:last-child td {
       border-bottom: 0;
+    }
+
+    .url-cell a {
+      color: #075db5;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .url-cell a:hover {
+      text-decoration: underline;
     }
 
     .record-url {
@@ -227,6 +235,7 @@
   <!-- =========================
        LOGIN
   ========================== -->
+
   <div class="admin-card" id="login-card">
 
     <h1>অ্যাডমিন লগইন</h1>
@@ -237,6 +246,7 @@
 
     <div class="field">
       <label>ইমেইল</label>
+
       <input
         id="email"
         type="email"
@@ -248,6 +258,7 @@
 
     <div class="field">
       <label>পাসওয়ার্ড</label>
+
       <input
         id="password"
         type="password"
@@ -284,6 +295,7 @@
   <!-- =========================
        ADMIN PANEL
   ========================== -->
+
   <div
     class="admin-card"
     id="editor-card"
@@ -298,7 +310,10 @@
     </p>
 
 
-    <!-- নতুন সংযুক্ত করুন -->
+    <!-- =========================
+         NEW RECORD BUTTON
+    ========================== -->
+
     <div class="new-box">
 
       <h2>নতুন খতিয়ান</h2>
@@ -322,6 +337,7 @@
     <!-- =========================
          NEW RECORD FORM
     ========================== -->
+
     <div
       id="new-record-form"
       style="display:none"
@@ -381,7 +397,11 @@
 
       <div id="save-msg" class="msg"></div>
 
-      <!-- নতুন record তৈরি করার বাটন -->
+
+      <!-- =========================
+           SAVE / CANCEL
+      ========================== -->
+
       <div class="btns">
 
         <button
@@ -403,7 +423,10 @@
       </div>
 
 
-      <!-- নতুন record তৈরি হলে URL এখানে দেখাবে -->
+      <!-- =========================
+           NEW RECORD URL
+      ========================== -->
+
       <div
         id="record-url"
         class="record-url"
@@ -418,6 +441,7 @@
           id="record-url-link"
           href="#"
           target="_blank"
+          rel="noopener"
         ></a>
 
       </div>
@@ -426,8 +450,9 @@
 
 
     <!-- =========================
-         HISTORY
+         HISTORY / RECORD LIST
     ========================== -->
+
     <div class="history-box">
 
       <h2>সংযুক্ত খতিয়ানের তালিকা</h2>
@@ -444,15 +469,27 @@
         <table>
 
           <thead>
+
             <tr>
+
               <th>ID</th>
+
               <th>খতিয়ান</th>
+
               <th>মালিক</th>
+
               <th>দাগ নং</th>
+
               <th>সার্ভে</th>
+
               <th>মৌজা</th>
+
               <th>তারিখ</th>
+
+              <th>URL</th>
+
             </tr>
+
           </thead>
 
           <tbody id="history-body">
@@ -468,6 +505,7 @@
     <!-- =========================
          ADMIN BUTTONS
     ========================== -->
+
     <div class="btns">
 
       <button
@@ -479,12 +517,14 @@
       </button>
 
       <a href="index.html">
+
         <button
           type="button"
           class="btn secondary"
         >
           ওয়েবসাইট দেখুন
         </button>
+
       </a>
 
     </div>
@@ -494,13 +534,24 @@
 </div>
 
 
-<!-- Supabase -->
+<!-- =========================
+     SUPABASE
+========================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- Configuration -->
+
+<!-- =========================
+     CONFIG
+========================= -->
+
 <script src="config.js"></script>
 
-<!-- Admin JavaScript -->
+
+<!-- =========================
+     ADMIN JAVASCRIPT
+========================= -->
+
 <script src="admin.js"></script>
 
 </body>
