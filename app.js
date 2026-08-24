@@ -1,3 +1,4 @@
+```javascript
 (function () {
   const cfg = window.APP_CONFIG || {};
 
@@ -16,150 +17,137 @@
     cfg.SUPABASE_ANON_KEY
   );
 
-  const fields = [
-    "khatian",
-    "owner",
-    "dag_no",
-    "survey",
-    "mouza",
-    "upazila",
-    "district",
-    "division",
-    "record_date"
-  ];
-
-  function setText(id, value) {
-    const el = document.getElementById(id);
-
-    if (el) {
-      el.textContent = value ?? "";
-    }
-  }
-
-  function showRecord(record) {
-    fields.forEach(function (field) {
-      setText(field, record[field]);
-    });
-  }
-
-  function showNotFound() {
-    const card = document.getElementById("record-card");
-
-    if (!card) {
-      return;
-    }
-
-    card.style.background = "#ffffff";
-    card.style.backgroundColor = "#ffffff";
-
-    card.innerHTML = `
-      <div style="
-        text-align:center;
-        padding:30px 15px;
-        font-family:inherit;
-      ">
-        <h1 style="
-          color:#a40000;
-          font-size:24px;
-          margin:0 0 12px;
-        ">
-          খতিয়ান পাওয়া যায়নি
-        </h1>
-
-        <p style="
-          color:#555;
-          font-size:16px;
-          line-height:1.6;
-          margin:0;
-        ">
-          এই খতিয়ানটি মুছে ফেলা হয়েছে
-          অথবা আর উপলভ্য নয়।
-        </p>
-      </div>
-    `;
-  }
-
-  function showError() {
-    const card = document.getElementById("record-card");
-
-    if (!card) {
-      return;
-    }
-
-    card.innerHTML = `
-      <div style="
-        text-align:center;
-        padding:30px 15px;
-      ">
-        <h1 style="
-          color:#a40000;
-          font-size:22px;
-          margin:0 0 10px;
-        ">
-          তথ্য লোড করা যায়নি
-        </h1>
-
-        <p style="
-          color:#555;
-          font-size:15px;
-          margin:0;
-        ">
-          অনুগ্রহ করে কিছুক্ষণ পরে আবার চেষ্টা করুন।
-        </p>
-      </div>
-    `;
-  }
-
   const params = new URLSearchParams(
     window.location.search
   );
 
   const idParam = params.get("id");
 
-  /*
-    No ID = latest record
-    With ID = exact record
-  */
+  function showNotFound() {
+    document.body.innerHTML = `
+      <div style="
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+        margin:0;
+        background:#f5f6fa;
+        font-family:
+          'Noto Sans Bengali',
+          'Noto Sans Bengali UI',
+          sans-serif;
+      ">
+        <div style="
+          width:100%;
+          max-width:520px;
+          background:#ffffff;
+          border:1px solid #e1e1e1;
+          border-radius:10px;
+          box-shadow:0 2px 10px rgba(0,0,0,.12);
+          padding:40px 25px;
+          text-align:center;
+        ">
+          <h1 style="
+            margin:0;
+            color:#00863c;
+            font-size:28px;
+            font-weight:800;
+          ">
+            কোনো খতিয়ান পাওয়া যায়নি
+          </h1>
+        </div>
+      </div>
+    `;
+
+    document.body.style.margin = "0";
+  }
+
+  function showError() {
+    document.body.innerHTML = `
+      <div style="
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:20px;
+        margin:0;
+        background:#f5f6fa;
+        font-family:
+          'Noto Sans Bengali',
+          'Noto Sans Bengali UI',
+          sans-serif;
+      ">
+        <div style="
+          width:100%;
+          max-width:520px;
+          background:#ffffff;
+          border:1px solid #e1e1e1;
+          border-radius:10px;
+          box-shadow:0 2px 10px rgba(0,0,0,.12);
+          padding:40px 25px;
+          text-align:center;
+        ">
+          <h1 style="
+            margin:0;
+            color:#a40000;
+            font-size:26px;
+            font-weight:800;
+          ">
+            তথ্য লোড করা যাচ্ছে না
+          </h1>
+        </div>
+      </div>
+    `;
+
+    document.body.style.margin = "0";
+  }
+
+  function showRecord(record) {
+    const fields = [
+      "khatian",
+      "owner",
+      "dag_no",
+      "survey",
+      "mouza",
+      "upazila",
+      "district",
+      "division",
+      "record_date"
+    ];
+
+    fields.forEach(function (field) {
+      const element = document.getElementById(field);
+
+      if (element) {
+        element.textContent =
+          record[field] ?? "";
+      }
+    });
+  }
 
   async function loadRecord() {
 
-    let query = client
-      .from("land_records")
-      .select(
-        "id,khatian,owner,dag_no,survey,mouza,upazila,district,division,record_date"
-      );
-
-    if (idParam && /^\d+$/.test(idParam)) {
-
-      query = query.eq(
-        "id",
-        Number(idParam)
-      );
-
-    } else {
-
-      query = query
-        .order("id", {
-          ascending: false
-        })
-        .limit(1);
-    }
-
-    const {
-      data,
-      error
-    } = await query.maybeSingle();
-
-    if (error) {
-      console.error(error);
-      showError();
+    if (!idParam || !/^\d+$/.test(idParam)) {
+      showNotFound();
       return;
     }
 
-    /*
-      No fallback data here.
-      Deleted record = no data = dead URL.
-    */
+    const recordId = Number(idParam);
+
+    const { data, error } = await client
+      .from("land_records")
+      .select(
+        "id,khatian,owner,dag_no,survey,mouza,upazila,district,division,record_date"
+      )
+      .eq("id", recordId)
+      .maybeSingle();
+
+    if (error) {
+      console.error("Supabase error:", error);
+      showError();
+      return;
+    }
 
     if (!data) {
       showNotFound();
@@ -172,3 +160,4 @@
   loadRecord();
 
 })();
+```
