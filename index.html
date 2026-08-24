@@ -1,41 +1,19 @@
-```html id="m5k2pn"
+```html
 <!doctype html>
 <html lang="bn">
-
 <head>
-
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
-
-  <meta
-    name="theme-color"
-    content="#0d8ed6"
-  >
-
-  <meta
-    name="msapplication-navbutton-color"
-    content="#0d8ed6"
-  >
-
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
+  <meta name="theme-color" content="#0d8ed6">
+  <meta name="msapplication-navbutton-color" content="#0d8ed6">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <title>খতিয়ান তথ্য</title>
 
-  <link
-    rel="stylesheet"
-    href="style.css?v=5"
-  >
-
+  <link rel="stylesheet" href="style.css?v=5">
 
   <style>
-
     @media (max-width:700px){
 
       html,
@@ -45,32 +23,27 @@
         margin:0 !important;
         padding:0 !important;
         overflow-x:hidden !important;
-        background:#ffffff !important;
+        background:#fff !important;
       }
 
       body{
         min-width:0 !important;
       }
 
-
-      /* Header */
-
       .site-header{
         width:100% !important;
         height:118px !important;
-        background:#ffffff !important;
+        background:#fff !important;
       }
 
       .top-strip{
         position:absolute !important;
-
         top:0 !important;
         left:0 !important;
         transform:none !important;
 
         width:100% !important;
         height:46px !important;
-
         line-height:46px !important;
 
         font-size:13px !important;
@@ -94,7 +67,6 @@
 
       .nav-wrap{
         position:absolute !important;
-
         top:46px !important;
         left:0 !important;
 
@@ -102,8 +74,7 @@
         height:72px !important;
 
         bottom:auto !important;
-
-        background:#ffffff !important;
+        background:#fff !important;
       }
 
       .nav-inner{
@@ -120,7 +91,6 @@
       .brand{
         width:47px !important;
         height:47px !important;
-
         top:0 !important;
         position:relative !important;
       }
@@ -137,19 +107,15 @@
 
       .login{
         margin-left:auto !important;
-
         display:flex !important;
         align-items:center !important;
-
         gap:8px !important;
       }
 
       .cart{
         width:42px !important;
         height:42px !important;
-
         min-width:42px !important;
-
         font-size:18px !important;
       }
 
@@ -159,29 +125,21 @@
 
       .login::after{
         content:"⋮";
-
         width:20px !important;
         height:42px !important;
 
         display:flex !important;
-
         align-items:center !important;
         justify-content:center !important;
 
-        color:#111111 !important;
-
+        color:#111 !important;
         font-family:Arial,sans-serif !important;
-
         font-size:30px !important;
         line-height:1 !important;
       }
 
-
-      /* Record area */
-
       .record-area{
         width:100% !important;
-
         height:auto !important;
         min-height:0 !important;
 
@@ -190,15 +148,11 @@
         background:#f5f6fa !important;
       }
 
-
-      /* Record card */
-
       .record-card{
         position:relative !important;
 
         top:auto !important;
         left:auto !important;
-
         transform:none !important;
 
         width:100% !important;
@@ -211,34 +165,29 @@
 
         padding:18px 23px 17px !important;
 
-        background:#ffffff !important;
-        background-color:#ffffff !important;
+        background:#fff !important;
+        background-color:#fff !important;
         background-image:none !important;
 
         border:1px solid #e1e1e1 !important;
-
         border-radius:8px !important;
 
-        box-shadow:
-          0 2px 8px rgba(0,0,0,.12) !important;
+        box-shadow:0 2px 8px rgba(0,0,0,.12) !important;
 
-        color:#111111 !important;
+        color:#111 !important;
       }
 
       .record-card h1{
         text-align:center !important;
-
         color:#00863c !important;
 
         font-size:22px !important;
         line-height:1.25 !important;
 
         margin:0 0 13px !important;
-
         padding:0 !important;
 
         font-weight:800 !important;
-
         white-space:nowrap !important;
       }
 
@@ -253,79 +202,58 @@
         align-items:center !important;
 
         min-height:38px !important;
-
         height:auto !important;
 
         padding:1px 0 !important;
 
         font-size:15.5px !important;
-
         line-height:1.3 !important;
 
-        color:#111111 !important;
+        color:#111 !important;
       }
 
       .record-row b{
-        color:#111111 !important;
-
+        color:#111 !important;
         font-weight:800 !important;
-
         white-space:nowrap !important;
       }
 
       .record-row span{
-        color:#111111 !important;
-
+        color:#111 !important;
         font-weight:700 !important;
-
         text-align:center !important;
       }
 
       .record-row strong{
-        color:#111111 !important;
-
+        color:#111 !important;
         font-weight:500 !important;
-
         min-width:0 !important;
-
         word-break:break-word !important;
-
         overflow-wrap:anywhere !important;
       }
 
-
-      /* Divider */
-
       .divider{
         height:42px !important;
-
-        background:#ffffff !important;
+        background:#fff !important;
       }
 
       .divider::before{
         height:15px !important;
       }
 
-
-      /* Footer */
-
       .site-footer{
         width:100% !important;
-
         height:auto !important;
-
         min-height:0 !important;
 
         padding:34px 20px 46px !important;
 
         background:#e4ffe2 !important;
-
         position:relative !important;
       }
 
       .footer-inner{
         width:100% !important;
-
         margin:0 !important;
 
         display:grid !important;
@@ -335,13 +263,11 @@
           1fr !important;
 
         column-gap:14px !important;
-
         row-gap:28px !important;
       }
 
       .footer-inner > section{
         display:block !important;
-
         width:100% !important;
       }
 
@@ -351,11 +277,8 @@
 
       .footer-inner h2{
         font-size:19px !important;
-
         line-height:1.3 !important;
-
         margin:0 0 12px !important;
-
         color:#08732f !important;
       }
 
@@ -367,77 +290,52 @@
           1fr !important;
 
         column-gap:12px !important;
-
         row-gap:1px !important;
       }
 
       .two-cols li{
         font-size:13px !important;
-
         line-height:2.05 !important;
-
         white-space:normal !important;
       }
 
       .two-cols li::before{
         content:"▶" !important;
-
         color:#07843b !important;
-
         font-size:8px !important;
-
         margin-right:5px !important;
       }
 
-
-      /* Planning */
-
       .planning{
         display:block !important;
-
         grid-column:1 !important;
       }
 
       .planning .logos{
         display:flex !important;
-
         align-items:center !important;
-
         justify-content:flex-start !important;
       }
 
       .planning .lmap-logo{
         display:block !important;
-
         width:100% !important;
-
         max-width:150px !important;
-
         height:auto !important;
-
         max-height:none !important;
-
         object-fit:contain !important;
       }
 
-
-      /* Social */
-
       .social{
         display:block !important;
-
         grid-column:2 !important;
-
         text-align:left !important;
       }
 
       .social .store{
         display:flex !important;
-
         width:118px !important;
-
         height:34px !important;
-
         margin:3px 0 10px !important;
       }
 
@@ -451,53 +349,39 @@
 
       .social-icons{
         display:flex !important;
-
         justify-content:flex-start !important;
-
         gap:6px !important;
-
         flex-wrap:wrap !important;
       }
 
       .social-icons i{
         width:29px !important;
-
         height:29px !important;
-
         font-size:17px !important;
       }
-
-
-      /* Support */
 
       .support{
         display:flex !important;
 
         position:relative !important;
-
         right:auto !important;
         bottom:auto !important;
 
         grid-column:1 / -1 !important;
 
         width:100% !important;
-
         height:auto !important;
 
         margin:0 !important;
-
         padding:5px 0 0 !important;
 
         background:transparent !important;
-
         border-radius:0 !important;
 
         justify-content:center !important;
-
         align-items:center !important;
 
         gap:6px !important;
-
         font-size:11px !important;
 
         flex-wrap:wrap !important;
@@ -505,33 +389,25 @@
 
       .support img{
         width:105px !important;
-
         height:auto !important;
       }
-
-
-      /* Copyright */
 
       .copyright{
         display:block !important;
 
         position:relative !important;
-
         left:auto !important;
-
         bottom:auto !important;
 
         width:100% !important;
-
         height:auto !important;
 
         grid-column:1 / -1 !important;
 
         margin-top:2px !important;
-
         padding:7px 3px !important;
 
-        background:#ffffff !important;
+        background:#fff !important;
 
         text-align:center !important;
 
@@ -540,18 +416,13 @@
         border-top:1px solid #ddd !important;
       }
 
-
-      /* Chat */
-
       .chat{
         position:fixed !important;
 
         right:13px !important;
-
         bottom:13px !important;
 
         width:48px !important;
-
         height:48px !important;
 
         font-size:20px !important;
@@ -559,7 +430,6 @@
         z-index:9999 !important;
       }
     }
-
 
     @media (max-width:400px){
 
@@ -623,7 +493,6 @@
           minmax(0,1fr) !important;
 
         min-height:35px !important;
-
         font-size:14px !important;
       }
 
@@ -679,40 +548,27 @@
         font-size:8px !important;
       }
     }
-
   </style>
-
 </head>
-
 
 <body>
 
-
 <header class="site-header">
 
-
   <div class="top-strip">
-
-    <div
-      class="top-inner"
-      id="live-date"
-    >
+    <div class="top-inner" id="live-date">
       তারিখ লোড হচ্ছে...
     </div>
-
   </div>
-
 
   <div class="nav-wrap">
 
     <div class="nav-inner">
 
-
       <div
         class="brand"
         aria-label="ভূমি ব্যবস্থাপনা অটোমেশন প্রকল্প"
       >
-
         <div class="brand-icon">
 
           <svg
@@ -763,15 +619,11 @@
           </svg>
 
         </div>
-
       </div>
-
 
       <nav class="main-nav">
 
-        <a href="index.html">
-          হোম
-        </a>
+        <a href="index.html">হোম</a>
 
         <a href="#">
           আমাদের সম্পর্কে
@@ -783,30 +635,19 @@
           <span class="down">▼</span>
         </a>
 
-        <a href="#">
-          পরিপত্র
-        </a>
+        <a href="#">পরিপত্র</a>
 
-        <a href="#">
-          আবেদনের অবস্থা
-        </a>
+        <a href="#">আবেদনের অবস্থা</a>
 
-        <a href="#">
-          নির্দেশিকা
-        </a>
+        <a href="#">নির্দেশিকা</a>
 
-        <a href="#">
-          খতিয়ান ও ম্যাপ অনুসন্ধান
-        </a>
+        <a href="#">খতিয়ান ও ম্যাপ অনুসন্ধান</a>
 
       </nav>
 
-
       <div class="login">
 
-        <span class="cart">
-          🛒
-        </span>
+        <span class="cart">🛒</span>
 
         <a href="admin.html">
 
@@ -820,7 +661,6 @@
       </div>
 
     </div>
-
   </div>
 
 </header>
@@ -828,9 +668,7 @@
 
 <main>
 
-
   <section class="record-area">
-
 
     <div
       class="record-card"
@@ -842,237 +680,100 @@
       "
     >
 
-
       <h1>
-
         খতিয়ান নং -
-
-        <span id="khatian">
-          লোড হচ্ছে...
-        </span>
-
+        <span id="khatian">লোড হচ্ছে...</span>
       </h1>
 
-
       <div class="record-row">
-
-        <b>
-          মালিক
-        </b>
-
-        <span>
-          :
-        </span>
-
-        <strong id="owner">
-          —
-        </strong>
-
+        <b>মালিক</b>
+        <span>:</span>
+        <strong id="owner">—</strong>
       </div>
 
-
       <div class="record-row">
-
-        <b>
-          দাগ নং
-        </b>
-
-        <span>
-          :
-        </span>
-
-        <strong id="dag_no">
-          —
-        </strong>
-
+        <b>দাগ নং</b>
+        <span>:</span>
+        <strong id="dag_no">—</strong>
       </div>
 
-
       <div class="record-row">
-
-        <b>
-          সার্ভে
-        </b>
-
-        <span>
-          :
-        </span>
-
-        <strong id="survey">
-          —
-        </strong>
-
+        <b>সার্ভে</b>
+        <span>:</span>
+        <strong id="survey">—</strong>
       </div>
 
-
       <div class="record-row">
-
-        <b>
-          মৌজা
-        </b>
-
-        <span>
-          :
-        </span>
-
-        <strong id="mouza">
-          —
-        </strong>
-
+        <b>মৌজা</b>
+        <span>:</span>
+        <strong id="mouza">—</strong>
       </div>
 
-
       <div class="record-row">
-
-        <b>
-          উপজেলা
-        </b>
-
-        <span>
-          :
-        </span>
-
-        <strong id="upazila">
-          —
-        </strong>
-
+        <b>উপজেলা</b>
+        <span>:</span>
+        <strong id="upazila">—</strong>
       </div>
 
-
       <div class="record-row">
-
-        <b>
-          জেলা
-        </b>
-
-        <span>
-          :
-        </span>
-
-        <strong id="district">
-          —
-        </strong>
-
+        <b>জেলা</b>
+        <span>:</span>
+        <strong id="district">—</strong>
       </div>
 
-
       <div class="record-row">
-
-        <b>
-          বিভাগ
-        </b>
-
-        <span>
-          :
-        </span>
-
-        <strong id="division">
-          —
-        </strong>
-
+        <b>বিভাগ</b>
+        <span>:</span>
+        <strong id="division">—</strong>
       </div>
 
-
       <div class="record-row">
-
-        <b>
-          তারিখ
-        </b>
-
-        <span>
-          :
-        </span>
-
-        <strong id="record_date">
-          —
-        </strong>
-
+        <b>তারিখ</b>
+        <span>:</span>
+        <strong id="record_date">—</strong>
       </div>
-
 
     </div>
 
-
   </section>
 
-
   <div class="divider"></div>
-
 
 </main>
 
 
 <footer class="site-footer">
 
-
   <div class="footer-inner">
-
 
     <section>
 
-      <h2>
-        গুরুত্বপূর্ণ লিংক
-      </h2>
-
+      <h2>গুরুত্বপূর্ণ লিংক</h2>
 
       <div class="two-cols">
 
-
         <ul>
-
-          <li>
-            বাংলাদেশ জাতীয় তথ্য বাতায়ন
-          </li>
-
-          <li>
-            ভূমি মন্ত্রণালয়
-          </li>
-
-          <li>
-            তথ্য অধিদপ্তর (পিআইডি)
-          </li>
-
-          <li>
-            অভিযোগ প্রতিকার ব্যবস্থা
-          </li>
-
+          <li>বাংলাদেশ জাতীয় তথ্য বাতায়ন</li>
+          <li>ভূমি মন্ত্রণালয়</li>
+          <li>তথ্য অধিদপ্তর (পিআইডি)</li>
+          <li>অভিযোগ প্রতিকার ব্যবস্থা</li>
         </ul>
 
-
         <ul>
-
-          <li>
-            সার্ভে টিকেট
-          </li>
-
-          <li>
-            গোপনীয়তা নীতি
-          </li>
-
-          <li>
-            সাধারণ জিজ্ঞাসা
-          </li>
-
-          <li>
-            যোগাযোগ
-          </li>
-
+          <li>সার্ভে টিকেট</li>
+          <li>গোপনীয়তা নীতি</li>
+          <li>সাধারণ জিজ্ঞাসা</li>
+          <li>যোগাযোগ</li>
         </ul>
-
 
       </div>
-
 
     </section>
 
 
     <section class="planning">
 
-
-      <h2>
-        পরিকল্পনা ও বাস্তবায়ন
-      </h2>
-
+      <h2>পরিকল্পনা ও বাস্তবায়ন</h2>
 
       <div class="logos">
 
@@ -1084,36 +785,24 @@
 
       </div>
 
-
     </section>
 
 
     <section class="social">
 
-
-      <h2>
-        সামাজিক যোগাযোগ
-      </h2>
-
+      <h2>সামাজিক যোগাযোগ</h2>
 
       <div class="store">
 
         ▶
 
         <span>
-
           GET IT ON
-
           <br>
-
-          <b>
-            Google Play
-          </b>
-
+          <b>Google Play</b>
         </span>
 
       </div>
-
 
       <div class="social-icons">
 
@@ -1124,9 +813,7 @@
 
       </div>
 
-
     </section>
-
 
   </div>
 
@@ -1144,9 +831,7 @@
 
 
   <div class="copyright">
-
     ©২০২৬ ভূমি ব্যবস্থাপনা অটোমেশন প্রকল্প
-
   </div>
 
 
@@ -1157,134 +842,90 @@
     ▤
   </button>
 
-
 </footer>
 
 
-<script
-  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="config.js"></script>
 
 
 <script>
-
-(function(){
+(function () {
 
   const dateElement =
     document.getElementById("live-date");
 
-  if(!dateElement){
+  if (!dateElement) {
     return;
   }
 
+  const DHAKA_TIME_ZONE = "Asia/Dhaka";
 
-  const DHAKA_TIME_ZONE =
-    "Asia/Dhaka";
+  function getPart(parts, type) {
 
+    const item = parts.find(function (part) {
+      return part.type === type;
+    });
 
-  function getPart(parts,type){
-
-    const found =
-      parts.find(function(part){
-        return part.type === type;
-      });
-
-    return found ? found.value : "";
-
+    return item ? item.value : "";
   }
 
+  function updateLiveDate() {
 
-  function updateLiveDate(){
+    const now = new Date();
 
-    const now =
-      new Date();
-
-
-    try{
+    try {
 
       const banglaFormatter =
         new Intl.DateTimeFormat(
           "bn-BD-u-ca-beng",
           {
-            timeZone:DHAKA_TIME_ZONE,
-            weekday:"long",
-            day:"numeric",
-            month:"long",
-            year:"numeric"
+            timeZone: DHAKA_TIME_ZONE,
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
           }
         );
-
 
       const englishFormatter =
         new Intl.DateTimeFormat(
           "bn-BD",
           {
-            timeZone:DHAKA_TIME_ZONE,
-            day:"numeric",
-            month:"long",
-            year:"numeric"
+            timeZone: DHAKA_TIME_ZONE,
+            day: "numeric",
+            month: "long",
+            year: "numeric"
           }
         );
-
 
       const banglaParts =
         banglaFormatter.formatToParts(now);
 
-
       const englishParts =
         englishFormatter.formatToParts(now);
 
-
       const weekday =
-        getPart(
-          banglaParts,
-          "weekday"
-        );
-
+        getPart(banglaParts, "weekday");
 
       const banglaDay =
-        getPart(
-          banglaParts,
-          "day"
-        );
-
+        getPart(banglaParts, "day");
 
       const banglaMonth =
-        getPart(
-          banglaParts,
-          "month"
-        );
-
+        getPart(banglaParts, "month");
 
       const banglaYear =
-        getPart(
-          banglaParts,
-          "year"
-        );
-
+        getPart(banglaParts, "year");
 
       const englishDay =
-        getPart(
-          englishParts,
-          "day"
-        );
-
+        getPart(englishParts, "day");
 
       const englishMonth =
-        getPart(
-          englishParts,
-          "month"
-        );
-
+        getPart(englishParts, "month");
 
       const englishYear =
-        getPart(
-          englishParts,
-          "year"
-        );
-
+        getPart(englishParts, "year");
 
       dateElement.textContent =
         weekday +
@@ -1301,19 +942,15 @@
         " " +
         englishYear;
 
-    }
-    catch(error){
+    } catch (error) {
 
       dateElement.textContent =
         "তারিখ পাওয়া যাচ্ছে না";
 
     }
-
   }
 
-
   updateLiveDate();
-
 
   setInterval(
     updateLiveDate,
@@ -1321,14 +958,11 @@
   );
 
 })();
-
 </script>
 
 
 <script src="app.js"></script>
 
-
 </body>
-
 </html>
 ```
