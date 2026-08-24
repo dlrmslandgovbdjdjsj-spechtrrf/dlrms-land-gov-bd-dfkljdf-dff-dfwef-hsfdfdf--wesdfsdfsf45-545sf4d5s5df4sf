@@ -1,28 +1,31 @@
 @font-face{
   font-family:NotoBengaliLocal;
-  src:local('Noto Sans Bengali'),local('Noto Sans Bengali UI');
-  font-display:swap
+  src:local('Noto Sans Bengali'),
+      local('Noto Sans Bengali UI');
+  font-display:swap;
 }
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   margin:0;
+  padding:0;
   min-height:100%;
   font-family:NotoBengaliLocal,'Noto Sans Bengali',sans-serif;
   color:#111;
-  background:#fff
+  background:#fff;
 }
 
 body{
-  min-width:1000px
+  min-width:0;
 }
 
 a{
   text-decoration:none;
-  color:inherit
+  color:inherit;
 }
 
 
@@ -35,7 +38,7 @@ a{
   background:#fff;
   position:relative;
   box-shadow:0 2px 5px rgba(0,0,0,.16);
-  z-index:2
+  z-index:10;
 }
 
 .top-strip{
@@ -55,7 +58,8 @@ a{
   text-align:center;
   font-size:13px;
   font-weight:700;
-  line-height:28px
+  line-height:28px;
+  white-space:nowrap;
 }
 
 .nav-wrap{
@@ -63,7 +67,7 @@ a{
   left:0;
   right:0;
   bottom:0;
-  height:28px
+  height:28px;
 }
 
 .nav-inner{
@@ -72,7 +76,7 @@ a{
   margin:auto;
   display:flex;
   align-items:center;
-  position:relative
+  position:relative;
 }
 
 .brand{
@@ -81,18 +85,18 @@ a{
   position:relative;
   top:-14px;
   display:flex;
-  align-items:center
+  align-items:center;
 }
 
 .brand-icon{
   width:44px;
-  height:44px
+  height:44px;
 }
 
 .brand-icon svg{
   width:44px;
   height:44px;
-  display:block
+  display:block;
 }
 
 .main-nav{
@@ -103,24 +107,24 @@ a{
   margin-left:205px;
   font-size:14px;
   font-weight:600;
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .main-nav a{
-  line-height:28px
+  line-height:28px;
 }
 
 .down{
   font-size:9px;
   margin-left:3px;
-  color:#111
+  color:#111;
 }
 
 .login{
   margin-left:auto;
   display:flex;
   align-items:center;
-  gap:9px
+  gap:9px;
 }
 
 .cart{
@@ -132,7 +136,7 @@ a{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:13px
+  font-size:13px;
 }
 
 .login button{
@@ -143,12 +147,13 @@ a{
   padding:5px 12px 6px;
   font-family:inherit;
   font-weight:700;
-  font-size:14px
+  font-size:14px;
+  cursor:pointer;
 }
 
 .login button span{
   font-size:14px;
-  margin-left:4px
+  margin-left:4px;
 }
 
 
@@ -159,7 +164,7 @@ a{
 .record-area{
   height:538px;
   background:#f5f6fa;
-  position:relative
+  position:relative;
 }
 
 .record-card{
@@ -168,12 +173,13 @@ a{
   left:50%;
   transform:translateX(-50%);
   width:330px;
-  height:262px;
+  min-height:262px;
+  height:auto;
   background:#fff;
   border:1px solid #e1e1e1;
   border-radius:6px;
   box-shadow:0 2px 8px rgba(0,0,0,.12);
-  padding:15px 22px
+  padding:15px 22px;
 }
 
 .record-card h1{
@@ -181,34 +187,42 @@ a{
   color:#00863c;
   font-size:18px;
   margin:0 0 8px;
-  font-weight:800
+  font-weight:800;
 }
 
 .record-row{
   display:grid;
   grid-template-columns:62px 12px 1fr;
   align-items:center;
-  height:26px;
+  min-height:26px;
+  height:auto;
   font-size:14px;
-  line-height:1.2
+  line-height:1.35;
+  padding:2px 0;
 }
 
 .record-row b{
-  font-weight:800
+  font-weight:800;
 }
 
 .record-row strong{
-  font-weight:500
+  font-weight:500;
+  word-break:break-word;
 }
 
 .record-row span{
-  font-weight:700
+  font-weight:700;
 }
+
+
+/* =========================
+   DIVIDER
+========================= */
 
 .divider{
   height:56px;
   background:#fff;
-  position:relative
+  position:relative;
 }
 
 .divider:before{
@@ -223,7 +237,7 @@ a{
     #f3fbf7 0%,
     #128c4b 48%,
     #f3fbf7 100%
-  )
+  );
 }
 
 
@@ -232,10 +246,12 @@ a{
 ========================= */
 
 .site-footer{
-  height:304px;
+  min-height:304px;
+  height:auto;
   background:#e4ffe2;
   position:relative;
-  padding-top:40px
+  padding-top:40px;
+  padding-bottom:60px;
 }
 
 .footer-inner{
@@ -243,42 +259,42 @@ a{
   margin:0 auto;
   display:grid;
   grid-template-columns:390px 400px 1fr;
-  gap:20px
+  gap:20px;
 }
 
 .footer-inner h2{
   font-size:16px;
   margin:0 0 12px;
-  font-weight:800
+  font-weight:800;
 }
 
 .two-cols{
   display:grid;
-  grid-template-columns:1fr 1fr
+  grid-template-columns:1fr 1fr;
 }
 
 .two-cols ul{
   list-style:none;
   margin:0;
-  padding:0
+  padding:0;
 }
 
 .two-cols li{
   font-size:13px;
   line-height:27px;
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .two-cols li:before{
   content:'▶';
   color:#07843b;
   font-size:10px;
-  margin-right:8px
+  margin-right:8px;
 }
 
 .logos{
   display:flex;
-  align-items:center
+  align-items:center;
 }
 
 .lmap-logo{
@@ -287,11 +303,11 @@ a{
   height:auto;
   max-height:92px;
   object-fit:contain;
-  object-position:left center
+  object-position:left center;
 }
 
 .social{
-  position:relative
+  position:relative;
 }
 
 .store{
@@ -306,27 +322,27 @@ a{
   gap:6px;
   font-family:Arial,sans-serif;
   font-size:11px;
-  margin:0 auto 14px
+  margin:0 auto 14px;
 }
 
 .store:first-letter{
-  color:#8fe3ff
+  color:#8fe3ff;
 }
 
 .store span{
   font-size:7px;
-  line-height:1.05
+  line-height:1.05;
 }
 
 .store b{
-  font-size:12px
+  font-size:12px;
 }
 
 .social-icons{
   display:flex;
   justify-content:center;
   gap:12px;
-  margin-top:0
+  margin-top:0;
 }
 
 .social-icons i{
@@ -341,19 +357,19 @@ a{
   align-items:center;
   justify-content:center;
   font-size:18px;
-  font-weight:700
+  font-weight:700;
 }
 
 .social-icons i:nth-child(2){
-  background:#050505
+  background:#050505;
 }
 
 .social-icons i:nth-child(3){
-  background:#e63d7e
+  background:#e63d7e;
 }
 
 .social-icons i:nth-child(4){
-  background:#f04b43
+  background:#f04b43;
 }
 
 .support{
@@ -368,13 +384,13 @@ a{
   font-size:13px;
   display:flex;
   align-items:center;
-  gap:8px
+  gap:8px;
 }
 
 .support img{
   width:145px;
   height:auto;
-  display:block
+  display:block;
 }
 
 .copyright{
@@ -386,7 +402,7 @@ a{
   width:100%;
   padding:6px 18px;
   font-size:11px;
-  border-top:1px solid #ddd
+  border-top:1px solid #ddd;
 }
 
 .chat{
@@ -400,176 +416,152 @@ a{
   background:#4156c6;
   color:#fff;
   box-shadow:0 2px 4px rgba(0,0,0,.2);
-  font-size:22px
+  font-size:22px;
+  cursor:pointer;
 }
 
 
 /* =========================
-   TABLET / SMALL LAPTOP
+   TABLET / SMALL PC
 ========================= */
 
-@media(max-width:1200px) and (min-width:701px){
+@media (max-width:1200px){
 
   .top-strip,
   .nav-inner,
   .footer-inner{
-    width:94%
+    width:94%;
   }
 
   .main-nav{
     margin-left:110px;
-    gap:18px
+    gap:18px;
   }
 
   .footer-inner{
-    grid-template-columns:1.2fr 1fr .8fr
+    grid-template-columns:1.2fr 1fr .8fr;
   }
 
   .support{
-    right:18%
+    right:18%;
   }
 }
 
 
-/* =====================================================
-   MOBILE VERSION
-   700px এবং তার নিচে
-===================================================== */
+/* =========================
+   MOBILE
+========================= */
 
-@media(max-width:700px){
+@media (max-width:700px){
 
   html,
   body{
     width:100%;
     min-width:0;
-    overflow-x:hidden
+    overflow-x:hidden;
   }
 
   body{
-    background:#fff
+    font-size:16px;
   }
 
 
-  /* -------------------------
-     MOBILE HEADER
-  ------------------------- */
+  /* HEADER */
 
   .site-header{
-    height:145px;
-    background:#fff;
-    box-shadow:0 2px 5px rgba(0,0,0,.15)
+    height:92px;
   }
 
   .top-strip{
     position:absolute;
-    top:0;
+    width:100%;
+    height:36px;
     left:0;
     transform:none;
-    width:100%;
-    height:54px;
-
-    background:linear-gradient(
-      90deg,
-      #eaf7f0 0%,
-      #3d9b68 50%,
-      #eaf7f0 100%
-    );
-
+    top:0;
     font-size:15px;
-    line-height:54px;
-    white-space:nowrap;
+    line-height:36px;
+    padding:0 8px;
     overflow:hidden;
-    padding:0 8px
+    text-overflow:ellipsis;
   }
 
   .nav-wrap{
-    top:54px;
-    bottom:auto;
-    height:91px;
-    background:#fff
+    height:56px;
+    bottom:0;
+    background:#fff;
   }
 
   .nav-inner{
     width:100%;
-    height:91px;
+    height:56px;
     margin:0;
-    padding:0 30px;
+    padding:0 16px;
     display:flex;
-    align-items:center
+    align-items:center;
   }
 
   .brand{
-    width:70px;
-    height:70px;
-    position:static;
+    width:58px;
+    height:56px;
+    top:0;
     display:flex;
-    align-items:center
+    align-items:center;
+    justify-content:flex-start;
+    flex-shrink:0;
   }
 
   .brand-icon{
-    width:58px;
-    height:58px
+    width:48px;
+    height:48px;
   }
 
   .brand-icon svg{
-    width:58px;
-    height:58px
+    width:48px;
+    height:48px;
   }
 
-  /* মোবাইলে বড় navigation menu থাকবে না */
+  /*
+    মোবাইলে মাঝের বড় মেনু লুকানো
+    এতে স্ক্রিনে জায়গা থাকে
+  */
+
   .main-nav{
-    display:none
+    display:none;
   }
 
   .login{
     margin-left:auto;
-    display:flex;
-    align-items:center;
-    gap:12px
+    gap:8px;
   }
 
-  /* Cart বড় হবে */
   .cart{
-    width:50px;
-    height:50px;
+    width:42px;
+    height:42px;
     border-radius:50%;
-    background:#08732f;
-    color:#fff;
-    font-size:23px;
-    box-shadow:0 2px 5px rgba(0,0,0,.12)
+    font-size:20px;
   }
 
-  /* মোবাইলে Login লেখা না দেখিয়ে শুধু cart থাকবে */
   .login button{
-    display:none
+    min-width:82px;
+    height:42px;
+    border-radius:22px;
+    padding:4px 12px;
+    font-size:17px;
   }
 
-  /* মোবাইলের ডান পাশে 3-dot menu */
-  .nav-inner:after{
-    content:"⋮";
-    width:40px;
-    height:50px;
-    margin-left:8px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:Arial,sans-serif;
-    font-size:34px;
-    font-weight:700;
-    color:#111
+  .login button span{
+    font-size:15px;
   }
 
 
-  /* -------------------------
-     MOBILE RECORD AREA
-  ------------------------- */
+  /* RECORD AREA */
 
   .record-area{
+    min-height:650px;
     height:auto;
-    min-height:765px;
+    padding:0;
     background:#f5f6fa;
-    padding:30px 15px 30px;
-    position:relative
   }
 
   .record-card{
@@ -578,91 +570,78 @@ a{
     left:auto;
     transform:none;
 
-    width:100%;
+    width:calc(100% - 30px);
+    min-height:0;
     height:auto;
-    min-height:650px;
 
-    padding:28px 30px 30px;
+    margin:28px auto 28px;
 
-    background:#fff;
-    border:1px solid #e1e1e1;
-    border-radius:10px;
+    border-radius:9px;
+    padding:27px 25px 30px;
 
-    box-shadow:0 2px 8px rgba(0,0,0,.12)
+    box-shadow:0 2px 9px rgba(0,0,0,.13);
   }
 
   .record-card h1{
-    text-align:center;
-    color:#00863c;
-    font-size:29px;
-    line-height:1.35;
-    margin:0 0 26px;
-    font-weight:800
+    font-size:27px;
+    line-height:1.4;
+    margin:0 0 24px;
+    white-space:nowrap;
   }
 
   .record-row{
     display:grid;
     grid-template-columns:105px 18px minmax(0,1fr);
 
-    align-items:start;
-
+    min-height:52px;
     height:auto;
-    min-height:55px;
 
-    font-size:20px;
+    font-size:21px;
     line-height:1.55;
 
-    margin-bottom:4px
+    padding:3px 0;
   }
 
   .record-row b{
     font-weight:800;
-    white-space:nowrap
   }
 
   .record-row span{
-    font-weight:700
+    font-weight:700;
+    text-align:center;
   }
 
   .record-row strong{
     font-weight:500;
+    word-break:break-word;
     overflow-wrap:anywhere;
-    word-break:break-word
   }
 
 
-  /* -------------------------
-     MOBILE DIVIDER
-  ------------------------- */
+  /* DIVIDER */
 
   .divider{
-    height:78px;
-    background:#fff
+    height:56px;
   }
 
   .divider:before{
-    height:54px;
-    top:0;
-
+    height:22px;
     background:linear-gradient(
       90deg,
       #f3fbf7 0%,
-      #128c4b 50%,
+      #128c4b 48%,
       #f3fbf7 100%
-    )
+    );
   }
 
 
-  /* -------------------------
-     MOBILE FOOTER
-  ------------------------- */
+  /* FOOTER */
 
   .site-footer{
+    min-height:0;
     height:auto;
-    min-height:760px;
+    padding:55px 22px 75px;
     background:#e4ffe2;
-    padding:60px 30px 90px;
-    position:relative
   }
 
   .footer-inner{
@@ -670,92 +649,41 @@ a{
     margin:0;
     display:flex;
     flex-direction:column;
-    gap:45px
+    gap:42px;
   }
 
   .footer-inner h2{
     font-size:25px;
-    line-height:1.4;
-    margin:0 0 20px;
+    margin:0 0 18px;
     font-weight:800;
-    color:#08732f
   }
 
   .two-cols{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:8px 20px
-  }
-
-  .two-cols ul{
-    list-style:none;
-    margin:0;
-    padding:0
+    gap:8px 16px;
   }
 
   .two-cols li{
     font-size:17px;
-    line-height:2.2;
+    line-height:2.15;
     white-space:normal;
-    display:flex;
-    align-items:flex-start
   }
 
   .two-cols li:before{
     content:'▶';
     color:#07843b;
-    font-size:13px;
-    margin-right:9px;
-    margin-top:2px;
-    flex-shrink:0
+    font-size:12px;
+    margin-right:8px;
   }
 
   .planning{
-    width:100%
-  }
-
-  .logos{
-    display:flex;
-    justify-content:center;
-    align-items:center
-  }
-
-  .lmap-logo{
-    display:block;
-    width:100%;
-    max-width:330px;
-    height:auto;
-    max-height:110px;
-    object-fit:contain
+    display:none;
   }
 
   .social{
-    width:100%;
-    text-align:center
+    display:none;
   }
-
-  .store{
-    width:150px;
-    height:44px;
-    margin:0 auto 18px
-  }
-
-  .social-icons{
-    display:flex;
-    justify-content:center;
-    gap:14px
-  }
-
-  .social-icons i{
-    width:38px;
-    height:38px;
-    font-size:22px
-  }
-
-
-  /* -------------------------
-     MOBILE SUPPORT
-  ------------------------- */
 
   .support{
     position:relative;
@@ -764,143 +692,114 @@ a{
 
     width:100%;
     height:auto;
-    min-height:60px;
 
     background:#fff;
-    border-radius:0;
+    border-radius:30px 30px 0 0;
 
-    margin-top:35px;
+    margin:35px -22px 0;
+    width:calc(100% + 44px);
 
-    padding:12px 5px;
+    padding:15px 22px;
 
-    font-size:13px;
-
-    display:flex;
-    align-items:center;
     justify-content:center;
-    gap:8px
+
+    font-size:14px;
   }
 
   .support img{
-    width:135px;
-    height:auto
+    width:125px;
   }
-
-
-  /* -------------------------
-     MOBILE COPYRIGHT
-  ------------------------- */
 
   .copyright{
-    position:absolute;
-    bottom:0;
-    left:0;
+    position:relative;
+    bottom:auto;
+    left:auto;
 
-    height:48px;
-    width:100%;
+    width:calc(100% + 44px);
+    height:auto;
 
-    padding:12px 10px;
+    margin:0 -22px -75px;
+
+    padding:10px 15px;
 
     text-align:center;
-
-    font-size:11px;
-
-    background:#fff;
-    border-top:1px solid #ddd
+    font-size:12px;
   }
-
-
-  /* -------------------------
-     MOBILE CHAT
-  ------------------------- */
 
   .chat{
     position:fixed;
     right:18px;
-    bottom:22px;
+    bottom:20px;
 
-    width:62px;
-    height:62px;
+    width:58px;
+    height:58px;
 
     border-radius:50%;
 
-    background:#4156c6;
-    color:#fff;
-
-    box-shadow:0 3px 8px rgba(0,0,0,.25);
-
-    font-size:28px;
-
-    z-index:20
+    font-size:25px;
+    z-index:100;
   }
-
 }
 
 
-/* =====================================================
+/* =========================
    VERY SMALL MOBILE
-   400px এবং তার নিচে
-===================================================== */
+========================= */
 
-@media(max-width:400px){
+@media (max-width:420px){
 
   .top-strip{
-    font-size:13px
+    font-size:14px;
   }
 
   .nav-inner{
-    padding:0 18px
+    padding:0 12px;
   }
 
   .brand-icon,
   .brand-icon svg{
-    width:52px;
-    height:52px
+    width:45px;
+    height:45px;
   }
 
   .cart{
-    width:46px;
-    height:46px;
-    font-size:21px
+    width:39px;
+    height:39px;
+    font-size:18px;
   }
 
-  .record-area{
-    padding:22px 10px 25px;
-    min-height:720px
+  .login button{
+    min-width:76px;
+    height:39px;
+    font-size:16px;
   }
 
   .record-card{
-    padding:25px 20px 25px;
-    min-height:620px
+    width:calc(100% - 22px);
+    padding:23px 18px 27px;
+    margin-top:22px;
   }
 
   .record-card h1{
-    font-size:25px;
-    margin-bottom:22px
+    font-size:23px;
+    margin-bottom:20px;
   }
 
   .record-row{
-    grid-template-columns:92px 16px minmax(0,1fr);
+    grid-template-columns:88px 15px minmax(0,1fr);
     font-size:18px;
-    min-height:51px
+    min-height:47px;
   }
 
-  .site-footer{
-    padding-left:20px;
-    padding-right:20px
+  .record-area{
+    min-height:600px;
   }
 
   .footer-inner h2{
-    font-size:22px
-  }
-
-  .two-cols{
-    grid-template-columns:1fr;
-    gap:0
+    font-size:22px;
   }
 
   .two-cols li{
-    font-size:16px
+    font-size:15px;
   }
-
 }
