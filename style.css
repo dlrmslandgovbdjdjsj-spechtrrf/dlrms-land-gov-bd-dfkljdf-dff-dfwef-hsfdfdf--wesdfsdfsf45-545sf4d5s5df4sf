@@ -1,15 +1,7 @@
 ```css
-/* =========================================
-   BASE
-   ========================================= */
-
-@font-face {
-  font-family: NotoBengaliLocal;
-  src:
-    local("Noto Sans Bengali"),
-    local("Noto Sans Bengali UI");
-  font-display: swap;
-}
+/* =========================================================
+   RESET
+   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -20,13 +12,17 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  font-family: NotoBengaliLocal, "Noto Sans Bengali", sans-serif;
-  color: #111;
-  background: #fff;
+  font-family:
+    "Noto Sans Bengali",
+    "Noto Sans Bengali UI",
+    sans-serif;
+
+  color: #111 !important;
+  background: #ffffff !important;
 }
 
 body {
-  min-width: 1000px;
+  min-width: 320px;
 }
 
 a {
@@ -35,34 +31,40 @@ a {
 }
 
 
-/* =========================================
+/* =========================================================
    HEADER
-   ========================================= */
+   ========================================================= */
 
 .site-header {
   height: 56px;
-  background: #fff;
+  background: #ffffff !important;
   position: relative;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
   z-index: 10;
 }
+
+
+/* বাংলা তারিখ */
 
 .top-strip {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+
   width: 1180px;
   height: 28px;
 
-  background: linear-gradient(
-    90deg,
-    #dceee5 0%,
-    #278a53 50%,
-    #dceee5 100%
-  );
+  background:
+    linear-gradient(
+      90deg,
+      #dceee5 0%,
+      #278a53 50%,
+      #dceee5 100%
+    ) !important;
 
-  color: #fff;
+  color: #ffffff !important;
+
   text-align: center;
   font-size: 13px;
   font-weight: 700;
@@ -73,6 +75,9 @@ a {
   width: 100%;
   height: 100%;
 }
+
+
+/* Navigation */
 
 .nav-wrap {
   position: absolute;
@@ -86,16 +91,23 @@ a {
   width: 1180px;
   height: 28px;
   margin: auto;
+
   display: flex;
   align-items: center;
+
   position: relative;
 }
+
+
+/* Logo */
 
 .brand {
   width: 65px;
   height: 56px;
+
   position: relative;
   top: -14px;
+
   display: flex;
   align-items: center;
 }
@@ -111,14 +123,21 @@ a {
   display: block;
 }
 
+
+/* Desktop menu */
+
 .main-nav {
   height: 28px;
+
   display: flex;
   align-items: center;
+
   gap: 28px;
   margin-left: 205px;
+
   font-size: 14px;
   font-weight: 600;
+
   white-space: nowrap;
 }
 
@@ -132,8 +151,12 @@ a {
   color: #111;
 }
 
+
+/* Login */
+
 .login {
   margin-left: auto;
+
   display: flex;
   align-items: center;
   gap: 9px;
@@ -142,9 +165,11 @@ a {
 .cart {
   width: 27px;
   height: 27px;
+
   border-radius: 50%;
-  background: #08732f;
-  color: #fff;
+
+  background: #08732f !important;
+  color: #ffffff !important;
 
   display: flex;
   align-items: center;
@@ -155,8 +180,10 @@ a {
 
 .login button {
   border: 0;
-  background: #08732f;
-  color: #fff;
+
+  background: #08732f !important;
+  color: #ffffff !important;
+
   border-radius: 18px;
 
   padding: 5px 12px 6px;
@@ -172,89 +199,118 @@ a {
 }
 
 
-/* =========================================
+/* =========================================================
    RECORD AREA
-   ========================================= */
+   ========================================================= */
 
 .record-area {
-  height: 538px;
-  background: #f5f6fa;
+  min-height: 538px;
+
   position: relative;
+
+  background: #f5f6fa !important;
 }
 
 
-/* =========================================
-   RECORD CARD - DESKTOP
-   ========================================= */
+/* =========================================================
+   KHATIAN CARD
+   ========================================================= */
 
 .record-card {
   position: absolute;
 
   top: 22px;
   left: 50%;
+
   transform: translateX(-50%);
 
   width: 330px;
-  height: 262px;
+  min-height: 262px;
 
-  background: #fff !important;
+  /*
+     সবচেয়ে গুরুত্বপূর্ণ:
+     কার্ডের ব্যাকগ্রাউন্ড সাদা।
+     !important দেওয়া হয়েছে যাতে অন্য কোনো CSS
+     হলুদ রং চাপিয়ে দিতে না পারে।
+  */
 
-  border: 1px solid #e1e1e1;
+  background-color: #ffffff !important;
+  background-image: none !important;
+
+  border: 1px solid #e1e1e1 !important;
+
   border-radius: 6px;
 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.12);
 
   padding: 15px 22px;
 
-  overflow: hidden;
+  color: #111111 !important;
 }
+
+
+/* খতিয়ান শিরোনাম */
 
 .record-card h1 {
   text-align: center;
 
-  color: #00863c;
+  color: #00863c !important;
 
   font-size: 18px;
-  line-height: 1.3;
 
   margin: 0 0 8px;
 
   font-weight: 800;
 }
 
+
+/* তথ্যের প্রতিটি লাইন */
+
 .record-row {
   display: grid;
 
-  grid-template-columns: 62px 12px 1fr;
+  grid-template-columns:
+    62px
+    12px
+    1fr;
 
   align-items: center;
 
-  height: 26px;
+  min-height: 26px;
 
   font-size: 14px;
+
   line-height: 1.2;
+
+  color: #111111 !important;
 }
 
 .record-row b {
   font-weight: 800;
-}
-
-.record-row strong {
-  font-weight: 500;
+  color: #111111 !important;
 }
 
 .record-row span {
   font-weight: 700;
+  color: #111111 !important;
+}
+
+.record-row strong {
+  font-weight: 500;
+  color: #111111 !important;
 }
 
 
-/* =========================================
+/* =========================================================
    DIVIDER
-   ========================================= */
+   ========================================================= */
 
 .divider {
   height: 56px;
-  background: #fff;
+
+  background: #ffffff !important;
+
   position: relative;
 }
 
@@ -269,23 +325,24 @@ a {
 
   height: 22px;
 
-  background: linear-gradient(
-    90deg,
-    #f3fbf7 0%,
-    #128c4b 48%,
-    #f3fbf7 100%
-  );
+  background:
+    linear-gradient(
+      90deg,
+      #f3fbf7 0%,
+      #128c4b 48%,
+      #f3fbf7 100%
+    ) !important;
 }
 
 
-/* =========================================
+/* =========================================================
    FOOTER
-   ========================================= */
+   ========================================================= */
 
 .site-footer {
-  height: 304px;
+  min-height: 304px;
 
-  background: #e4ffe2;
+  background: #e4ffe2 !important;
 
   position: relative;
 
@@ -309,39 +366,56 @@ a {
 
 .footer-inner h2 {
   font-size: 16px;
+
   margin: 0 0 12px;
+
   font-weight: 800;
+
+  color: #08732f !important;
 }
+
+
+/* Footer links */
 
 .two-cols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
 }
 
 .two-cols ul {
   list-style: none;
+
   margin: 0;
   padding: 0;
 }
 
 .two-cols li {
   font-size: 13px;
+
   line-height: 27px;
+
   white-space: nowrap;
 }
 
 .two-cols li:before {
   content: "▶";
 
-  color: #07843b;
+  color: #07843b !important;
 
   font-size: 10px;
 
   margin-right: 8px;
 }
 
+
+/* Logo */
+
 .logos {
   display: flex;
+
   align-items: center;
 }
 
@@ -349,13 +423,18 @@ a {
   display: block;
 
   width: 355px;
+
   height: auto;
 
   max-height: 92px;
 
   object-fit: contain;
+
   object-position: left center;
 }
+
+
+/* Social */
 
 .social {
   position: relative;
@@ -365,18 +444,20 @@ a {
   width: 120px;
   height: 36px;
 
-  background: #111;
-  color: #fff;
+  background: #111111 !important;
+  color: #ffffff !important;
 
   border-radius: 5px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   gap: 6px;
 
   font-family: Arial, sans-serif;
+
   font-size: 11px;
 
   margin: 0 auto 14px;
@@ -384,6 +465,7 @@ a {
 
 .store span {
   font-size: 7px;
+
   line-height: 1.05;
 }
 
@@ -391,14 +473,22 @@ a {
   font-size: 12px;
 }
 
+
+/* Social icons */
+
 .social-icons {
   display: flex;
+
   justify-content: center;
+
   gap: 12px;
+
+  margin-top: 0;
 }
 
 .social-icons i {
   font-family: Arial, sans-serif;
+
   font-style: normal;
 
   width: 27px;
@@ -406,28 +496,36 @@ a {
 
   border-radius: 4px;
 
-  background: #1685e0;
-  color: #fff;
+  background: #1685e0 !important;
+
+  color: #ffffff !important;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   font-size: 18px;
+
   font-weight: 700;
 }
 
 .social-icons i:nth-child(2) {
-  background: #050505;
+  background: #050505 !important;
 }
 
 .social-icons i:nth-child(3) {
-  background: #e63d7e;
+  background: #e63d7e !important;
 }
 
 .social-icons i:nth-child(4) {
-  background: #f04b43;
+  background: #f04b43 !important;
 }
+
+
+/* =========================================================
+   SUPPORT
+   ========================================================= */
 
 .support {
   position: absolute;
@@ -438,7 +536,7 @@ a {
   width: 345px;
   height: 50px;
 
-  background: #fff;
+  background: #ffffff !important;
 
   border-radius: 50px 0 0 0;
 
@@ -447,6 +545,7 @@ a {
   font-size: 13px;
 
   display: flex;
+
   align-items: center;
 
   gap: 8px;
@@ -454,9 +553,14 @@ a {
 
 .support img {
   width: 145px;
+
   height: auto;
+
   display: block;
 }
+
+
+/* Copyright */
 
 .copyright {
   position: absolute;
@@ -466,7 +570,7 @@ a {
 
   height: 31px;
 
-  background: #fff;
+  background: #ffffff !important;
 
   width: 100%;
 
@@ -477,32 +581,42 @@ a {
   border-top: 1px solid #ddd;
 }
 
-.chat {
-  position: absolute;
 
-  right: 35px;
-  bottom: 17px;
+/* =========================================================
+   CHAT BUTTON
+   ========================================================= */
+
+.chat {
+  position: fixed;
+
+  right: 25px;
+  bottom: 20px;
 
   width: 49px;
   height: 49px;
 
   border: 0;
+
   border-radius: 50%;
 
-  background: #4156c6;
-  color: #fff;
+  background: #4156c6 !important;
 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #ffffff !important;
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2);
 
   font-size: 22px;
+
+  z-index: 100;
 }
 
 
-/* =========================================
+/* =========================================================
    TABLET
-   ========================================= */
+   ========================================================= */
 
-@media (max-width: 1200px) and (min-width: 701px) {
+@media (max-width: 1200px) {
 
   .top-strip,
   .nav-inner,
@@ -528,43 +642,39 @@ a {
 }
 
 
-/* =========================================
+/* =========================================================
    MOBILE
-   ========================================= */
+   ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
 
   html,
   body {
     width: 100%;
-    min-width: 0 !important;
 
-    margin: 0;
-    padding: 0;
-
-    background: #fff !important;
+    min-width: 320px;
 
     overflow-x: hidden;
+
+    background: #ffffff !important;
   }
 
-  body {
-    font-size: 14px;
-  }
 
-
-  /* -----------------------------------------
-     HEADER
-     ----------------------------------------- */
+  /* -------------------------
+     Header
+     ------------------------- */
 
   .site-header {
-    height: 145px;
+    height: 235px;
 
-    background: #fff;
+    background: #ffffff !important;
 
     box-shadow:
-      0 2px 7px rgba(0, 0, 0, 0.16);
+      0 2px 6px rgba(0, 0, 0, 0.16);
   }
 
+
+  /* তারিখ */
 
   .top-strip {
     position: absolute;
@@ -575,176 +685,214 @@ a {
     transform: none;
 
     width: 100%;
-    height: 58px;
 
-    background: linear-gradient(
-      90deg,
-      #dceee5 0%,
-      #32945d 50%,
-      #dceee5 100%
-    );
+    height: 54px;
 
-    font-size: 15px;
-    line-height: 58px;
+    background:
+      linear-gradient(
+        90deg,
+        #dceee5 0%,
+        #278a53 50%,
+        #dceee5 100%
+      ) !important;
+
+    font-size: 17px;
+
+    line-height: 54px;
 
     white-space: nowrap;
-
-    overflow: hidden;
   }
 
 
   .nav-wrap {
-    top: 58px;
+    top: 54px;
     bottom: auto;
 
-    width: 100%;
-    height: 87px;
+    height: 181px;
 
-    background: #fff;
+    background: #ffffff !important;
   }
 
 
   .nav-inner {
     width: 100%;
-    height: 87px;
+
+    height: 181px;
 
     margin: 0;
 
-    padding: 0 30px;
-
     display: flex;
-    align-items: center;
 
-    justify-content: space-between;
+    align-items: flex-start;
+
+    position: relative;
   }
 
 
   /* Logo */
 
   .brand {
-    width: 55px;
-    height: 55px;
+    position: absolute;
 
-    top: 0;
+    left: 30px;
+    top: 22px;
 
-    display: flex;
-    align-items: center;
+    width: 75px;
+    height: 75px;
   }
 
-  .brand-icon {
-    width: 55px;
-    height: 55px;
-  }
-
+  .brand-icon,
   .brand-icon svg {
-    width: 55px;
-    height: 55px;
+    width: 75px;
+    height: 75px;
   }
 
 
   /* Desktop menu mobile-এ থাকবে না */
 
   .main-nav {
-    display: none;
+    display: none !important;
   }
 
 
-  /* Login area */
+  /* Login */
 
   .login {
-    margin-left: auto;
+    position: absolute;
+
+    right: 24px;
+    top: 24px;
+
+    margin: 0;
 
     display: flex;
 
     align-items: center;
 
-    gap: 15px;
+    gap: 18px;
   }
 
 
   .cart {
-    width: 48px;
-    height: 48px;
+    width: 58px;
+    height: 58px;
 
     border-radius: 50%;
 
-    background: #087d35;
+    background: #08732f !important;
 
-    font-size: 21px;
+    font-size: 27px;
   }
 
 
   .login a {
-    display: none;
+    display: none !important;
   }
 
 
-  /* -----------------------------------------
-     RECORD AREA
-     ----------------------------------------- */
+  /*
+     মোবাইলের তিন ডট
+     login button-এর জায়গায় দেখাবে
+  */
+
+  .login:after {
+    content: "⋮";
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 58px;
+
+    color: #111111;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 38px;
+
+    line-height: 1;
+  }
+
+
+  /* =====================================================
+     MOBILE RECORD AREA
+     ===================================================== */
 
   .record-area {
 
-    height: auto;
-    min-height: 700px;
+    /*
+       স্ক্রিনের মতো হালকা ধূসর background
+    */
 
-    background: #f5f6fa;
+    background: #f5f6fa !important;
 
-    position: relative;
-
-    padding: 30px 15px 35px;
-  }
-
-
-  /* -----------------------------------------
-     RECORD CARD
-     সবচেয়ে গুরুত্বপূর্ণ অংশ
-     ----------------------------------------- */
-
-  .record-card {
-
-    position: relative;
-
-    top: auto;
-    left: auto;
-
-    transform: none;
-
-    width: 100%;
-
-    max-width: 640px;
-
-    height: auto;
-    min-height: 0;
-
-    margin: 0 auto;
-
-    padding: 24px 24px 22px;
-
-    background: #fff !important;
-
-    border: 1px solid #e1e1e1;
-
-    border-radius: 9px;
-
-    box-shadow:
-      0 2px 9px rgba(0, 0, 0, 0.12);
-
-    overflow: visible;
-  }
-
-
-  .record-card h1 {
-
-    margin: 0 0 22px;
+    min-height: 780px;
 
     padding: 0;
 
+    position: relative;
+  }
+
+
+  /*
+     আসল গুরুত্বপূর্ণ অংশ:
+
+     কার্ড সবসময় সাদা।
+     হলুদ হওয়ার কোনো সুযোগ নেই।
+  */
+
+  .record-card {
+
+    position: absolute;
+
+    top: 32px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 48px);
+
+    max-width: 640px;
+
+    min-height: auto;
+
+    height: auto;
+
+    margin: 0;
+
+    padding:
+      28px 38px 30px 38px;
+
+    background-color: #ffffff !important;
+
+    background-image: none !important;
+
+    border:
+      1px solid #e1e1e1 !important;
+
+    border-radius: 10px;
+
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.12);
+
+    color: #111111 !important;
+  }
+
+
+  /* মোবাইল খতিয়ান শিরোনাম */
+
+  .record-card h1 {
+
+    margin:
+      0 0 24px;
+
     text-align: center;
 
-    color: #00863c;
+    color: #00863c !important;
 
-    font-size: 27px;
+    font-size: 30px;
 
     line-height: 1.35;
 
@@ -752,41 +900,50 @@ a {
   }
 
 
+  /*
+     তথ্যগুলো কাছাকাছি
+  */
+
   .record-row {
 
     display: grid;
 
     grid-template-columns:
-      115px
-      15px
+      92px
+      18px
       minmax(0, 1fr);
 
     align-items: center;
 
-    width: 100%;
+    min-height: 0;
 
-    min-height: 48px;
     height: auto;
 
-    padding: 3px 0;
+    padding: 7px 0;
 
-    font-size: 18px;
+    font-size: 20px;
 
     line-height: 1.45;
+
+    color: #111111 !important;
   }
 
 
   .record-row b {
+
     font-weight: 800;
+
+    color: #111111 !important;
 
     white-space: nowrap;
   }
 
 
   .record-row span {
+
     font-weight: 700;
 
-    text-align: center;
+    color: #111111 !important;
   }
 
 
@@ -794,53 +951,53 @@ a {
 
     font-weight: 500;
 
+    color: #111111 !important;
+
     min-width: 0;
 
     word-break: normal;
-
-    overflow-wrap: anywhere;
   }
 
 
-  /* -----------------------------------------
-     DIVIDER
-     ----------------------------------------- */
+  /* =====================================================
+     MOBILE DIVIDER
+     ===================================================== */
 
   .divider {
 
-    height: 55px;
+    height: 54px;
 
-    background: #fff;
+    background: #ffffff !important;
   }
 
   .divider:before {
 
-    height: 22px;
+    height: 20px;
 
-    background: linear-gradient(
-      90deg,
-      #f3fbf7 0%,
-      #128c4b 50%,
-      #f3fbf7 100%
-    );
+    background:
+      linear-gradient(
+        90deg,
+        #f3fbf7 0%,
+        #128c4b 48%,
+        #f3fbf7 100%
+      ) !important;
   }
 
 
-  /* -----------------------------------------
-     FOOTER
-     ----------------------------------------- */
+  /* =====================================================
+     MOBILE FOOTER
+     ===================================================== */
 
   .site-footer {
 
+    min-height: 350px;
+
     height: auto;
 
-    min-height: 330px;
+    padding:
+      42px 28px 80px;
 
-    background: #e4ffe2;
-
-    padding: 40px 30px 65px;
-
-    position: relative;
+    background: #e4ffe2 !important;
   }
 
 
@@ -854,19 +1011,20 @@ a {
   }
 
 
-  .footer-inner > section {
+  .footer-inner section:not(:first-child) {
 
-    margin-bottom: 28px;
+    display: none !important;
   }
 
 
   .footer-inner h2 {
 
-    font-size: 22px;
+    font-size: 25px;
 
-    margin: 0 0 14px;
+    margin:
+      0 0 20px;
 
-    color: #087d35;
+    color: #08732f !important;
   }
 
 
@@ -874,17 +1032,19 @@ a {
 
     display: grid;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+      1fr
+      1fr;
 
-    gap: 8px 20px;
+    column-gap: 20px;
   }
 
 
   .two-cols li {
 
-    font-size: 15px;
+    font-size: 17px;
 
-    line-height: 32px;
+    line-height: 2.3;
 
     white-space: normal;
   }
@@ -892,134 +1052,126 @@ a {
 
   .two-cols li:before {
 
-    font-size: 10px;
+    font-size: 11px;
 
-    margin-right: 7px;
-  }
+    margin-right: 8px;
 
-
-  .planning,
-  .social {
-
-    display: none;
+    color: #07843b !important;
   }
 
 
   .support {
 
-    display: none;
+    display: none !important;
   }
 
 
   .copyright {
 
-    position: absolute;
-
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-
-    height: 32px;
-
-    padding: 7px 12px;
-
-    font-size: 10px;
-
-    text-align: center;
+    display: none !important;
   }
 
 
-  /* -----------------------------------------
-     CHAT BUTTON
-     ----------------------------------------- */
+  /* Mobile chat */
 
   .chat {
 
     position: fixed;
 
+    right: 24px;
+
+    bottom: 24px;
+
+    width: 62px;
+    height: 62px;
+
+    font-size: 28px;
+
+    background: #4156c6 !important;
+
+    z-index: 999;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .top-strip {
+
+    font-size: 15px;
+  }
+
+
+  .brand {
+
+    left: 25px;
+
+    top: 23px;
+  }
+
+
+  .login {
+
     right: 18px;
-    bottom: 20px;
+  }
 
-    width: 58px;
-    height: 58px;
 
-    z-index: 100;
+  .cart {
 
-    border-radius: 50%;
-
-    background: #4156c6;
+    width: 54px;
+    height: 54px;
 
     font-size: 25px;
   }
 
-}
 
+  .login:after {
 
-/* =========================================
-   SMALL MOBILE
-   ========================================= */
+    height: 54px;
 
-@media (max-width: 400px) {
-
-  .nav-inner {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-
-  .record-area {
-    padding: 25px 12px 30px;
+    font-size: 34px;
   }
 
 
   .record-card {
 
-    padding: 20px 18px 18px;
+    width: calc(100% - 30px);
 
-    border-radius: 8px;
-
-    background: #fff !important;
+    padding:
+      24px 26px 26px;
   }
 
 
   .record-card h1 {
 
-    font-size: 24px;
+    font-size: 26px;
 
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
 
   .record-row {
 
     grid-template-columns:
-      100px
-      13px
+      82px
+      15px
       minmax(0, 1fr);
 
-    min-height: 44px;
+    font-size: 18px;
 
-    font-size: 16px;
-
-    line-height: 1.4;
-  }
-
-
-  .footer-inner h2 {
-    font-size: 20px;
-  }
-
-
-  .two-cols {
-    grid-template-columns: 1fr;
+    padding: 6px 0;
   }
 
 
   .two-cols li {
-    font-size: 14px;
-    line-height: 29px;
-  }
 
+    font-size: 15px;
+
+    line-height: 2.2;
+  }
 }
 ```
