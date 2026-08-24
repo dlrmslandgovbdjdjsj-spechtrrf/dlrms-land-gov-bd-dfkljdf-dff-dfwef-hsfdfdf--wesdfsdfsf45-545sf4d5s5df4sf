@@ -1,35 +1,507 @@
 <!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>অ্যাডমিন প্যানেল — খতিয়ান</title><link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>অ্যাডমিন প্যানেল — খতিয়ান</title>
+
+  <link rel="stylesheet" href="style.css">
+
   <style>
-    body{background:#f3f5f8}.admin-wrap{max-width:720px;margin:50px auto;padding:20px}.admin-card{background:#fff;border-radius:10px;box-shadow:0 3px 15px #0001;padding:28px}.admin-card h1{margin:0 0 22px;color:#087a3d;font-size:25px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-weight:700}.field input{padding:11px 12px;border:1px solid #ccc;border-radius:6px;font:inherit}.btns{display:flex;gap:10px;margin-top:20px}.btn{border:0;border-radius:6px;padding:11px 20px;font:inherit;font-weight:700;cursor:pointer}.primary{background:#087a3d;color:#fff}.secondary{background:#eee}.msg{margin:12px 0;padding:10px;border-radius:6px;display:none}.ok{display:block;background:#e5f8ea;color:#087a3d}.err{display:block;background:#ffe9e9;color:#a40000}.muted{color:#666;font-size:14px;margin-bottom:15px}@media(max-width:650px){.grid{grid-template-columns:1fr}}
+    body {
+      background: #f3f5f8;
+    }
+
+    .admin-wrap {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .admin-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 15px #0001;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .admin-card h1 {
+      margin: 0 0 10px;
+      color: #087a3d;
+      font-size: 25px;
+    }
+
+    .admin-card h2 {
+      margin: 0 0 15px;
+      color: #087a3d;
+      font-size: 20px;
+    }
+
+    .muted {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-weight: 700;
+    }
+
+    .field input {
+      padding: 11px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font: inherit;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 6px;
+      padding: 11px 20px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .primary {
+      background: #087a3d;
+      color: #fff;
+    }
+
+    .secondary {
+      background: #eee;
+      color: #222;
+    }
+
+    .new-record {
+      background: #087a3d;
+      color: #fff;
+      font-size: 16px;
+      padding: 13px 24px;
+    }
+
+    .msg {
+      margin: 12px 0;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .ok {
+      display: block;
+      background: #e5f8ea;
+      color: #087a3d;
+    }
+
+    .err {
+      display: block;
+      background: #ffe9e9;
+      color: #a40000;
+    }
+
+    /* নতুন রেকর্ড তৈরির বাটন */
+    .new-box {
+      background: #f7faf8;
+      border: 1px solid #dcebe2;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    /* পুরোনো রেকর্ডের তালিকা */
+    .history-box {
+      margin-top: 25px;
+    }
+
+    .history-count {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 750px;
+      background: #fff;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid #eee;
+      padding: 10px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    th {
+      background: #f5f5f5;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .record-url {
+      margin-top: 15px;
+      padding: 12px;
+      background: #f1f7ff;
+      border: 1px solid #d5e6ff;
+      border-radius: 7px;
+      word-break: break-all;
+    }
+
+    .record-url a {
+      color: #075db5;
+      font-weight: 700;
+    }
+
+    .url-label {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 650px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .admin-wrap {
+        margin: 20px auto;
+        padding: 12px;
+      }
+
+      .admin-card {
+        padding: 20px;
+      }
+    }
   </style>
 </head>
+
 <body>
+
 <div class="admin-wrap">
+
+  <!-- =========================
+       LOGIN
+  ========================== -->
   <div class="admin-card" id="login-card">
-    <h1>অ্যাডমিন লগইন</h1><p class="muted">শুধু অনুমোদিত অ্যাডমিন এখানে তথ্য পরিবর্তন করতে পারবেন।</p>
-    <div class="field"><label>ইমেইল</label><input id="email" type="email" autocomplete="username"></div><br>
-    <div class="field"><label>পাসওয়ার্ড</label><input id="password" type="password" autocomplete="current-password"></div>
-    <div id="login-msg" class="msg"></div><div class="btns"><button class="btn primary" id="login">লগইন</button><a href="index.html"><button type="button" class="btn secondary">হোম</button></a></div>
-  </div>
-  <div class="admin-card" id="editor-card" style="display:none">
-    <h1>খতিয়ান তথ্য পরিবর্তন</h1><p class="muted">এখানে Save করলে মূল ওয়েবসাইটের তথ্য আপডেট হবে।</p>
-    <div class="grid">
-      <div class="field"><label>খতিয়ান নং</label><input id="f_khatian"></div>
-      <div class="field"><label>মালিক</label><input id="f_owner"></div>
-      <div class="field"><label>দাগ নং</label><input id="f_dag_no"></div>
-      <div class="field"><label>সার্ভে</label><input id="f_survey"></div>
-      <div class="field"><label>মৌজা</label><input id="f_mouza"></div>
-      <div class="field"><label>উপজেলা</label><input id="f_upazila"></div>
-      <div class="field"><label>জেলা</label><input id="f_district"></div>
-      <div class="field"><label>বিভাগ</label><input id="f_division"></div>
-      <div class="field full"><label>তারিখ</label><input id="f_record_date"></div>
+
+    <h1>অ্যাডমিন লগইন</h1>
+
+    <p class="muted">
+      শুধুমাত্র অনুমোদিত অ্যাডমিন এখানে নতুন খতিয়ান সংযুক্ত করতে পারবেন।
+    </p>
+
+    <div class="field">
+      <label>ইমেইল</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="username"
+      >
     </div>
-    <div id="save-msg" class="msg"></div><div class="btns"><button class="btn primary" id="save">Save / Update</button><button class="btn secondary" id="logout">লগআউট</button><a href="index.html"><button type="button" class="btn secondary">ওয়েবসাইট দেখুন</button></a></div>
+
+    <br>
+
+    <div class="field">
+      <label>পাসওয়ার্ড</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+      >
+    </div>
+
+    <div id="login-msg" class="msg"></div>
+
+    <div class="btns">
+
+      <button
+        class="btn primary"
+        id="login"
+        type="button"
+      >
+        লগইন
+      </button>
+
+      <a href="index.html">
+        <button
+          type="button"
+          class="btn secondary"
+        >
+          হোম
+        </button>
+      </a>
+
+    </div>
+
   </div>
+
+
+  <!-- =========================
+       ADMIN PANEL
+  ========================== -->
+  <div
+    class="admin-card"
+    id="editor-card"
+    style="display:none"
+  >
+
+    <h1>খতিয়ান অ্যাডমিন প্যানেল</h1>
+
+    <p class="muted">
+      এখান থেকে প্রতিবার নতুন খতিয়ান সংযুক্ত করা যাবে।
+      আগের খতিয়ান পরিবর্তন হবে না।
+    </p>
+
+
+    <!-- নতুন সংযুক্ত করুন -->
+    <div class="new-box">
+
+      <h2>নতুন খতিয়ান</h2>
+
+      <p class="muted">
+        নতুন খতিয়ানের তথ্য দিতে নিচের ফর্ম পূরণ করুন।
+        প্রতিটি নতুন খতিয়ানের জন্য আলাদা রেকর্ড ও আলাদা URL তৈরি হবে।
+      </p>
+
+      <button
+        class="btn new-record"
+        id="new-record"
+        type="button"
+      >
+        ＋ নতুন সংযুক্ত করুন
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         NEW RECORD FORM
+    ========================== -->
+    <div
+      id="new-record-form"
+      style="display:none"
+    >
+
+      <h2>নতুন খতিয়ান সংযুক্ত করুন</h2>
+
+      <div class="grid">
+
+        <div class="field">
+          <label>খতিয়ান নং</label>
+          <input id="f_khatian">
+        </div>
+
+        <div class="field">
+          <label>মালিক</label>
+          <input id="f_owner">
+        </div>
+
+        <div class="field">
+          <label>দাগ নং</label>
+          <input id="f_dag_no">
+        </div>
+
+        <div class="field">
+          <label>সার্ভে</label>
+          <input id="f_survey">
+        </div>
+
+        <div class="field">
+          <label>মৌজা</label>
+          <input id="f_mouza">
+        </div>
+
+        <div class="field">
+          <label>উপজেলা</label>
+          <input id="f_upazila">
+        </div>
+
+        <div class="field">
+          <label>জেলা</label>
+          <input id="f_district">
+        </div>
+
+        <div class="field">
+          <label>বিভাগ</label>
+          <input id="f_division">
+        </div>
+
+        <div class="field full">
+          <label>তারিখ</label>
+          <input id="f_record_date">
+        </div>
+
+      </div>
+
+
+      <div id="save-msg" class="msg"></div>
+
+      <!-- নতুন record তৈরি করার বাটন -->
+      <div class="btns">
+
+        <button
+          class="btn primary"
+          id="save"
+          type="button"
+        >
+          নতুন সংযুক্ত করুন
+        </button>
+
+        <button
+          class="btn secondary"
+          id="cancel-new"
+          type="button"
+        >
+          বাতিল
+        </button>
+
+      </div>
+
+
+      <!-- নতুন record তৈরি হলে URL এখানে দেখাবে -->
+      <div
+        id="record-url"
+        class="record-url"
+        style="display:none"
+      >
+
+        <span class="url-label">
+          এই খতিয়ানের আলাদা URL:
+        </span>
+
+        <a
+          id="record-url-link"
+          href="#"
+          target="_blank"
+        ></a>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         HISTORY
+    ========================== -->
+    <div class="history-box">
+
+      <h2>সংযুক্ত খতিয়ানের তালিকা</h2>
+
+      <div
+        id="history-count"
+        class="history-count"
+      >
+        মোট ০টি রেকর্ড
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>খতিয়ান</th>
+              <th>মালিক</th>
+              <th>দাগ নং</th>
+              <th>সার্ভে</th>
+              <th>মৌজা</th>
+              <th>তারিখ</th>
+            </tr>
+          </thead>
+
+          <tbody id="history-body">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         ADMIN BUTTONS
+    ========================== -->
+    <div class="btns">
+
+      <button
+        class="btn secondary"
+        id="logout"
+        type="button"
+      >
+        লগআউট
+      </button>
+
+      <a href="index.html">
+        <button
+          type="button"
+          class="btn secondary"
+        >
+          ওয়েবসাইট দেখুন
+        </button>
+      </a>
+
+    </div>
+
+  </div>
+
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="admin.js"></script>
-</body></html>
+
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Configuration -->
+<script src="config.js"></script>
+
+<!-- Admin JavaScript -->
+<script src="admin.js"></script>
+
+</body>
+</html>
