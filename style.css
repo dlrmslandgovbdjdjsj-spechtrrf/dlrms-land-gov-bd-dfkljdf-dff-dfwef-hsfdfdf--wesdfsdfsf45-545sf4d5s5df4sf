@@ -47,14 +47,12 @@ a{
   transform:translateX(-50%);
   width:1180px;
   height:28px;
-
   background:linear-gradient(
     90deg,
     #dceee5 0%,
     #278a53 50%,
     #dceee5 100%
   );
-
   color:#fff;
   text-align:center;
   font-size:13px;
@@ -123,6 +121,7 @@ a{
 .down{
   font-size:9px;
   margin-left:3px;
+  color:#111;
 }
 
 .login{
@@ -163,7 +162,7 @@ a{
 
 
 /* =========================
-   MAIN RECORD
+   RECORD
 ========================= */
 
 .record-area{
@@ -240,7 +239,6 @@ a{
   left:0;
   right:0;
   height:22px;
-
   background:linear-gradient(
     90deg,
     #f3fbf7 0%,
@@ -419,7 +417,7 @@ a{
   color:#fff;
   box-shadow:0 2px 4px rgba(0,0,0,.2);
   font-size:22px;
-  z-index:999;
+  z-index:9999;
 }
 
 
@@ -461,8 +459,6 @@ a{
     width:100% !important;
     min-width:0 !important;
     max-width:100% !important;
-    margin:0;
-    padding:0;
     overflow-x:hidden !important;
     background:#fff !important;
   }
@@ -471,81 +467,56 @@ a{
     min-width:0 !important;
   }
 
-
-  /* HEADER */
-
   .site-header{
     width:100%;
-    height:146px;
+    height:116px;
     background:#fff;
-    box-shadow:0 2px 6px rgba(0,0,0,.15);
   }
 
   .top-strip{
-    position:absolute;
-
     top:0;
     left:0;
     transform:none;
-
     width:100%;
-    height:60px;
-
+    height:46px;
+    line-height:46px;
+    font-size:13px;
+    white-space:nowrap;
+    overflow:hidden;
     background:linear-gradient(
       90deg,
       #dceee5 0%,
       #278a53 50%,
       #dceee5 100%
-    );
-
-    font-size:17px;
-    line-height:60px;
-
-    white-space:nowrap;
-
-    overflow:hidden;
+    ) !important;
   }
 
   .nav-wrap{
-    position:absolute;
-
-    top:60px;
+    top:46px;
+    left:0;
     bottom:auto;
-
     width:100%;
-    height:86px;
-
+    height:70px;
     background:#fff;
   }
 
   .nav-inner{
     width:100%;
-    height:86px;
+    height:70px;
     margin:0;
-    padding:0 31px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    padding:0 20px;
   }
 
   .brand{
-    width:70px;
-    height:70px;
-    position:static;
-
-    display:flex;
-    align-items:center;
+    width:47px;
+    height:47px;
+    top:0;
   }
 
-  .brand-icon{
-    width:66px;
-    height:66px;
-  }
-
+  .brand-icon,
   .brand-icon svg{
-    width:66px;
-    height:66px;
+    width:47px;
+    height:47px;
   }
 
   .main-nav{
@@ -554,16 +525,14 @@ a{
 
   .login{
     margin-left:auto;
-    display:flex;
-    align-items:center;
-    gap:14px;
+    gap:10px;
   }
 
   .cart{
-    width:51px;
-    height:51px;
-    min-width:51px;
-    font-size:22px;
+    width:43px;
+    height:43px;
+    min-width:43px;
+    font-size:18px;
   }
 
   .login a{
@@ -572,18 +541,14 @@ a{
 
   .login:after{
     content:"⋮";
-
-    width:25px;
-    height:51px;
-
+    width:22px;
+    height:43px;
     display:flex;
     align-items:center;
     justify-content:center;
-
     color:#111;
-
     font-family:Arial,sans-serif;
-    font-size:34px;
+    font-size:30px;
     line-height:1;
   }
 
@@ -592,126 +557,92 @@ a{
 
   .record-area{
     width:100%;
-
     height:auto;
     min-height:0;
-
-    padding:57px 30px 28px;
-
+    padding:25px 14px 22px;
     background:#f5f6fa !important;
   }
 
-
-  /* WHITE CARD */
-
   .record-card{
     position:relative !important;
-
     top:auto !important;
     left:auto !important;
-
     transform:none !important;
 
     width:100% !important;
-
-    max-width:none !important;
+    max-width:345px !important;
 
     height:auto !important;
     min-height:0 !important;
 
     margin:0 auto !important;
 
-    padding:29px 47px 28px !important;
+    padding:18px 22px 17px !important;
 
     background:#fff !important;
     background-color:#fff !important;
     background-image:none !important;
 
     border:1px solid #e1e1e1 !important;
+    border-radius:8px !important;
 
-    border-radius:10px !important;
-
-    box-shadow:
-      0 2px 8px rgba(0,0,0,.12) !important;
-
-    color:#111 !important;
+    box-shadow:0 2px 8px rgba(0,0,0,.12) !important;
   }
-
 
   .record-card h1{
-    text-align:center !important;
-
-    color:#00863c !important;
-
-    font-size:30px !important;
-
-    line-height:1.3 !important;
-
-    margin:0 0 22px !important;
-
-    padding:0 !important;
-
-    font-weight:800 !important;
-
+    font-size:22px !important;
+    line-height:1.25 !important;
+    margin:0 0 13px !important;
     white-space:nowrap !important;
+    color:#00863c !important;
   }
-
 
   .record-row{
     display:grid !important;
+    grid-template-columns:80px 10px minmax(0,1fr) !important;
 
-    grid-template-columns:
-      101px
-      15px
-      minmax(0,1fr) !important;
+    align-items:center !important;
 
-    align-items:start !important;
-
-    min-height:51px !important;
-
+    min-height:38px !important;
     height:auto !important;
 
-    padding:4px 0 !important;
+    padding:1px 0 !important;
 
-    font-size:20px !important;
-
-    line-height:1.4 !important;
+    font-size:15.5px !important;
+    line-height:1.3 !important;
 
     color:#111 !important;
   }
 
   .record-row b{
-    color:#111 !important;
     font-weight:800 !important;
+    color:#111 !important;
     white-space:nowrap !important;
   }
 
   .record-row span{
-    color:#111 !important;
     font-weight:700 !important;
+    color:#111 !important;
     text-align:center !important;
   }
 
   .record-row strong{
-    color:#111 !important;
     font-weight:500 !important;
-
+    color:#111 !important;
     min-width:0 !important;
-
-    word-break:normal !important;
-    overflow-wrap:break-word !important;
+    overflow-wrap:anywhere !important;
   }
 
 
   /* DIVIDER */
 
   .divider{
-    height:58px !important;
+    height:38px !important;
     background:#fff !important;
   }
 
   .divider:before{
-    height:22px !important;
+    height:14px !important;
   }
 
 
@@ -719,168 +650,149 @@ a{
 
   .site-footer{
     width:100%;
-
     height:auto;
+    min-height:275px;
 
-    min-height:390px;
-
-    padding:55px 31px 55px;
+    padding:27px 18px 45px;
 
     background:#e4ffe2 !important;
   }
 
   .footer-inner{
     width:100%;
-
-    display:block;
-
     margin:0;
+    display:block;
   }
 
   .footer-inner > section:not(:first-child){
-    display:none;
+    display:none !important;
   }
 
   .footer-inner h2{
-    font-size:23px;
-
-    margin:0 0 17px;
-
+    font-size:18px;
+    margin:0 0 10px;
     color:#08732f;
   }
 
   .two-cols{
     display:grid;
-
-    grid-template-columns:
-      1fr
-      1fr;
-
-    gap:4px 18px;
+    grid-template-columns:1fr 1fr;
+    gap:2px 9px;
   }
 
   .two-cols li{
-    font-size:16px;
-
-    line-height:2.2;
-
+    font-size:13px;
+    line-height:1.95;
     white-space:normal;
   }
 
   .two-cols li:before{
-    font-size:10px;
-    margin-right:6px;
+    font-size:8px;
+    margin-right:4px;
   }
 
   .support,
   .copyright{
-    display:none;
+    display:none !important;
   }
-
-
-  /* CHAT */
 
   .chat{
     position:fixed;
-
-    right:20px;
-    bottom:20px;
-
-    width:58px;
-    height:58px;
-
-    font-size:24px;
-
-    z-index:9999;
+    right:13px;
+    bottom:13px;
+    width:48px;
+    height:48px;
+    font-size:20px;
   }
 }
 
 
 /* =========================
-   SMALL MOBILE
+   VERY SMALL MOBILE
 ========================= */
 
-@media(max-width:420px){
+@media(max-width:380px){
 
   .site-header{
-    height:140px;
+    height:112px;
   }
 
   .top-strip{
-    height:57px;
-    line-height:57px;
-    font-size:16px;
+    height:44px;
+    line-height:44px;
+    font-size:12px;
   }
 
   .nav-wrap{
-    top:57px;
-    height:83px;
+    top:44px;
+    height:68px;
   }
 
   .nav-inner{
-    height:83px;
-    padding:0 27px;
+    height:68px;
+    padding:0 17px;
   }
 
   .brand,
   .brand-icon,
   .brand-icon svg{
-    width:61px;
-    height:61px;
+    width:44px;
+    height:44px;
   }
 
   .cart{
-    width:49px;
-    height:49px;
-    min-width:49px;
-    font-size:21px;
+    width:40px;
+    height:40px;
+    min-width:40px;
+    font-size:17px;
   }
 
   .login:after{
-    height:49px;
-    font-size:32px;
+    height:40px;
+    font-size:28px;
   }
 
   .record-area{
-    padding:47px 30px 25px;
+    padding:22px 11px 18px;
   }
 
   .record-card{
-    padding:27px 35px 25px !important;
+    max-width:330px !important;
+    padding:16px 17px 15px !important;
   }
 
   .record-card h1{
-    font-size:27px !important;
-    margin-bottom:19px !important;
+    font-size:20px !important;
+    margin-bottom:11px !important;
   }
 
   .record-row{
-    grid-template-columns:
-      94px
-      13px
-      minmax(0,1fr) !important;
-
-    min-height:48px !important;
-
-    padding:3px 0 !important;
-
-    font-size:18px !important;
+    grid-template-columns:74px 9px minmax(0,1fr) !important;
+    min-height:35px !important;
+    font-size:14px !important;
   }
 
   .site-footer{
-    min-height:370px;
-    padding:50px 25px 50px;
+    min-height:255px;
+    padding:24px 14px 40px;
   }
 
   .footer-inner h2{
-    font-size:21px;
+    font-size:17px;
   }
 
   .two-cols{
-    gap:3px 12px;
+    gap:2px 7px;
   }
 
   .two-cols li{
-    font-size:15px;
+    font-size:12px;
+  }
+
+  .chat{
+    width:44px;
+    height:44px;
+    right:11px;
+    bottom:11px;
   }
 }
