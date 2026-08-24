@@ -1,27 +1,906 @@
-@font-face{font-family:NotoBengaliLocal;src:local('Noto Sans Bengali'),local('Noto Sans Bengali UI');font-display:swap}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:NotoBengaliLocal,'Noto Sans Bengali',sans-serif;color:#111;background:#fff}
-body{min-width:1000px}
-a{text-decoration:none;color:inherit}
-.site-header{height:56px;background:#fff;position:relative;box-shadow:0 2px 5px rgba(0,0,0,.16);z-index:2}
-.top-strip{position:absolute;top:0;left:50%;transform:translateX(-50%);width:1180px;height:28px;background:linear-gradient(90deg,#dceee5 0%,#278a53 50%,#dceee5 100%);color:#fff;text-align:center;font-size:13px;font-weight:700;line-height:28px}
-.nav-wrap{position:absolute;left:0;right:0;bottom:0;height:28px}
-.nav-inner{width:1180px;height:28px;margin:auto;display:flex;align-items:center;position:relative}
-.brand{width:65px;height:56px;position:relative;top:-14px;display:flex;align-items:center}
-.brand-icon{width:44px;height:44px}
-.brand-icon svg{width:44px;height:44px;display:block}
-.main-nav{height:28px;display:flex;align-items:center;gap:28px;margin-left:205px;font-size:14px;font-weight:600;white-space:nowrap}
-.main-nav a{line-height:28px}.down{font-size:9px;margin-left:3px;color:#111}
-.login{margin-left:auto;display:flex;align-items:center;gap:9px}.cart{width:27px;height:27px;border-radius:50%;background:#08732f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
-.login button{border:0;background:#08732f;color:#fff;border-radius:18px;padding:5px 12px 6px;font-family:inherit;font-weight:700;font-size:14px}.login button span{font-size:14px;margin-left:4px}
-.record-area{height:538px;background:#f5f6fa;position:relative}
-.record-card{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:330px;height:262px;background:#fff;border:1px solid #e1e1e1;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.12);padding:15px 22px}
-.record-card h1{text-align:center;color:#00863c;font-size:18px;margin:0 0 8px;font-weight:800}
-.record-row{display:grid;grid-template-columns:62px 12px 1fr;align-items:center;height:26px;font-size:14px;line-height:1.2}.record-row b{font-weight:800}.record-row strong{font-weight:500}.record-row span{font-weight:700}
-.divider{height:56px;background:#fff;position:relative}.divider:before{content:"";position:absolute;top:0;left:0;right:0;height:22px;background:linear-gradient(90deg,#f3fbf7 0%,#128c4b 48%,#f3fbf7 100%)}
-.site-footer{height:304px;background:#e4ffe2;position:relative;padding-top:40px}
-.footer-inner{width:1180px;margin:0 auto;display:grid;grid-template-columns:390px 400px 1fr;gap:20px}
-.footer-inner h2{font-size:16px;margin:0 0 12px;font-weight:800}.two-cols{display:grid;grid-template-columns:1fr 1fr}.two-cols ul{list-style:none;margin:0;padding:0}.two-cols li{font-size:13px;line-height:27px;white-space:nowrap}.two-cols li:before{content:'▶';color:#07843b;font-size:10px;margin-right:8px}
-.logos{display:flex;align-items:center}.lmap-logo{display:block;width:355px;height:auto;max-height:92px;object-fit:contain;object-position:left center}.social{position:relative}.store{width:120px;height:36px;background:#111;color:#fff;border-radius:5px;display:flex;align-items:center;justify-content:center;gap:6px;font-family:Arial,sans-serif;font-size:11px;margin:0 auto 14px}.store:first-letter{color:#8fe3ff}.store span{font-size:7px;line-height:1.05}.store b{font-size:12px}.social-icons{display:flex;justify-content:center;gap:12px;margin-top:0}.social-icons i{font-family:Arial,sans-serif;font-style:normal;width:27px;height:27px;border-radius:4px;background:#1685e0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}.social-icons i:nth-child(2){background:#050505}.social-icons i:nth-child(3){background:#e63d7e}.social-icons i:nth-child(4){background:#f04b43}
-.support{position:absolute;right:275px;bottom:0;width:345px;height:50px;background:#fff;border-radius:50px 0 0 0;padding:8px 28px;font-size:13px;display:flex;align-items:center;gap:8px}.support img{width:145px;height:auto;display:block}.copyright{position:absolute;bottom:0;left:0;height:31px;background:#fff;width:100%;padding:6px 18px;font-size:11px;border-top:1px solid #ddd}.chat{position:absolute;right:35px;bottom:17px;width:49px;height:49px;border:0;border-radius:50%;background:#4156c6;color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2);font-size:22px}
-@media(max-width:1200px){.top-strip,.nav-inner,.footer-inner{width:94%}.main-nav{margin-left:110px;gap:18px}.footer-inner{grid-template-columns:1.2fr 1fr .8fr}.support{right:18%;}}
+@font-face{
+  font-family:NotoBengaliLocal;
+  src:local('Noto Sans Bengali'),local('Noto Sans Bengali UI');
+  font-display:swap
+}
+
+*{
+  box-sizing:border-box
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:NotoBengaliLocal,'Noto Sans Bengali',sans-serif;
+  color:#111;
+  background:#fff
+}
+
+body{
+  min-width:1000px
+}
+
+a{
+  text-decoration:none;
+  color:inherit
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header{
+  height:56px;
+  background:#fff;
+  position:relative;
+  box-shadow:0 2px 5px rgba(0,0,0,.16);
+  z-index:2
+}
+
+.top-strip{
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:1180px;
+  height:28px;
+  background:linear-gradient(
+    90deg,
+    #dceee5 0%,
+    #278a53 50%,
+    #dceee5 100%
+  );
+  color:#fff;
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  line-height:28px
+}
+
+.nav-wrap{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:28px
+}
+
+.nav-inner{
+  width:1180px;
+  height:28px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  position:relative
+}
+
+.brand{
+  width:65px;
+  height:56px;
+  position:relative;
+  top:-14px;
+  display:flex;
+  align-items:center
+}
+
+.brand-icon{
+  width:44px;
+  height:44px
+}
+
+.brand-icon svg{
+  width:44px;
+  height:44px;
+  display:block
+}
+
+.main-nav{
+  height:28px;
+  display:flex;
+  align-items:center;
+  gap:28px;
+  margin-left:205px;
+  font-size:14px;
+  font-weight:600;
+  white-space:nowrap
+}
+
+.main-nav a{
+  line-height:28px
+}
+
+.down{
+  font-size:9px;
+  margin-left:3px;
+  color:#111
+}
+
+.login{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:9px
+}
+
+.cart{
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  background:#08732f;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px
+}
+
+.login button{
+  border:0;
+  background:#08732f;
+  color:#fff;
+  border-radius:18px;
+  padding:5px 12px 6px;
+  font-family:inherit;
+  font-weight:700;
+  font-size:14px
+}
+
+.login button span{
+  font-size:14px;
+  margin-left:4px
+}
+
+
+/* =========================
+   RECORD AREA
+========================= */
+
+.record-area{
+  height:538px;
+  background:#f5f6fa;
+  position:relative
+}
+
+.record-card{
+  position:absolute;
+  top:22px;
+  left:50%;
+  transform:translateX(-50%);
+  width:330px;
+  height:262px;
+  background:#fff;
+  border:1px solid #e1e1e1;
+  border-radius:6px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+  padding:15px 22px
+}
+
+.record-card h1{
+  text-align:center;
+  color:#00863c;
+  font-size:18px;
+  margin:0 0 8px;
+  font-weight:800
+}
+
+.record-row{
+  display:grid;
+  grid-template-columns:62px 12px 1fr;
+  align-items:center;
+  height:26px;
+  font-size:14px;
+  line-height:1.2
+}
+
+.record-row b{
+  font-weight:800
+}
+
+.record-row strong{
+  font-weight:500
+}
+
+.record-row span{
+  font-weight:700
+}
+
+.divider{
+  height:56px;
+  background:#fff;
+  position:relative
+}
+
+.divider:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:22px;
+  background:linear-gradient(
+    90deg,
+    #f3fbf7 0%,
+    #128c4b 48%,
+    #f3fbf7 100%
+  )
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer{
+  height:304px;
+  background:#e4ffe2;
+  position:relative;
+  padding-top:40px
+}
+
+.footer-inner{
+  width:1180px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:390px 400px 1fr;
+  gap:20px
+}
+
+.footer-inner h2{
+  font-size:16px;
+  margin:0 0 12px;
+  font-weight:800
+}
+
+.two-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr
+}
+
+.two-cols ul{
+  list-style:none;
+  margin:0;
+  padding:0
+}
+
+.two-cols li{
+  font-size:13px;
+  line-height:27px;
+  white-space:nowrap
+}
+
+.two-cols li:before{
+  content:'▶';
+  color:#07843b;
+  font-size:10px;
+  margin-right:8px
+}
+
+.logos{
+  display:flex;
+  align-items:center
+}
+
+.lmap-logo{
+  display:block;
+  width:355px;
+  height:auto;
+  max-height:92px;
+  object-fit:contain;
+  object-position:left center
+}
+
+.social{
+  position:relative
+}
+
+.store{
+  width:120px;
+  height:36px;
+  background:#111;
+  color:#fff;
+  border-radius:5px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  font-family:Arial,sans-serif;
+  font-size:11px;
+  margin:0 auto 14px
+}
+
+.store:first-letter{
+  color:#8fe3ff
+}
+
+.store span{
+  font-size:7px;
+  line-height:1.05
+}
+
+.store b{
+  font-size:12px
+}
+
+.social-icons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:0
+}
+
+.social-icons i{
+  font-family:Arial,sans-serif;
+  font-style:normal;
+  width:27px;
+  height:27px;
+  border-radius:4px;
+  background:#1685e0;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:700
+}
+
+.social-icons i:nth-child(2){
+  background:#050505
+}
+
+.social-icons i:nth-child(3){
+  background:#e63d7e
+}
+
+.social-icons i:nth-child(4){
+  background:#f04b43
+}
+
+.support{
+  position:absolute;
+  right:275px;
+  bottom:0;
+  width:345px;
+  height:50px;
+  background:#fff;
+  border-radius:50px 0 0 0;
+  padding:8px 28px;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:8px
+}
+
+.support img{
+  width:145px;
+  height:auto;
+  display:block
+}
+
+.copyright{
+  position:absolute;
+  bottom:0;
+  left:0;
+  height:31px;
+  background:#fff;
+  width:100%;
+  padding:6px 18px;
+  font-size:11px;
+  border-top:1px solid #ddd
+}
+
+.chat{
+  position:absolute;
+  right:35px;
+  bottom:17px;
+  width:49px;
+  height:49px;
+  border:0;
+  border-radius:50%;
+  background:#4156c6;
+  color:#fff;
+  box-shadow:0 2px 4px rgba(0,0,0,.2);
+  font-size:22px
+}
+
+
+/* =========================
+   TABLET / SMALL LAPTOP
+========================= */
+
+@media(max-width:1200px) and (min-width:701px){
+
+  .top-strip,
+  .nav-inner,
+  .footer-inner{
+    width:94%
+  }
+
+  .main-nav{
+    margin-left:110px;
+    gap:18px
+  }
+
+  .footer-inner{
+    grid-template-columns:1.2fr 1fr .8fr
+  }
+
+  .support{
+    right:18%
+  }
+}
+
+
+/* =====================================================
+   MOBILE VERSION
+   700px এবং তার নিচে
+===================================================== */
+
+@media(max-width:700px){
+
+  html,
+  body{
+    width:100%;
+    min-width:0;
+    overflow-x:hidden
+  }
+
+  body{
+    background:#fff
+  }
+
+
+  /* -------------------------
+     MOBILE HEADER
+  ------------------------- */
+
+  .site-header{
+    height:145px;
+    background:#fff;
+    box-shadow:0 2px 5px rgba(0,0,0,.15)
+  }
+
+  .top-strip{
+    position:absolute;
+    top:0;
+    left:0;
+    transform:none;
+    width:100%;
+    height:54px;
+
+    background:linear-gradient(
+      90deg,
+      #eaf7f0 0%,
+      #3d9b68 50%,
+      #eaf7f0 100%
+    );
+
+    font-size:15px;
+    line-height:54px;
+    white-space:nowrap;
+    overflow:hidden;
+    padding:0 8px
+  }
+
+  .nav-wrap{
+    top:54px;
+    bottom:auto;
+    height:91px;
+    background:#fff
+  }
+
+  .nav-inner{
+    width:100%;
+    height:91px;
+    margin:0;
+    padding:0 30px;
+    display:flex;
+    align-items:center
+  }
+
+  .brand{
+    width:70px;
+    height:70px;
+    position:static;
+    display:flex;
+    align-items:center
+  }
+
+  .brand-icon{
+    width:58px;
+    height:58px
+  }
+
+  .brand-icon svg{
+    width:58px;
+    height:58px
+  }
+
+  /* মোবাইলে বড় navigation menu থাকবে না */
+  .main-nav{
+    display:none
+  }
+
+  .login{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:12px
+  }
+
+  /* Cart বড় হবে */
+  .cart{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#08732f;
+    color:#fff;
+    font-size:23px;
+    box-shadow:0 2px 5px rgba(0,0,0,.12)
+  }
+
+  /* মোবাইলে Login লেখা না দেখিয়ে শুধু cart থাকবে */
+  .login button{
+    display:none
+  }
+
+  /* মোবাইলের ডান পাশে 3-dot menu */
+  .nav-inner:after{
+    content:"⋮";
+    width:40px;
+    height:50px;
+    margin-left:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Arial,sans-serif;
+    font-size:34px;
+    font-weight:700;
+    color:#111
+  }
+
+
+  /* -------------------------
+     MOBILE RECORD AREA
+  ------------------------- */
+
+  .record-area{
+    height:auto;
+    min-height:765px;
+    background:#f5f6fa;
+    padding:30px 15px 30px;
+    position:relative
+  }
+
+  .record-card{
+    position:relative;
+    top:auto;
+    left:auto;
+    transform:none;
+
+    width:100%;
+    height:auto;
+    min-height:650px;
+
+    padding:28px 30px 30px;
+
+    background:#fff;
+    border:1px solid #e1e1e1;
+    border-radius:10px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.12)
+  }
+
+  .record-card h1{
+    text-align:center;
+    color:#00863c;
+    font-size:29px;
+    line-height:1.35;
+    margin:0 0 26px;
+    font-weight:800
+  }
+
+  .record-row{
+    display:grid;
+    grid-template-columns:105px 18px minmax(0,1fr);
+
+    align-items:start;
+
+    height:auto;
+    min-height:55px;
+
+    font-size:20px;
+    line-height:1.55;
+
+    margin-bottom:4px
+  }
+
+  .record-row b{
+    font-weight:800;
+    white-space:nowrap
+  }
+
+  .record-row span{
+    font-weight:700
+  }
+
+  .record-row strong{
+    font-weight:500;
+    overflow-wrap:anywhere;
+    word-break:break-word
+  }
+
+
+  /* -------------------------
+     MOBILE DIVIDER
+  ------------------------- */
+
+  .divider{
+    height:78px;
+    background:#fff
+  }
+
+  .divider:before{
+    height:54px;
+    top:0;
+
+    background:linear-gradient(
+      90deg,
+      #f3fbf7 0%,
+      #128c4b 50%,
+      #f3fbf7 100%
+    )
+  }
+
+
+  /* -------------------------
+     MOBILE FOOTER
+  ------------------------- */
+
+  .site-footer{
+    height:auto;
+    min-height:760px;
+    background:#e4ffe2;
+    padding:60px 30px 90px;
+    position:relative
+  }
+
+  .footer-inner{
+    width:100%;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    gap:45px
+  }
+
+  .footer-inner h2{
+    font-size:25px;
+    line-height:1.4;
+    margin:0 0 20px;
+    font-weight:800;
+    color:#08732f
+  }
+
+  .two-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 20px
+  }
+
+  .two-cols ul{
+    list-style:none;
+    margin:0;
+    padding:0
+  }
+
+  .two-cols li{
+    font-size:17px;
+    line-height:2.2;
+    white-space:normal;
+    display:flex;
+    align-items:flex-start
+  }
+
+  .two-cols li:before{
+    content:'▶';
+    color:#07843b;
+    font-size:13px;
+    margin-right:9px;
+    margin-top:2px;
+    flex-shrink:0
+  }
+
+  .planning{
+    width:100%
+  }
+
+  .logos{
+    display:flex;
+    justify-content:center;
+    align-items:center
+  }
+
+  .lmap-logo{
+    display:block;
+    width:100%;
+    max-width:330px;
+    height:auto;
+    max-height:110px;
+    object-fit:contain
+  }
+
+  .social{
+    width:100%;
+    text-align:center
+  }
+
+  .store{
+    width:150px;
+    height:44px;
+    margin:0 auto 18px
+  }
+
+  .social-icons{
+    display:flex;
+    justify-content:center;
+    gap:14px
+  }
+
+  .social-icons i{
+    width:38px;
+    height:38px;
+    font-size:22px
+  }
+
+
+  /* -------------------------
+     MOBILE SUPPORT
+  ------------------------- */
+
+  .support{
+    position:relative;
+    right:auto;
+    bottom:auto;
+
+    width:100%;
+    height:auto;
+    min-height:60px;
+
+    background:#fff;
+    border-radius:0;
+
+    margin-top:35px;
+
+    padding:12px 5px;
+
+    font-size:13px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px
+  }
+
+  .support img{
+    width:135px;
+    height:auto
+  }
+
+
+  /* -------------------------
+     MOBILE COPYRIGHT
+  ------------------------- */
+
+  .copyright{
+    position:absolute;
+    bottom:0;
+    left:0;
+
+    height:48px;
+    width:100%;
+
+    padding:12px 10px;
+
+    text-align:center;
+
+    font-size:11px;
+
+    background:#fff;
+    border-top:1px solid #ddd
+  }
+
+
+  /* -------------------------
+     MOBILE CHAT
+  ------------------------- */
+
+  .chat{
+    position:fixed;
+    right:18px;
+    bottom:22px;
+
+    width:62px;
+    height:62px;
+
+    border-radius:50%;
+
+    background:#4156c6;
+    color:#fff;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.25);
+
+    font-size:28px;
+
+    z-index:20
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+   400px এবং তার নিচে
+===================================================== */
+
+@media(max-width:400px){
+
+  .top-strip{
+    font-size:13px
+  }
+
+  .nav-inner{
+    padding:0 18px
+  }
+
+  .brand-icon,
+  .brand-icon svg{
+    width:52px;
+    height:52px
+  }
+
+  .cart{
+    width:46px;
+    height:46px;
+    font-size:21px
+  }
+
+  .record-area{
+    padding:22px 10px 25px;
+    min-height:720px
+  }
+
+  .record-card{
+    padding:25px 20px 25px;
+    min-height:620px
+  }
+
+  .record-card h1{
+    font-size:25px;
+    margin-bottom:22px
+  }
+
+  .record-row{
+    grid-template-columns:92px 16px minmax(0,1fr);
+    font-size:18px;
+    min-height:51px
+  }
+
+  .site-footer{
+    padding-left:20px;
+    padding-right:20px
+  }
+
+  .footer-inner h2{
+    font-size:22px
+  }
+
+  .two-cols{
+    grid-template-columns:1fr;
+    gap:0
+  }
+
+  .two-cols li{
+    font-size:16px
+  }
+
+}
