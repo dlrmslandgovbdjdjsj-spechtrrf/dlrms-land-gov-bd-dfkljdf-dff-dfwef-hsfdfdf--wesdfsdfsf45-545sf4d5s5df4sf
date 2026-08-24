@@ -1,5 +1,7 @@
+```html
 <!doctype html>
 <html lang="bn">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,14 +42,11 @@
         top:0 !important;
         left:0 !important;
         transform:none !important;
-
         width:100% !important;
         height:46px !important;
         line-height:46px !important;
-
         font-size:13px !important;
         font-weight:700 !important;
-
         white-space:nowrap !important;
         overflow:hidden !important;
 
@@ -68,10 +67,8 @@
         position:absolute !important;
         top:46px !important;
         left:0 !important;
-
         width:100% !important;
         height:72px !important;
-
         bottom:auto !important;
         background:#fff !important;
       }
@@ -79,10 +76,8 @@
       .nav-inner{
         width:100% !important;
         height:72px !important;
-
         margin:0 !important;
         padding:0 19px !important;
-
         display:flex !important;
         align-items:center !important;
       }
@@ -126,11 +121,9 @@
         content:"⋮";
         width:20px !important;
         height:42px !important;
-
         display:flex !important;
         align-items:center !important;
         justify-content:center !important;
-
         color:#111 !important;
         font-family:Arial,sans-serif !important;
         font-size:30px !important;
@@ -141,27 +134,20 @@
         width:100% !important;
         height:auto !important;
         min-height:0 !important;
-
         padding:24px 13px 20px !important;
-
         background:#f5f6fa !important;
       }
 
       .record-card{
         position:relative !important;
-
         top:auto !important;
         left:auto !important;
         transform:none !important;
-
         width:100% !important;
         max-width:345px !important;
-
         height:auto !important;
         min-height:0 !important;
-
         margin:0 auto !important;
-
         padding:18px 23px 17px !important;
 
         background:#fff !important;
@@ -170,44 +156,34 @@
 
         border:1px solid #e1e1e1 !important;
         border-radius:8px !important;
-
         box-shadow:0 2px 8px rgba(0,0,0,.12) !important;
-
         color:#111 !important;
       }
 
       .record-card h1{
         text-align:center !important;
         color:#00863c !important;
-
         font-size:22px !important;
         line-height:1.25 !important;
-
         margin:0 0 13px !important;
         padding:0 !important;
-
         font-weight:800 !important;
         white-space:nowrap !important;
       }
 
       .record-row{
         display:grid !important;
-
         grid-template-columns:
           81px
           10px
           minmax(0,1fr) !important;
 
         align-items:center !important;
-
         min-height:38px !important;
         height:auto !important;
-
         padding:1px 0 !important;
-
         font-size:15.5px !important;
         line-height:1.3 !important;
-
         color:#111 !important;
       }
 
@@ -244,9 +220,7 @@
         width:100% !important;
         height:auto !important;
         min-height:0 !important;
-
         padding:34px 20px 46px !important;
-
         background:#e4ffe2 !important;
         position:relative !important;
       }
@@ -254,13 +228,10 @@
       .footer-inner{
         width:100% !important;
         margin:0 !important;
-
         display:grid !important;
-
         grid-template-columns:
           1fr
           1fr !important;
-
         column-gap:14px !important;
         row-gap:28px !important;
       }
@@ -283,11 +254,9 @@
 
       .two-cols{
         display:grid !important;
-
         grid-template-columns:
           1fr
           1fr !important;
-
         column-gap:12px !important;
         row-gap:1px !important;
       }
@@ -361,28 +330,20 @@
 
       .support{
         display:flex !important;
-
         position:relative !important;
         right:auto !important;
         bottom:auto !important;
-
         grid-column:1 / -1 !important;
-
         width:100% !important;
         height:auto !important;
-
         margin:0 !important;
         padding:5px 0 0 !important;
-
         background:transparent !important;
         border-radius:0 !important;
-
         justify-content:center !important;
         align-items:center !important;
-
         gap:6px !important;
         font-size:11px !important;
-
         flex-wrap:wrap !important;
       }
 
@@ -393,39 +354,27 @@
 
       .copyright{
         display:block !important;
-
         position:relative !important;
         left:auto !important;
         bottom:auto !important;
-
         width:100% !important;
         height:auto !important;
-
         grid-column:1 / -1 !important;
-
         margin-top:2px !important;
         padding:7px 3px !important;
-
         background:#fff !important;
-
         text-align:center !important;
-
         font-size:8px !important;
-
         border-top:1px solid #ddd !important;
       }
 
       .chat{
         position:fixed !important;
-
         right:13px !important;
         bottom:13px !important;
-
         width:48px !important;
         height:48px !important;
-
         font-size:20px !important;
-
         z-index:9999 !important;
       }
     }
@@ -555,9 +504,11 @@
 <header class="site-header">
 
   <div class="top-strip">
+
     <div class="top-inner" id="live-date">
       তারিখ লোড হচ্ছে...
     </div>
+
   </div>
 
   <div class="nav-wrap">
@@ -568,6 +519,7 @@
         class="brand"
         aria-label="ভূমি ব্যবস্থাপনা অটোমেশন প্রকল্প"
       >
+
         <div class="brand-icon">
 
           <svg
@@ -618,6 +570,7 @@
           </svg>
 
         </div>
+
       </div>
 
       <nav class="main-nav">
@@ -660,6 +613,7 @@
       </div>
 
     </div>
+
   </div>
 
 </header>
@@ -863,9 +817,10 @@
 
   function getPart(parts, type) {
 
-    const item = parts.find(function (part) {
-      return part.type === type;
-    });
+    const item =
+      parts.find(function (part) {
+        return part.type === type;
+      });
 
     return item ? item.value : "";
   }
@@ -945,8 +900,8 @@
 
       dateElement.textContent =
         "তারিখ পাওয়া যাচ্ছে না";
-
     }
+
   }
 
   updateLiveDate();
@@ -960,6 +915,8 @@
 </script>
 
 
-<script src="app.js"></script>
+<script src="app.js?v=5"></script>
 
 </body>
+</html>
+```
