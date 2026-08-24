@@ -9,7 +9,6 @@
     !cfg.SUPABASE_ANON_KEY.includes("PASTE_");
 
   if (!valid || !window.supabase) {
-    console.error("Supabase configuration is missing.");
     return;
   }
 
@@ -27,47 +26,38 @@
 
   function showNotFound() {
 
-    document.body.innerHTML = `
+    const card =
+      document.getElementById("record-card");
+
+    if (!card) {
+      return;
+    }
+
+    card.innerHTML = `
       <div style="
-        min-height:100vh;
+        width:100%;
+        min-height:180px;
         display:flex;
         align-items:center;
         justify-content:center;
-        margin:0;
-        padding:20px;
-        background:#f5f6fa;
-        font-family:
-          'Noto Sans Bengali',
-          'Noto Sans Bengali UI',
-          sans-serif;
+        text-align:center;
       ">
-
-        <div style="
-          width:100%;
-          max-width:500px;
-          padding:35px 20px;
-          background:#fff;
-          border:1px solid #e1e1e1;
-          border-radius:10px;
-          box-shadow:0 2px 10px rgba(0,0,0,.12);
-          text-align:center;
+        <h1 style="
+          margin:0;
+          padding:0;
+          color:#111111;
+          font-size:28px;
+          line-height:1.4;
+          font-weight:800;
         ">
-
-          <h1 style="
-            margin:0;
-            color:#111;
-            font-size:28px;
-            font-weight:800;
-          ">
-            খতিয়ান পাওয়া যায়নি
-          </h1>
-
-        </div>
-
+          কোন খতিয়ান পাওয়া যায়নি
+        </h1>
       </div>
     `;
 
-    document.body.style.margin = "0";
+    card.style.background = "#ffffff";
+    card.style.backgroundColor = "#ffffff";
+    card.style.backgroundImage = "none";
   }
 
 
@@ -82,21 +72,29 @@
 
     card.innerHTML = `
       <div style="
+        width:100%;
+        min-height:180px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
         text-align:center;
-        padding:30px 15px;
       ">
-
         <h1 style="
           margin:0;
-          color:#111;
-          font-size:22px;
+          padding:0;
+          color:#111111;
+          font-size:24px;
+          line-height:1.4;
           font-weight:800;
         ">
           তথ্য লোড করা যাচ্ছে না
         </h1>
-
       </div>
     `;
+
+    card.style.background = "#ffffff";
+    card.style.backgroundColor = "#ffffff";
+    card.style.backgroundImage = "none";
   }
 
 
@@ -140,7 +138,10 @@
         );
 
 
-    /* Specific record URL */
+    /*
+      Specific record URL:
+      index.html?id=5
+    */
 
     if (idParam !== null) {
 
@@ -157,35 +158,29 @@
           Number(idParam)
         );
 
-    }
+    } else {
 
-
-    /* Main page without ID */
-
-    else {
+      /*
+        Main page without ?id=
+        shows the latest record.
+      */
 
       query =
         query
           .order(
             "id",
             {
-              ascending:false
+              ascending: false
             }
           )
           .limit(1);
-
     }
 
 
-    const result =
-      await query.maybeSingle();
-
-
-    const data =
-      result.data;
-
-    const error =
-      result.error;
+    const {
+      data,
+      error
+    } = await query.maybeSingle();
 
 
     if (error) {
@@ -201,7 +196,9 @@
     }
 
 
-    /* Deleted or missing record */
+    /*
+      Deleted / missing record
+    */
 
     if (!data) {
 
