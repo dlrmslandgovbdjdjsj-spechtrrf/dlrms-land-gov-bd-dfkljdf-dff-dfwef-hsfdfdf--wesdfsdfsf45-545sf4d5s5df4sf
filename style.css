@@ -976,3 +976,12 @@ body{
   }
 
 }
+@media (max-width: 768px) {
+  body {
+    background: red !important;
+  }
+
+  .record-card {
+    background: yellow !important;
+  }
+}
