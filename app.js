@@ -7,6 +7,15 @@
     cfg.SUPABASE_ANON_KEY &&
     !cfg.SUPABASE_ANON_KEY.includes("PASTE_");
 
+  if (!valid || !window.supabase) {
+    return;
+  }
+
+  const client = window.supabase.createClient(
+    cfg.SUPABASE_URL,
+    cfg.SUPABASE_ANON_KEY
+  );
+
   const fields = [
     "khatian",
     "owner",
@@ -23,7 +32,7 @@
     const el = document.getElementById(id);
 
     if (el) {
-      el.textContent = value == null ? "" : value;
+      el.textContent = value ?? "";
     }
   }
 
@@ -33,49 +42,44 @@
     });
   }
 
-  function showDeletedMessage() {
+  function showNotFound() {
     const card = document.getElementById("record-card");
 
     if (!card) {
       return;
     }
 
+    card.style.background = "#ffffff";
+    card.style.backgroundColor = "#ffffff";
+
     card.innerHTML = `
-      <div
-        style="
-          text-align:center;
-          padding:35px 20px;
+      <div style="
+        text-align:center;
+        padding:30px 15px;
+        font-family:inherit;
+      ">
+        <h1 style="
           color:#a40000;
-          font-family:inherit;
-        "
-      >
-        <h1
-          style="
-            color:#a40000;
-            font-size:24px;
-            margin:0 0 14px;
-          "
-        >
-          খতিয়ান পাওয়া যায়নি
+          font-size:24px;
+          margin:0 0 12px;
+        ">
+          খতিয়ান পাওয়া যায়নি
         </h1>
 
-        <p
-          style="
-            margin:0;
-            font-size:17px;
-            line-height:1.6;
-          "
-        >
+        <p style="
+          color:#555;
+          font-size:16px;
+          line-height:1.6;
+          margin:0;
+        ">
           এই খতিয়ানটি মুছে ফেলা হয়েছে
           অথবা আর উপলভ্য নয়।
         </p>
       </div>
     `;
-
-    card.style.background = "#fff";
   }
 
-  function showConfigError() {
+  function showError() {
     const card = document.getElementById("record-card");
 
     if (!card) {
@@ -83,49 +87,28 @@
     }
 
     card.innerHTML = `
-      <div
-        style="
-          text-align:center;
-          padding:30px 20px;
+      <div style="
+        text-align:center;
+        padding:30px 15px;
+      ">
+        <h1 style="
           color:#a40000;
-        "
-      >
-        <h1
-          style="
-            color:#a40000;
-            font-size:22px;
-            margin:0 0 12px;
-          "
-        >
-          সংযোগ সমস্যা
+          font-size:22px;
+          margin:0 0 10px;
+        ">
+          তথ্য লোড করা যায়নি
         </h1>
 
-        <p
-          style="
-            margin:0;
-            font-size:16px;
-            line-height:1.6;
-          "
-        >
-          ডাটাবেসের সাথে সংযোগ করা যাচ্ছে না।
+        <p style="
+          color:#555;
+          font-size:15px;
+          margin:0;
+        ">
+          অনুগ্রহ করে কিছুক্ষণ পরে আবার চেষ্টা করুন।
         </p>
       </div>
     `;
   }
-
-  function showNotFound() {
-    showDeletedMessage();
-  }
-
-  if (!valid || !window.supabase) {
-    showConfigError();
-    return;
-  }
-
-  const client = window.supabase.createClient(
-    cfg.SUPABASE_URL,
-    cfg.SUPABASE_ANON_KEY
-  );
 
   const params = new URLSearchParams(
     window.location.search
@@ -134,51 +117,58 @@
   const idParam = params.get("id");
 
   /*
-    URL-এ ?id=5 থাকলে ঠিক ওই record খুঁজবে।
-    id না থাকলে পুরোনো default হিসেবে ID 1 দেখাবে।
+    No ID = latest record
+    With ID = exact record
   */
 
-  const recordId =
-    idParam && /^\d+$/.test(idParam)
-      ? Number(idParam)
-      : 1;
+  async function loadRecord() {
 
-  client
-    .from("land_records")
-    .select(
-      "id,khatian,owner,dag_no,survey,mouza,upazila,district,division,record_date"
-    )
-    .eq("id", recordId)
-    .maybeSingle()
-    .then(function (result) {
+    let query = client
+      .from("land_records")
+      .select(
+        "id,khatian,owner,dag_no,survey,mouza,upazila,district,division,record_date"
+      );
 
-      const data = result.data;
-      const error = result.error;
+    if (idParam && /^\d+$/.test(idParam)) {
 
-      if (error) {
-        console.error("Supabase error:", error);
-        showConfigError();
-        return;
-      }
+      query = query.eq(
+        "id",
+        Number(idParam)
+      );
 
-      /*
-        সবচেয়ে গুরুত্বপূর্ণ অংশ:
+    } else {
 
-        record না থাকলে কোনো fallback data দেখাবে না।
-        অর্থাৎ delete করা ID-এর URL খুললেও
-        খতিয়ান আর দেখাবে না।
-      */
+      query = query
+        .order("id", {
+          ascending: false
+        })
+        .limit(1);
+    }
 
-      if (!data) {
-        showNotFound();
-        return;
-      }
+    const {
+      data,
+      error
+    } = await query.maybeSingle();
 
-      showRecord(data);
-    })
-    .catch(function (error) {
-      console.error("Unexpected error:", error);
-      showConfigError();
-    });
+    if (error) {
+      console.error(error);
+      showError();
+      return;
+    }
+
+    /*
+      No fallback data here.
+      Deleted record = no data = dead URL.
+    */
+
+    if (!data) {
+      showNotFound();
+      return;
+    }
+
+    showRecord(data);
+  }
+
+  loadRecord();
 
 })();
