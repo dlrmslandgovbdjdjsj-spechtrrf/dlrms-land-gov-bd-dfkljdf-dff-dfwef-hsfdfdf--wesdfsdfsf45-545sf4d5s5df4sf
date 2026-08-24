@@ -2,654 +2,406 @@
 <html lang="bn">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>অ্যাডমিন প্যানেল — খতিয়ান</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>খতিয়ান তথ্য</title>
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    body {
-      background: #f3f5f8;
-    }
-
-    .admin-wrap {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-
-    .admin-card {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 3px 15px #0001;
-      padding: 28px;
-      margin-bottom: 20px;
-    }
-
-    .admin-card h1 {
-      margin: 0 0 10px;
-      color: #087a3d;
-      font-size: 25px;
-    }
-
-    .admin-card h2 {
-      margin: 0 0 15px;
-      color: #087a3d;
-      font-size: 20px;
-    }
-
-    .muted {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    .field label {
-      font-weight: 700;
-    }
-
-    .field input {
-      padding: 11px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font: inherit;
-      box-sizing: border-box;
-      width: 100%;
-    }
-
-    .btns {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 6px;
-      padding: 11px 20px;
-      font: inherit;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .primary {
-      background: #087a3d;
-      color: #fff;
-    }
-
-    .secondary {
-      background: #eee;
-      color: #222;
-    }
-
-    .new-record {
-      background: #087a3d;
-      color: #fff;
-      font-size: 16px;
-      padding: 13px 24px;
-    }
-
-    .msg {
-      margin: 12px 0;
-      padding: 10px;
-      border-radius: 6px;
-      display: none;
-    }
-
-    .ok {
-      display: block;
-      background: #e5f8ea;
-      color: #087a3d;
-    }
-
-    .err {
-      display: block;
-      background: #ffe9e9;
-      color: #a40000;
-    }
-
-    .new-box {
-      background: #f7faf8;
-      border: 1px solid #dcebe2;
-      border-radius: 8px;
-      padding: 18px;
-      margin-bottom: 20px;
-    }
-
-    .history-box {
-      margin-top: 25px;
-    }
-
-    .history-count {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-
-    .table-wrap {
-      width: 100%;
-      overflow-x: auto;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 980px;
-      background: #fff;
-    }
-
-    th,
-    td {
-      border-bottom: 1px solid #eee;
-      padding: 10px;
-      text-align: left;
-      white-space: nowrap;
-    }
-
-    th {
-      background: #f5f5f5;
-      font-weight: 700;
-    }
-
-    tr:last-child td {
-      border-bottom: 0;
-    }
-
-    .url-cell a {
-      color: #075db5;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .url-cell a:hover {
-      text-decoration: underline;
-    }
-
-    .record-url {
-      margin-top: 15px;
-      padding: 12px;
-      background: #f1f7ff;
-      border: 1px solid #d5e6ff;
-      border-radius: 7px;
-      word-break: break-all;
-    }
-
-    .record-url a {
-      color: #075db5;
-      font-weight: 700;
-    }
-
-    .url-label {
-      font-weight: 700;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .delete-button {
-      background: #d93025;
-      color: #fff;
-      border: 0;
-      border-radius: 6px;
-      padding: 8px 14px;
-      font: inherit;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .delete-button:hover {
-      background: #b91c1c;
-    }
-
-    .delete-button:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-    }
-
-    @media (max-width: 650px) {
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .field.full {
-        grid-column: auto;
-      }
-
-      .admin-wrap {
-        margin: 20px auto;
-        padding: 12px;
-      }
-
-      .admin-card {
-        padding: 20px;
-      }
-
-    }
-  </style>
 </head>
 
 <body>
 
-<div class="admin-wrap">
+<header class="site-header">
 
-  <!-- =========================
-       LOGIN
-  ========================== -->
-
-  <div class="admin-card" id="login-card">
-
-    <h1>অ্যাডমিন লগইন</h1>
-
-    <p class="muted">
-      শুধুমাত্র অনুমোদিত অ্যাডমিন এখানে নতুন খতিয়ান সংযুক্ত ও অপ্রয়োজনীয় খতিয়ান ডিলেট করতে পারবেন।
-    </p>
-
-    <div class="field">
-
-      <label>ইমেইল</label>
-
-      <input
-        id="email"
-        type="email"
-        autocomplete="username"
-      >
-
+  <div class="top-strip">
+    <div class="top-inner" id="live-date">
+      লোড হচ্ছে...
     </div>
-
-    <br>
-
-    <div class="field">
-
-      <label>পাসওয়ার্ড</label>
-
-      <input
-        id="password"
-        type="password"
-        autocomplete="current-password"
-      >
-
-    </div>
-
-    <div id="login-msg" class="msg"></div>
-
-    <div class="btns">
-
-      <button
-        class="btn primary"
-        id="login"
-        type="button"
-      >
-        লগইন
-      </button>
-
-      <a href="index.html">
-
-        <button
-          type="button"
-          class="btn secondary"
-        >
-          হোম
-        </button>
-
-      </a>
-
-    </div>
-
   </div>
 
+  <div class="nav-wrap">
+    <div class="nav-inner">
 
-  <!-- =========================
-       ADMIN PANEL
-  ========================== -->
+      <div class="brand" aria-label="ভূমি ব্যবস্থাপনা অটোমেশন প্রকল্প">
 
-  <div
-    class="admin-card"
-    id="editor-card"
-    style="display:none"
-  >
+        <div class="brand-icon">
 
-    <h1>খতিয়ান অ্যাডমিন প্যানেল</h1>
+          <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
 
-    <p class="muted">
-      এখান থেকে নতুন খতিয়ান সংযুক্ত করতে পারবেন এবং যেগুলো দরকার নেই সেগুলো ডিলেট করতে পারবেন।
-    </p>
+            <rect
+              x="2"
+              y="2"
+              width="44"
+              height="44"
+              rx="2"
+              fill="#fff"
+              stroke="#8bc53f"
+              stroke-width="2"
+            />
+
+            <path
+              d="M8 29h32M11 29V18l13-8 13 8v11"
+              fill="none"
+              stroke="#79a83a"
+              stroke-width="2"
+            />
+
+            <path
+              d="M15 29v8h18v-8M20 37v-7h8v7"
+              fill="none"
+              stroke="#79a83a"
+              stroke-width="2"
+            />
+
+            <circle
+              cx="32"
+              cy="13"
+              r="5"
+              fill="#e9f8d8"
+              stroke="#8bc53f"
+            />
+
+            <path
+              d="M32 10v6M29 13h6"
+              stroke="#8bc53f"
+              stroke-width="1.4"
+            />
+
+          </svg>
+
+        </div>
+
+      </div>
 
 
-    <!-- =========================
-         NEW RECORD
-    ========================== -->
+      <nav class="main-nav">
 
-    <div class="new-box">
+        <a href="index.html">হোম</a>
 
-      <h2>নতুন খতিয়ান</h2>
+        <a href="#">
+          আমাদের সম্পর্কে
+          <span class="down">▼</span>
+        </a>
 
-      <p class="muted">
-        নতুন খতিয়ানের তথ্য দিন। প্রতিটি নতুন খতিয়ানের জন্য আলাদা ID এবং আলাদা URL তৈরি হবে।
-      </p>
+        <a href="#">
+          জ্ঞাতব্য
+          <span class="down">▼</span>
+        </a>
 
-      <button
-        class="btn new-record"
-        id="new-record"
-        type="button"
-      >
-        ＋ নতুন সংযুক্ত করুন
-      </button>
+        <a href="#">পরিপত্র</a>
+
+        <a href="#">আবেদনের অবস্থা</a>
+
+        <a href="#">নির্দেশিকা</a>
+
+        <a href="#">খতিয়ান ও ম্যাপ অনুসন্ধান</a>
+
+      </nav>
+
+
+      <!-- LOGIN -->
+      <div class="login">
+
+        <span class="cart">🛒</span>
+
+        <a href="https://lsg-land-owner.land.gov.bd/login">
+
+          <button type="button">
+            লগইন
+            <span>⌄</span>
+          </button>
+
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+
+</header>
+
+
+<main>
+
+  <section class="record-area">
+
+    <div class="record-card" id="record-card">
+
+      <h1>
+        খতিয়ান নং -
+        <span id="khatian">লোড হচ্ছে...</span>
+      </h1>
+
+
+      <div class="record-row">
+        <b>মালিক</b>
+        <span>:</span>
+        <strong id="owner">—</strong>
+      </div>
+
+
+      <div class="record-row">
+        <b>দাগ নং</b>
+        <span>:</span>
+        <strong id="dag_no">—</strong>
+      </div>
+
+
+      <div class="record-row">
+        <b>সার্ভে</b>
+        <span>:</span>
+        <strong id="survey">—</strong>
+      </div>
+
+
+      <div class="record-row">
+        <b>মৌজা</b>
+        <span>:</span>
+        <strong id="mouza">—</strong>
+      </div>
+
+
+      <div class="record-row">
+        <b>উপজেলা</b>
+        <span>:</span>
+        <strong id="upazila">—</strong>
+      </div>
+
+
+      <div class="record-row">
+        <b>জেলা</b>
+        <span>:</span>
+        <strong id="district">—</strong>
+      </div>
+
+
+      <div class="record-row">
+        <b>বিভাগ</b>
+        <span>:</span>
+        <strong id="division">—</strong>
+      </div>
+
+
+      <div class="record-row">
+        <b>তারিখ</b>
+        <span>:</span>
+        <strong id="record_date">—</strong>
+      </div>
 
     </div>
 
+  </section>
 
-    <!-- =========================
-         NEW RECORD FORM
-    ========================== -->
+  <div class="divider"></div>
 
-    <div
-      id="new-record-form"
-      style="display:none"
-    >
-
-      <h2>নতুন খতিয়ান সংযুক্ত করুন</h2>
-
-      <div class="grid">
-
-        <div class="field">
-
-          <label>খতিয়ান নং</label>
-
-          <input
-            id="f_khatian"
-            type="text"
-          >
-
-        </div>
+</main>
 
 
-        <div class="field">
+<footer class="site-footer">
 
-          <label>মালিক</label>
+  <div class="footer-inner">
 
-          <input
-            id="f_owner"
-            type="text"
-          >
+    <section>
 
-        </div>
+      <h2>গুরুত্বপূর্ণ লিংক</h2>
 
+      <div class="two-cols">
 
-        <div class="field">
+        <ul>
 
-          <label>দাগ নং</label>
+          <li>বাংলাদেশ জাতীয় তথ্য বাতায়ন</li>
 
-          <input
-            id="f_dag_no"
-            type="text"
-          >
+          <li>ভূমি মন্ত্রণালয়</li>
 
-        </div>
+          <li>তথ্য অধিদপ্তর (পিআইডি)</li>
 
+          <li>অভিযোগ প্রতিকার ব্যবস্থা</li>
 
-        <div class="field">
-
-          <label>সার্ভে</label>
-
-          <input
-            id="f_survey"
-            type="text"
-          >
-
-        </div>
+        </ul>
 
 
-        <div class="field">
+        <ul>
 
-          <label>মৌজা</label>
+          <li>সার্ভে টিকেট</li>
 
-          <input
-            id="f_mouza"
-            type="text"
-          >
+          <li>গোপনীয়তা নীতি</li>
 
-        </div>
+          <li>সাধারণ জিজ্ঞাসা</li>
 
+          <li>যোগাযোগ</li>
 
-        <div class="field">
-
-          <label>উপজেলা</label>
-
-          <input
-            id="f_upazila"
-            type="text"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>জেলা</label>
-
-          <input
-            id="f_district"
-            type="text"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>বিভাগ</label>
-
-          <input
-            id="f_division"
-            type="text"
-          >
-
-        </div>
-
-
-        <div class="field full">
-
-          <label>তারিখ</label>
-
-          <input
-            id="f_record_date"
-            type="text"
-          >
-
-        </div>
+        </ul>
 
       </div>
 
-
-      <div
-        id="save-msg"
-        class="msg"
-      ></div>
+    </section>
 
 
-      <!-- =========================
-           SAVE / CANCEL
-      ========================== -->
+    <section class="planning">
 
-      <div class="btns">
+      <h2>পরিকল্পনা ও বাস্তবায়ন</h2>
 
-        <button
-          class="btn primary"
-          id="save"
-          type="button"
+      <div class="logos">
+
+        <img
+          class="lmap-logo"
+          src="lmap_logo.png"
+          alt="ভূমি ব্যবস্থাপনা অটোমেশন প্রকল্প"
         >
-          নতুন সংযুক্ত করুন
-        </button>
-
-        <button
-          class="btn secondary"
-          id="cancel-new"
-          type="button"
-        >
-          বাতিল
-        </button>
 
       </div>
 
+    </section>
 
-      <!-- =========================
-           NEW RECORD URL
-      ========================== -->
 
-      <div
-        id="record-url"
-        class="record-url"
-        style="display:none"
-      >
+    <section class="social">
 
-        <span class="url-label">
-          এই খতিয়ানের আলাদা URL:
+      <h2>সামাজিক যোগাযোগ</h2>
+
+      <div class="store">
+
+        ▶
+
+        <span>
+          GET IT ON<br>
+          <b>Google Play</b>
         </span>
 
-        <a
-          id="record-url-link"
-          href="#"
-          target="_blank"
-          rel="noopener"
-        ></a>
-
-      </div>
-
-    </div>
-
-
-    <!-- =========================
-         HISTORY
-    ========================== -->
-
-    <div class="history-box">
-
-      <h2>সংযুক্ত খতিয়ানের তালিকা</h2>
-
-      <div
-        id="history-count"
-        class="history-count"
-      >
-        মোট ০টি রেকর্ড
       </div>
 
 
-      <div class="table-wrap">
+      <div class="social-icons">
 
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>ID</th>
-
-              <th>খতিয়ান</th>
-
-              <th>মালিক</th>
-
-              <th>দাগ নং</th>
-
-              <th>সার্ভে</th>
-
-              <th>মৌজা</th>
-
-              <th>তারিখ</th>
-
-              <th>URL</th>
-
-              <th>অ্যাকশন</th>
-
-            </tr>
-
-          </thead>
-
-
-          <tbody id="history-body">
-
-          </tbody>
-
-        </table>
+        <i>f</i>
+        <i>𝕏</i>
+        <i>◎</i>
+        <i>▶</i>
 
       </div>
 
-    </div>
-
-
-    <!-- =========================
-         ADMIN BUTTONS
-    ========================== -->
-
-    <div class="btns">
-
-      <button
-        class="btn secondary"
-        id="logout"
-        type="button"
-      >
-        লগআউট
-      </button>
-
-
-      <a href="index.html">
-
-        <button
-          type="button"
-          class="btn secondary"
-        >
-          ওয়েবসাইট দেখুন
-        </button>
-
-      </a>
-
-    </div>
+    </section>
 
   </div>
 
-</div>
+
+  <div class="support">
+
+    কারিগরি সহায়তায়:
+
+    <img
+      src="softbd.png"
+      alt="Soft BD Ltd."
+    >
+
+  </div>
 
 
-<!-- =========================
-     SUPABASE
-========================= -->
+  <div class="copyright">
+    ©২০২৬ ভূমি ব্যবস্থাপনা অটোমেশন প্রকল্প
+  </div>
+
+
+  <button
+    class="chat"
+    aria-label="চ্যাট"
+  >
+    ▤
+  </button>
+
+</footer>
+
+
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-<!-- =========================
-     CONFIG
-========================= -->
+<!-- CONFIG -->
 
 <script src="config.js"></script>
 
 
-<!-- =========================
-     ADMIN JAVASCRIPT
-========================= -->
+<!-- APP -->
 
-<script src="admin.js"></script>
+<script src="app.js"></script>
+
+
+<!-- LIVE DATE -->
+
+<script>
+
+(function () {
+
+  const dateElement =
+    document.getElementById('live-date');
+
+  if (!dateElement) return;
+
+
+  function updateLiveDate() {
+
+    const now = new Date();
+
+    const days = [
+      'রবিবার',
+      'সোমবার',
+      'মঙ্গলবার',
+      'বুধবার',
+      'বৃহস্পতিবার',
+      'শুক্রবার',
+      'শনিবার'
+    ];
+
+    const banglaMonths = [
+      'জানুয়ারি',
+      'ফেব্রুয়ারি',
+      'মার্চ',
+      'এপ্রিল',
+      'মে',
+      'জুন',
+      'জুলাই',
+      'আগস্ট',
+      'সেপ্টেম্বর',
+      'অক্টোবর',
+      'নভেম্বর',
+      'ডিসেম্বর'
+    ];
+
+
+    const dayName =
+      days[now.getDay()];
+
+    const day =
+      now.getDate();
+
+    const month =
+      banglaMonths[now.getMonth()];
+
+    const year =
+      now.getFullYear();
+
+
+    dateElement.textContent =
+      dayName +
+      ', ' +
+      day +
+      ' ' +
+      month +
+      ' ' +
+      year;
+
+  }
+
+
+  updateLiveDate();
+
+  // প্রতি মিনিটে তারিখ আপডেট করবে
+  setInterval(
+    updateLiveDate,
+    60000
+  );
+
+})();
+
+</script>
 
 </body>
 </html>
