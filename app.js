@@ -1,4 +1,3 @@
-```javascript
 (function () {
 
   const cfg = window.APP_CONFIG || {};
@@ -10,23 +9,19 @@
     !cfg.SUPABASE_ANON_KEY.includes("PASTE_");
 
   if (!valid || !window.supabase) {
-    console.error("Supabase configuration is missing.");
     return;
   }
 
-  const client =
-    window.supabase.createClient(
-      cfg.SUPABASE_URL,
-      cfg.SUPABASE_ANON_KEY
-    );
+  const client = window.supabase.createClient(
+    cfg.SUPABASE_URL,
+    cfg.SUPABASE_ANON_KEY
+  );
 
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
+  const params = new URLSearchParams(
+    window.location.search
+  );
 
-  const idParam =
-    params.get("id");
+  const idParam = params.get("id");
 
 
   function showNotFound() {
@@ -46,9 +41,7 @@
         align-items:center;
         justify-content:center;
         text-align:center;
-        padding:20px;
       ">
-
         <h1 style="
           margin:0;
           padding:0;
@@ -59,7 +52,6 @@
         ">
           কোন খতিয়ান পাওয়া যায়নি
         </h1>
-
       </div>
     `;
 
@@ -86,9 +78,7 @@
         align-items:center;
         justify-content:center;
         text-align:center;
-        padding:20px;
       ">
-
         <h1 style="
           margin:0;
           padding:0;
@@ -99,7 +89,6 @@
         ">
           তথ্য লোড করা যাচ্ছে না
         </h1>
-
       </div>
     `;
 
@@ -122,7 +111,6 @@
       "division",
       "record_date"
     ];
-
 
     fields.forEach(function (field) {
 
@@ -150,6 +138,11 @@
         );
 
 
+    /*
+      Specific record URL:
+      index.html?id=5
+    */
+
     if (idParam !== null) {
 
       if (!/^\d+$/.test(idParam)) {
@@ -166,6 +159,11 @@
         );
 
     } else {
+
+      /*
+        Main page without ?id=
+        shows the latest record.
+      */
 
       query =
         query
@@ -198,6 +196,10 @@
     }
 
 
+    /*
+      Deleted / missing record
+    */
+
     if (!data) {
 
       showNotFound();
@@ -223,4 +225,3 @@
   });
 
 })();
-```
