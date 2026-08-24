@@ -12,8 +12,8 @@
 <header class="site-header">
 
   <div class="top-strip">
-    <div class="top-inner" id="live-date">
-      লোড হচ্ছে...
+    <div class="top-inner">
+      সোমবার, ৯ ভাদ্র ১৪৩৩, ২৪ আগস্ট ২০২৬
     </div>
   </div>
 
@@ -97,18 +97,24 @@
       </nav>
 
 
-      <!-- LOGIN -->
+      <!-- =========================
+           LOGIN
+           এখন আর admin.html নয়
+           সরাসরি নির্দিষ্ট Login URL
+      ========================== -->
+
       <div class="login">
 
         <span class="cart">🛒</span>
 
-        <a href="https://lsg-land-owner.land.gov.bd/login">
-
+        <a
+          href="https://lsg-land-owner.land.gov.bd/login"
+          target="_self"
+        >
           <button type="button">
             লগইন
             <span>⌄</span>
           </button>
-
         </a>
 
       </div>
@@ -190,6 +196,7 @@
 
   </section>
 
+
   <div class="divider"></div>
 
 </main>
@@ -198,6 +205,7 @@
 <footer class="site-footer">
 
   <div class="footer-inner">
+
 
     <section>
 
@@ -309,99 +317,26 @@
 </footer>
 
 
-<!-- SUPABASE -->
+<!-- =========================
+     SUPABASE
+========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-<!-- CONFIG -->
+<!-- =========================
+     CONFIG
+========================= -->
 
 <script src="config.js"></script>
 
 
-<!-- APP -->
+<!-- =========================
+     APP
+========================= -->
 
 <script src="app.js"></script>
 
-
-<!-- LIVE DATE -->
-
-<script>
-
-(function () {
-
-  const dateElement =
-    document.getElementById('live-date');
-
-  if (!dateElement) return;
-
-
-  function updateLiveDate() {
-
-    const now = new Date();
-
-    const days = [
-      'রবিবার',
-      'সোমবার',
-      'মঙ্গলবার',
-      'বুধবার',
-      'বৃহস্পতিবার',
-      'শুক্রবার',
-      'শনিবার'
-    ];
-
-    const banglaMonths = [
-      'জানুয়ারি',
-      'ফেব্রুয়ারি',
-      'মার্চ',
-      'এপ্রিল',
-      'মে',
-      'জুন',
-      'জুলাই',
-      'আগস্ট',
-      'সেপ্টেম্বর',
-      'অক্টোবর',
-      'নভেম্বর',
-      'ডিসেম্বর'
-    ];
-
-
-    const dayName =
-      days[now.getDay()];
-
-    const day =
-      now.getDate();
-
-    const month =
-      banglaMonths[now.getMonth()];
-
-    const year =
-      now.getFullYear();
-
-
-    dateElement.textContent =
-      dayName +
-      ', ' +
-      day +
-      ' ' +
-      month +
-      ' ' +
-      year;
-
-  }
-
-
-  updateLiveDate();
-
-  // প্রতি মিনিটে তারিখ আপডেট করবে
-  setInterval(
-    updateLiveDate,
-    60000
-  );
-
-})();
-
-</script>
 
 </body>
 </html>
