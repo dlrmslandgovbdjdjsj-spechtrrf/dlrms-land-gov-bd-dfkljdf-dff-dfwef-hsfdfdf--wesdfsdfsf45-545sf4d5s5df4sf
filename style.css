@@ -28,9 +28,8 @@ a{
   color:inherit;
 }
 
-
 /* =========================
-   HEADER
+   HEADER - DESKTOP
 ========================= */
 
 .site-header{
@@ -158,7 +157,7 @@ a{
 
 
 /* =========================
-   RECORD AREA
+   RECORD AREA - DESKTOP
 ========================= */
 
 .record-area{
@@ -174,7 +173,6 @@ a{
   transform:translateX(-50%);
   width:330px;
   min-height:262px;
-  height:auto;
   background:#fff;
   border:1px solid #e1e1e1;
   border-radius:6px;
@@ -195,10 +193,8 @@ a{
   grid-template-columns:62px 12px 1fr;
   align-items:center;
   min-height:26px;
-  height:auto;
   font-size:14px;
-  line-height:1.35;
-  padding:2px 0;
+  line-height:1.2;
 }
 
 .record-row b{
@@ -207,17 +203,11 @@ a{
 
 .record-row strong{
   font-weight:500;
-  word-break:break-word;
 }
 
 .record-row span{
   font-weight:700;
 }
-
-
-/* =========================
-   DIVIDER
-========================= */
 
 .divider{
   height:56px;
@@ -242,12 +232,11 @@ a{
 
 
 /* =========================
-   FOOTER
+   FOOTER - DESKTOP
 ========================= */
 
 .site-footer{
   min-height:304px;
-  height:auto;
   background:#e4ffe2;
   position:relative;
   padding-top:40px;
@@ -417,15 +406,14 @@ a{
   color:#fff;
   box-shadow:0 2px 4px rgba(0,0,0,.2);
   font-size:22px;
-  cursor:pointer;
 }
 
 
 /* =========================
-   TABLET / SMALL PC
+   TABLET
 ========================= */
 
-@media (max-width:1200px){
+@media (max-width:1200px) and (min-width:701px){
 
   .top-strip,
   .nav-inner,
@@ -434,8 +422,12 @@ a{
   }
 
   .main-nav{
-    margin-left:110px;
-    gap:18px;
+    margin-left:70px;
+    gap:16px;
+  }
+
+  .main-nav a{
+    font-size:13px;
   }
 
   .footer-inner{
@@ -462,106 +454,146 @@ a{
   }
 
   body{
-    font-size:16px;
+    background:#fff;
   }
 
 
-  /* HEADER */
+  /* -------------------------
+     MOBILE HEADER
+  ------------------------- */
 
   .site-header{
-    height:92px;
+    height:145px;
+    background:#fff;
+    box-shadow:0 2px 6px rgba(0,0,0,.15);
   }
 
   .top-strip{
     position:absolute;
-    width:100%;
-    height:36px;
+    top:0;
     left:0;
     transform:none;
-    top:0;
-    font-size:15px;
-    line-height:36px;
-    padding:0 8px;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    width:100%;
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:linear-gradient(
+      90deg,
+      #f4faf7 0%,
+      #4ba16e 50%,
+      #f4faf7 100%
+    );
+
+    font-size:16px;
+    line-height:1.4;
+    font-weight:700;
+    color:#fff;
+
+    padding:0 10px;
+    white-space:nowrap;
   }
 
   .nav-wrap{
-    height:56px;
-    bottom:0;
+    top:58px;
+    bottom:auto;
+    height:87px;
     background:#fff;
   }
 
   .nav-inner{
     width:100%;
-    height:56px;
+    height:87px;
     margin:0;
-    padding:0 16px;
+    padding:0 30px;
     display:flex;
     align-items:center;
+    justify-content:space-between;
   }
 
   .brand{
-    width:58px;
-    height:56px;
-    top:0;
+    width:70px;
+    height:auto;
+    position:static;
     display:flex;
     align-items:center;
-    justify-content:flex-start;
-    flex-shrink:0;
   }
 
   .brand-icon{
-    width:48px;
-    height:48px;
+    width:68px;
+    height:68px;
   }
 
   .brand-icon svg{
-    width:48px;
-    height:48px;
+    width:68px;
+    height:68px;
   }
 
-  /*
-    মোবাইলে মাঝের বড় মেনু লুকানো
-    এতে স্ক্রিনে জায়গা থাকে
-  */
-
+  /* মোবাইলে মূল মেনু লুকানো */
   .main-nav{
     display:none;
   }
 
+  /*
+    মোবাইলে লগইনের লেখা বাটন থাকবে না।
+    শুধু cart থাকবে।
+  */
+
   .login{
     margin-left:auto;
-    gap:8px;
+    display:flex;
+    align-items:center;
+    gap:14px;
   }
 
   .cart{
-    width:42px;
-    height:42px;
+    width:52px;
+    height:52px;
     border-radius:50%;
-    font-size:20px;
+    background:#07863a;
+    color:#fff;
+    font-size:25px;
   }
 
-  .login button{
-    min-width:82px;
-    height:42px;
-    border-radius:22px;
-    padding:4px 12px;
-    font-size:17px;
+  .login a{
+    display:none;
   }
 
-  .login button span{
-    font-size:15px;
+  /*
+    ডান পাশে তিনটি ডট
+  */
+
+  .nav-inner:after{
+    content:"⋮";
+    width:35px;
+    height:52px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-family:Arial,sans-serif;
+    font-size:35px;
+    line-height:1;
+
+    color:#111;
+    margin-left:3px;
   }
 
 
-  /* RECORD AREA */
+  /* -------------------------
+     MOBILE RECORD AREA
+  ------------------------- */
 
   .record-area{
-    min-height:650px;
+    width:100%;
     height:auto;
-    padding:0;
+    min-height:760px;
     background:#f5f6fa;
+    padding:58px 30px 60px;
+    position:relative;
   }
 
   .record-card{
@@ -570,36 +602,43 @@ a{
     left:auto;
     transform:none;
 
-    width:calc(100% - 30px);
-    min-height:0;
-    height:auto;
+    width:100%;
+    min-height:680px;
 
-    margin:28px auto 28px;
+    background:#fff;
+    border:1px solid #e5e5e5;
+    border-radius:10px;
 
-    border-radius:9px;
-    padding:27px 25px 30px;
+    box-shadow:0 2px 9px rgba(0,0,0,.12);
 
-    box-shadow:0 2px 9px rgba(0,0,0,.13);
+    padding:38px 48px 35px;
   }
 
   .record-card h1{
-    font-size:27px;
-    line-height:1.4;
-    margin:0 0 24px;
-    white-space:nowrap;
+    text-align:center;
+    color:#00863c;
+
+    font-size:29px;
+    line-height:1.35;
+
+    margin:0 0 32px;
+    font-weight:800;
   }
 
   .record-row{
     display:grid;
-    grid-template-columns:105px 18px minmax(0,1fr);
 
-    min-height:52px;
-    height:auto;
+    /*
+      মোবাইলে label + : + value
+    */
+    grid-template-columns:105px 18px 1fr;
 
-    font-size:21px;
-    line-height:1.55;
+    align-items:start;
 
-    padding:3px 0;
+    min-height:62px;
+
+    font-size:23px;
+    line-height:1.5;
   }
 
   .record-row b{
@@ -608,64 +647,84 @@ a{
 
   .record-row span{
     font-weight:700;
-    text-align:center;
   }
 
   .record-row strong{
     font-weight:500;
     word-break:break-word;
-    overflow-wrap:anywhere;
   }
 
 
-  /* DIVIDER */
+  /* -------------------------
+     MOBILE DIVIDER
+  ------------------------- */
 
   .divider{
-    height:56px;
+    height:82px;
+    background:#fff;
   }
 
   .divider:before{
-    height:22px;
+    top:0;
+    height:54px;
+
     background:linear-gradient(
       90deg,
       #f3fbf7 0%,
-      #128c4b 48%,
+      #0b8b48 50%,
       #f3fbf7 100%
     );
   }
 
 
-  /* FOOTER */
+  /* -------------------------
+     MOBILE FOOTER
+  ------------------------- */
 
   .site-footer{
-    min-height:0;
+    min-height:560px;
     height:auto;
-    padding:55px 22px 75px;
+
     background:#e4ffe2;
+
+    padding:68px 30px 100px;
   }
 
   .footer-inner{
     width:100%;
     margin:0;
-    display:flex;
-    flex-direction:column;
-    gap:42px;
+
+    display:block;
+  }
+
+  .footer-inner section{
+    margin-bottom:55px;
   }
 
   .footer-inner h2{
-    font-size:25px;
-    margin:0 0 18px;
+    font-size:28px;
+    line-height:1.3;
+    margin:0 0 24px;
     font-weight:800;
+    color:#087d39;
   }
+
+
+  /* গুরুত্বপূর্ণ লিংক */
 
   .two-cols{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:8px 16px;
+    gap:20px;
+  }
+
+  .two-cols ul{
+    padding:0;
+    margin:0;
   }
 
   .two-cols li{
-    font-size:17px;
+    font-size:18px;
     line-height:2.15;
     white-space:normal;
   }
@@ -673,133 +732,194 @@ a{
   .two-cols li:before{
     content:'▶';
     color:#07843b;
-    font-size:12px;
+    font-size:15px;
     margin-right:8px;
   }
+
+
+  /* পরিকল্পনা */
 
   .planning{
     display:none;
   }
 
+
+  /* সামাজিক যোগাযোগ */
+
   .social{
     display:none;
   }
 
+
+  /* support */
+
   .support{
     position:relative;
+
     right:auto;
     bottom:auto;
 
     width:100%;
     height:auto;
 
-    background:#fff;
-    border-radius:30px 30px 0 0;
+    background:transparent;
+    border-radius:0;
 
-    margin:35px -22px 0;
-    width:calc(100% + 44px);
+    padding:20px 0;
 
-    padding:15px 22px;
+    font-size:16px;
 
+    display:flex;
     justify-content:center;
-
-    font-size:14px;
+    align-items:center;
+    gap:8px;
   }
 
   .support img{
-    width:125px;
+    width:120px;
+    height:auto;
   }
+
+
+  /* copyright */
 
   .copyright{
-    position:relative;
-    bottom:auto;
-    left:auto;
+    position:absolute;
 
-    width:calc(100% + 44px);
-    height:auto;
+    bottom:0;
+    left:0;
 
-    margin:0 -22px -75px;
+    width:100%;
+    height:45px;
 
-    padding:10px 15px;
+    padding:11px 10px;
 
-    text-align:center;
     font-size:12px;
+    text-align:center;
+
+    background:#fff;
+    border-top:1px solid #ddd;
   }
+
+
+  /* chat button */
 
   .chat{
     position:fixed;
-    right:18px;
-    bottom:20px;
 
-    width:58px;
-    height:58px;
+    right:22px;
+    bottom:70px;
+
+    width:62px;
+    height:62px;
 
     border-radius:50%;
 
-    font-size:25px;
+    background:#4156c6;
+
+    color:#fff;
+
+    font-size:27px;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.25);
+
     z-index:100;
   }
 }
 
 
 /* =========================
-   VERY SMALL MOBILE
+   SMALL MOBILE
 ========================= */
 
 @media (max-width:420px){
 
   .top-strip{
+    height:55px;
     font-size:14px;
   }
 
+  .site-header{
+    height:135px;
+  }
+
+  .nav-wrap{
+    top:55px;
+    height:80px;
+  }
+
   .nav-inner{
-    padding:0 12px;
+    height:80px;
+    padding:0 22px;
   }
 
   .brand-icon,
   .brand-icon svg{
-    width:45px;
-    height:45px;
+    width:60px;
+    height:60px;
   }
 
   .cart{
-    width:39px;
-    height:39px;
-    font-size:18px;
-  }
-
-  .login button{
-    min-width:76px;
-    height:39px;
-    font-size:16px;
-  }
-
-  .record-card{
-    width:calc(100% - 22px);
-    padding:23px 18px 27px;
-    margin-top:22px;
-  }
-
-  .record-card h1{
-    font-size:23px;
-    margin-bottom:20px;
-  }
-
-  .record-row{
-    grid-template-columns:88px 15px minmax(0,1fr);
-    font-size:18px;
-    min-height:47px;
-  }
-
-  .record-area{
-    min-height:600px;
-  }
-
-  .footer-inner h2{
+    width:48px;
+    height:48px;
     font-size:22px;
   }
 
+  .nav-inner:after{
+    height:48px;
+    font-size:31px;
+  }
+
+  .record-area{
+    padding:45px 20px 50px;
+    min-height:690px;
+  }
+
+  .record-card{
+    min-height:620px;
+    padding:30px 25px;
+  }
+
+  .record-card h1{
+    font-size:25px;
+    margin-bottom:28px;
+  }
+
+  .record-row{
+    grid-template-columns:92px 15px 1fr;
+    min-height:58px;
+    font-size:19px;
+  }
+
+  .divider{
+    height:70px;
+  }
+
+  .divider:before{
+    height:45px;
+  }
+
+  .site-footer{
+    padding:55px 22px 90px;
+  }
+
+  .footer-inner h2{
+    font-size:25px;
+  }
+
+  .two-cols{
+    gap:10px;
+  }
+
   .two-cols li{
-    font-size:15px;
+    font-size:16px;
+    line-height:2.15;
+  }
+
+  .chat{
+    width:57px;
+    height:57px;
+    right:18px;
+    bottom:62px;
   }
 }
