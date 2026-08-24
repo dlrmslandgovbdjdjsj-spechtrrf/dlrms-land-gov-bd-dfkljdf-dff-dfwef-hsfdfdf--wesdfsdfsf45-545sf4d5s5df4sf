@@ -1,4 +1,3 @@
-```javascript
 (function () {
   const cfg = window.APP_CONFIG || {};
 
@@ -40,6 +39,7 @@
           'Noto Sans Bengali UI',
           sans-serif;
       ">
+
         <div style="
           width:100%;
           max-width:520px;
@@ -50,6 +50,7 @@
           padding:40px 25px;
           text-align:center;
         ">
+
           <h1 style="
             margin:0;
             color:#111111;
@@ -58,7 +59,9 @@
           ">
             খতিয়ান পাওয়া যায়নি
           </h1>
+
         </div>
+
       </div>
     `;
 
@@ -68,43 +71,29 @@
 
   function showError() {
 
-    document.body.innerHTML = `
+    const card =
+      document.getElementById("record-card");
+
+    if (!card) {
+      return;
+    }
+
+    card.innerHTML = `
       <div style="
-        min-height:100vh;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:20px;
-        margin:0;
-        background:#f5f6fa;
-        font-family:
-          'Noto Sans Bengali',
-          'Noto Sans Bengali UI',
-          sans-serif;
+        text-align:center;
+        padding:30px 15px;
       ">
-        <div style="
-          width:100%;
-          max-width:520px;
-          background:#ffffff;
-          border:1px solid #e1e1e1;
-          border-radius:10px;
-          box-shadow:0 2px 10px rgba(0,0,0,.12);
-          padding:40px 25px;
-          text-align:center;
+
+        <h1 style="
+          color:#111111;
+          font-size:22px;
+          margin:0;
         ">
-          <h1 style="
-            margin:0;
-            color:#111111;
-            font-size:26px;
-            font-weight:800;
-          ">
-            তথ্য লোড করা যাচ্ছে না
-          </h1>
-        </div>
+          তথ্য লোড করা যাচ্ছে না
+        </h1>
+
       </div>
     `;
-
-    document.body.style.margin = "0";
   }
 
 
@@ -142,39 +131,56 @@
 
   async function loadRecord() {
 
+    let query = client
+      .from("land_records")
+      .select(
+        "id,khatian,owner,dag_no,survey,mouza,upazila,district,division,record_date"
+      );
+
+
     /*
-      The record URL must contain ?id=NUMBER.
+      Specific record URL:
+      index.html?id=5
     */
 
-    if (
-      !idParam ||
-      !/^\d+$/.test(idParam)
-    ) {
+    if (idParam) {
 
-      showNotFound();
+      if (!/^\d+$/.test(idParam)) {
 
-      return;
+        showNotFound();
+
+        return;
+      }
+
+      query =
+        query.eq(
+          "id",
+          Number(idParam)
+        );
+
     }
 
+    /*
+      Main website without ?id=
+      will show the latest record.
+    */
 
-    const recordId =
-      Number(idParam);
+    else {
+
+      query =
+        query
+          .order("id", {
+            ascending: false
+          })
+          .limit(1);
+
+    }
 
 
     const {
       data,
       error
-    } = await client
-
-      .from("land_records")
-
-      .select(
-        "id,khatian,owner,dag_no,survey,mouza,upazila,district,division,record_date"
-      )
-
-      .eq("id", recordId)
-
-      .maybeSingle();
+    } = await query.maybeSingle();
 
 
     if (error) {
@@ -191,7 +197,7 @@
 
 
     /*
-      The record was deleted or does not exist.
+      Deleted record or no record.
     */
 
     if (!data) {
@@ -210,4 +216,3 @@
   loadRecord();
 
 })();
-```
