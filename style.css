@@ -1,7 +1,6 @@
 @font-face{
   font-family:NotoBengaliLocal;
-  src:local('Noto Sans Bengali'),
-      local('Noto Sans Bengali UI');
+  src:local('Noto Sans Bengali'),local('Noto Sans Bengali UI');
   font-display:swap;
 }
 
@@ -9,8 +8,7 @@
   box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
   margin:0;
   min-height:100%;
   font-family:NotoBengaliLocal,'Noto Sans Bengali',sans-serif;
@@ -23,9 +21,9 @@ a{
   color:inherit;
 }
 
-/* =========================================================
-   DESKTOP VERSION
-   ========================================================= */
+/* =========================
+   DESKTOP
+========================= */
 
 body{
   min-width:1000px;
@@ -57,6 +55,11 @@ body{
   font-size:13px;
   font-weight:700;
   line-height:28px;
+}
+
+.top-inner{
+  width:100%;
+  height:100%;
 }
 
 .nav-wrap{
@@ -114,7 +117,6 @@ body{
 .down{
   font-size:9px;
   margin-left:3px;
-  color:#111;
 }
 
 .login{
@@ -152,10 +154,9 @@ body{
   margin-left:4px;
 }
 
-
-/* =========================================================
-   RECORD AREA - DESKTOP
-   ========================================================= */
+/* =========================
+   RECORD
+========================= */
 
 .record-area{
   height:538px;
@@ -206,10 +207,9 @@ body{
   font-weight:700;
 }
 
-
-/* =========================================================
+/* =========================
    DIVIDER
-   ========================================================= */
+========================= */
 
 .divider{
   height:56px;
@@ -232,10 +232,9 @@ body{
   );
 }
 
-
-/* =========================================================
-   FOOTER - DESKTOP
-   ========================================================= */
+/* =========================
+   FOOTER
+========================= */
 
 .site-footer{
   height:304px;
@@ -315,10 +314,6 @@ body{
   margin:0 auto 14px;
 }
 
-.store:first-letter{
-  color:#8fe3ff;
-}
-
 .store span{
   font-size:7px;
   line-height:1.05;
@@ -332,7 +327,6 @@ body{
   display:flex;
   justify-content:center;
   gap:12px;
-  margin-top:0;
 }
 
 .social-icons i{
@@ -380,7 +374,6 @@ body{
 .support img{
   width:145px;
   height:auto;
-  display:block;
 }
 
 .copyright{
@@ -409,10 +402,9 @@ body{
   font-size:22px;
 }
 
-
-/* =========================================================
-   DESKTOP RESPONSIVE
-   ========================================================= */
+/* =========================
+   TABLET / SMALL DESKTOP
+========================= */
 
 @media(max-width:1200px) and (min-width:769px){
 
@@ -436,20 +428,17 @@ body{
   }
 }
 
-
-/* =========================================================
-   MOBILE VERSION
-   769px এর নিচে
-   ========================================================= */
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:768px){
 
   html,
   body{
     width:100%;
-    min-width:0;
-    margin:0;
-    padding:0;
+    min-width:0 !important;
+    max-width:100%;
     overflow-x:hidden;
   }
 
@@ -457,266 +446,201 @@ body{
     background:#f5f6fa;
   }
 
-
-  /* -------------------------
-     HEADER
-     ------------------------- */
+  /* HEADER */
 
   .site-header{
     width:100%;
-    height:132px;
-    background:#fff;
-    box-shadow:0 2px 6px rgba(0,0,0,.18);
+    height:96px;
   }
 
   .top-strip{
     position:absolute;
-    top:0;
     left:0;
+    top:0;
     transform:none;
+
     width:100%;
-    height:58px;
+    height:38px;
 
-    background:linear-gradient(
-      90deg,
-      #dceee5 0%,
-      #278a53 50%,
-      #dceee5 100%
-    );
+    line-height:38px;
 
-    font-size:18px;
-    line-height:58px;
-    font-weight:800;
+    font-size:12px;
+    font-weight:700;
+
     white-space:nowrap;
+
+    overflow:hidden;
   }
 
   .nav-wrap{
     position:absolute;
-    top:58px;
-    bottom:auto;
     left:0;
+    top:38px;
+
     width:100%;
-    height:74px;
-    background:#fff;
+    height:58px;
+
+    bottom:auto;
   }
 
   .nav-inner{
     width:100%;
-    height:74px;
+    height:58px;
+
+    padding:0 16px;
+
     margin:0;
-    padding:0 30px;
+
     display:flex;
     align-items:center;
   }
 
-
   /* LOGO */
 
   .brand{
-    width:62px;
-    height:62px;
+    width:42px;
+    height:42px;
     top:0;
-    position:relative;
+
     display:flex;
     align-items:center;
   }
 
   .brand-icon{
-    width:58px;
-    height:58px;
+    width:40px;
+    height:40px;
   }
 
   .brand-icon svg{
-    width:58px;
-    height:58px;
+    width:40px;
+    height:40px;
   }
 
-
-  /* DESKTOP MENU HIDE */
+  /* MENU HIDE */
 
   .main-nav{
     display:none;
   }
 
-
-  /* LOGIN BUTTON HIDE */
+  /* LOGIN */
 
   .login{
     margin-left:auto;
-    gap:0;
-    display:flex;
-    align-items:center;
+    gap:8px;
   }
 
   .login a{
-    display:none;
+    display:block;
   }
 
+  .login button{
+    font-size:12px;
+    padding:5px 10px;
+  }
 
-  /* CART */
+  .login button span{
+    font-size:11px;
+  }
 
   .cart{
-    width:54px;
-    height:54px;
-    border-radius:50%;
-    background:#08732f;
-    color:#fff;
-    font-size:25px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    width:32px;
+    height:32px;
+    font-size:15px;
   }
 
-
-  /* MOBILE MENU DOTS */
-
-  .login:after{
-    content:"⋮";
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:30px;
-    height:54px;
-
-    margin-left:18px;
-
-    color:#111;
-    font-family:Arial,sans-serif;
-    font-size:38px;
-    line-height:1;
-    font-weight:700;
-  }
-
-
-  /* -------------------------
-     MAIN RECORD AREA
-     ------------------------- */
+  /* RECORD AREA */
 
   .record-area{
     width:100%;
     height:auto;
-    min-height:760px;
+    min-height:460px;
+
+    padding:20px 16px 22px;
+
     background:#f5f6fa;
-    padding:38px 30px 30px;
-    position:relative;
   }
 
   .record-card{
     position:relative;
+
     top:auto;
     left:auto;
     transform:none;
 
     width:100%;
-    max-width:640px;
+    max-width:350px;
 
-    min-height:0;
     height:auto;
+    min-height:0;
 
     margin:0 auto;
 
-    background:#fff;
+    padding:13px 18px 14px;
 
-    border:1px solid #e1e1e1;
-    border-radius:10px;
+    border-radius:6px;
 
-    box-shadow:0 2px 8px rgba(0,0,0,.12);
-
-    padding:24px 42px 24px;
+    box-shadow:0 2px 7px rgba(0,0,0,.12);
   }
 
-
-  /* TITLE */
-
   .record-card h1{
-    text-align:center;
-
-    color:#00863c;
-
-    font-size:29px;
+    font-size:17px;
     line-height:1.25;
 
-    margin:0 0 22px;
-
-    font-weight:800;
+    margin:0 0 8px;
 
     white-space:nowrap;
   }
-
-
-  /* RECORD ROW */
 
   .record-row{
     display:grid;
 
-    grid-template-columns:118px 18px minmax(0,1fr);
+    grid-template-columns:65px 9px 1fr;
 
-    align-items:center;
+    height:26px;
+    min-height:26px;
 
-    min-height:56px;
-    height:auto;
-
-    font-size:21px;
-    line-height:1.45;
-
-    margin:0;
+    font-size:13px;
+    line-height:1.15;
   }
 
   .record-row b{
     font-weight:800;
-    white-space:nowrap;
   }
 
   .record-row span{
     font-weight:700;
-    text-align:center;
   }
 
   .record-row strong{
     font-weight:500;
+
     min-width:0;
-    overflow-wrap:anywhere;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
 
-
-  /* -------------------------
-     DIVIDER
-     ------------------------- */
+  /* DIVIDER */
 
   .divider{
-    height:78px;
-    background:#fff;
-    position:relative;
+    height:35px;
   }
 
   .divider:before{
-    top:0;
-    height:22px;
-
-    background:linear-gradient(
-      90deg,
-      #f3fbf7 0%,
-      #128c4b 48%,
-      #f3fbf7 100%
-    );
+    height:13px;
   }
 
-
-  /* -------------------------
-     FOOTER
-     ------------------------- */
+  /* FOOTER */
 
   .site-footer{
     width:100%;
     height:auto;
-    min-height:430px;
+    min-height:330px;
+
+    padding:28px 18px 45px;
 
     background:#e4ffe2;
-
-    position:relative;
-
-    padding:58px 34px 70px;
   }
 
   .footer-inner{
@@ -726,262 +650,164 @@ body{
     display:block;
   }
 
-  .footer-inner section{
-    width:100%;
-  }
-
   .footer-inner h2{
-    font-size:24px;
-    line-height:1.3;
-    margin:0 0 18px;
-    font-weight:800;
-    color:#007b36;
+    font-size:16px;
+    margin:0 0 9px;
   }
-
-
-  /* IMPORTANT LINKS */
 
   .two-cols{
     display:grid;
     grid-template-columns:1fr 1fr;
-    column-gap:24px;
-  }
-
-  .two-cols ul{
-    margin:0;
-    padding:0;
-    list-style:none;
+    gap:5px 12px;
   }
 
   .two-cols li{
-    font-size:17px;
-    line-height:2.35;
-
+    font-size:12px;
+    line-height:23px;
     white-space:normal;
-
-    color:#111;
   }
 
   .two-cols li:before{
-    content:'▶';
-
-    color:#07843b;
-
-    font-size:13px;
-
-    margin-right:8px;
+    font-size:8px;
+    margin-right:4px;
   }
 
+  /* নিচের বড় অংশ মোবাইলে বাদ */
 
-  /* PLANNING */
-
-  .planning{
-    display:none;
-  }
-
-
-  /* SOCIAL */
-
-  .social{
-    display:none;
-  }
-
-
-  /* SUPPORT */
-
+  .planning,
+  .social,
   .support{
     display:none;
   }
 
-
-  /* COPYRIGHT */
-
   .copyright{
     position:absolute;
 
-    bottom:0;
     left:0;
+    bottom:0;
 
     width:100%;
-    height:42px;
+    height:30px;
 
-    background:#fff;
+    padding:7px 10px;
 
-    padding:9px 18px;
-
-    font-size:12px;
+    font-size:9px;
 
     text-align:center;
-
-    border-top:1px solid #ddd;
   }
-
-
-  /* CHAT BUTTON */
 
   .chat{
     position:fixed;
 
-    right:22px;
-    bottom:24px;
+    right:14px;
+    bottom:14px;
 
-    width:58px;
-    height:58px;
+    width:42px;
+    height:42px;
 
-    border:0;
-    border-radius:50%;
+    font-size:18px;
 
-    background:#4156c6;
-    color:#fff;
-
-    box-shadow:0 2px 6px rgba(0,0,0,.25);
-
-    font-size:25px;
-
-    z-index:10;
+    z-index:100;
   }
-
 }
 
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
 
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media(max-width:480px){
+@media(max-width:380px){
 
   .site-header{
-    height:120px;
+    height:92px;
   }
 
   .top-strip{
-    height:52px;
-    line-height:52px;
-    font-size:15px;
+    height:36px;
+    line-height:36px;
+    font-size:11px;
   }
 
   .nav-wrap{
-    top:52px;
-    height:68px;
+    top:36px;
+    height:56px;
   }
 
   .nav-inner{
-    height:68px;
-    padding:0 22px;
+    height:56px;
+    padding:0 13px;
   }
 
   .brand{
-    width:52px;
-    height:52px;
+    width:38px;
+    height:38px;
   }
 
   .brand-icon,
   .brand-icon svg{
-    width:52px;
-    height:52px;
+    width:37px;
+    height:37px;
   }
 
   .cart{
-    width:48px;
-    height:48px;
-    font-size:22px;
+    width:30px;
+    height:30px;
+    font-size:14px;
   }
 
-  .login:after{
-    width:22px;
-    height:48px;
-    margin-left:13px;
-    font-size:34px;
+  .login button{
+    font-size:11px;
+    padding:4px 8px;
   }
-
-
-  /* RECORD */
 
   .record-area{
-    min-height:0;
-    padding:28px 18px 24px;
+    padding:17px 12px 18px;
+    min-height:430px;
   }
 
   .record-card{
-    width:100%;
-    max-width:none;
-
-    padding:22px 25px 22px;
-
-    border-radius:9px;
+    max-width:330px;
+    padding:12px 15px 13px;
   }
 
   .record-card h1{
-    font-size:25px;
-    margin-bottom:17px;
+    font-size:16px;
+    margin-bottom:6px;
   }
 
   .record-row{
-    grid-template-columns:94px 15px minmax(0,1fr);
-
-    min-height:47px;
-
-    font-size:18px;
-
-    line-height:1.35;
+    grid-template-columns:60px 8px 1fr;
+    height:24px;
+    min-height:24px;
+    font-size:12px;
   }
 
-
-  /* DIVIDER */
-
   .divider{
-    height:58px;
+    height:30px;
   }
 
   .divider:before{
-    height:18px;
+    height:11px;
   }
 
-
-  /* FOOTER */
-
   .site-footer{
-    min-height:390px;
-    padding:48px 22px 58px;
+    min-height:300px;
+    padding:25px 14px 40px;
   }
 
   .footer-inner h2{
-    font-size:22px;
-    margin-bottom:14px;
+    font-size:15px;
   }
 
   .two-cols{
-    column-gap:12px;
+    gap:3px 8px;
   }
 
   .two-cols li{
-    font-size:15px;
-    line-height:2.35;
-  }
-
-  .two-cols li:before{
-    font-size:10px;
-    margin-right:5px;
+    font-size:11px;
+    line-height:21px;
   }
 
   .copyright{
-    font-size:10px;
-  }
-
-  .chat{
-    width:54px;
-    height:54px;
-    right:18px;
-    bottom:18px;
-  }
-
-}
-@media (max-width: 768px) {
-  body {
-    background: red !important;
-  }
-
-  .record-card {
-    background: yellow !important;
+    font-size:8px;
   }
 }
