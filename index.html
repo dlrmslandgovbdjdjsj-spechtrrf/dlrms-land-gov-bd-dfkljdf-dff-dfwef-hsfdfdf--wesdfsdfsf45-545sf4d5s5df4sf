@@ -1,31 +1,719 @@
+```html
 <!doctype html>
 <html lang="bn">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>খতিয়ান তথ্য</title>
-  <link rel="stylesheet" href="style.css?v=2">
+
+  <link rel="stylesheet" href="style.css?v=5">
+
+  <style>
+    /* =====================================================
+       MOBILE OVERRIDES
+    ===================================================== */
+
+    @media (max-width: 700px) {
+
+      html,
+      body {
+        width: 100% !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
+        background: #ffffff !important;
+      }
+
+      body {
+        min-width: 0 !important;
+      }
+
+
+      /* HEADER */
+
+      .site-header {
+        width: 100% !important;
+        height: 118px !important;
+        background: #ffffff !important;
+      }
+
+      .top-strip {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+
+        width: 100% !important;
+        height: 46px !important;
+
+        line-height: 46px !important;
+
+        font-size: 13px !important;
+        font-weight: 700 !important;
+
+        white-space: nowrap !important;
+        overflow: hidden !important;
+
+        background: linear-gradient(
+          90deg,
+          #dceee5 0%,
+          #278a53 50%,
+          #dceee5 100%
+        ) !important;
+      }
+
+      .top-inner {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .nav-wrap {
+        position: absolute !important;
+
+        top: 46px !important;
+        left: 0 !important;
+
+        width: 100% !important;
+        height: 72px !important;
+
+        bottom: auto !important;
+
+        background: #ffffff !important;
+      }
+
+      .nav-inner {
+        width: 100% !important;
+        height: 72px !important;
+
+        margin: 0 !important;
+
+        padding: 0 19px !important;
+
+        display: flex !important;
+        align-items: center !important;
+      }
+
+      .brand {
+        width: 47px !important;
+        height: 47px !important;
+
+        top: 0 !important;
+        position: relative !important;
+      }
+
+      .brand-icon,
+      .brand-icon svg {
+        width: 47px !important;
+        height: 47px !important;
+      }
+
+      .main-nav {
+        display: none !important;
+      }
+
+      .login {
+        margin-left: auto !important;
+
+        display: flex !important;
+        align-items: center !important;
+
+        gap: 8px !important;
+      }
+
+      .cart {
+        width: 42px !important;
+        height: 42px !important;
+
+        min-width: 42px !important;
+
+        font-size: 18px !important;
+      }
+
+      .login a {
+        display: none !important;
+      }
+
+      .login::after {
+        content: "⋮";
+
+        width: 20px !important;
+        height: 42px !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        color: #111111 !important;
+
+        font-family: Arial, sans-serif !important;
+
+        font-size: 30px !important;
+        line-height: 1 !important;
+      }
+
+
+      /* RECORD AREA */
+
+      .record-area {
+        width: 100% !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+
+        padding: 24px 13px 20px !important;
+
+        background: #f5f6fa !important;
+      }
+
+
+      /* RECORD CARD */
+
+      .record-card {
+        position: relative !important;
+
+        top: auto !important;
+        left: auto !important;
+
+        transform: none !important;
+
+        width: 100% !important;
+        max-width: 345px !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+
+        margin: 0 auto !important;
+
+        padding: 18px 23px 17px !important;
+
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        background-image: none !important;
+
+        border: 1px solid #e1e1e1 !important;
+
+        border-radius: 8px !important;
+
+        box-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.12) !important;
+
+        color: #111111 !important;
+      }
+
+      .record-card h1 {
+        text-align: center !important;
+
+        color: #00863c !important;
+
+        font-size: 22px !important;
+        line-height: 1.25 !important;
+
+        margin: 0 0 13px !important;
+
+        padding: 0 !important;
+
+        font-weight: 800 !important;
+
+        white-space: nowrap !important;
+      }
+
+      .record-row {
+        display: grid !important;
+
+        grid-template-columns:
+          81px
+          10px
+          minmax(0, 1fr) !important;
+
+        align-items: center !important;
+
+        min-height: 38px !important;
+
+        height: auto !important;
+
+        padding: 1px 0 !important;
+
+        font-size: 15.5px !important;
+
+        line-height: 1.3 !important;
+
+        color: #111111 !important;
+      }
+
+      .record-row b {
+        color: #111111 !important;
+
+        font-weight: 800 !important;
+
+        white-space: nowrap !important;
+      }
+
+      .record-row span {
+        color: #111111 !important;
+
+        font-weight: 700 !important;
+
+        text-align: center !important;
+      }
+
+      .record-row strong {
+        color: #111111 !important;
+
+        font-weight: 500 !important;
+
+        min-width: 0 !important;
+
+        word-break: break-word !important;
+
+        overflow-wrap: anywhere !important;
+      }
+
+
+      /* DIVIDER */
+
+      .divider {
+        height: 42px !important;
+
+        background: #ffffff !important;
+      }
+
+      .divider::before {
+        height: 15px !important;
+      }
+
+
+      /* FOOTER */
+
+      .site-footer {
+        width: 100% !important;
+
+        height: auto !important;
+
+        min-height: 0 !important;
+
+        padding: 34px 20px 46px !important;
+
+        background: #e4ffe2 !important;
+
+        position: relative !important;
+      }
+
+      .footer-inner {
+        width: 100% !important;
+
+        margin: 0 !important;
+
+        display: grid !important;
+
+        grid-template-columns:
+          1fr
+          1fr !important;
+
+        column-gap: 14px !important;
+
+        row-gap: 28px !important;
+      }
+
+      .footer-inner > section {
+        display: block !important;
+
+        width: 100% !important;
+      }
+
+      .footer-inner > section:first-child {
+        grid-column: 1 / -1 !important;
+      }
+
+      .footer-inner h2 {
+        font-size: 19px !important;
+
+        line-height: 1.3 !important;
+
+        margin: 0 0 12px !important;
+
+        color: #08732f !important;
+      }
+
+      .two-cols {
+        display: grid !important;
+
+        grid-template-columns:
+          1fr
+          1fr !important;
+
+        column-gap: 12px !important;
+
+        row-gap: 1px !important;
+      }
+
+      .two-cols li {
+        font-size: 13px !important;
+
+        line-height: 2.05 !important;
+
+        white-space: normal !important;
+      }
+
+      .two-cols li::before {
+        content: "▶" !important;
+
+        color: #07843b !important;
+
+        font-size: 8px !important;
+
+        margin-right: 5px !important;
+      }
+
+
+      /* PLANNING */
+
+      .planning {
+        display: block !important;
+
+        grid-column: 1 !important;
+      }
+
+      .planning .logos {
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: flex-start !important;
+      }
+
+      .planning .lmap-logo {
+        display: block !important;
+
+        width: 100% !important;
+
+        max-width: 150px !important;
+
+        height: auto !important;
+
+        max-height: none !important;
+
+        object-fit: contain !important;
+      }
+
+
+      /* SOCIAL */
+
+      .social {
+        display: block !important;
+
+        grid-column: 2 !important;
+
+        text-align: left !important;
+      }
+
+      .social .store {
+        display: flex !important;
+
+        width: 118px !important;
+
+        height: 34px !important;
+
+        margin: 3px 0 10px !important;
+      }
+
+      .social .store span {
+        font-size: 6px !important;
+      }
+
+      .social .store b {
+        font-size: 10px !important;
+      }
+
+      .social-icons {
+        display: flex !important;
+
+        justify-content: flex-start !important;
+
+        gap: 6px !important;
+
+        flex-wrap: wrap !important;
+      }
+
+      .social-icons i {
+        width: 29px !important;
+
+        height: 29px !important;
+
+        font-size: 17px !important;
+      }
+
+
+      /* SUPPORT */
+
+      .support {
+        display: flex !important;
+
+        position: relative !important;
+
+        right: auto !important;
+
+        bottom: auto !important;
+
+        grid-column: 1 / -1 !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+
+        margin: 0 !important;
+
+        padding: 5px 0 0 !important;
+
+        background: transparent !important;
+
+        border-radius: 0 !important;
+
+        justify-content: center !important;
+
+        align-items: center !important;
+
+        gap: 6px !important;
+
+        font-size: 11px !important;
+
+        flex-wrap: wrap !important;
+      }
+
+      .support img {
+        width: 105px !important;
+
+        height: auto !important;
+      }
+
+
+      /* COPYRIGHT */
+
+      .copyright {
+        display: block !important;
+
+        position: relative !important;
+
+        left: auto !important;
+
+        bottom: auto !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+
+        grid-column: 1 / -1 !important;
+
+        margin-top: 2px !important;
+
+        padding: 7px 3px !important;
+
+        background: #ffffff !important;
+
+        text-align: center !important;
+
+        font-size: 8px !important;
+
+        border-top: 1px solid #ddd !important;
+      }
+
+
+      /* CHAT */
+
+      .chat {
+        position: fixed !important;
+
+        right: 13px !important;
+
+        bottom: 13px !important;
+
+        width: 48px !important;
+
+        height: 48px !important;
+
+        font-size: 20px !important;
+
+        z-index: 9999 !important;
+      }
+    }
+
+
+    /* SMALL PHONES */
+
+    @media (max-width: 400px) {
+
+      .site-header {
+        height: 112px !important;
+      }
+
+      .top-strip {
+        height: 44px !important;
+
+        line-height: 44px !important;
+
+        font-size: 12px !important;
+      }
+
+      .nav-wrap {
+        top: 44px !important;
+
+        height: 68px !important;
+      }
+
+      .nav-inner {
+        height: 68px !important;
+
+        padding: 0 16px !important;
+      }
+
+      .brand,
+      .brand-icon,
+      .brand-icon svg {
+        width: 43px !important;
+
+        height: 43px !important;
+      }
+
+      .cart {
+        width: 39px !important;
+
+        height: 39px !important;
+
+        min-width: 39px !important;
+
+        font-size: 17px !important;
+      }
+
+      .login::after {
+        height: 39px !important;
+
+        font-size: 28px !important;
+      }
+
+      .record-area {
+        padding: 22px 10px 18px !important;
+      }
+
+      .record-card {
+        max-width: 330px !important;
+
+        padding: 16px 17px 15px !important;
+      }
+
+      .record-card h1 {
+        font-size: 20px !important;
+
+        margin-bottom: 10px !important;
+      }
+
+      .record-row {
+        grid-template-columns:
+          73px
+          9px
+          minmax(0, 1fr) !important;
+
+        min-height: 35px !important;
+
+        font-size: 14px !important;
+      }
+
+      .site-footer {
+        padding: 28px 15px 40px !important;
+      }
+
+      .footer-inner {
+        column-gap: 9px !important;
+
+        row-gap: 22px !important;
+      }
+
+      .footer-inner h2 {
+        font-size: 17px !important;
+      }
+
+      .two-cols {
+        column-gap: 7px !important;
+      }
+
+      .two-cols li {
+        font-size: 12px !important;
+      }
+
+      .planning .lmap-logo {
+        max-width: 140px !important;
+      }
+
+      .social .store {
+        width: 112px !important;
+
+        height: 32px !important;
+      }
+
+      .social-icons {
+        gap: 5px !important;
+      }
+
+      .social-icons i {
+        width: 27px !important;
+
+        height: 27px !important;
+
+        font-size: 15px !important;
+      }
+
+      .support {
+        font-size: 10px !important;
+      }
+
+      .support img {
+        width: 95px !important;
+      }
+
+      .copyright {
+        font-size: 8px !important;
+      }
+    }
+  </style>
 </head>
+
 
 <body>
 
 <header class="site-header">
 
-  <!-- লাইভ বাংলা তারিখ -->
   <div class="top-strip">
-    <div class="top-inner" id="live-date">
+
+    <div
+      class="top-inner"
+      id="live-date"
+    >
       তারিখ লোড হচ্ছে...
+
     </div>
+
   </div>
 
+
   <div class="nav-wrap">
+
     <div class="nav-inner">
 
-      <div class="brand" aria-label="ভূমি ব্যবস্থাপনা অটোমেশন প্রকল্প">
+
+      <div
+        class="brand"
+        aria-label="ভূমি ব্যবস্থাপনা অটোমেশন প্রকল্প"
+      >
 
         <div class="brand-icon">
 
-          <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
+          <svg
+            viewBox="0 0 48 48"
+            role="img"
+            aria-hidden="true"
+          >
 
             <rect
               x="2"
@@ -75,7 +763,9 @@
 
       <nav class="main-nav">
 
-        <a href="index.html">হোম</a>
+        <a href="index.html">
+          হোম
+        </a>
 
         <a href="#">
           আমাদের সম্পর্কে
@@ -87,20 +777,30 @@
           <span class="down">▼</span>
         </a>
 
-        <a href="#">পরিপত্র</a>
+        <a href="#">
+          পরিপত্র
+        </a>
 
-        <a href="#">আবেদনের অবস্থা</a>
+        <a href="#">
+          আবেদনের অবস্থা
+        </a>
 
-        <a href="#">নির্দেশিকা</a>
+        <a href="#">
+          নির্দেশিকা
+        </a>
 
-        <a href="#">খতিয়ান ও ম্যাপ অনুসন্ধান</a>
+        <a href="#">
+          খতিয়ান ও ম্যাপ অনুসন্ধান
+        </a>
 
       </nav>
 
 
       <div class="login">
 
-        <span class="cart">🛒</span>
+        <span class="cart">
+          🛒
+        </span>
 
         <a href="admin.html">
 
@@ -114,6 +814,7 @@
       </div>
 
     </div>
+
   </div>
 
 </header>
@@ -123,67 +824,160 @@
 
   <section class="record-area">
 
-    <div class="record-card" id="record-card">
+    <div
+      class="record-card"
+      id="record-card"
+      style="
+        background:#ffffff !important;
+        background-color:#ffffff !important;
+        background-image:none !important;
+      "
+    >
 
       <h1>
+
         খতিয়ান নং -
-        <span id="khatian">লোড হচ্ছে...</span>
+
+        <span id="khatian">
+          লোড হচ্ছে...
+        </span>
+
       </h1>
 
 
       <div class="record-row">
-        <b>মালিক</b>
-        <span>:</span>
-        <strong id="owner">—</strong>
+
+        <b>
+          মালিক
+        </b>
+
+        <span>
+          :
+        </span>
+
+        <strong id="owner">
+          —
+        </strong>
+
       </div>
 
 
       <div class="record-row">
-        <b>দাগ নং</b>
-        <span>:</span>
-        <strong id="dag_no">—</strong>
+
+        <b>
+          দাগ নং
+        </b>
+
+        <span>
+          :
+        </span>
+
+        <strong id="dag_no">
+          —
+        </strong>
+
       </div>
 
 
       <div class="record-row">
-        <b>সার্ভে</b>
-        <span>:</span>
-        <strong id="survey">—</strong>
+
+        <b>
+          সার্ভে
+        </b>
+
+        <span>
+          :
+        </span>
+
+        <strong id="survey">
+          —
+        </strong>
+
       </div>
 
 
       <div class="record-row">
-        <b>মৌজা</b>
-        <span>:</span>
-        <strong id="mouza">—</strong>
+
+        <b>
+          মৌজা
+        </b>
+
+        <span>
+          :
+        </span>
+
+        <strong id="mouza">
+          —
+        </strong>
+
       </div>
 
 
       <div class="record-row">
-        <b>উপজেলা</b>
-        <span>:</span>
-        <strong id="upazila">—</strong>
+
+        <b>
+          উপজেলা
+        </b>
+
+        <span>
+          :
+        </span>
+
+        <strong id="upazila">
+          —
+        </strong>
+
       </div>
 
 
       <div class="record-row">
-        <b>জেলা</b>
-        <span>:</span>
-        <strong id="district">—</strong>
+
+        <b>
+          জেলা
+        </b>
+
+        <span>
+          :
+        </span>
+
+        <strong id="district">
+          —
+        </strong>
+
       </div>
 
 
       <div class="record-row">
-        <b>বিভাগ</b>
-        <span>:</span>
-        <strong id="division">—</strong>
+
+        <b>
+          বিভাগ
+        </b>
+
+        <span>
+          :
+        </span>
+
+        <strong id="division">
+          —
+        </strong>
+
       </div>
 
 
       <div class="record-row">
-        <b>তারিখ</b>
-        <span>:</span>
-        <strong id="record_date">—</strong>
+
+        <b>
+          তারিখ
+        </b>
+
+        <span>
+          :
+        </span>
+
+        <strong id="record_date">
+          —
+        </strong>
+
       </div>
 
     </div>
@@ -200,28 +994,54 @@
 
   <div class="footer-inner">
 
+
     <section>
 
-      <h2>গুরুত্বপূর্ণ লিংক</h2>
+      <h2>
+        গুরুত্বপূর্ণ লিংক
+      </h2>
+
 
       <div class="two-cols">
 
         <ul>
 
-          <li>বাংলাদেশ জাতীয় তথ্য বাতায়ন</li>
-          <li>ভূমি মন্ত্রণালয়</li>
-          <li>তথ্য অধিদপ্তর (পিআইডি)</li>
-          <li>অভিযোগ প্রতিকার ব্যবস্থা</li>
+          <li>
+            বাংলাদেশ জাতীয় তথ্য বাতায়ন
+          </li>
+
+          <li>
+            ভূমি মন্ত্রণালয়
+          </li>
+
+          <li>
+            তথ্য অধিদপ্তর (পিআইডি)
+          </li>
+
+          <li>
+            অভিযোগ প্রতিকার ব্যবস্থা
+          </li>
 
         </ul>
 
 
         <ul>
 
-          <li>সার্ভে টিকেট</li>
-          <li>গোপনীয়তা নীতি</li>
-          <li>সাধারণ জিজ্ঞাসা</li>
-          <li>যোগাযোগ</li>
+          <li>
+            সার্ভে টিকেট
+          </li>
+
+          <li>
+            গোপনীয়তা নীতি
+          </li>
+
+          <li>
+            সাধারণ জিজ্ঞাসা
+          </li>
+
+          <li>
+            যোগাযোগ
+          </li>
 
         </ul>
 
@@ -232,7 +1052,10 @@
 
     <section class="planning">
 
-      <h2>পরিকল্পনা ও বাস্তবায়ন</h2>
+      <h2>
+        পরিকল্পনা ও বাস্তবায়ন
+      </h2>
+
 
       <div class="logos">
 
@@ -249,23 +1072,38 @@
 
     <section class="social">
 
-      <h2>সামাজিক যোগাযোগ</h2>
+      <h2>
+        সামাজিক যোগাযোগ
+      </h2>
+
 
       <div class="store">
+
         ▶
+
         <span>
+
           GET IT ON
+
           <br>
-          <b>Google Play</b>
+
+          <b>
+            Google Play
+          </b>
+
         </span>
+
       </div>
 
 
       <div class="social-icons">
 
         <i>f</i>
+
         <i>𝕏</i>
+
         <i>◎</i>
+
         <i>▶</i>
 
       </div>
@@ -288,7 +1126,9 @@
 
 
   <div class="copyright">
+
     ©২০২৬ ভূমি ব্যবস্থাপনা অটোমেশন প্রকল্প
+
   </div>
 
 
@@ -302,86 +1142,168 @@
 </footer>
 
 
-<!-- Supabase -->
+<!-- SUPABASE -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
 
 
-<!-- Configuration -->
+<!-- CONFIG -->
 
 <script src="config.js"></script>
 
 
-<!-- =========================================
-     লাইভ বাংলা তারিখ
-     ========================================= -->
+<!-- LIVE BANGLA DATE -->
 
 <script>
 
 (function () {
 
+  const dateElement =
+    document.getElementById("live-date");
+
+  if (!dateElement) {
+    return;
+  }
+
+
+  const DHAKA_TIME_ZONE =
+    "Asia/Dhaka";
+
+
+  function getPart(parts, type) {
+
+    const item =
+      parts.find(function (part) {
+
+        return part.type === type;
+
+      });
+
+    return item ? item.value : "";
+
+  }
+
+
   function updateLiveDate() {
 
-    const dateElement =
-      document.getElementById('live-date');
-
-    if (!dateElement) return;
-
-
-    const now = new Date();
+    const now =
+      new Date();
 
 
     try {
 
-      const formatter =
+      const banglaFormatter =
         new Intl.DateTimeFormat(
-          'bn-BD-u-ca-beng',
+          "bn-BD-u-ca-beng",
           {
-            timeZone: 'Asia/Dhaka',
-            weekday: 'long',
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
+            timeZone: DHAKA_TIME_ZONE,
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
           }
         );
 
 
+      const gregorianFormatter =
+        new Intl.DateTimeFormat(
+          "bn-BD",
+          {
+            timeZone: DHAKA_TIME_ZONE,
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          }
+        );
+
+
+      const banglaParts =
+        banglaFormatter.formatToParts(now);
+
+
+      const gregorianParts =
+        gregorianFormatter.formatToParts(now);
+
+
+      const weekday =
+        getPart(
+          banglaParts,
+          "weekday"
+        );
+
+
+      const banglaDay =
+        getPart(
+          banglaParts,
+          "day"
+        );
+
+
+      const banglaMonth =
+        getPart(
+          banglaParts,
+          "month"
+        );
+
+
+      const banglaYear =
+        getPart(
+          banglaParts,
+          "year"
+        );
+
+
+      const gregorianDay =
+        getPart(
+          gregorianParts,
+          "day"
+        );
+
+
+      const gregorianMonth =
+        getPart(
+          gregorianParts,
+          "month"
+        );
+
+
+      const gregorianYear =
+        getPart(
+          gregorianParts,
+          "year"
+        );
+
+
       dateElement.textContent =
-        formatter.format(now);
+        weekday +
+        ", " +
+        banglaDay +
+        " " +
+        banglaMonth +
+        " " +
+        banglaYear +
+        ", " +
+        gregorianDay +
+        " " +
+        gregorianMonth +
+        " " +
+        gregorianYear;
+
 
     } catch (error) {
 
-      /* যদি কোনো পুরোনো ব্রাউজারে বাংলা ক্যালেন্ডার
-         সাপোর্ট না থাকে, তাহলে অন্তত বাংলা ভাষায়
-         ইংরেজি তারিখ দেখাবে */
-
-      const fallbackFormatter =
-        new Intl.DateTimeFormat(
-          'bn-BD',
-          {
-            timeZone: 'Asia/Dhaka',
-            weekday: 'long',
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-          }
-        );
-
-
       dateElement.textContent =
-        fallbackFormatter.format(now);
+        "তারিখ পাওয়া যাচ্ছে না";
 
     }
 
   }
 
 
-  /* প্রথমবার দেখাবে */
-
   updateLiveDate();
 
-
-  /* প্রতিদিন/সময় অনুযায়ী নিজে নিজে আপডেট */
 
   setInterval(
     updateLiveDate,
@@ -393,9 +1315,11 @@
 </script>
 
 
-<!-- খতিয়ানের তথ্য -->
+<!-- APP -->
 
 <script src="app.js"></script>
 
+
 </body>
 </html>
+```
