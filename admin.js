@@ -1,5 +1,4 @@
 (function () {
-
   const cfg = window.APP_CONFIG || {};
 
   const valid =
@@ -15,28 +14,14 @@
 
   const loginMsg = document.getElementById('login-msg');
   const saveMsg = document.getElementById('save-msg');
-
   const tableBody = document.getElementById('history-body');
 
-  const newRecordButton =
-    document.getElementById('new-record');
+  const newRecordButton = document.getElementById('new-record');
+  const newRecordForm = document.getElementById('new-record-form');
+  const cancelNewButton = document.getElementById('cancel-new');
 
-  const newRecordForm =
-    document.getElementById('new-record-form');
-
-  const cancelNewButton =
-    document.getElementById('cancel-new');
-
-  const recordUrlBox =
-    document.getElementById('record-url');
-
-  const recordUrlLink =
-    document.getElementById('record-url-link');
-
-
-  // =====================================================
-  // যে ফিল্ডগুলো Supabase-এ যাবে
-  // =====================================================
+  const recordUrlBox = document.getElementById('record-url');
+  const recordUrlLink = document.getElementById('record-url-link');
 
   const fields = [
     'khatian',
@@ -50,36 +35,25 @@
     'record_date'
   ];
 
+  function msg(el, text, ok) {
+    if (!el) return;
 
-  // =====================================================
-  // Message দেখানোর function
-  // =====================================================
-
-  function msg(element, text, success) {
-
-    if (!element) return;
-
-    element.textContent = text;
-
-    element.className =
-      'msg ' + (success ? 'ok' : 'err');
+    el.textContent = text;
+    el.className = 'msg ' + (ok ? 'ok' : 'err');
   }
 
-
   // =====================================================
-  // Supabase configuration check
+  // Supabase check
   // =====================================================
 
   if (!valid || !window.supabase) {
-
     msg(
       loginMsg,
       'config.js-এ Supabase URL এবং publishable key ঠিকভাবে বসানো হয়নি।',
       false
     );
 
-    const loginButton =
-      document.getElementById('login');
+    const loginButton = document.getElementById('login');
 
     if (loginButton) {
       loginButton.disabled = true;
@@ -88,105 +62,63 @@
     return;
   }
 
-
-  // =====================================================
-  // Supabase client
-  // =====================================================
-
-  const client =
-    window.supabase.createClient(
-      cfg.SUPABASE_URL,
-      cfg.SUPABASE_ANON_KEY
-    );
+  const client = window.supabase.createClient(
+    cfg.SUPABASE_URL,
+    cfg.SUPABASE_ANON_KEY
+  );
 
 
   // =====================================================
-  // প্রতিটি রেকর্ডের আলাদা URL তৈরি
-  //
-  // যেমন:
-  // ID 1 → index.html?id=1
-  // ID 2 → index.html?id=2
-  // ID 3 → index.html?id=3
+  // প্রতিটি খতিয়ানের URL তৈরি
   // =====================================================
 
   function makeRecordUrl(id) {
 
-    const currentUrl =
-      new URL(window.location.href);
-
-    currentUrl.pathname =
-      currentUrl.pathname.replace(
-        /admin\.html$/i,
-        'index.html'
-      );
-
-    currentUrl.search = '';
-
-    currentUrl.hash = '';
-
-    currentUrl.searchParams.set(
-      'id',
-      id
+    const url = new URL(
+      'index.html',
+      window.location.href
     );
 
-    return currentUrl.toString();
+    url.searchParams.set('id', id);
+
+    return url.href;
   }
 
 
   // =====================================================
-  // সব খতিয়ানের তালিকা দেখানো
+  // সব খতিয়ানের তালিকা + URL
   // =====================================================
 
   async function loadHistory() {
 
-    const { data, error } =
-      await client
-        .from('land_records')
-        .select('*')
-        .order('id', {
-          ascending: false
-        });
-
+    const { data, error } = await client
+      .from('land_records')
+      .select('*')
+      .order('id', { ascending: false });
 
     if (error) {
-
-      msg(
-        saveMsg,
-        error.message,
-        false
-      );
-
+      msg(saveMsg, error.message, false);
       return;
     }
 
-
-    if (!tableBody) return;
-
     tableBody.innerHTML = '';
-
 
     (data || []).forEach(function (record) {
 
-      const tr =
-        document.createElement('tr');
+      const tr = document.createElement('tr');
 
-
-      // -------------------------------
+      // -------------------------
       // ID
-      // -------------------------------
+      // -------------------------
 
-      const idTd =
-        document.createElement('td');
-
-      idTd.textContent =
-        record.id ?? '';
-
+      const idTd = document.createElement('td');
+      idTd.textContent = record.id;
       tr.appendChild(idTd);
 
 
-      // -------------------------------
-      // সাধারণ তথ্য
-      // -------------------------------
+      // -------------------------
+      // অন্যান্য তথ্য
+      // -------------------------
 
       const values = [
         record.khatian,
@@ -197,45 +129,34 @@
         record.record_date
       ];
 
-
       values.forEach(function (value) {
 
-        const td =
-          document.createElement('td');
+        const td = document.createElement('td');
 
-        td.textContent =
-          value ?? '';
+        td.textContent = value ?? '';
 
         tr.appendChild(td);
       });
 
 
-      // -------------------------------
+      // -------------------------
       // URL
-      // -------------------------------
+      // -------------------------
 
-      const urlTd =
-        document.createElement('td');
+      const urlTd = document.createElement('td');
 
-      urlTd.className =
-        'url-cell';
+      const url = makeRecordUrl(record.id);
 
-
-      const link =
-        document.createElement('a');
-
-      const url =
-        makeRecordUrl(record.id);
+      const link = document.createElement('a');
 
       link.href = url;
-
-      link.textContent =
-        'দেখুন';
-
       link.target = '_blank';
+      link.rel = 'noopener noreferrer';
 
-      link.rel = 'noopener';
+      link.textContent = 'খতিয়ান দেখুন';
 
+      link.style.color = '#075db5';
+      link.style.fontWeight = '700';
 
       urlTd.appendChild(link);
 
@@ -243,51 +164,33 @@
 
 
       tableBody.appendChild(tr);
-
     });
 
 
-    // -------------------------------
     // মোট রেকর্ড
-    // -------------------------------
 
-    const count =
-      (data || []).length;
+    const count = (data || []).length;
 
-    const countEl =
-      document.getElementById(
-        'history-count'
-      );
+    const countEl = document.getElementById('history-count');
 
     if (countEl) {
-
-      countEl.textContent =
-        'মোট ' +
-        count +
-        'টি রেকর্ড';
+      countEl.textContent = 'মোট ' + count + 'টি রেকর্ড';
     }
-
   }
 
 
   // =====================================================
-  // Login session
+  // Login
   // =====================================================
 
   async function enter(session) {
 
     if (!session) return;
 
-
     const email =
-      (session.user.email || '')
-        .toLowerCase();
+      (session.user.email || '').toLowerCase();
 
-
-    if (
-      email !==
-      ADMIN_EMAIL.toLowerCase()
-    ) {
+    if (email !== ADMIN_EMAIL.toLowerCase()) {
 
       await client.auth.signOut();
 
@@ -300,387 +203,239 @@
       return;
     }
 
-
-    loginCard.style.display =
-      'none';
-
-    editor.style.display =
-      'block';
-
+    loginCard.style.display = 'none';
+    editor.style.display = 'block';
 
     await loadHistory();
-
   }
 
 
-  // =====================================================
-  // আগে থেকেই Login করা থাকলে
-  // =====================================================
-
-  client.auth
-    .getSession()
-    .then(function (result) {
-
-      enter(
-        result.data.session
-      );
-
-    });
+  client.auth.getSession().then(function (result) {
+    enter(result.data.session);
+  });
 
 
   // =====================================================
   // Login button
   // =====================================================
 
-  const loginButton =
-    document.getElementById('login');
+  document.getElementById('login').onclick =
+    async function () {
 
+      loginMsg.className = 'msg';
 
-  if (loginButton) {
+      const email =
+        document
+          .getElementById('email')
+          .value
+          .trim();
 
-    loginButton.onclick =
-      async function () {
+      const password =
+        document
+          .getElementById('password')
+          .value;
 
-        loginMsg.className =
-          'msg';
+      const { data, error } =
+        await client.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
 
+      if (error) {
+        msg(loginMsg, error.message, false);
+        return;
+      }
 
-        const email =
-          document
-            .getElementById('email')
-            .value
-            .trim();
-
-
-        const password =
-          document
-            .getElementById('password')
-            .value;
-
-
-        const { data, error } =
-          await client.auth
-            .signInWithPassword({
-
-              email: email,
-
-              password: password
-
-            });
-
-
-        if (error) {
-
-          msg(
-            loginMsg,
-            error.message,
-            false
-          );
-
-          return;
-        }
-
-
-        await enter(
-          data.session
-        );
-
-      };
-
-  }
+      await enter(data.session);
+    };
 
 
   // =====================================================
-  // "নতুন সংযুক্ত করুন" button
+  // নতুন সংযুক্ত করুন
   // =====================================================
 
   if (newRecordButton) {
 
-    newRecordButton.onclick =
-      function () {
+    newRecordButton.onclick = function () {
 
-        newRecordForm.style.display =
-          'block';
+      newRecordForm.style.display = 'block';
 
+      recordUrlBox.style.display = 'none';
 
-        recordUrlBox.style.display =
-          'none';
+      saveMsg.className = 'msg';
 
+      fields.forEach(function (field) {
 
-        saveMsg.className =
-          'msg';
+        const input =
+          document.getElementById('f_' + field);
 
-
-        // Form খালি করা
-
-        fields.forEach(
-          function (field) {
-
-            const input =
-              document.getElementById(
-                'f_' + field
-              );
-
-            if (input) {
-              input.value = '';
-            }
-
-          }
-        );
-
-
-        // প্রথম ঘরে cursor
-
-        const firstInput =
-          document.getElementById(
-            'f_khatian'
-          );
-
-        if (firstInput) {
-          firstInput.focus();
+        if (input) {
+          input.value = '';
         }
+      });
 
-      };
+      const firstInput =
+        document.getElementById('f_khatian');
 
+      if (firstInput) {
+        firstInput.focus();
+      }
+    };
   }
 
 
   // =====================================================
-  // Cancel button
+  // Cancel
   // =====================================================
 
   if (cancelNewButton) {
 
-    cancelNewButton.onclick =
-      function () {
+    cancelNewButton.onclick = function () {
 
-        newRecordForm.style.display =
-          'none';
+      newRecordForm.style.display = 'none';
 
+      recordUrlBox.style.display = 'none';
 
-        recordUrlBox.style.display =
-          'none';
+      saveMsg.className = 'msg';
 
+      fields.forEach(function (field) {
 
-        saveMsg.className =
-          'msg';
+        const input =
+          document.getElementById('f_' + field);
 
-
-        fields.forEach(
-          function (field) {
-
-            const input =
-              document.getElementById(
-                'f_' + field
-              );
-
-            if (input) {
-              input.value = '';
-            }
-
-          }
-        );
-
-      };
-
+        if (input) {
+          input.value = '';
+        }
+      });
+    };
   }
 
 
   // =====================================================
-  // নতুন খতিয়ান তৈরি
-  //
-  // খুব গুরুত্বপূর্ণ:
-  //
-  // এখানে UPDATE নেই।
-  //
-  // শুধু INSERT আছে।
-  //
-  // তাই প্রতিবার নতুন ID হবে।
+  // নতুন খতিয়ান INSERT
   // =====================================================
 
-  const saveButton =
-    document.getElementById('save');
+  document.getElementById('save').onclick =
+    async function () {
 
+      saveMsg.className = 'msg';
 
-  if (saveButton) {
+      const row = {};
 
-    saveButton.onclick =
-      async function () {
+      for (const field of fields) {
 
-        saveMsg.className =
-          'msg';
+        const input =
+          document.getElementById('f_' + field);
 
+        const value =
+          input.value.trim();
 
-        const row = {};
-
-
-        // -----------------------------------------------
-        // Form থেকে তথ্য নেওয়া
-        // -----------------------------------------------
-
-        for (const field of fields) {
-
-          const input =
-            document.getElementById(
-              'f_' + field
-            );
-
-
-          if (!input) continue;
-
-
-          const value =
-            input.value.trim();
-
-
-          if (!value) {
-
-            msg(
-              saveMsg,
-              'সবগুলো ঘর পূরণ করুন।',
-              false
-            );
-
-
-            input.focus();
-
-            return;
-          }
-
-
-          row[field] =
-            value;
-
-        }
-
-
-        // -----------------------------------------------
-        // নতুন Record INSERT
-        // -----------------------------------------------
-
-        const { data, error } =
-          await client
-            .from('land_records')
-            .insert([row])
-            .select()
-            .single();
-
-
-        // -----------------------------------------------
-        // Error
-        // -----------------------------------------------
-
-        if (error) {
+        if (!value) {
 
           msg(
             saveMsg,
-            error.message,
+            'সবগুলো ঘর পূরণ করুন।',
             false
           );
+
+          input.focus();
 
           return;
         }
 
-
-        // -----------------------------------------------
-        // নতুন ID
-        // -----------------------------------------------
-
-        const newId =
-          data.id;
+        row[field] = value;
+      }
 
 
-        // -----------------------------------------------
-        // নতুন Record-এর URL
-        // -----------------------------------------------
+      // =================================================
+      // শুধু INSERT
+      // =================================================
 
-        const recordUrl =
-          makeRecordUrl(newId);
-
-
-        // URL box দেখানো
-
-        if (recordUrlBox) {
-
-          recordUrlBox.style.display =
-            'block';
-
-        }
+      const { data, error } =
+        await client
+          .from('land_records')
+          .insert([row])
+          .select()
+          .single();
 
 
-        if (recordUrlLink) {
-
-          recordUrlLink.href =
-            recordUrl;
-
-          recordUrlLink.textContent =
-            recordUrl;
-
-        }
-
-
-        // -----------------------------------------------
-        // Success message
-        // -----------------------------------------------
+      if (error) {
 
         msg(
           saveMsg,
-          '✅ নতুন খতিয়ান সফলভাবে সংযুক্ত হয়েছে। ID: ' +
-          newId,
-          true
+          error.message,
+          false
         );
 
-
-        // -----------------------------------------------
-        // Form খালি
-        // -----------------------------------------------
-
-        fields.forEach(
-          function (field) {
-
-            const input =
-              document.getElementById(
-                'f_' + field
-              );
-
-            if (input) {
-              input.value = '';
-            }
-
-          }
-        );
+        return;
+      }
 
 
-        // -----------------------------------------------
-        // তালিকা Refresh
-        // -----------------------------------------------
+      // =================================================
+      // নতুন ID
+      // =================================================
 
-        await loadHistory();
+      const newId = data.id;
 
-      };
 
-  }
+      // =================================================
+      // নতুন খতিয়ানের URL
+      // =================================================
+
+      const recordUrl = makeRecordUrl(newId);
+
+
+      recordUrlLink.href = recordUrl;
+
+      recordUrlLink.textContent = recordUrl;
+
+      recordUrlBox.style.display = 'block';
+
+
+      // =================================================
+      // সফল বার্তা
+      // =================================================
+
+      msg(
+        saveMsg,
+        '✅ নতুন খতিয়ান সফলভাবে সংযুক্ত হয়েছে। ID: ' + newId,
+        true
+      );
+
+
+      // =================================================
+      // Form খালি
+      // =================================================
+
+      fields.forEach(function (field) {
+
+        const input =
+          document.getElementById('f_' + field);
+
+        if (input) {
+          input.value = '';
+        }
+      });
+
+
+      // =================================================
+      // তালিকা আবার লোড
+      // =================================================
+
+      await loadHistory();
+    };
 
 
   // =====================================================
   // Logout
   // =====================================================
 
-  const logoutButton =
-    document.getElementById('logout');
+  document.getElementById('logout').onclick =
+    async function () {
 
+      await client.auth.signOut();
 
-  if (logoutButton) {
-
-    logoutButton.onclick =
-      async function () {
-
-        await client.auth.signOut();
-
-        location.reload();
-
-      };
-
-  }
+      location.reload();
+    };
 
 })();
