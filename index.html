@@ -1,63 +1,85 @@
-```html
+```html id="m5k2pn"
 <!doctype html>
 <html lang="bn">
 
 <head>
+
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0d8ed6"
+  >
+
+  <meta
+    name="msapplication-navbutton-color"
+    content="#0d8ed6"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
 
   <title>খতিয়ান তথ্য</title>
 
-  <link rel="stylesheet" href="style.css?v=5">
+  <link
+    rel="stylesheet"
+    href="style.css?v=5"
+  >
+
 
   <style>
-    /* =====================================================
-       MOBILE OVERRIDES
-    ===================================================== */
 
-    @media (max-width: 700px) {
+    @media (max-width:700px){
 
       html,
-      body {
-        width: 100% !important;
-        min-width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden !important;
-        background: #ffffff !important;
+      body{
+        width:100% !important;
+        min-width:0 !important;
+        margin:0 !important;
+        padding:0 !important;
+        overflow-x:hidden !important;
+        background:#ffffff !important;
       }
 
-      body {
-        min-width: 0 !important;
+      body{
+        min-width:0 !important;
       }
 
 
-      /* HEADER */
+      /* Header */
 
-      .site-header {
-        width: 100% !important;
-        height: 118px !important;
-        background: #ffffff !important;
+      .site-header{
+        width:100% !important;
+        height:118px !important;
+        background:#ffffff !important;
       }
 
-      .top-strip {
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        transform: none !important;
+      .top-strip{
+        position:absolute !important;
 
-        width: 100% !important;
-        height: 46px !important;
+        top:0 !important;
+        left:0 !important;
+        transform:none !important;
 
-        line-height: 46px !important;
+        width:100% !important;
+        height:46px !important;
 
-        font-size: 13px !important;
-        font-weight: 700 !important;
+        line-height:46px !important;
 
-        white-space: nowrap !important;
-        overflow: hidden !important;
+        font-size:13px !important;
+        font-weight:700 !important;
 
-        background: linear-gradient(
+        white-space:nowrap !important;
+        overflow:hidden !important;
+
+        background:linear-gradient(
           90deg,
           #dceee5 0%,
           #278a53 50%,
@@ -65,624 +87,609 @@
         ) !important;
       }
 
-      .top-inner {
-        width: 100% !important;
-        height: 100% !important;
+      .top-inner{
+        width:100% !important;
+        height:100% !important;
       }
 
-      .nav-wrap {
-        position: absolute !important;
+      .nav-wrap{
+        position:absolute !important;
 
-        top: 46px !important;
-        left: 0 !important;
+        top:46px !important;
+        left:0 !important;
 
-        width: 100% !important;
-        height: 72px !important;
+        width:100% !important;
+        height:72px !important;
 
-        bottom: auto !important;
+        bottom:auto !important;
 
-        background: #ffffff !important;
+        background:#ffffff !important;
       }
 
-      .nav-inner {
-        width: 100% !important;
-        height: 72px !important;
+      .nav-inner{
+        width:100% !important;
+        height:72px !important;
 
-        margin: 0 !important;
+        margin:0 !important;
+        padding:0 19px !important;
 
-        padding: 0 19px !important;
-
-        display: flex !important;
-        align-items: center !important;
+        display:flex !important;
+        align-items:center !important;
       }
 
-      .brand {
-        width: 47px !important;
-        height: 47px !important;
+      .brand{
+        width:47px !important;
+        height:47px !important;
 
-        top: 0 !important;
-        position: relative !important;
+        top:0 !important;
+        position:relative !important;
       }
 
       .brand-icon,
-      .brand-icon svg {
-        width: 47px !important;
-        height: 47px !important;
+      .brand-icon svg{
+        width:47px !important;
+        height:47px !important;
       }
 
-      .main-nav {
-        display: none !important;
+      .main-nav{
+        display:none !important;
       }
 
-      .login {
-        margin-left: auto !important;
+      .login{
+        margin-left:auto !important;
 
-        display: flex !important;
-        align-items: center !important;
+        display:flex !important;
+        align-items:center !important;
 
-        gap: 8px !important;
+        gap:8px !important;
       }
 
-      .cart {
-        width: 42px !important;
-        height: 42px !important;
+      .cart{
+        width:42px !important;
+        height:42px !important;
 
-        min-width: 42px !important;
+        min-width:42px !important;
 
-        font-size: 18px !important;
+        font-size:18px !important;
       }
 
-      .login a {
-        display: none !important;
+      .login a{
+        display:none !important;
       }
 
-      .login::after {
-        content: "⋮";
+      .login::after{
+        content:"⋮";
 
-        width: 20px !important;
-        height: 42px !important;
+        width:20px !important;
+        height:42px !important;
 
-        display: flex !important;
+        display:flex !important;
 
-        align-items: center !important;
-        justify-content: center !important;
+        align-items:center !important;
+        justify-content:center !important;
 
-        color: #111111 !important;
+        color:#111111 !important;
 
-        font-family: Arial, sans-serif !important;
+        font-family:Arial,sans-serif !important;
 
-        font-size: 30px !important;
-        line-height: 1 !important;
-      }
-
-
-      /* RECORD AREA */
-
-      .record-area {
-        width: 100% !important;
-
-        height: auto !important;
-        min-height: 0 !important;
-
-        padding: 24px 13px 20px !important;
-
-        background: #f5f6fa !important;
+        font-size:30px !important;
+        line-height:1 !important;
       }
 
 
-      /* RECORD CARD */
+      /* Record area */
 
-      .record-card {
-        position: relative !important;
+      .record-area{
+        width:100% !important;
 
-        top: auto !important;
-        left: auto !important;
+        height:auto !important;
+        min-height:0 !important;
 
-        transform: none !important;
+        padding:24px 13px 20px !important;
 
-        width: 100% !important;
-        max-width: 345px !important;
+        background:#f5f6fa !important;
+      }
 
-        height: auto !important;
-        min-height: 0 !important;
 
-        margin: 0 auto !important;
+      /* Record card */
 
-        padding: 18px 23px 17px !important;
+      .record-card{
+        position:relative !important;
 
-        background: #ffffff !important;
-        background-color: #ffffff !important;
-        background-image: none !important;
+        top:auto !important;
+        left:auto !important;
 
-        border: 1px solid #e1e1e1 !important;
+        transform:none !important;
 
-        border-radius: 8px !important;
+        width:100% !important;
+        max-width:345px !important;
+
+        height:auto !important;
+        min-height:0 !important;
+
+        margin:0 auto !important;
+
+        padding:18px 23px 17px !important;
+
+        background:#ffffff !important;
+        background-color:#ffffff !important;
+        background-image:none !important;
+
+        border:1px solid #e1e1e1 !important;
+
+        border-radius:8px !important;
 
         box-shadow:
-          0 2px 8px rgba(0, 0, 0, 0.12) !important;
+          0 2px 8px rgba(0,0,0,.12) !important;
 
-        color: #111111 !important;
+        color:#111111 !important;
       }
 
-      .record-card h1 {
-        text-align: center !important;
+      .record-card h1{
+        text-align:center !important;
 
-        color: #00863c !important;
+        color:#00863c !important;
 
-        font-size: 22px !important;
-        line-height: 1.25 !important;
+        font-size:22px !important;
+        line-height:1.25 !important;
 
-        margin: 0 0 13px !important;
+        margin:0 0 13px !important;
 
-        padding: 0 !important;
+        padding:0 !important;
 
-        font-weight: 800 !important;
+        font-weight:800 !important;
 
-        white-space: nowrap !important;
+        white-space:nowrap !important;
       }
 
-      .record-row {
-        display: grid !important;
+      .record-row{
+        display:grid !important;
 
         grid-template-columns:
           81px
           10px
-          minmax(0, 1fr) !important;
+          minmax(0,1fr) !important;
 
-        align-items: center !important;
+        align-items:center !important;
 
-        min-height: 38px !important;
+        min-height:38px !important;
 
-        height: auto !important;
+        height:auto !important;
 
-        padding: 1px 0 !important;
+        padding:1px 0 !important;
 
-        font-size: 15.5px !important;
+        font-size:15.5px !important;
 
-        line-height: 1.3 !important;
+        line-height:1.3 !important;
 
-        color: #111111 !important;
+        color:#111111 !important;
       }
 
-      .record-row b {
-        color: #111111 !important;
+      .record-row b{
+        color:#111111 !important;
 
-        font-weight: 800 !important;
+        font-weight:800 !important;
 
-        white-space: nowrap !important;
+        white-space:nowrap !important;
       }
 
-      .record-row span {
-        color: #111111 !important;
+      .record-row span{
+        color:#111111 !important;
 
-        font-weight: 700 !important;
+        font-weight:700 !important;
 
-        text-align: center !important;
+        text-align:center !important;
       }
 
-      .record-row strong {
-        color: #111111 !important;
+      .record-row strong{
+        color:#111111 !important;
 
-        font-weight: 500 !important;
+        font-weight:500 !important;
 
-        min-width: 0 !important;
+        min-width:0 !important;
 
-        word-break: break-word !important;
+        word-break:break-word !important;
 
-        overflow-wrap: anywhere !important;
-      }
-
-
-      /* DIVIDER */
-
-      .divider {
-        height: 42px !important;
-
-        background: #ffffff !important;
-      }
-
-      .divider::before {
-        height: 15px !important;
+        overflow-wrap:anywhere !important;
       }
 
 
-      /* FOOTER */
+      /* Divider */
 
-      .site-footer {
-        width: 100% !important;
+      .divider{
+        height:42px !important;
 
-        height: auto !important;
-
-        min-height: 0 !important;
-
-        padding: 34px 20px 46px !important;
-
-        background: #e4ffe2 !important;
-
-        position: relative !important;
+        background:#ffffff !important;
       }
 
-      .footer-inner {
-        width: 100% !important;
+      .divider::before{
+        height:15px !important;
+      }
 
-        margin: 0 !important;
 
-        display: grid !important;
+      /* Footer */
+
+      .site-footer{
+        width:100% !important;
+
+        height:auto !important;
+
+        min-height:0 !important;
+
+        padding:34px 20px 46px !important;
+
+        background:#e4ffe2 !important;
+
+        position:relative !important;
+      }
+
+      .footer-inner{
+        width:100% !important;
+
+        margin:0 !important;
+
+        display:grid !important;
 
         grid-template-columns:
           1fr
           1fr !important;
 
-        column-gap: 14px !important;
+        column-gap:14px !important;
 
-        row-gap: 28px !important;
+        row-gap:28px !important;
       }
 
-      .footer-inner > section {
-        display: block !important;
+      .footer-inner > section{
+        display:block !important;
 
-        width: 100% !important;
+        width:100% !important;
       }
 
-      .footer-inner > section:first-child {
-        grid-column: 1 / -1 !important;
+      .footer-inner > section:first-child{
+        grid-column:1 / -1 !important;
       }
 
-      .footer-inner h2 {
-        font-size: 19px !important;
+      .footer-inner h2{
+        font-size:19px !important;
 
-        line-height: 1.3 !important;
+        line-height:1.3 !important;
 
-        margin: 0 0 12px !important;
+        margin:0 0 12px !important;
 
-        color: #08732f !important;
+        color:#08732f !important;
       }
 
-      .two-cols {
-        display: grid !important;
+      .two-cols{
+        display:grid !important;
 
         grid-template-columns:
           1fr
           1fr !important;
 
-        column-gap: 12px !important;
+        column-gap:12px !important;
 
-        row-gap: 1px !important;
+        row-gap:1px !important;
       }
 
-      .two-cols li {
-        font-size: 13px !important;
+      .two-cols li{
+        font-size:13px !important;
 
-        line-height: 2.05 !important;
+        line-height:2.05 !important;
 
-        white-space: normal !important;
+        white-space:normal !important;
       }
 
-      .two-cols li::before {
-        content: "▶" !important;
+      .two-cols li::before{
+        content:"▶" !important;
 
-        color: #07843b !important;
+        color:#07843b !important;
 
-        font-size: 8px !important;
+        font-size:8px !important;
 
-        margin-right: 5px !important;
-      }
-
-
-      /* PLANNING */
-
-      .planning {
-        display: block !important;
-
-        grid-column: 1 !important;
-      }
-
-      .planning .logos {
-        display: flex !important;
-
-        align-items: center !important;
-
-        justify-content: flex-start !important;
-      }
-
-      .planning .lmap-logo {
-        display: block !important;
-
-        width: 100% !important;
-
-        max-width: 150px !important;
-
-        height: auto !important;
-
-        max-height: none !important;
-
-        object-fit: contain !important;
+        margin-right:5px !important;
       }
 
 
-      /* SOCIAL */
+      /* Planning */
 
-      .social {
-        display: block !important;
+      .planning{
+        display:block !important;
 
-        grid-column: 2 !important;
-
-        text-align: left !important;
+        grid-column:1 !important;
       }
 
-      .social .store {
-        display: flex !important;
+      .planning .logos{
+        display:flex !important;
 
-        width: 118px !important;
+        align-items:center !important;
 
-        height: 34px !important;
-
-        margin: 3px 0 10px !important;
+        justify-content:flex-start !important;
       }
 
-      .social .store span {
-        font-size: 6px !important;
-      }
+      .planning .lmap-logo{
+        display:block !important;
 
-      .social .store b {
-        font-size: 10px !important;
-      }
+        width:100% !important;
 
-      .social-icons {
-        display: flex !important;
+        max-width:150px !important;
 
-        justify-content: flex-start !important;
+        height:auto !important;
 
-        gap: 6px !important;
+        max-height:none !important;
 
-        flex-wrap: wrap !important;
-      }
-
-      .social-icons i {
-        width: 29px !important;
-
-        height: 29px !important;
-
-        font-size: 17px !important;
+        object-fit:contain !important;
       }
 
 
-      /* SUPPORT */
+      /* Social */
 
-      .support {
-        display: flex !important;
+      .social{
+        display:block !important;
 
-        position: relative !important;
+        grid-column:2 !important;
 
-        right: auto !important;
-
-        bottom: auto !important;
-
-        grid-column: 1 / -1 !important;
-
-        width: 100% !important;
-
-        height: auto !important;
-
-        margin: 0 !important;
-
-        padding: 5px 0 0 !important;
-
-        background: transparent !important;
-
-        border-radius: 0 !important;
-
-        justify-content: center !important;
-
-        align-items: center !important;
-
-        gap: 6px !important;
-
-        font-size: 11px !important;
-
-        flex-wrap: wrap !important;
+        text-align:left !important;
       }
 
-      .support img {
-        width: 105px !important;
+      .social .store{
+        display:flex !important;
 
-        height: auto !important;
+        width:118px !important;
+
+        height:34px !important;
+
+        margin:3px 0 10px !important;
       }
 
+      .social .store span{
+        font-size:6px !important;
+      }
 
-      /* COPYRIGHT */
+      .social .store b{
+        font-size:10px !important;
+      }
 
-      .copyright {
-        display: block !important;
+      .social-icons{
+        display:flex !important;
 
-        position: relative !important;
+        justify-content:flex-start !important;
 
-        left: auto !important;
+        gap:6px !important;
 
-        bottom: auto !important;
+        flex-wrap:wrap !important;
+      }
 
-        width: 100% !important;
+      .social-icons i{
+        width:29px !important;
 
-        height: auto !important;
+        height:29px !important;
 
-        grid-column: 1 / -1 !important;
-
-        margin-top: 2px !important;
-
-        padding: 7px 3px !important;
-
-        background: #ffffff !important;
-
-        text-align: center !important;
-
-        font-size: 8px !important;
-
-        border-top: 1px solid #ddd !important;
+        font-size:17px !important;
       }
 
 
-      /* CHAT */
+      /* Support */
 
-      .chat {
-        position: fixed !important;
+      .support{
+        display:flex !important;
 
-        right: 13px !important;
+        position:relative !important;
 
-        bottom: 13px !important;
+        right:auto !important;
+        bottom:auto !important;
 
-        width: 48px !important;
+        grid-column:1 / -1 !important;
 
-        height: 48px !important;
+        width:100% !important;
 
-        font-size: 20px !important;
+        height:auto !important;
 
-        z-index: 9999 !important;
+        margin:0 !important;
+
+        padding:5px 0 0 !important;
+
+        background:transparent !important;
+
+        border-radius:0 !important;
+
+        justify-content:center !important;
+
+        align-items:center !important;
+
+        gap:6px !important;
+
+        font-size:11px !important;
+
+        flex-wrap:wrap !important;
+      }
+
+      .support img{
+        width:105px !important;
+
+        height:auto !important;
+      }
+
+
+      /* Copyright */
+
+      .copyright{
+        display:block !important;
+
+        position:relative !important;
+
+        left:auto !important;
+
+        bottom:auto !important;
+
+        width:100% !important;
+
+        height:auto !important;
+
+        grid-column:1 / -1 !important;
+
+        margin-top:2px !important;
+
+        padding:7px 3px !important;
+
+        background:#ffffff !important;
+
+        text-align:center !important;
+
+        font-size:8px !important;
+
+        border-top:1px solid #ddd !important;
+      }
+
+
+      /* Chat */
+
+      .chat{
+        position:fixed !important;
+
+        right:13px !important;
+
+        bottom:13px !important;
+
+        width:48px !important;
+
+        height:48px !important;
+
+        font-size:20px !important;
+
+        z-index:9999 !important;
       }
     }
 
 
-    /* SMALL PHONES */
+    @media (max-width:400px){
 
-    @media (max-width: 400px) {
-
-      .site-header {
-        height: 112px !important;
+      .site-header{
+        height:112px !important;
       }
 
-      .top-strip {
-        height: 44px !important;
-
-        line-height: 44px !important;
-
-        font-size: 12px !important;
+      .top-strip{
+        height:44px !important;
+        line-height:44px !important;
+        font-size:12px !important;
       }
 
-      .nav-wrap {
-        top: 44px !important;
-
-        height: 68px !important;
+      .nav-wrap{
+        top:44px !important;
+        height:68px !important;
       }
 
-      .nav-inner {
-        height: 68px !important;
-
-        padding: 0 16px !important;
+      .nav-inner{
+        height:68px !important;
+        padding:0 16px !important;
       }
 
       .brand,
       .brand-icon,
-      .brand-icon svg {
-        width: 43px !important;
-
-        height: 43px !important;
+      .brand-icon svg{
+        width:43px !important;
+        height:43px !important;
       }
 
-      .cart {
-        width: 39px !important;
-
-        height: 39px !important;
-
-        min-width: 39px !important;
-
-        font-size: 17px !important;
+      .cart{
+        width:39px !important;
+        height:39px !important;
+        min-width:39px !important;
+        font-size:17px !important;
       }
 
-      .login::after {
-        height: 39px !important;
-
-        font-size: 28px !important;
+      .login::after{
+        height:39px !important;
+        font-size:28px !important;
       }
 
-      .record-area {
-        padding: 22px 10px 18px !important;
+      .record-area{
+        padding:22px 10px 18px !important;
       }
 
-      .record-card {
-        max-width: 330px !important;
-
-        padding: 16px 17px 15px !important;
+      .record-card{
+        max-width:330px !important;
+        padding:16px 17px 15px !important;
       }
 
-      .record-card h1 {
-        font-size: 20px !important;
-
-        margin-bottom: 10px !important;
+      .record-card h1{
+        font-size:20px !important;
+        margin-bottom:10px !important;
       }
 
-      .record-row {
+      .record-row{
         grid-template-columns:
           73px
           9px
-          minmax(0, 1fr) !important;
+          minmax(0,1fr) !important;
 
-        min-height: 35px !important;
+        min-height:35px !important;
 
-        font-size: 14px !important;
+        font-size:14px !important;
       }
 
-      .site-footer {
-        padding: 28px 15px 40px !important;
+      .site-footer{
+        padding:28px 15px 40px !important;
       }
 
-      .footer-inner {
-        column-gap: 9px !important;
-
-        row-gap: 22px !important;
+      .footer-inner{
+        column-gap:9px !important;
+        row-gap:22px !important;
       }
 
-      .footer-inner h2 {
-        font-size: 17px !important;
+      .footer-inner h2{
+        font-size:17px !important;
       }
 
-      .two-cols {
-        column-gap: 7px !important;
+      .two-cols{
+        column-gap:7px !important;
       }
 
-      .two-cols li {
-        font-size: 12px !important;
+      .two-cols li{
+        font-size:12px !important;
       }
 
-      .planning .lmap-logo {
-        max-width: 140px !important;
+      .planning .lmap-logo{
+        max-width:140px !important;
       }
 
-      .social .store {
-        width: 112px !important;
-
-        height: 32px !important;
+      .social .store{
+        width:112px !important;
+        height:32px !important;
       }
 
-      .social-icons {
-        gap: 5px !important;
+      .social-icons{
+        gap:5px !important;
       }
 
-      .social-icons i {
-        width: 27px !important;
-
-        height: 27px !important;
-
-        font-size: 15px !important;
+      .social-icons i{
+        width:27px !important;
+        height:27px !important;
+        font-size:15px !important;
       }
 
-      .support {
-        font-size: 10px !important;
+      .support{
+        font-size:10px !important;
       }
 
-      .support img {
-        width: 95px !important;
+      .support img{
+        width:95px !important;
       }
 
-      .copyright {
-        font-size: 8px !important;
+      .copyright{
+        font-size:8px !important;
       }
     }
+
   </style>
+
 </head>
 
 
 <body>
 
+
 <header class="site-header">
+
 
   <div class="top-strip">
 
@@ -691,7 +698,6 @@
       id="live-date"
     >
       তারিখ লোড হচ্ছে...
-
     </div>
 
   </div>
@@ -822,7 +828,9 @@
 
 <main>
 
+
   <section class="record-area">
+
 
     <div
       class="record-card"
@@ -833,6 +841,7 @@
         background-image:none !important;
       "
     >
+
 
       <h1>
 
@@ -980,17 +989,21 @@
 
       </div>
 
+
     </div>
+
 
   </section>
 
 
   <div class="divider"></div>
 
+
 </main>
 
 
 <footer class="site-footer">
+
 
   <div class="footer-inner">
 
@@ -1003,6 +1016,7 @@
 
 
       <div class="two-cols">
+
 
         <ul>
 
@@ -1045,12 +1059,15 @@
 
         </ul>
 
+
       </div>
+
 
     </section>
 
 
     <section class="planning">
+
 
       <h2>
         পরিকল্পনা ও বাস্তবায়ন
@@ -1067,10 +1084,12 @@
 
       </div>
 
+
     </section>
 
 
     <section class="social">
+
 
       <h2>
         সামাজিক যোগাযোগ
@@ -1099,16 +1118,15 @@
       <div class="social-icons">
 
         <i>f</i>
-
         <i>𝕏</i>
-
         <i>◎</i>
-
         <i>▶</i>
 
       </div>
 
+
     </section>
+
 
   </div>
 
@@ -1139,31 +1157,25 @@
     ▤
   </button>
 
+
 </footer>
 
-
-<!-- SUPABASE -->
 
 <script
   src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
 ></script>
 
-
-<!-- CONFIG -->
-
 <script src="config.js"></script>
 
 
-<!-- LIVE BANGLA DATE -->
-
 <script>
 
-(function () {
+(function(){
 
   const dateElement =
     document.getElementById("live-date");
 
-  if (!dateElement) {
+  if(!dateElement){
     return;
   }
 
@@ -1172,49 +1184,47 @@
     "Asia/Dhaka";
 
 
-  function getPart(parts, type) {
+  function getPart(parts,type){
 
-    const item =
-      parts.find(function (part) {
-
+    const found =
+      parts.find(function(part){
         return part.type === type;
-
       });
 
-    return item ? item.value : "";
+    return found ? found.value : "";
 
   }
 
 
-  function updateLiveDate() {
+  function updateLiveDate(){
 
     const now =
       new Date();
 
 
-    try {
+    try{
 
       const banglaFormatter =
         new Intl.DateTimeFormat(
           "bn-BD-u-ca-beng",
           {
-            timeZone: DHAKA_TIME_ZONE,
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric"
+            timeZone:DHAKA_TIME_ZONE,
+            weekday:"long",
+            day:"numeric",
+            month:"long",
+            year:"numeric"
           }
         );
 
 
-      const gregorianFormatter =
+      const englishFormatter =
         new Intl.DateTimeFormat(
           "bn-BD",
           {
-            timeZone: DHAKA_TIME_ZONE,
-            day: "numeric",
-            month: "long",
-            year: "numeric"
+            timeZone:DHAKA_TIME_ZONE,
+            day:"numeric",
+            month:"long",
+            year:"numeric"
           }
         );
 
@@ -1223,8 +1233,8 @@
         banglaFormatter.formatToParts(now);
 
 
-      const gregorianParts =
-        gregorianFormatter.formatToParts(now);
+      const englishParts =
+        englishFormatter.formatToParts(now);
 
 
       const weekday =
@@ -1255,23 +1265,23 @@
         );
 
 
-      const gregorianDay =
+      const englishDay =
         getPart(
-          gregorianParts,
+          englishParts,
           "day"
         );
 
 
-      const gregorianMonth =
+      const englishMonth =
         getPart(
-          gregorianParts,
+          englishParts,
           "month"
         );
 
 
-      const gregorianYear =
+      const englishYear =
         getPart(
-          gregorianParts,
+          englishParts,
           "year"
         );
 
@@ -1285,14 +1295,14 @@
         " " +
         banglaYear +
         ", " +
-        gregorianDay +
+        englishDay +
         " " +
-        gregorianMonth +
+        englishMonth +
         " " +
-        gregorianYear;
+        englishYear;
 
-
-    } catch (error) {
+    }
+    catch(error){
 
       dateElement.textContent =
         "তারিখ পাওয়া যাচ্ছে না";
@@ -1315,11 +1325,10 @@
 </script>
 
 
-<!-- APP -->
-
 <script src="app.js"></script>
 
 
 </body>
+
 </html>
 ```
