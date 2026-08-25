@@ -157,7 +157,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 950px;
+      min-width: 1180px;
       background: #fff;
     }
 
@@ -221,6 +221,30 @@
 
     .delete-btn:hover {
       background: #b42318;
+    }
+
+    .pdf-btn {
+      background: #6f42c1;
+      color: #fff;
+      border: 0;
+      border-radius: 5px;
+      padding: 7px 12px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .pdf-btn:hover {
+      background: #59339d;
+    }
+
+    .action-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: wrap;
     }
 
     @media (max-width: 650px) {
@@ -636,6 +660,8 @@
 
               <th>URL</th>
 
+              <th>খতিয়ানের পিডিএফ</th>
+
               <th>অ্যাকশন</th>
 
             </tr>
@@ -702,7 +728,7 @@
      ADMIN JAVASCRIPT
 =================================================== -->
 
-<script src="admin.js"></script>
+<script src="admin.js?v=2"></script>
 
 </body>
 </html>
