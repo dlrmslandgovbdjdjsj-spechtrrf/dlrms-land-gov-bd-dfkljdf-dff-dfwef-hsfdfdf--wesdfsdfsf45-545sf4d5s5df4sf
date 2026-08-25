@@ -1,48 +1,31 @@
+```javascript
 (function () {
 
-  'use strict';
-
-  // =====================================================
-  // CONFIG
-  // =====================================================
-
-  const cfg = window.APP_CONFIG || {};
-
-  const SUPABASE_URL =
-    cfg.SUPABASE_URL || '';
-
-  const SUPABASE_ANON_KEY =
-    cfg.SUPABASE_ANON_KEY || '';
-
-  const loadStatus =
-    document.getElementById('load-status');
+  "use strict";
 
 
-  // =====================================================
-  // BASIC HELPERS
-  // =====================================================
+  /* =====================================================
+     BASIC HELPERS
+  ===================================================== */
 
-  function getField(id) {
+  function get(id) {
     return document.getElementById(id);
   }
 
 
   function getValue(id) {
-
-    const el = getField(id);
+    const el = get(id);
 
     if (!el) {
-      return '';
+      return "";
     }
 
-    return String(el.value || '');
-
+    return String(el.value || "");
   }
 
 
   function setValue(id, value) {
-
-    const el = getField(id);
+    const el = get(id);
 
     if (!el) {
       return;
@@ -51,104 +34,79 @@
     el.value =
       value === null ||
       value === undefined
-        ? ''
+        ? ""
         : String(value);
-
   }
 
 
-  function clean(value) {
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
-      return '';
-    }
-
-    return String(value);
-
-  }
-
-
-  // =====================================================
-  // STATUS
-  // =====================================================
-
-  function setStatus(text, type) {
-
-    if (!loadStatus) {
-      return;
-    }
-
-    loadStatus.textContent = text;
-
-    loadStatus.className = 'load-status';
-
-    if (type) {
-      loadStatus.classList.add(type);
-    }
-
-  }
-
-
-  // =====================================================
-  // PREVIEW
-  // =====================================================
+  /* =====================================================
+     PREVIEW
+  ===================================================== */
 
   function updatePreview() {
 
-    const outputs =
-      document.querySelectorAll('[data-out]');
+    document
+      .querySelectorAll("[data-out]")
+      .forEach(function (el) {
 
-    outputs.forEach(function (element) {
+        const field =
+          el.getAttribute("data-out");
 
-      const field =
-        element.getAttribute('data-out');
+        if (!field) {
+          return;
+        }
 
-      if (!field) {
-        return;
-      }
+        el.textContent =
+          getValue(field);
 
-      element.textContent =
-        getValue(field);
+      });
 
-    });
 
     updateQR();
-
   }
 
 
-  // =====================================================
-  // QR
-  // =====================================================
+  /* =====================================================
+     QR
+  ===================================================== */
 
   function updateQR() {
 
-    const qrContainer =
-      document.getElementById('qrcode');
+    const box =
+      get("qrcode");
 
-    if (!qrContainer) {
+    const input =
+      get("qrUrl");
+
+    if (!box || !input) {
       return;
     }
 
-    qrContainer.innerHTML = '';
+    box.innerHTML = "";
 
     const url =
-      getValue('qrUrl').trim();
+      String(input.value || "").trim();
 
     if (
       !url ||
-      typeof QRCode === 'undefined'
+      typeof QRCode === "undefined"
     ) {
+
+      if (!url) {
+        box.style.display = "none";
+      }
+
       return;
     }
+
+
+    box.style.display = "block";
+
 
     try {
 
       new QRCode(
-        qrContainer,
+        box,
         {
           text: url,
           width: 92,
@@ -161,7 +119,7 @@
     } catch (error) {
 
       console.error(
-        'QR Error:',
+        "QR Code error:",
         error
       );
 
@@ -170,9 +128,15 @@
   }
 
 
-  // =====================================================
-  // URL থেকে ID
-  // =====================================================
+  /* =====================================================
+     GET RECORD ID
+
+     Admin থেকে PDF ক্লিক করার সময় সাধারণত
+     ?id=123 আসে।
+
+     নিরাপত্তার জন্য আরও কয়েকটি common parameter
+     গ্রহণ করা হচ্ছে।
+  ===================================================== */
 
   function getRecordId() {
 
@@ -181,195 +145,192 @@
         window.location.search
       );
 
-    const id =
-      params.get('id');
 
-    if (!id) {
-      return null;
-    }
-
-    return id.trim();
-
-  }
+    const possibleKeys = [
+      "id",
+      "record_id",
+      "khatian_id"
+    ];
 
 
-  // =====================================================
-  // DATABASE RECORD → FORM
-  // =====================================================
-
-  function fillRecord(record) {
-
-    console.log(
-      'Supabase record:',
-      record
-    );
-
-
-    // ---------------------------------------------------
-    // KHATIAN
-    // ---------------------------------------------------
-
-    if (
-      record.khatian !== null &&
-      record.khatian !== undefined
+    for (
+      let i = 0;
+      i < possibleKeys.length;
+      i++
     ) {
 
-      setValue(
-        'titleText',
-        'আর এস (জোনাল) খতিয়ান নং- ' +
-        clean(record.khatian)
-      );
+      const value =
+        params.get(
+          possibleKeys[i]
+        );
+
+      if (
+        value !== null &&
+        value !== ""
+      ) {
+
+        return value.trim();
+
+      }
 
     }
 
 
-    // ---------------------------------------------------
-    // OWNER
-    // ---------------------------------------------------
+    return null;
+  }
 
-    setValue(
-      'owner',
-      clean(record.owner)
+
+  /* =====================================================
+     LOAD CONFIG.JS
+  ===================================================== */
+
+  function loadScript(src) {
+
+    return new Promise(
+      function (resolve, reject) {
+
+        const script =
+          document.createElement("script");
+
+        script.src = src;
+
+        script.onload =
+          function () {
+            resolve();
+          };
+
+        script.onerror =
+          function () {
+            reject(
+              new Error(
+                "Script load failed: " + src
+              )
+            );
+          };
+
+        document.head.appendChild(
+          script
+        );
+
+      }
     );
-
-
-    // ---------------------------------------------------
-    // DAG
-    // ---------------------------------------------------
-
-    setValue(
-      'dag',
-      clean(record.dag_no)
-    );
-
-
-    // ---------------------------------------------------
-    // SURVEY
-    // ---------------------------------------------------
-
-    setValue(
-      'revisionNo',
-      clean(record.survey)
-    );
-
-
-    // ---------------------------------------------------
-    // MOUZA
-    // ---------------------------------------------------
-
-    setValue(
-      'mouza',
-      clean(record.mouza)
-    );
-
-
-    // ---------------------------------------------------
-    // UPAZILA
-    // ---------------------------------------------------
-
-    setValue(
-      'upazila',
-      clean(record.upazila)
-    );
-
-
-    // ---------------------------------------------------
-    // DISTRICT
-    // ---------------------------------------------------
-
-    setValue(
-      'district',
-      clean(record.district)
-    );
-
-
-    // ---------------------------------------------------
-    // DIVISION
-    // ---------------------------------------------------
-
-    setValue(
-      'division',
-      clean(record.division)
-    );
-
-
-    // ---------------------------------------------------
-    // DATE
-    // ---------------------------------------------------
-
-    setValue(
-      'printDate',
-      clean(record.record_date)
-    );
-
-
-    // ---------------------------------------------------
-    // DEFAULT PAGE
-    // ---------------------------------------------------
-
-    if (!getValue('pageText').trim()) {
-
-      setValue(
-        'pageText',
-        'পৃষ্ঠা নং: ১ এর ১'
-      );
-
-    }
-
-
-    // ---------------------------------------------------
-    // DEFAULT PRINTING
-    // ---------------------------------------------------
-
-    if (!getValue('printing').trim()) {
-
-      setValue(
-        'printing',
-        'সেটেলমেন্ট প্রেস, ঢাকা'
-      );
-
-    }
-
-
-    // ---------------------------------------------------
-    // QR URL
-    // ---------------------------------------------------
-
-    setValue(
-      'qrUrl',
-      window.location.href
-    );
-
-
-    // ---------------------------------------------------
-    // UPDATE SCREEN
-    // ---------------------------------------------------
-
-    updatePreview();
 
   }
 
 
-  // =====================================================
-  // SUPABASE LOAD
-  // =====================================================
+  /* =====================================================
+     ENSURE SUPABASE + CONFIG
+  ===================================================== */
 
-  async function loadRecord() {
+  async function prepareSupabase() {
 
-    const id =
+    /*
+     * Supabase library আগে থেকে না থাকলে
+     * নিজে লোড করবে।
+     */
+
+    if (!window.supabase) {
+
+      await loadScript(
+        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+      );
+
+    }
+
+
+    /*
+     * config.js আগে থেকে না থাকলে
+     * root folder থেকে আনার চেষ্টা।
+     *
+     * Structure:
+     *
+     * /
+     * ├── config.js
+     * └── khatian/
+     *     ├── index.html
+     *     ├── style.css
+     *     └── app.js
+     *
+     * তাই ../config.js
+     */
+
+    if (
+      !window.APP_CONFIG ||
+      !window.APP_CONFIG.SUPABASE_URL ||
+      !window.APP_CONFIG.SUPABASE_ANON_KEY
+    ) {
+
+      try {
+
+        await loadScript(
+          "../config.js"
+        );
+
+      } catch (error) {
+
+        /*
+         * Fallback:
+         * config.js একই folder-এ থাকলে।
+         */
+
+        await loadScript(
+          "./config.js"
+        );
+
+      }
+
+    }
+
+
+    const cfg =
+      window.APP_CONFIG || {};
+
+
+    if (
+      !cfg.SUPABASE_URL ||
+      !cfg.SUPABASE_ANON_KEY
+    ) {
+
+      throw new Error(
+        "Supabase configuration পাওয়া যায়নি।"
+      );
+
+    }
+
+
+    if (!window.supabase) {
+
+      throw new Error(
+        "Supabase library পাওয়া যায়নি।"
+      );
+
+    }
+
+
+    return window.supabase.createClient(
+      cfg.SUPABASE_URL,
+      cfg.SUPABASE_ANON_KEY
+    );
+
+  }
+
+
+  /* =====================================================
+     AUTO FILL
+  ===================================================== */
+
+  async function autoFillFromAdminPDF() {
+
+    const recordId =
       getRecordId();
 
 
-    // ---------------------------------------------------
-    // NO ID
-    // ---------------------------------------------------
+    /*
+     * URL-এ ID না থাকলে এটা
+     * normal manual mode থাকবে।
+     */
 
-    if (!id) {
-
-      setStatus(
-        'ম্যানুয়াল মোড — URL-এ কোনো খতিয়ান ID নেই।',
-        'manual'
-      );
+    if (!recordId) {
 
       updatePreview();
 
@@ -378,116 +339,52 @@
     }
 
 
-    // ---------------------------------------------------
-    // CONFIG CHECK
-    // ---------------------------------------------------
-
-    if (
-      !SUPABASE_URL ||
-      !SUPABASE_ANON_KEY
-    ) {
-
-      setStatus(
-        'Supabase configuration পাওয়া যায়নি।',
-        'error'
-      );
-
-      console.error(
-        'SUPABASE CONFIG MISSING',
-        {
-          SUPABASE_URL,
-          SUPABASE_ANON_KEY
-        }
-      );
-
-      return;
-
-    }
-
-
-    // ---------------------------------------------------
-    // SUPABASE LIBRARY CHECK
-    // ---------------------------------------------------
-
-    if (
-      !window.supabase ||
-      typeof window.supabase.createClient !== 'function'
-    ) {
-
-      setStatus(
-        'Supabase library লোড হয়নি।',
-        'error'
-      );
-
-      console.error(
-        'Supabase JS library missing'
-      );
-
-      return;
-
-    }
-
-
-    setStatus(
-      'খতিয়ানের তথ্য লোড হচ্ছে...',
-      'loading'
-    );
-
-
     try {
 
       const client =
-        window.supabase.createClient(
-          SUPABASE_URL,
-          SUPABASE_ANON_KEY
-        );
+        await prepareSupabase();
 
 
-      // -------------------------------------------------
-      // ID
-      // -------------------------------------------------
-
-      const recordId =
-        /^\d+$/.test(id)
-          ? Number(id)
-          : id;
+      const dbId =
+        /^\d+$/.test(recordId)
+          ? Number(recordId)
+          : recordId;
 
 
-      console.log(
-        'Loading Khatian ID:',
-        recordId
-      );
+      /*
+       * land_records থেকে ID অনুযায়ী
+       * মূল খতিয়ানের তথ্য আনা।
+       */
+
+      const result =
+        await client
+          .from("land_records")
+          .select(
+            [
+              "id",
+              "khatian",
+              "owner",
+              "dag_no",
+              "survey",
+              "mouza",
+              "upazila",
+              "district",
+              "division",
+              "record_date"
+            ].join(",")
+          )
+          .eq(
+            "id",
+            dbId
+          )
+          .maybeSingle();
 
 
-      // -------------------------------------------------
-      // DATABASE QUERY
-      // -------------------------------------------------
-
-      const {
-        data,
-        error
-      } = await client
-        .from('land_records')
-        .select('*')
-        .eq('id', recordId)
-        .maybeSingle();
-
-
-      // -------------------------------------------------
-      // ERROR
-      // -------------------------------------------------
-
-      if (error) {
+      if (result.error) {
 
         console.error(
-          'Supabase error:',
-          error
-        );
-
-        setStatus(
-          'খতিয়ানের তথ্য লোড করা যায়নি: ' +
-          error.message,
-          'error'
+          "AutoFill Supabase error:",
+          result.error
         );
 
         return;
@@ -495,53 +392,189 @@
       }
 
 
-      // -------------------------------------------------
-      // NO RECORD
-      // -------------------------------------------------
+      if (!result.data) {
 
-      if (!data) {
-
-        console.error(
-          'No record found for ID:',
+        console.warn(
+          "খতিয়ানের রেকর্ড পাওয়া যায়নি। ID:",
           recordId
         );
 
-        setStatus(
-          'এই ID-এর কোনো খতিয়ান পাওয়া যায়নি। ID: ' +
-          id,
-          'error'
-        );
-
         return;
 
       }
 
 
-      // -------------------------------------------------
-      // AUTOFILL
-      // -------------------------------------------------
-
-      fillRecord(data);
+      const record =
+        result.data;
 
 
-      setStatus(
-        '✓ খতিয়ানের তথ্য সফলভাবে AutoFill হয়েছে। ID: ' +
-        id,
-        'success'
+      /* =================================================
+         DATABASE → EDITOR
+      ================================================= */
+
+
+      /*
+       * খতিয়ান
+       */
+
+      setValue(
+        "titleText",
+        record.khatian
+          ? "আর এস (জোনাল) খতিয়ান নং- " +
+            record.khatian
+          : ""
       );
 
 
-    } catch (error) {
+      /*
+       * মালিক
+       */
+
+      setValue(
+        "owner",
+        record.owner
+      );
+
+
+      /*
+       * দাগ
+       */
+
+      setValue(
+        "dag",
+        record.dag_no
+      );
+
+
+      /*
+       * সার্ভে
+       * তোমার বর্তমান HTML-এ আলাদা survey field নেই,
+       * তাই revisionNo-তে রাখা হচ্ছে।
+       */
+
+      setValue(
+        "revisionNo",
+        record.survey
+      );
+
+
+      /*
+       * মৌজা
+       */
+
+      setValue(
+        "mouza",
+        record.mouza
+      );
+
+
+      /*
+       * উপজেলা
+       */
+
+      setValue(
+        "upazila",
+        record.upazila
+      );
+
+
+      /*
+       * জেলা
+       */
+
+      setValue(
+        "district",
+        record.district
+      );
+
+
+      /*
+       * বিভাগ
+       */
+
+      setValue(
+        "division",
+        record.division
+      );
+
+
+      /*
+       * তারিখ
+       */
+
+      setValue(
+        "printDate",
+        record.record_date
+      );
+
+
+      /*
+       * পৃষ্ঠা তথ্য
+       * যদি আগে খালি থাকে।
+       */
+
+      if (
+        !getValue("pageText").trim()
+      ) {
+
+        setValue(
+          "pageText",
+          "পৃষ্ঠা নং: ১ এর ১"
+        );
+
+      }
+
+
+      /*
+       * মুদ্রণ
+       * যদি আগে খালি থাকে।
+       */
+
+      if (
+        !getValue("printing").trim()
+      ) {
+
+        setValue(
+          "printing",
+          "সেটেলমেন্ট প্রেস, ঢাকা"
+        );
+
+      }
+
+
+      /*
+       * QR URL
+       *
+       * Admin-এর "খতিয়ানের PDF" page-এর
+       * current URL-টাই QR-এ যাবে।
+       */
+
+      setValue(
+        "qrUrl",
+        window.location.href
+      );
+
+
+      /*
+       * সব ডাটা preview-তে পাঠানো।
+       */
+
+      updatePreview();
+
+
+      console.log(
+        "Khatian AutoFill successful:",
+        record
+      );
+
+    }
+
+
+    catch (error) {
 
       console.error(
-        'AutoFill error:',
+        "Khatian AutoFill failed:",
         error
-      );
-
-      setStatus(
-        'AutoFill করতে সমস্যা হয়েছে: ' +
-        error.message,
-        'error'
       );
 
     }
@@ -549,89 +582,86 @@
   }
 
 
-  // =====================================================
-  // FORM FIELDS
-  // =====================================================
+  /* =====================================================
+     LIVE PREVIEW
+  ===================================================== */
 
-  const fields = [
+  const fieldIds = [
 
-    'titleText',
-    'pageText',
-    'division',
-    'district',
-    'upazila',
-    'mouza',
-    'jlNo',
-    'revisionNo',
-    'owner',
-    'share',
-    'revenue',
-    'dag',
-    'agri',
-    'nonAgri',
-    'dagTotalAcre',
-    'dagTotalPercent',
-    'khatianShare',
-    'shareLandAcre',
-    'shareLandPercent',
-    'totalLand',
-    'remarks',
-    'printing',
-    'printDate',
-    'qrUrl'
+    "titleText",
+    "pageText",
+    "division",
+    "district",
+    "upazila",
+    "mouza",
+    "jlNo",
+    "revisionNo",
+    "owner",
+    "share",
+    "revenue",
+    "dag",
+    "agri",
+    "nonAgri",
+    "dagTotalAcre",
+    "dagTotalPercent",
+    "khatianShare",
+    "shareLandAcre",
+    "shareLandPercent",
+    "totalLand",
+    "remarks",
+    "printing",
+    "printDate",
+    "qrUrl"
 
   ];
 
 
-  // =====================================================
-  // LIVE PREVIEW
-  // =====================================================
+  fieldIds.forEach(
+    function (id) {
 
-  fields.forEach(function (field) {
+      const input =
+        get(id);
 
-    const input =
-      getField(field);
+      if (!input) {
+        return;
+      }
 
-    if (!input) {
-      return;
+      input.addEventListener(
+        "input",
+        updatePreview
+      );
+
     }
-
-    input.addEventListener(
-      'input',
-      updatePreview
-    );
-
-  });
+  );
 
 
-  // =====================================================
-  // UPDATE BUTTON
-  // =====================================================
+  /* =====================================================
+     BUTTONS
+  ===================================================== */
+
 
   const updateBtn =
-    document.getElementById('updateBtn');
+    get("updateBtn");
+
 
   if (updateBtn) {
 
     updateBtn.addEventListener(
-      'click',
+      "click",
       updatePreview
     );
 
   }
 
 
-  // =====================================================
-  // PRINT BUTTON
-  // =====================================================
-
   const printBtn =
-    document.getElementById('printBtn');
+    get("printBtn");
+
 
   if (printBtn) {
 
     printBtn.addEventListener(
-      'click',
+      "click",
       function () {
 
         updatePreview();
@@ -640,7 +670,7 @@
           function () {
             window.print();
           },
-          200
+          100
         );
 
       }
@@ -649,79 +679,85 @@
   }
 
 
-  // =====================================================
-  // RESET
-  // =====================================================
-
   const resetBtn =
-    document.getElementById('resetBtn');
+    get("resetBtn");
+
 
   if (resetBtn) {
 
     resetBtn.addEventListener(
-      'click',
+      "click",
       function () {
 
-        const ok =
-          window.confirm(
-            'সব ঘরের তথ্য খালি করতে চান?'
-          );
+        fieldIds.forEach(
+          function (id) {
 
-        if (!ok) {
-          return;
-        }
+            const input =
+              get(id);
 
+            if (input) {
+              input.value = "";
+            }
 
-        fields.forEach(
-          function (field) {
-            setValue(field, '');
           }
         );
 
 
+        /*
+         * আপনার আগের default values
+         */
+
         setValue(
-          'pageText',
-          'পৃষ্ঠা নং: ১ এর ১'
+          "pageText",
+          "পৃষ্ঠা নং: ১ এর ১"
         );
 
 
         setValue(
-          'printing',
-          'সেটেলমেন্ট প্রেস, ঢাকা'
+          "printing",
+          "সেটেলমেন্ট প্রেস, ঢাকা"
         );
 
 
         updatePreview();
 
-
-        setStatus(
-          'সব ঘর খালি করা হয়েছে।',
-          'manual'
-        );
-
       }
     );
 
   }
 
 
-  // =====================================================
-  // INITIAL
-  // =====================================================
+  /* =====================================================
+     INITIAL
+  ===================================================== */
 
   updatePreview();
 
 
-  // গুরুত্বপূর্ণ:
-  // Supabase/config লোড হওয়ার পর AutoFill চালানো হচ্ছে
+  /*
+   * Admin → খতিয়ানের PDF → AutoFill
+   */
 
-  window.addEventListener(
-    'load',
-    function () {
+  if (
+    document.readyState === "loading"
+  ) {
 
-      loadRecord();
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
 
-    }
-  );
+        autoFillFromAdminPDF();
+
+      },
+      { once: true }
+    );
+
+  } else {
+
+    autoFillFromAdminPDF();
+
+  }
+
 
 })();
+```
