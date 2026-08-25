@@ -36,13 +36,20 @@
 
 
   /* =====================================================
-     BASIC HELPERS
+     BASIC
   ===================================================== */
+
+  function getElement(id) {
+
+    return document.getElementById(id);
+
+  }
+
 
   function getValue(id) {
 
     const input =
-      document.getElementById(id);
+      getElement(id);
 
     if (!input) {
       return "";
@@ -58,7 +65,7 @@
   function setValue(id, value) {
 
     const input =
-      document.getElementById(id);
+      getElement(id);
 
     if (!input) {
       return;
@@ -74,13 +81,13 @@
 
 
   /* =====================================================
-     PREVIEW OUTPUT
+     PREVIEW
   ===================================================== */
 
   function setOutputs(id) {
 
     const input =
-      document.getElementById(id);
+      getElement(id);
 
     if (!input) {
       return;
@@ -103,6 +110,17 @@
   }
 
 
+  function updatePreview() {
+
+    fieldIds.forEach(
+      setOutputs
+    );
+
+    updateQR();
+
+  }
+
+
   /* =====================================================
      QR
   ===================================================== */
@@ -110,18 +128,18 @@
   function updateQR() {
 
     const box =
-      document.getElementById("qrcode");
+      getElement("qrcode");
 
     const input =
-      document.getElementById("qrUrl");
-
+      getElement("qrUrl");
 
     if (!box || !input) {
       return;
     }
 
 
-    box.innerHTML = "";
+    box.innerHTML =
+      "";
 
 
     const url =
@@ -168,7 +186,7 @@
     } catch (error) {
 
       console.error(
-        "QR Code Error:",
+        "QR Code error:",
         error
       );
 
@@ -178,29 +196,14 @@
 
 
   /* =====================================================
-     PREVIEW
-  ===================================================== */
-
-  function updatePreview() {
-
-    fieldIds.forEach(
-      setOutputs
-    );
-
-    updateQR();
-
-  }
-
-
-  /* =====================================================
-     LIVE INPUT
+     INPUT EVENTS
   ===================================================== */
 
   fieldIds.forEach(
     function (id) {
 
       const input =
-        document.getElementById(id);
+        getElement(id);
 
 
       if (!input) {
@@ -213,18 +216,18 @@
         updatePreview
       );
 
+
+      input.addEventListener(
+        "change",
+        updatePreview
+      );
+
     }
   );
 
 
-  /* =====================================================
-     QR INPUT
-  ===================================================== */
-
   const qrUrl =
-    document.getElementById(
-      "qrUrl"
-    );
+    getElement("qrUrl");
 
 
   if (qrUrl) {
@@ -242,16 +245,18 @@
   ===================================================== */
 
   const updateBtn =
-    document.getElementById(
-      "updateBtn"
-    );
+    getElement("updateBtn");
 
 
   if (updateBtn) {
 
     updateBtn.addEventListener(
       "click",
-      updatePreview
+      function () {
+
+        updatePreview();
+
+      }
     );
 
   }
@@ -262,9 +267,7 @@
   ===================================================== */
 
   const printBtn =
-    document.getElementById(
-      "printBtn"
-    );
+    getElement("printBtn");
 
 
   if (printBtn) {
@@ -296,9 +299,7 @@
   ===================================================== */
 
   const resetBtn =
-    document.getElementById(
-      "resetBtn"
-    );
+    getElement("resetBtn");
 
 
   if (resetBtn) {
@@ -311,7 +312,7 @@
           function (id) {
 
             const input =
-              document.getElementById(id);
+              getElement(id);
 
 
             if (input) {
@@ -342,7 +343,7 @@
 
 
   /* =====================================================
-     GET ID FROM URL
+     GET ID FROM ADMIN PDF URL
   ===================================================== */
 
   function getRecordId() {
@@ -354,12 +355,13 @@
 
 
     /*
-      Admin → খতিয়ানের PDF
-      সাধারণত ?id=123
-
-      fallback হিসেবে
-      record_id / khatian_id-ও নেওয়া হবে।
-    */
+     * Admin থেকে যে ID পাঠাবে
+     * প্রথমে id নেওয়া হবে।
+     *
+     * fallback:
+     * record_id
+     * khatian_id
+     */
 
     return (
       params.get("id") ||
@@ -371,16 +373,16 @@
 
 
   /* =====================================================
-     STATUS BOX
+     STATUS
   ===================================================== */
 
-  function showAutoFillStatus(
-    message,
+  function setAutoFillStatus(
+    text,
     success
   ) {
 
     let status =
-      document.getElementById(
+      getElement(
         "auto-fill-status"
       );
 
@@ -395,25 +397,28 @@
       status.id =
         "auto-fill-status";
 
+
       status.style.marginTop =
         "8px";
 
+
       status.style.fontSize =
         "13px";
+
 
       status.style.fontWeight =
         "700";
 
 
-      const head =
+      const header =
         document.querySelector(
           ".controls-head"
         );
 
 
-      if (head) {
+      if (header) {
 
-        head.appendChild(
+        header.appendChild(
           status
         );
 
@@ -428,7 +433,7 @@
 
 
     status.textContent =
-      message;
+      text;
 
 
     status.style.color =
@@ -440,7 +445,7 @@
 
 
   /* =====================================================
-     SUPABASE AUTO-FILL
+     AUTO FILL FROM SUPABASE
   ===================================================== */
 
   async function autoFill() {
@@ -450,18 +455,23 @@
 
 
     /*
-      ID না থাকলে manual editor
-      আগের মতোই চলবে।
-    */
+     * ID না থাকলে manual mode।
+     * এতে local/manual editor আগের মতোই থাকবে।
+     */
 
     if (!recordId) {
+
+      updatePreview();
+
       return;
+
     }
 
 
     /*
-      Config check
-    */
+     * config.js থেকে config।
+     * index.html-এ config.js already loaded আছে।
+     */
 
     const cfg =
       window.APP_CONFIG || {};
@@ -472,15 +482,17 @@
       !cfg.SUPABASE_ANON_KEY
     ) {
 
-      showAutoFillStatus(
+      setAutoFillStatus(
         "Supabase configuration পাওয়া যায়নি।",
         false
       );
 
+
       console.error(
-        "APP_CONFIG missing:",
+        "APP_CONFIG পাওয়া যায়নি:",
         cfg
       );
+
 
       return;
 
@@ -488,29 +500,32 @@
 
 
     /*
-      Supabase library check
-    */
+     * Supabase library check
+     */
 
     if (
       !window.supabase ||
-      typeof window.supabase.createClient !== "function"
+      typeof window.supabase.createClient !==
+        "function"
     ) {
 
-      showAutoFillStatus(
-        "Supabase library লোড হয়নি।",
+      setAutoFillStatus(
+        "Supabase library পাওয়া যায়নি।",
         false
       );
 
+
       console.error(
-        "Supabase library missing."
+        "window.supabase পাওয়া যায়নি।"
       );
+
 
       return;
 
     }
 
 
-    showAutoFillStatus(
+    setAutoFillStatus(
       "খতিয়ানের তথ্য লোড হচ্ছে...",
       true
     );
@@ -525,6 +540,10 @@
         );
 
 
+      /*
+       * ID numeric হলে Number হিসেবে query।
+       */
+
       const dbId =
         /^\d+$/.test(
           String(recordId)
@@ -534,53 +553,33 @@
 
 
       /*
-        land_records থেকে ID অনুযায়ী record
-      */
+       * মূল land_records table
+       */
 
-      const {
-        data,
-        error
-      } =
+      const result =
         await client
-
           .from("land_records")
-
-          .select(
-            [
-              "id",
-              "khatian",
-              "owner",
-              "dag_no",
-              "survey",
-              "mouza",
-              "upazila",
-              "district",
-              "division",
-              "record_date"
-            ].join(",")
-          )
-
+          .select("*")
           .eq(
             "id",
             dbId
           )
-
           .maybeSingle();
 
 
       /* -----------------------------------------------
-         DATABASE ERROR
+         ERROR
       ------------------------------------------------ */
 
-      if (error) {
+      if (result.error) {
 
         console.error(
-          "Supabase AutoFill Error:",
-          error
+          "Supabase AutoFill error:",
+          result.error
         );
 
 
-        showAutoFillStatus(
+        setAutoFillStatus(
           "খতিয়ানের তথ্য লোড করা যায়নি।",
           false
         );
@@ -592,19 +591,19 @@
 
 
       /* -----------------------------------------------
-         RECORD NOT FOUND
+         NO RECORD
       ------------------------------------------------ */
 
-      if (!data) {
+      if (!result.data) {
 
         console.warn(
-          "No land record found for ID:",
+          "Record পাওয়া যায়নি। ID:",
           dbId
         );
 
 
-        showAutoFillStatus(
-          "এই ID-এর কোনো খতিয়ান পাওয়া যায়নি: " +
+        setAutoFillStatus(
+          "এই ID-এর খতিয়ান পাওয়া যায়নি: " +
           recordId,
           false
         );
@@ -615,98 +614,113 @@
       }
 
 
+      const row =
+        result.data;
+
+
+      /* =================================================
+         DATABASE → EXISTING FORM
+      ================================================= */
+
+
       /*
-        ================================================
-        DATABASE → EXISTING FORM
-        ================================================
-      */
-
-
-      /* খতিয়ান */
+       * খতিয়ান
+       */
 
       setValue(
         "titleText",
-        data.khatian
+        row.khatian
           ? "আর এস (জোনাল) খতিয়ান নং- " +
-            data.khatian
+            row.khatian
           : ""
       );
 
 
-      /* মালিক */
+      /*
+       * মালিক
+       */
 
       setValue(
         "owner",
-        data.owner
-      );
-
-
-      /* দাগ */
-
-      setValue(
-        "dag",
-        data.dag_no
+        row.owner
       );
 
 
       /*
-       * Survey
+       * দাগ
+       */
+
+      setValue(
+        "dag",
+        row.dag_no
+      );
+
+
+      /*
+       * সার্ভে
        *
-       * তোমার বর্তমান form-এ survey নামে field নেই।
-       * তাই existing "রেঃ সা. নং" field-এ রাখা হচ্ছে।
+       * তোমার existing HTML-এ আলাদা survey field নেই।
+       * তাই revisionNo-তে survey বসছে।
        */
 
       setValue(
         "revisionNo",
-        data.survey
+        row.survey
       );
 
 
-      /* মৌজা */
+      /*
+       * মৌজা
+       */
 
       setValue(
         "mouza",
-        data.mouza
+        row.mouza
       );
 
 
-      /* উপজেলা */
+      /*
+       * উপজেলা
+       */
 
       setValue(
         "upazila",
-        data.upazila
+        row.upazila
       );
 
 
-      /* জেলা */
+      /*
+       * জেলা
+       */
 
       setValue(
         "district",
-        data.district
+        row.district
       );
 
 
-      /* বিভাগ */
+      /*
+       * বিভাগ
+       */
 
       setValue(
         "division",
-        data.division
+        row.division
       );
 
 
-      /* তারিখ */
+      /*
+       * তারিখ
+       */
 
       setValue(
         "printDate",
-        data.record_date
+        row.record_date
       );
 
 
       /*
        * QR URL
-       *
-       * বর্তমান PDF editor page-এর URL
-       * automatically QR-এর input-এ বসবে।
        */
 
       setValue(
@@ -716,13 +730,13 @@
 
 
       /*
-       * Preview update
+       * Preview
        */
 
       updatePreview();
 
 
-      showAutoFillStatus(
+      setAutoFillStatus(
         "✓ খতিয়ানের তথ্য অটোফিল হয়েছে। ID: " +
         recordId,
         true
@@ -730,8 +744,8 @@
 
 
       console.log(
-        "Khatian AutoFill:",
-        data
+        "Khatian AutoFill successful:",
+        row
       );
 
     }
@@ -740,12 +754,12 @@
     catch (error) {
 
       console.error(
-        "AutoFill Exception:",
+        "AutoFill exception:",
         error
       );
 
 
-      showAutoFillStatus(
+      setAutoFillStatus(
         "অটোফিল করতে সমস্যা হয়েছে।",
         false
       );
@@ -756,15 +770,16 @@
 
 
   /* =====================================================
-     INITIAL PREVIEW
+     INITIAL
   ===================================================== */
 
   updatePreview();
 
 
-  /* =====================================================
-     START AUTO-FILL
-  ===================================================== */
+  /*
+   * Page সম্পূর্ণ load হওয়ার পর
+   * AutoFill চালু।
+   */
 
   if (
     document.readyState ===
