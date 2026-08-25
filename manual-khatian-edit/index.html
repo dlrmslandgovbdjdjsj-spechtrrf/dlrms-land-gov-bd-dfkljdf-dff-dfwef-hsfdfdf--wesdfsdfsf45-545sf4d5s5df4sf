@@ -1,9 +1,11 @@
 ```html
 <!doctype html>
 <html lang="bn">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>খতিয়ান ম্যানুয়াল এডিটর</title>
 
   <link rel="stylesheet" href="./style.css">
@@ -13,12 +15,22 @@
 
 <div class="editor-shell">
 
+  <!-- ==============================
+       CONTROL PANEL
+  =============================== -->
+
   <section class="controls">
 
     <div class="controls-head">
+
       <h1>খতিয়ান ম্যানুয়াল এডিটর</h1>
-      <p>প্রয়োজনীয় ঘরে তথ্য লিখুন। দরকার হলে একই ঘরে একাধিক লাইনে লিখতে পারবেন।</p>
+
+      <p>
+        প্রয়োজনীয় ঘরে তথ্য লিখুন। দরকার হলে একই ঘরে একাধিক লাইনে লিখতে পারবেন।
+      </p>
+
     </div>
+
 
     <div class="form-grid">
 
@@ -31,40 +43,69 @@
         ></textarea>
       </label>
 
+
       <label>
         পৃষ্ঠা তথ্য
-        <textarea id="pageText" rows="2">পৃষ্ঠা নং: ১ এর ১</textarea>
+        <textarea
+          id="pageText"
+          rows="2"
+        >পৃষ্ঠা নং: ১ এর ১</textarea>
       </label>
+
 
       <label>
         বিভাগ
-        <textarea id="division" rows="2">চট্টগ্রাম</textarea>
+        <textarea
+          id="division"
+          rows="2"
+        >চট্টগ্রাম</textarea>
       </label>
+
 
       <label>
         জেলা
-        <textarea id="district" rows="2">নোয়াখালী</textarea>
+        <textarea
+          id="district"
+          rows="2"
+        >নোয়াখালী</textarea>
       </label>
+
 
       <label>
         উপজেলা/থানা
-        <textarea id="upazila" rows="2">বেগমগঞ্জ</textarea>
+        <textarea
+          id="upazila"
+          rows="2"
+        >বেগমগঞ্জ</textarea>
       </label>
+
 
       <label>
         মৌজা
-        <textarea id="mouza" rows="2"></textarea>
+        <textarea
+          id="mouza"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         জে. এল. নং
-        <textarea id="jlNo" rows="2"></textarea>
+        <textarea
+          id="jlNo"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         রেঃ সা. নং
-        <textarea id="revisionNo" rows="2"></textarea>
+        <textarea
+          id="revisionNo"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         মালিক
@@ -75,60 +116,105 @@
         ></textarea>
       </label>
 
+
       <label>
         অংশ
-        <textarea id="share" rows="2"></textarea>
+        <textarea
+          id="share"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         রাজস্ব
-        <textarea id="revenue" rows="2"></textarea>
+        <textarea
+          id="revenue"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         দাগ
-        <textarea id="dag" rows="2"></textarea>
+        <textarea
+          id="dag"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         কৃষি
-        <textarea id="agri" rows="2"></textarea>
+        <textarea
+          id="agri"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         অকৃষি
-        <textarea id="nonAgri" rows="2"></textarea>
+        <textarea
+          id="nonAgri"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         দাগের মোট পরিমাণ — একর
-        <textarea id="dagTotalAcre" rows="2"></textarea>
+        <textarea
+          id="dagTotalAcre"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         দাগের মোট পরিমাণ — শতাংশ
-        <textarea id="dagTotalPercent" rows="2"></textarea>
+        <textarea
+          id="dagTotalPercent"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         দাগের মধ্যে অত্র খতিয়ানের অংশ
-        <textarea id="khatianShare" rows="2"></textarea>
+        <textarea
+          id="khatianShare"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         অংশানুযায়ী জমির পরিমাণ — একর
-        <textarea id="shareLandAcre" rows="2"></textarea>
+        <textarea
+          id="shareLandAcre"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         অংশানুযায়ী জমির পরিমাণ — শতাংশ
-        <textarea id="shareLandPercent" rows="2"></textarea>
+        <textarea
+          id="shareLandPercent"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label>
         মোট জমি
-        <textarea id="totalLand" rows="2"></textarea>
+        <textarea
+          id="totalLand"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label class="wide">
         দখল বিষয়ক বা অন্যান্য বিশেষ মন্তব্য
@@ -139,15 +225,24 @@
         ></textarea>
       </label>
 
+
       <label>
         মুদ্রণ
-        <textarea id="printing" rows="2">সেটেলমেন্ট প্রেস, ঢাকা</textarea>
+        <textarea
+          id="printing"
+          rows="2"
+        >সেটেলমেন্ট প্রেস, ঢাকা</textarea>
       </label>
+
 
       <label>
         তারিখ
-        <textarea id="printDate" rows="2"></textarea>
+        <textarea
+          id="printDate"
+          rows="2"
+        ></textarea>
       </label>
+
 
       <label class="wide">
         QR-এর URL
@@ -160,6 +255,7 @@
 
     </div>
 
+
     <div class="toolbar">
 
       <button
@@ -169,12 +265,14 @@
         প্রিভিউ আপডেট
       </button>
 
+
       <button
         id="printBtn"
         type="button"
       >
         প্রিন্ট / PDF
       </button>
+
 
       <button
         id="resetBtn"
@@ -189,6 +287,10 @@
   </section>
 
 
+  <!-- ==============================
+       PREVIEW
+  =============================== -->
+
   <section class="preview-area">
 
     <div class="paper-wrap">
@@ -202,6 +304,7 @@
           class="doc-title"
           data-out="titleText"
         ></div>
+
 
         <div
           class="page-no"
@@ -262,12 +365,27 @@
         </div>
 
 
+        <!-- ==============================
+             TABLE
+        =============================== -->
+
         <table class="khat-table">
 
           <colgroup>
-            <col class="c1"><col class="c2"><col class="c3"><col class="c4">
-            <col class="c5"><col class="c6"><col class="c7"><col class="c8">
-            <col class="c9"><col class="c10"><col class="c11"><col class="c12">
+
+            <col class="c1">
+            <col class="c2">
+            <col class="c3">
+            <col class="c4">
+            <col class="c5">
+            <col class="c6">
+            <col class="c7">
+            <col class="c8">
+            <col class="c9">
+            <col class="c10">
+            <col class="c11">
+            <col class="c12">
+
           </colgroup>
 
 
@@ -446,10 +564,13 @@
 
 
         <div class="print-note">
+
           মুদ্রণঃ
           <span data-out="printing"></span>
+
           তারিখঃ
           <span data-out="printDate"></span>
+
         </div>
 
 
@@ -466,7 +587,9 @@
 
 
         <div class="qr-zone">
+
           <div id="qrcode"></div>
+
         </div>
 
       </div>
@@ -480,28 +603,20 @@
 
 <!-- =====================================================
      SUPABASE
-===================================================== -->
+     ROOT config.js → manual-khatian-edit/ এর এক ধাপ উপরে
+====================================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
-<!--
-  manual-khatian-edit folder-এর এক ধাপ উপরে
-  config.js থাকলে এটি সঠিক path।
--->
 <script src="../config.js"></script>
 
 
-<!-- =====================================================
-     QR
-===================================================== -->
+<!-- QR -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 
-<!-- =====================================================
-     APP
-===================================================== -->
+<!-- APP -->
 
 <script src="./app.js"></script>
 
