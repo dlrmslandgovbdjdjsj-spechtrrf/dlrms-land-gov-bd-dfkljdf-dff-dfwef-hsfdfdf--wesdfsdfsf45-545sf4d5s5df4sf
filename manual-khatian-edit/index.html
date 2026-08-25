@@ -2,324 +2,172 @@
 <html lang="bn">
 
 <head>
-
   <meta charset="utf-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>খতিয়ান ম্যানুয়াল এডিটর</title>
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
-
+  <link rel="stylesheet" href="style.css?v=10">
 </head>
-
 
 <body>
 
 <div class="editor-shell">
 
-
   <section class="controls">
 
     <div class="controls-head">
-
-      <h1>
-        খতিয়ান ম্যানুয়াল এডিটর
-      </h1>
+      <h1>খতিয়ান ম্যানুয়াল এডিটর</h1>
 
       <p>
-        প্রয়োজনীয় ঘরে তথ্য লিখুন। দরকার হলে একই ঘরে একাধিক লাইনে লিখতে পারবেন।
+        আগের খতিয়ানের তথ্য স্বয়ংক্রিয়ভাবে বসবে।
+        প্রয়োজনীয় বাকি তথ্য নিজের মতো লিখতে পারবেন।
       </p>
 
-      <div
-        id="load-status"
-        class="load-status"
-      >
-        খতিয়ানের তথ্য লোড হচ্ছে...
-      </div>
-
+      <div id="load-status"></div>
     </div>
 
 
     <div class="form-grid">
 
-
       <label class="wide">
         শিরোনাম
-
-        <textarea
-          id="titleText"
-          rows="2"
-          placeholder="যেমন: আর এস (জোনাল) খতিয়ান নং- ৩০২"
-        ></textarea>
+        <textarea id="titleText" rows="2"
+          placeholder="যেমন: আর এস (জোনাল) খতিয়ান নং- ৩০২"></textarea>
       </label>
-
 
       <label>
         পৃষ্ঠা তথ্য
-
-        <textarea
-          id="pageText"
-          rows="2"
-        >পৃষ্ঠা নং: ১ এর ১</textarea>
+        <textarea id="pageText" rows="2">পৃষ্ঠা নং: ১ এর ১</textarea>
       </label>
-
 
       <label>
         বিভাগ
-
-        <textarea
-          id="division"
-          rows="2"
-        >চট্টগ্রাম</textarea>
+        <textarea id="division" rows="2">চট্টগ্রাম</textarea>
       </label>
-
 
       <label>
         জেলা
-
-        <textarea
-          id="district"
-          rows="2"
-        >নোয়াখালী</textarea>
+        <textarea id="district" rows="2">নোয়াখালী</textarea>
       </label>
-
 
       <label>
         উপজেলা/থানা
-
-        <textarea
-          id="upazila"
-          rows="2"
-        >বেগমগঞ্জ</textarea>
+        <textarea id="upazila" rows="2">বেগমগঞ্জ</textarea>
       </label>
-
 
       <label>
         মৌজা
-
-        <textarea
-          id="mouza"
-          rows="2"
-        ></textarea>
+        <textarea id="mouza" rows="2"></textarea>
       </label>
-
 
       <label>
         জে. এল. নং
-
-        <textarea
-          id="jlNo"
-          rows="2"
-        ></textarea>
+        <textarea id="jlNo" rows="2"></textarea>
       </label>
-
 
       <label>
         রেঃ সা. নং
-
-        <textarea
-          id="revisionNo"
-          rows="2"
-        ></textarea>
+        <textarea id="revisionNo" rows="2"></textarea>
       </label>
-
 
       <label>
         মালিক
-
-        <textarea
-          id="owner"
-          rows="4"
-          placeholder="যত লাইন প্রয়োজন লিখুন"
-        ></textarea>
+        <textarea id="owner" rows="4"
+          placeholder="যত লাইন প্রয়োজন লিখুন"></textarea>
       </label>
-
 
       <label>
         অংশ
-
-        <textarea
-          id="share"
-          rows="2"
-        ></textarea>
+        <textarea id="share" rows="2"></textarea>
       </label>
-
 
       <label>
         রাজস্ব
-
-        <textarea
-          id="revenue"
-          rows="2"
-        ></textarea>
+        <textarea id="revenue" rows="2"></textarea>
       </label>
-
 
       <label>
         দাগ
-
-        <textarea
-          id="dag"
-          rows="2"
-        ></textarea>
+        <textarea id="dag" rows="2"></textarea>
       </label>
-
 
       <label>
         কৃষি
-
-        <textarea
-          id="agri"
-          rows="2"
-        ></textarea>
+        <textarea id="agri" rows="2"></textarea>
       </label>
-
 
       <label>
         অকৃষি
-
-        <textarea
-          id="nonAgri"
-          rows="2"
-        ></textarea>
+        <textarea id="nonAgri" rows="2"></textarea>
       </label>
-
 
       <label>
         দাগের মোট পরিমাণ — একর
-
-        <textarea
-          id="dagTotalAcre"
-          rows="2"
-        ></textarea>
+        <textarea id="dagTotalAcre" rows="2"></textarea>
       </label>
-
 
       <label>
         দাগের মোট পরিমাণ — শতাংশ
-
-        <textarea
-          id="dagTotalPercent"
-          rows="2"
-        ></textarea>
+        <textarea id="dagTotalPercent" rows="2"></textarea>
       </label>
-
 
       <label>
         দাগের মধ্যে অত্র খতিয়ানের অংশ
-
-        <textarea
-          id="khatianShare"
-          rows="2"
-        ></textarea>
+        <textarea id="khatianShare" rows="2"></textarea>
       </label>
-
 
       <label>
         অংশানুযায়ী জমির পরিমাণ — একর
-
-        <textarea
-          id="shareLandAcre"
-          rows="2"
-        ></textarea>
+        <textarea id="shareLandAcre" rows="2"></textarea>
       </label>
-
 
       <label>
         অংশানুযায়ী জমির পরিমাণ — শতাংশ
-
-        <textarea
-          id="shareLandPercent"
-          rows="2"
-        ></textarea>
+        <textarea id="shareLandPercent" rows="2"></textarea>
       </label>
-
 
       <label>
         মোট জমি
-
-        <textarea
-          id="totalLand"
-          rows="2"
-        ></textarea>
+        <textarea id="totalLand" rows="2"></textarea>
       </label>
-
 
       <label class="wide">
         দখল বিষয়ক বা অন্যান্য বিশেষ মন্তব্য
-
-        <textarea
-          id="remarks"
-          rows="4"
-          placeholder="যত লাইন প্রয়োজন লিখুন"
-        ></textarea>
+        <textarea id="remarks" rows="4"
+          placeholder="যত লাইন প্রয়োজন লিখুন"></textarea>
       </label>
-
 
       <label>
         মুদ্রণ
-
-        <textarea
-          id="printing"
-          rows="2"
-        >সেটেলমেন্ট প্রেস, ঢাকা</textarea>
+        <textarea id="printing" rows="2">সেটেলমেন্ট প্রেস, ঢাকা</textarea>
       </label>
-
 
       <label>
         তারিখ
-
-        <textarea
-          id="printDate"
-          rows="2"
-        ></textarea>
+        <textarea id="printDate" rows="2"></textarea>
       </label>
-
 
       <label class="wide">
         QR-এর URL
-
-        <input
-          id="qrUrl"
-          value=""
-          placeholder="এখানে URL লিখুন"
-        >
+        <input id="qrUrl"
+          placeholder="URL স্বয়ংক্রিয়ভাবে বসবে">
       </label>
-
 
     </div>
 
 
     <div class="toolbar">
 
-      <button
-        id="updateBtn"
-        type="button"
-      >
+      <button id="updateBtn" type="button">
         প্রিভিউ আপডেট
       </button>
 
-
-      <button
-        id="printBtn"
-        type="button"
-      >
+      <button id="printBtn" type="button">
         প্রিন্ট / PDF
       </button>
 
-
-      <button
-        id="resetBtn"
-        type="button"
-        class="secondary"
-      >
+      <button id="resetBtn" type="button" class="secondary">
         সব ঘর খালি করুন
       </button>
 
@@ -328,388 +176,446 @@
   </section>
 
 
+  <!-- ===================================================
+       FIXED 1650 × 1275 KHATIAN CANVAS
+  ==================================================== -->
 
   <section class="preview-area">
 
     <div class="paper-wrap">
 
-      <div
-        class="paper"
-        id="paper"
+      <svg
+        id="khatian-svg"
+        class="khatian-svg"
+        viewBox="0 0 1650 1275"
+        xmlns="http://www.w3.org/2000/svg"
       >
 
+        <rect
+          x="0"
+          y="0"
+          width="1650"
+          height="1275"
+          fill="#ffffff"
+        />
 
-        <div
-          class="doc-title"
-          data-out="titleText"
-        ></div>
 
+        <!-- TITLE -->
 
-        <div
-          class="page-no"
-          data-out="pageText"
-        ></div>
+        <text
+          id="out-title"
+          x="825"
+          y="82"
+          text-anchor="middle"
+          class="svg-title"
+        ></text>
 
 
-        <div class="location">
+        <!-- PAGE -->
 
-          <div>
-            বিভাগঃ
-            <span
-              class="multiline"
-              data-out="division"
-            ></span>
-          </div>
+        <text
+          id="out-page"
+          x="1570"
+          y="85"
+          text-anchor="end"
+          class="svg-page"
+        ></text>
 
 
-          <div>
-            জেলাঃ
-            <span
-              class="multiline"
-              data-out="district"
-            ></span>
-          </div>
+        <!-- LOCATION -->
 
+        <text x="60" y="128" class="svg-location">
+          বিভাগঃ <tspan id="out-division"></tspan>
+        </text>
 
-          <div>
-            উপজেলা/থানাঃ
-            <span
-              class="multiline"
-              data-out="upazila"
-            ></span>
-          </div>
+        <text x="280" y="128" class="svg-location">
+          জেলাঃ <tspan id="out-district"></tspan>
+        </text>
 
+        <text x="505" y="128" class="svg-location">
+          উপজেলা/থানাঃ <tspan id="out-upazila"></tspan>
+        </text>
 
-          <div>
-            মৌজাঃ
-            <span
-              class="multiline"
-              data-out="mouza"
-            ></span>
-          </div>
+        <text x="790" y="128" class="svg-location">
+          মৌজাঃ <tspan id="out-mouza"></tspan>
+        </text>
 
+        <text x="1010" y="128" class="svg-location">
+          জে. এল. নংঃ <tspan id="out-jl"></tspan>
+        </text>
 
-          <div>
-            জে. এল. নংঃ
-            <span
-              class="multiline"
-              data-out="jlNo"
-            ></span>
-          </div>
+        <text x="1180" y="128" class="svg-location">
+          রেঃ সা. নংঃ <tspan id="out-revision"></tspan>
+        </text>
 
 
-          <div>
-            রেঃ সা. নংঃ
-            <span
-              class="multiline"
-              data-out="revisionNo"
-            ></span>
-          </div>
+        <!-- MAIN TABLE BORDER -->
 
-        </div>
-
-
-        <table class="khat-table">
-
-          <colgroup>
-
-            <col class="c1">
-            <col class="c2">
-            <col class="c3">
-            <col class="c4">
-
-            <col class="c5">
-            <col class="c6">
-
-            <col class="c7">
-            <col class="c8">
-
-            <col class="c9">
-
-            <col class="c10">
-            <col class="c11">
-
-            <col class="c12">
-
-          </colgroup>
-
-
-          <thead>
-
-            <tr class="r1">
-
-              <th rowspan="2">
-                মালিক, অকৃষি প্রজা বা ইজারাদারের
-                <br>
-                নাম ও ঠিকানা
-              </th>
-
-
-              <th rowspan="2">
-                অংশ
-              </th>
-
-
-              <th rowspan="2">
-                রাজস্ব
-              </th>
-
-
-              <th rowspan="2">
-                দাগ
-              </th>
-
-
-              <th colspan="2">
-                জমির শ্রেণী
-              </th>
-
-
-              <th colspan="2">
-                দাগের মোট পরিমাণ
-              </th>
-
-
-              <th rowspan="2">
-                দাগের মধ্যে
-                <br>
-                অত্র খতিয়ানের
-                <br>
-                অংশ
-              </th>
-
-
-              <th colspan="2">
-                অংশানুযায়ী জমির
-                <br>
-                পরিমাণ
-              </th>
-
-
-              <th rowspan="2">
-                দখল বিষয়ক বা অন্যান্য
-                <br>
-                বিশেষ মন্তব্য
-              </th>
-
-            </tr>
-
-
-            <tr class="r2">
-
-              <th>
-                কৃষি
-                <br>
-                ৫(ক)
-              </th>
-
-
-              <th>
-                অকৃষি
-                <br>
-                ৫(খ)
-              </th>
-
-
-              <th>
-                একর
-                <br>
-                ৬(ক)
-              </th>
-
-
-              <th>
-                শতাংশ
-                <br>
-                ৬(খ)
-              </th>
-
-
-              <th>
-                একর
-                <br>
-                ৮(ক)
-              </th>
-
-
-              <th>
-                শতাংশ
-                <br>
-                ৮(খ)
-              </th>
-
-            </tr>
-
-
-            <tr class="r3">
-
-              <th>১</th>
-              <th>২</th>
-              <th>৩</th>
-              <th>৪</th>
-
-              <th>৫(ক)</th>
-              <th>৫(খ)</th>
-
-              <th>৬(ক)</th>
-              <th>৬(খ)</th>
-
-              <th>৭</th>
-
-              <th>৮(ক)</th>
-              <th>৮(খ)</th>
-
-              <th>৯</th>
-
-            </tr>
-
-          </thead>
-
-
-          <tbody>
-
-            <tr class="data-row">
-
-              <td
-                class="left owner-text"
-                data-out="owner"
-              ></td>
-
-
-              <td
-                data-out="share"
-              ></td>
-
-
-              <td
-                data-out="revenue"
-              ></td>
-
-
-              <td
-                data-out="dag"
-              ></td>
-
-
-              <td
-                data-out="agri"
-              ></td>
-
-
-              <td
-                data-out="nonAgri"
-              ></td>
-
-
-              <td
-                data-out="dagTotalAcre"
-              ></td>
-
-
-              <td
-                data-out="dagTotalPercent"
-              ></td>
-
-
-              <td
-                data-out="khatianShare"
-              ></td>
-
-
-              <td
-                data-out="shareLandAcre"
-              ></td>
-
-
-              <td
-                data-out="shareLandPercent"
-              ></td>
-
-
-              <td
-                class="left"
-                data-out="remarks"
-              ></td>
-
-            </tr>
-
-
-            <tr class="total-row">
-
-              <td class="left small">
-
-                খারিজে নোট বা পরিবর্তন যাহা
-                <br>
-                যোগ্য নং...... এবং নং.....
-
-              </td>
-
-
-              <td
-                data-out="share"
-              ></td>
-
-
-              <td></td>
-
-
-              <td
-                colspan="7"
-                class="center"
-              >
-                পরিবার পরিকল্পনা গ্রহণ করুন
-              </td>
-
-
-              <td class="right">
-                মোট জমিঃ
-              </td>
-
-
-              <td
-                data-out="totalLand"
-              ></td>
-
-            </tr>
-
-          </tbody>
-
-        </table>
-
-
-        <div class="lower-line"></div>
-
-
-        <div class="print-note">
-
-          মুদ্রণঃ
-          <span data-out="printing"></span>
-
-          তারিখঃ
-          <span data-out="printDate"></span>
-
-        </div>
-
-
-        <div class="form-note">
-          বাংলাদেশ ফরম নং ৫৪৬২ (সংশোধিত)
-        </div>
-
-
-        <img
-          class="seal"
-          src="seal.png"
-          alt="সরকারি সিল"
+        <g
+          fill="none"
+          stroke="#111"
+          stroke-width="1"
         >
 
+          <rect
+            x="59"
+            y="148"
+            width="1532"
+            height="761"
+          />
 
-        <div class="qr-zone">
+          <!-- Vertical lines -->
 
-          <div id="qrcode"></div>
+          <line x1="299" y1="148" x2="299" y2="909"/>
+          <line x1="369" y1="148" x2="369" y2="909"/>
+          <line x1="420" y1="148" x2="420" y2="909"/>
+          <line x1="486" y1="148" x2="486" y2="909"/>
 
-        </div>
+          <line x1="609" y1="148" x2="609" y2="909"/>
+          <line x1="733" y1="148" x2="733" y2="909"/>
 
-      </div>
+          <line x1="809" y1="148" x2="809" y2="909"/>
+          <line x1="883" y1="148" x2="883" y2="909"/>
+
+          <line x1="1002" y1="148" x2="1002" y2="909"/>
+
+          <line x1="1076" y1="148" x2="1076" y2="909"/>
+          <line x1="1150" y1="148" x2="1150" y2="909"/>
+
+          <!-- Header horizontal -->
+
+          <line x1="59" y1="215" x2="1591" y2="215"/>
+          <line x1="59" y1="259" x2="1591" y2="259"/>
+          <line x1="59" y1="302" x2="1591" y2="302"/>
+
+          <!-- Total row -->
+
+          <line x1="59" y1="855" x2="1591" y2="855"/>
+          <line x1="59" y1="909" x2="1591" y2="909"/>
+
+        </g>
+
+
+        <!-- HEADER TEXT -->
+
+        <g class="svg-header">
+
+          <text x="179" y="173" text-anchor="middle">
+            মালিক, অকৃষি প্রজা বা ইজারাদারের
+          </text>
+
+          <text x="179" y="195" text-anchor="middle">
+            নাম ও ঠিকানা
+          </text>
+
+          <text x="334" y="196" text-anchor="middle">
+            অংশ
+          </text>
+
+          <text x="394" y="196" text-anchor="middle">
+            রাজস্ব
+          </text>
+
+          <text x="453" y="196" text-anchor="middle">
+            দাগ
+          </text>
+
+          <text x="609" y="183" text-anchor="middle">
+            জমির শ্রেণী
+          </text>
+
+          <text x="847" y="183" text-anchor="middle">
+            দাগের মোট পরিমাণ
+          </text>
+
+          <text x="942" y="173" text-anchor="middle">
+            দাগের মধ্যে
+          </text>
+
+          <text x="942" y="192" text-anchor="middle">
+            অত্র খতিয়ানের
+          </text>
+
+          <text x="942" y="211" text-anchor="middle">
+            অংশ
+          </text>
+
+          <text x="1108" y="183" text-anchor="middle">
+            অংশানুযায়ী জমির
+          </text>
+
+          <text x="1108" y="202" text-anchor="middle">
+            পরিমাণ
+          </text>
+
+          <text x="1370" y="173" text-anchor="middle">
+            দখল বিষয়ক বা অন্যান্য
+          </text>
+
+          <text x="1370" y="193" text-anchor="middle">
+            বিশেষ মন্তব্য
+          </text>
+
+          <!-- second header -->
+
+          <text x="548" y="247" text-anchor="middle">
+            কৃষি
+          </text>
+
+          <text x="548" y="256" text-anchor="middle">
+            ৫(ক)
+          </text>
+
+          <text x="671" y="247" text-anchor="middle">
+            অকৃষি
+          </text>
+
+          <text x="671" y="256" text-anchor="middle">
+            ৫(খ)
+          </text>
+
+          <text x="771" y="247" text-anchor="middle">
+            একর
+          </text>
+
+          <text x="771" y="256" text-anchor="middle">
+            ৬(ক)
+          </text>
+
+          <text x="846" y="247" text-anchor="middle">
+            শতাংশ
+          </text>
+
+          <text x="846" y="256" text-anchor="middle">
+            ৬(খ)
+          </text>
+
+          <text x="1040" y="247" text-anchor="middle">
+            একর
+          </text>
+
+          <text x="1040" y="256" text-anchor="middle">
+            ৮(ক)
+          </text>
+
+          <text x="1125" y="247" text-anchor="middle">
+            শতাংশ
+          </text>
+
+          <text x="1125" y="256" text-anchor="middle">
+            ৮(খ)
+          </text>
+
+          <!-- numbering -->
+
+          <text x="179" y="289" text-anchor="middle">১</text>
+          <text x="334" y="289" text-anchor="middle">২</text>
+          <text x="394" y="289" text-anchor="middle">৩</text>
+          <text x="453" y="289" text-anchor="middle">৪</text>
+          <text x="548" y="289" text-anchor="middle">৫(ক)</text>
+          <text x="671" y="289" text-anchor="middle">৫(খ)</text>
+          <text x="771" y="289" text-anchor="middle">৬(ক)</text>
+          <text x="846" y="289" text-anchor="middle">৬(খ)</text>
+          <text x="942" y="289" text-anchor="middle">৭</text>
+          <text x="1040" y="289" text-anchor="middle">৮(ক)</text>
+          <text x="1125" y="289" text-anchor="middle">৮(খ)</text>
+          <text x="1370" y="289" text-anchor="middle">৯</text>
+
+        </g>
+
+
+        <!-- DATA ROW -->
+
+        <g class="svg-data">
+
+          <text x="69" y="326">
+            মালিক
+          </text>
+
+          <text
+            id="out-owner"
+            x="69"
+            y="350"
+            class="multiline-svg"
+          ></text>
+
+          <text
+            id="out-share"
+            x="334"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-revenue"
+            x="394"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-dag"
+            x="453"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-agri"
+            x="548"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-nonagri"
+            x="671"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-dag-acre"
+            x="771"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-dag-percent"
+            x="846"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-khatian-share"
+            x="942"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-share-acre"
+            x="1040"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-share-percent"
+            x="1125"
+            y="330"
+            text-anchor="middle"
+          ></text>
+
+          <text
+            id="out-remarks"
+            x="1160"
+            y="330"
+            class="multiline-svg"
+          ></text>
+
+        </g>
+
+
+        <!-- TOTAL ROW -->
+
+        <g class="svg-total">
+
+          <text x="69" y="882">
+            খারিজে নোট বা পরিবর্তন যাহা
+          </text>
+
+          <text x="69" y="899">
+            যোগ্য নং...... এবং নং.....
+          </text>
+
+          <text
+            id="out-total-share"
+            x="334"
+            y="885"
+            text-anchor="middle"
+          ></text>
+
+
+          <!-- Family planning = columns 4 to 9 -->
+
+          <text
+            x="744"
+            y="885"
+            text-anchor="middle"
+          >
+            পরিবার পরিকল্পনা গ্রহণ করুন
+          </text>
+
+
+          <text
+            x="1240"
+            y="885"
+            text-anchor="end"
+          >
+            মোট জমিঃ
+          </text>
+
+
+          <text
+            id="out-total-land"
+            x="1320"
+            y="885"
+            text-anchor="middle"
+          ></text>
+
+        </g>
+
+
+        <!-- PRINT INFORMATION -->
+
+        <text
+          id="out-printing"
+          x="60"
+          y="940"
+          class="svg-footer"
+        ></text>
+
+        <text
+          id="out-form"
+          x="60"
+          y="963"
+          class="svg-footer"
+        >
+          বাংলাদেশ ফরম নং ৫৪৬২ (সংশোধিত)
+        </text>
+
+
+        <!-- SEAL -->
+
+        <image
+          href="seal.png"
+          x="710"
+          y="910"
+          width="82"
+          height="82"
+          preserveAspectRatio="xMidYMid meet"
+        />
+
+
+        <!-- QR -->
+
+        <foreignObject
+          x="1474"
+          y="913"
+          width="86"
+          height="86"
+        >
+          <div
+            xmlns="http://www.w3.org/1999/xhtml"
+            id="qr-holder"
+          ></div>
+        </foreignObject>
+
+
+      </svg>
 
     </div>
 
@@ -718,633 +624,12 @@
 </div>
 
 
-<!-- =====================================================
-     SUPABASE
-====================================================== -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-<!-- Root config -->
 
 <script src="../config.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-<!-- =====================================================
-     AUTO FILL + PREVIEW + QR
-====================================================== -->
-
-<script>
-
-(function () {
-
-  "use strict";
-
-
-  /* -----------------------------------------------------
-     CONFIG
-  ----------------------------------------------------- */
-
-  const cfg =
-    window.APP_CONFIG || {};
-
-
-  const valid =
-    cfg.SUPABASE_URL &&
-    !cfg.SUPABASE_URL.includes("PASTE_") &&
-    cfg.SUPABASE_ANON_KEY &&
-    !cfg.SUPABASE_ANON_KEY.includes("PASTE_");
-
-
-  const statusElement =
-    document.getElementById(
-      "load-status"
-    );
-
-
-  /* -----------------------------------------------------
-     STATUS
-  ----------------------------------------------------- */
-
-  function setStatus(
-    text,
-    success
-  ) {
-
-    if (!statusElement) {
-      return;
-    }
-
-
-    statusElement.textContent =
-      text;
-
-
-    statusElement.style.display =
-      "block";
-
-
-    statusElement.style.color =
-      success
-        ? "#087a3d"
-        : "#a40000";
-
-  }
-
-
-  /* -----------------------------------------------------
-     SUPABASE CHECK
-  ----------------------------------------------------- */
-
-  if (
-    !valid ||
-    !window.supabase
-  ) {
-
-    setStatus(
-      "Supabase configuration পাওয়া যায়নি।",
-      false
-    );
-
-    return;
-  }
-
-
-  const client =
-    window.supabase.createClient(
-      cfg.SUPABASE_URL,
-      cfg.SUPABASE_ANON_KEY
-    );
-
-
-  /* -----------------------------------------------------
-     GET ID FROM URL
-  ----------------------------------------------------- */
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-
-  const idParam =
-    params.get("id");
-
-
-  if (
-    !idParam ||
-    !/^\d+$/.test(idParam)
-  ) {
-
-    setStatus(
-      "খতিয়ানের ID পাওয়া যায়নি।",
-      false
-    );
-
-    return;
-  }
-
-
-  const recordId =
-    Number(idParam);
-
-
-  /* -----------------------------------------------------
-     INPUT HELPER
-  ----------------------------------------------------- */
-
-  function setValue(
-    id,
-    value
-  ) {
-
-    const element =
-      document.getElementById(id);
-
-
-    if (!element) {
-      return;
-    }
-
-
-    element.value =
-      value ?? "";
-
-  }
-
-
-  /* -----------------------------------------------------
-     PREVIEW
-  ----------------------------------------------------- */
-
-  function updatePreview() {
-
-    const fields = [
-
-      "titleText",
-      "pageText",
-
-      "division",
-      "district",
-      "upazila",
-      "mouza",
-
-      "jlNo",
-      "revisionNo",
-
-      "owner",
-
-      "share",
-      "revenue",
-      "dag",
-
-      "agri",
-      "nonAgri",
-
-      "dagTotalAcre",
-      "dagTotalPercent",
-
-      "khatianShare",
-
-      "shareLandAcre",
-      "shareLandPercent",
-
-      "totalLand",
-
-      "remarks",
-
-      "printing",
-      "printDate",
-
-      "qrUrl"
-
-    ];
-
-
-    fields.forEach(
-      function (field) {
-
-        const input =
-          document.getElementById(
-            field
-          );
-
-
-        if (!input) {
-          return;
-        }
-
-
-        document
-          .querySelectorAll(
-            '[data-out="' +
-            field +
-            '"]'
-          )
-          .forEach(
-            function (element) {
-
-              element.textContent =
-                input.value;
-
-            }
-          );
-
-      }
-    );
-
-
-    updateQR();
-
-  }
-
-
-  /* -----------------------------------------------------
-     PUBLIC KHATIAN URL
-  ----------------------------------------------------- */
-
-  function getPublicUrl(
-    id
-  ) {
-
-    return (
-      window.location.origin +
-      "/index.html?id=" +
-      encodeURIComponent(id)
-    );
-
-  }
-
-
-  /* -----------------------------------------------------
-     QR
-  ----------------------------------------------------- */
-
-  function updateQR() {
-
-    const container =
-      document.getElementById(
-        "qrcode"
-      );
-
-
-    if (!container) {
-      return;
-    }
-
-
-    container.innerHTML =
-      "";
-
-
-    const input =
-      document.getElementById(
-        "qrUrl"
-      );
-
-
-    if (!input) {
-      return;
-    }
-
-
-    const url =
-      input.value.trim();
-
-
-    if (
-      !url ||
-      !window.QRCode
-    ) {
-
-      return;
-
-    }
-
-
-    new QRCode(
-      container,
-      {
-        text: url,
-        width: 92,
-        height: 92,
-
-        correctLevel:
-          QRCode.CorrectLevel.M
-
-      }
-    );
-
-  }
-
-
-  /* -----------------------------------------------------
-     LOAD RECORD
-  ----------------------------------------------------- */
-
-  async function loadRecord() {
-
-    setStatus(
-      "খতিয়ানের তথ্য লোড হচ্ছে...",
-      true
-    );
-
-
-    const {
-      data,
-      error
-    } =
-      await client
-        .from("land_records")
-        .select(
-          [
-            "id",
-            "khatian",
-            "owner",
-            "dag_no",
-            "survey",
-            "mouza",
-            "upazila",
-            "district",
-            "division",
-            "record_date"
-          ].join(",")
-        )
-        .eq(
-          "id",
-          recordId
-        )
-        .maybeSingle();
-
-
-    if (error) {
-
-      console.error(
-        "Supabase error:",
-        error
-      );
-
-
-      setStatus(
-        "খতিয়ানের তথ্য লোড করা যাচ্ছে না।",
-        false
-      );
-
-
-      return;
-    }
-
-
-    if (!data) {
-
-      setStatus(
-        "কোন খতিয়ান পাওয়া যায়নি",
-        false
-      );
-
-
-      return;
-    }
-
-
-    /* ---------------------------------------------------
-       AUTO FILL
-    --------------------------------------------------- */
-
-
-    setValue(
-      "titleText",
-      data.khatian
-        ? "আর এস (জোনাল) খতিয়ান নং- " +
-          data.khatian
-        : ""
-    );
-
-
-    setValue(
-      "division",
-      data.division
-    );
-
-
-    setValue(
-      "district",
-      data.district
-    );
-
-
-    setValue(
-      "upazila",
-      data.upazila
-    );
-
-
-    setValue(
-      "mouza",
-      data.mouza
-    );
-
-
-    setValue(
-      "owner",
-      data.owner
-    );
-
-
-    setValue(
-      "dag",
-      data.dag_no
-    );
-
-
-    setValue(
-      "printDate",
-      data.record_date
-    );
-
-
-    /* ---------------------------------------------------
-       PUBLIC URL → QR URL
-    --------------------------------------------------- */
-
-    setValue(
-      "qrUrl",
-      getPublicUrl(
-        data.id
-      )
-    );
-
-
-    setStatus(
-      "খতিয়ানের তথ্য সফলভাবে লোড হয়েছে।",
-      true
-    );
-
-
-    updatePreview();
-
-  }
-
-
-  /* -----------------------------------------------------
-     LIVE PREVIEW
-  ----------------------------------------------------- */
-
-  const allInputs =
-    document.querySelectorAll(
-      "#paper ~ * input, " +
-      "#paper ~ * textarea"
-    );
-
-
-  document
-    .querySelectorAll(
-      ".controls input, " +
-      ".controls textarea"
-    )
-    .forEach(
-      function (input) {
-
-        input.addEventListener(
-          "input",
-          updatePreview
-        );
-
-      }
-    );
-
-
-  /* -----------------------------------------------------
-     PREVIEW BUTTON
-  ----------------------------------------------------- */
-
-  const updateButton =
-    document.getElementById(
-      "updateBtn"
-    );
-
-
-  if (updateButton) {
-
-    updateButton.addEventListener(
-      "click",
-      updatePreview
-    );
-
-  }
-
-
-  /* -----------------------------------------------------
-     PRINT
-  ----------------------------------------------------- */
-
-  const printButton =
-    document.getElementById(
-      "printBtn"
-    );
-
-
-  if (printButton) {
-
-    printButton.addEventListener(
-      "click",
-      function () {
-
-        updatePreview();
-
-
-        setTimeout(
-          function () {
-
-            window.print();
-
-          },
-          150
-        );
-
-      }
-    );
-
-  }
-
-
-  /* -----------------------------------------------------
-     RESET
-  ----------------------------------------------------- */
-
-  const resetButton =
-    document.getElementById(
-      "resetBtn"
-    );
-
-
-  if (resetButton) {
-
-    resetButton.addEventListener(
-      "click",
-      function () {
-
-        const fieldsToClear = [
-
-          "titleText",
-
-          "jlNo",
-          "revisionNo",
-
-          "share",
-          "revenue",
-          "agri",
-          "nonAgri",
-
-          "dagTotalAcre",
-          "dagTotalPercent",
-
-          "khatianShare",
-
-          "shareLandAcre",
-          "shareLandPercent",
-
-          "totalLand",
-
-          "remarks"
-
-        ];
-
-
-        fieldsToClear.forEach(
-          function (id) {
-
-            setValue(
-              id,
-              ""
-            );
-
-          }
-        );
-
-
-        /*
-          Auto-filled values remain.
-        */
-
-        updatePreview();
-
-      }
-    );
-
-  }
-
-
-  /* -----------------------------------------------------
-     START
-  ----------------------------------------------------- */
-
-  loadRecord();
-
-})();
-
-</script>
-
+<script src="app.js?v=10"></script>
 
 </body>
-
