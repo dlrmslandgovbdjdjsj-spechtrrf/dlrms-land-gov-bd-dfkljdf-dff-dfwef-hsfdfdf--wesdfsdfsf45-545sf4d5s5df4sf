@@ -1,3 +1,4 @@
+```css id="8o7gdx"
 * {
   box-sizing: border-box;
 }
@@ -20,7 +21,7 @@ body {
 
 
 /* =========================================================
-   EDITOR PANEL
+   EDITOR
 ========================================================= */
 
 .editor-shell {
@@ -30,12 +31,17 @@ body {
   padding: 22px;
 }
 
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
 .controls {
   background: #fff;
   border-radius: 10px;
   padding: 18px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
 }
 
 .controls-head h1 {
@@ -43,20 +49,17 @@ body {
   color: #087a3d;
   font-size: 24px;
   line-height: 1.2;
-  font-weight: 700;
 }
 
 .controls-head p {
   margin: 0 0 8px;
   color: #666;
   font-size: 14px;
-  line-height: 1.4;
 }
 
 #load-status {
   min-height: 20px;
   margin-bottom: 8px;
-  color: #087a3d;
   font-size: 13px;
   font-weight: 700;
 }
@@ -68,7 +71,8 @@ body {
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -99,8 +103,8 @@ textarea {
   font-size: 14px;
   line-height: 1.35;
 
-  background: #fff;
   color: #111;
+  background: #fff;
 
   outline: none;
 }
@@ -110,7 +114,7 @@ textarea:focus {
   border-color: #087a3d;
 
   box-shadow:
-    0 0 0 2px rgba(8, 122, 61, .10);
+    0 0 0 2px rgba(8,122,61,.10);
 }
 
 textarea {
@@ -146,21 +150,13 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background: #066c34;
-}
-
 button.secondary {
   background: #777;
 }
 
-button.secondary:hover {
-  background: #666;
-}
-
 
 /* =========================================================
-   PREVIEW AREA
+   PREVIEW
 ========================================================= */
 
 .preview-area {
@@ -178,23 +174,13 @@ button.secondary:hover {
   margin: 0 auto;
 }
 
-
-/* =========================================================
-   FIXED KHATIAN SVG
-========================================================= */
-
 .khatian-svg {
   display: block;
 
   width: 1650px;
   height: 1275px;
 
-  margin: 0;
-  padding: 0;
-
   background: #fff;
-
-  overflow: visible;
 }
 
 
@@ -211,11 +197,6 @@ button.secondary:hover {
     serif;
 }
 
-
-/* =========================================================
-   TITLE
-========================================================= */
-
 .svg-title {
   font-size: 40px;
   font-weight: 600;
@@ -229,20 +210,10 @@ button.secondary:hover {
   font-size: 17px;
 }
 
-
-/* =========================================================
-   TABLE HEADER
-========================================================= */
-
 .svg-header {
   font-size: 16px;
   font-weight: 400;
 }
-
-
-/* =========================================================
-   TABLE DATA
-========================================================= */
 
 .svg-data {
   font-size: 17px;
@@ -256,12 +227,8 @@ button.secondary:hover {
 
 .svg-footer {
   font-size: 17px;
+  font-weight: 400;
 }
-
-
-/* =========================================================
-   MULTILINE SVG TEXT
-========================================================= */
 
 .multiline-svg {
   white-space: pre-line;
@@ -269,7 +236,7 @@ button.secondary:hover {
 
 
 /* =========================================================
-   QR HOLDER
+   QR
 ========================================================= */
 
 #qr-holder {
@@ -277,6 +244,7 @@ button.secondary:hover {
   height: 82px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -285,10 +253,10 @@ button.secondary:hover {
 
 #qr-holder img,
 #qr-holder canvas {
+  display: block;
+
   width: 82px !important;
   height: 82px !important;
-
-  display: block;
 }
 
 
@@ -322,7 +290,7 @@ button.secondary:hover {
 
   .form-grid {
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(2, minmax(0,1fr));
   }
 
 }
@@ -340,10 +308,6 @@ button.secondary:hover {
 
   .controls {
     padding: 14px;
-  }
-
-  .controls-head h1 {
-    font-size: 21px;
   }
 
   .form-grid {
@@ -366,7 +330,21 @@ button.secondary:hover {
 
 
 /* =========================================================
-   PRINT
+   PRINT — EXACTLY ONE A4 LANDSCAPE PAGE
+
+   SVG ratio:
+   1650 / 1275 = 1.2941176
+
+   A4 landscape:
+   297 / 210 = 1.4142857
+
+   Therefore to preserve the exact SVG ratio while
+   fitting completely inside A4 landscape:
+
+   Width = 210mm × 1650 / 1275
+         = 271.7647mm
+
+   Height = 210mm
 ========================================================= */
 
 @media print {
@@ -376,56 +354,56 @@ button.secondary:hover {
     width: 100%;
     height: 100%;
 
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
 
     background: #fff !important;
   }
+
 
   .controls {
     display: none !important;
   }
 
-  .editor-shell {
-    width: 100%;
-    max-width: none;
 
-    margin: 0;
-    padding: 0;
+  .editor-shell {
+    width: 271.7647mm !important;
+    max-width: none !important;
+
+    margin: 0 auto !important;
+    padding: 0 !important;
   }
 
+
   .preview-area {
-    width: 100%;
+    width: 271.7647mm !important;
 
     overflow: visible !important;
 
-    padding: 0 !important;
     margin: 0 !important;
+    padding: 0 !important;
   }
+
 
   .paper-wrap {
-    width: 1650px;
-    height: 1275px;
+    width: 271.7647mm !important;
+    height: 210mm !important;
 
-    margin: 0;
+    margin: 0 !important;
+    padding: 0 !important;
   }
+
 
   .khatian-svg {
-    width: 1650px !important;
-    height: 1275px !important;
+    width: 271.7647mm !important;
+    height: 210mm !important;
 
-    /*
-      1650 x 1275
-      scaled uniformly to A4 landscape
-    */
+    display: block !important;
 
-    transform:
-      scale(
-        0.6221176470588235
-      );
-
-    transform-origin: top left;
+    margin: 0 !important;
+    padding: 0 !important;
   }
+
 
   @page {
     size: A4 landscape;
@@ -433,3 +411,4 @@ button.secondary:hover {
   }
 
 }
+```
