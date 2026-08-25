@@ -1,49 +1,560 @@
-```javascript
 (function () {
 
   'use strict';
 
-  /*
-   * =========================================================
-   * KHATIAN AUTO-FILL APP
-   *
-   * কাজ:
-   * 1. URL থেকে ?id= নেওয়া
-   * 2. Supabase থেকে land_records-এর ঐ ID-এর তথ্য আনা
-   * 3. তোমার বর্তমান HTML-এর field-গুলোতে AutoFill করা
-   * 4. Preview-তে তথ্য দেখানো
-   * 5. QR Code তৈরি করা
-   * 6. Manual editing চালু রাখা
-   * 7. Print / PDF চালু রাখা
-   * =========================================================
-   */
+  // =====================================================
+  // CONFIG
+  // =====================================================
+
+  const cfg = window.APP_CONFIG || {};
+
+  const SUPABASE_URL =
+    cfg.SUPABASE_URL || '';
+
+  const SUPABASE_ANON_KEY =
+    cfg.SUPABASE_ANON_KEY || '';
+
+  const loadStatus =
+    document.getElementById('load-status');
 
 
-  /* =========================================================
-     ELEMENTS
-  ========================================================= */
+  // =====================================================
+  // BASIC HELPERS
+  // =====================================================
 
-  const updateBtn =
-    document.getElementById('updateBtn');
-
-  const printBtn =
-    document.getElementById('printBtn');
-
-  const resetBtn =
-    document.getElementById('resetBtn');
-
-  const qrInput =
-    document.getElementById('qrUrl');
-
-  const qrContainer =
-    document.getElementById('qrcode');
+  function getField(id) {
+    return document.getElementById(id);
+  }
 
 
-  /* =========================================================
-     FIELD LIST
-  ========================================================= */
+  function getValue(id) {
+
+    const el = getField(id);
+
+    if (!el) {
+      return '';
+    }
+
+    return String(el.value || '');
+
+  }
+
+
+  function setValue(id, value) {
+
+    const el = getField(id);
+
+    if (!el) {
+      return;
+    }
+
+    el.value =
+      value === null ||
+      value === undefined
+        ? ''
+        : String(value);
+
+  }
+
+
+  function clean(value) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return '';
+    }
+
+    return String(value);
+
+  }
+
+
+  // =====================================================
+  // STATUS
+  // =====================================================
+
+  function setStatus(text, type) {
+
+    if (!loadStatus) {
+      return;
+    }
+
+    loadStatus.textContent = text;
+
+    loadStatus.className = 'load-status';
+
+    if (type) {
+      loadStatus.classList.add(type);
+    }
+
+  }
+
+
+  // =====================================================
+  // PREVIEW
+  // =====================================================
+
+  function updatePreview() {
+
+    const outputs =
+      document.querySelectorAll('[data-out]');
+
+    outputs.forEach(function (element) {
+
+      const field =
+        element.getAttribute('data-out');
+
+      if (!field) {
+        return;
+      }
+
+      element.textContent =
+        getValue(field);
+
+    });
+
+    updateQR();
+
+  }
+
+
+  // =====================================================
+  // QR
+  // =====================================================
+
+  function updateQR() {
+
+    const qrContainer =
+      document.getElementById('qrcode');
+
+    if (!qrContainer) {
+      return;
+    }
+
+    qrContainer.innerHTML = '';
+
+    const url =
+      getValue('qrUrl').trim();
+
+    if (
+      !url ||
+      typeof QRCode === 'undefined'
+    ) {
+      return;
+    }
+
+    try {
+
+      new QRCode(
+        qrContainer,
+        {
+          text: url,
+          width: 92,
+          height: 92,
+          correctLevel:
+            QRCode.CorrectLevel.M
+        }
+      );
+
+    } catch (error) {
+
+      console.error(
+        'QR Error:',
+        error
+      );
+
+    }
+
+  }
+
+
+  // =====================================================
+  // URL থেকে ID
+  // =====================================================
+
+  function getRecordId() {
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const id =
+      params.get('id');
+
+    if (!id) {
+      return null;
+    }
+
+    return id.trim();
+
+  }
+
+
+  // =====================================================
+  // DATABASE RECORD → FORM
+  // =====================================================
+
+  function fillRecord(record) {
+
+    console.log(
+      'Supabase record:',
+      record
+    );
+
+
+    // ---------------------------------------------------
+    // KHATIAN
+    // ---------------------------------------------------
+
+    if (
+      record.khatian !== null &&
+      record.khatian !== undefined
+    ) {
+
+      setValue(
+        'titleText',
+        'আর এস (জোনাল) খতিয়ান নং- ' +
+        clean(record.khatian)
+      );
+
+    }
+
+
+    // ---------------------------------------------------
+    // OWNER
+    // ---------------------------------------------------
+
+    setValue(
+      'owner',
+      clean(record.owner)
+    );
+
+
+    // ---------------------------------------------------
+    // DAG
+    // ---------------------------------------------------
+
+    setValue(
+      'dag',
+      clean(record.dag_no)
+    );
+
+
+    // ---------------------------------------------------
+    // SURVEY
+    // ---------------------------------------------------
+
+    setValue(
+      'revisionNo',
+      clean(record.survey)
+    );
+
+
+    // ---------------------------------------------------
+    // MOUZA
+    // ---------------------------------------------------
+
+    setValue(
+      'mouza',
+      clean(record.mouza)
+    );
+
+
+    // ---------------------------------------------------
+    // UPAZILA
+    // ---------------------------------------------------
+
+    setValue(
+      'upazila',
+      clean(record.upazila)
+    );
+
+
+    // ---------------------------------------------------
+    // DISTRICT
+    // ---------------------------------------------------
+
+    setValue(
+      'district',
+      clean(record.district)
+    );
+
+
+    // ---------------------------------------------------
+    // DIVISION
+    // ---------------------------------------------------
+
+    setValue(
+      'division',
+      clean(record.division)
+    );
+
+
+    // ---------------------------------------------------
+    // DATE
+    // ---------------------------------------------------
+
+    setValue(
+      'printDate',
+      clean(record.record_date)
+    );
+
+
+    // ---------------------------------------------------
+    // DEFAULT PAGE
+    // ---------------------------------------------------
+
+    if (!getValue('pageText').trim()) {
+
+      setValue(
+        'pageText',
+        'পৃষ্ঠা নং: ১ এর ১'
+      );
+
+    }
+
+
+    // ---------------------------------------------------
+    // DEFAULT PRINTING
+    // ---------------------------------------------------
+
+    if (!getValue('printing').trim()) {
+
+      setValue(
+        'printing',
+        'সেটেলমেন্ট প্রেস, ঢাকা'
+      );
+
+    }
+
+
+    // ---------------------------------------------------
+    // QR URL
+    // ---------------------------------------------------
+
+    setValue(
+      'qrUrl',
+      window.location.href
+    );
+
+
+    // ---------------------------------------------------
+    // UPDATE SCREEN
+    // ---------------------------------------------------
+
+    updatePreview();
+
+  }
+
+
+  // =====================================================
+  // SUPABASE LOAD
+  // =====================================================
+
+  async function loadRecord() {
+
+    const id =
+      getRecordId();
+
+
+    // ---------------------------------------------------
+    // NO ID
+    // ---------------------------------------------------
+
+    if (!id) {
+
+      setStatus(
+        'ম্যানুয়াল মোড — URL-এ কোনো খতিয়ান ID নেই।',
+        'manual'
+      );
+
+      updatePreview();
+
+      return;
+
+    }
+
+
+    // ---------------------------------------------------
+    // CONFIG CHECK
+    // ---------------------------------------------------
+
+    if (
+      !SUPABASE_URL ||
+      !SUPABASE_ANON_KEY
+    ) {
+
+      setStatus(
+        'Supabase configuration পাওয়া যায়নি।',
+        'error'
+      );
+
+      console.error(
+        'SUPABASE CONFIG MISSING',
+        {
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        }
+      );
+
+      return;
+
+    }
+
+
+    // ---------------------------------------------------
+    // SUPABASE LIBRARY CHECK
+    // ---------------------------------------------------
+
+    if (
+      !window.supabase ||
+      typeof window.supabase.createClient !== 'function'
+    ) {
+
+      setStatus(
+        'Supabase library লোড হয়নি।',
+        'error'
+      );
+
+      console.error(
+        'Supabase JS library missing'
+      );
+
+      return;
+
+    }
+
+
+    setStatus(
+      'খতিয়ানের তথ্য লোড হচ্ছে...',
+      'loading'
+    );
+
+
+    try {
+
+      const client =
+        window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_ANON_KEY
+        );
+
+
+      // -------------------------------------------------
+      // ID
+      // -------------------------------------------------
+
+      const recordId =
+        /^\d+$/.test(id)
+          ? Number(id)
+          : id;
+
+
+      console.log(
+        'Loading Khatian ID:',
+        recordId
+      );
+
+
+      // -------------------------------------------------
+      // DATABASE QUERY
+      // -------------------------------------------------
+
+      const {
+        data,
+        error
+      } = await client
+        .from('land_records')
+        .select('*')
+        .eq('id', recordId)
+        .maybeSingle();
+
+
+      // -------------------------------------------------
+      // ERROR
+      // -------------------------------------------------
+
+      if (error) {
+
+        console.error(
+          'Supabase error:',
+          error
+        );
+
+        setStatus(
+          'খতিয়ানের তথ্য লোড করা যায়নি: ' +
+          error.message,
+          'error'
+        );
+
+        return;
+
+      }
+
+
+      // -------------------------------------------------
+      // NO RECORD
+      // -------------------------------------------------
+
+      if (!data) {
+
+        console.error(
+          'No record found for ID:',
+          recordId
+        );
+
+        setStatus(
+          'এই ID-এর কোনো খতিয়ান পাওয়া যায়নি। ID: ' +
+          id,
+          'error'
+        );
+
+        return;
+
+      }
+
+
+      // -------------------------------------------------
+      // AUTOFILL
+      // -------------------------------------------------
+
+      fillRecord(data);
+
+
+      setStatus(
+        '✓ খতিয়ানের তথ্য সফলভাবে AutoFill হয়েছে। ID: ' +
+        id,
+        'success'
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        'AutoFill error:',
+        error
+      );
+
+      setStatus(
+        'AutoFill করতে সমস্যা হয়েছে: ' +
+        error.message,
+        'error'
+      );
+
+    }
+
+  }
+
+
+  // =====================================================
+  // FORM FIELDS
+  // =====================================================
 
   const fields = [
+
     'titleText',
     'pageText',
     'division',
@@ -68,822 +579,54 @@
     'printing',
     'printDate',
     'qrUrl'
+
   ];
 
 
-  /* =========================================================
-     BASIC HELPERS
-  ========================================================= */
+  // =====================================================
+  // LIVE PREVIEW
+  // =====================================================
 
-  function getField(id) {
+  fields.forEach(function (field) {
 
-    return document.getElementById(id);
+    const input =
+      getField(field);
 
-  }
-
-
-  function getValue(id) {
-
-    const element =
-      getField(id);
-
-    if (!element) {
-      return '';
-    }
-
-    return String(
-      element.value ?? ''
-    );
-
-  }
-
-
-  function setValue(id, value) {
-
-    const element =
-      getField(id);
-
-    if (!element) {
+    if (!input) {
       return;
     }
 
-    element.value =
-      value === null ||
-      value === undefined
-        ? ''
-        : String(value);
-
-  }
-
-
-  function safeText(value) {
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
-      return '';
-    }
-
-    return String(value);
-
-  }
-
-
-  /* =========================================================
-     STATUS
-  ========================================================= */
-
-  function createStatusBox() {
-
-    let status =
-      document.getElementById(
-        'auto-load-status'
-      );
-
-    if (status) {
-      return status;
-    }
-
-
-    const controlsHead =
-      document.querySelector(
-        '.controls-head'
-      );
-
-
-    if (!controlsHead) {
-      return null;
-    }
-
-
-    status =
-      document.createElement('div');
-
-    status.id =
-      'auto-load-status';
-
-    status.style.marginTop =
-      '10px';
-
-    status.style.padding =
-      '8px 12px';
-
-    status.style.borderRadius =
-      '6px';
-
-    status.style.fontSize =
-      '14px';
-
-    status.style.fontWeight =
-      '700';
-
-    status.style.display =
-      'inline-block';
-
-    controlsHead.appendChild(
-      status
+    input.addEventListener(
+      'input',
+      updatePreview
     );
 
-    return status;
+  });
 
-  }
 
+  // =====================================================
+  // UPDATE BUTTON
+  // =====================================================
 
-  function setStatus(text, type) {
-
-    const status =
-      createStatusBox();
-
-    if (!status) {
-      return;
-    }
-
-
-    status.textContent =
-      text;
-
-
-    if (type === 'success') {
-
-      status.style.background =
-        '#e8f5e9';
-
-      status.style.color =
-        '#087f3d';
-
-    }
-
-    else if (type === 'error') {
-
-      status.style.background =
-        '#fdecea';
-
-      status.style.color =
-        '#b3261e';
-
-    }
-
-    else {
-
-      status.style.background =
-        '#f1f3f4';
-
-      status.style.color =
-        '#555';
-
-    }
-
-  }
-
-
-  /* =========================================================
-     PREVIEW
-  ========================================================= */
-
-  function updatePreview() {
-
-    const outputs =
-      document.querySelectorAll(
-        '[data-out]'
-      );
-
-
-    outputs.forEach(
-      function (element) {
-
-        const field =
-          element.getAttribute(
-            'data-out'
-          );
-
-
-        if (!field) {
-          return;
-        }
-
-
-        element.textContent =
-          getValue(field);
-
-      }
-    );
-
-
-    updateQR();
-
-  }
-
-
-  /* =========================================================
-     QR CODE
-  ========================================================= */
-
-  function updateQR() {
-
-    if (!qrContainer) {
-      return;
-    }
-
-
-    qrContainer.innerHTML =
-      '';
-
-
-    const url =
-      getValue('qrUrl').trim();
-
-
-    if (
-      !url ||
-      typeof QRCode === 'undefined'
-    ) {
-
-      return;
-
-    }
-
-
-    try {
-
-      new QRCode(
-        qrContainer,
-        {
-          text: url,
-          width: 92,
-          height: 92,
-          correctLevel:
-            QRCode.CorrectLevel.M
-        }
-      );
-
-    }
-
-    catch (error) {
-
-      console.error(
-        'QR Code Error:',
-        error
-      );
-
-    }
-
-  }
-
-
-  /* =========================================================
-     URL থেকে ID
-  ========================================================= */
-
-  function getRecordId() {
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-
-    const id =
-      params.get('id');
-
-
-    if (!id) {
-      return null;
-    }
-
-
-    return id.trim();
-
-  }
-
-
-  /* =========================================================
-     DYNAMIC SCRIPT LOADER
-  ========================================================= */
-
-  function loadScript(src) {
-
-    return new Promise(
-      function (resolve, reject) {
-
-        const existing =
-          document.querySelector(
-            'script[src="' + src + '"]'
-          );
-
-
-        if (existing) {
-
-          if (
-            existing.dataset.loaded ===
-            'true'
-          ) {
-
-            resolve();
-
-            return;
-
-          }
-
-          existing.addEventListener(
-            'load',
-            resolve,
-            { once: true }
-          );
-
-          existing.addEventListener(
-            'error',
-            reject,
-            { once: true }
-          );
-
-          return;
-
-        }
-
-
-        const script =
-          document.createElement(
-            'script'
-          );
-
-
-        script.src =
-          src;
-
-        script.async =
-          false;
-
-
-        script.onload =
-          function () {
-
-            script.dataset.loaded =
-              'true';
-
-            resolve();
-
-          };
-
-
-        script.onerror =
-          function () {
-
-            reject(
-              new Error(
-                'Script load failed: ' +
-                src
-              )
-            );
-
-          };
-
-
-        document.head.appendChild(
-          script
-        );
-
-      }
-    );
-
-  }
-
-
-  /* =========================================================
-     SUPABASE + CONFIG
-  ========================================================= */
-
-  async function prepareSupabase() {
-
-    /*
-     * Supabase library না থাকলে নিজে লোড করবে।
-     */
-
-    if (!window.supabase) {
-
-      await loadScript(
-        'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
-      );
-
-    }
-
-
-    /*
-     * APP_CONFIG না থাকলে config.js লোড করবে।
-     *
-     * তোমার index.html যদি khatian folder-এর ভিতরে থাকে
-     * এবং config.js root folder-এ থাকে,
-     * তাহলে ../config.js সঠিক।
-     */
-
-    if (
-      !window.APP_CONFIG ||
-      !window.APP_CONFIG.SUPABASE_URL ||
-      !window.APP_CONFIG.SUPABASE_ANON_KEY
-    ) {
-
-      try {
-
-        await loadScript(
-          '../config.js'
-        );
-
-      }
-
-      catch (error) {
-
-        /*
-         * একই folder-এ config.js থাকলেও চেষ্টা করবে।
-         */
-
-        try {
-
-          await loadScript(
-            './config.js'
-          );
-
-        }
-
-        catch (secondError) {
-
-          throw new Error(
-            'config.js পাওয়া যাচ্ছে না।'
-          );
-
-        }
-
-      }
-
-    }
-
-
-    const cfg =
-      window.APP_CONFIG || {};
-
-
-    const url =
-      cfg.SUPABASE_URL || '';
-
-
-    const key =
-      cfg.SUPABASE_ANON_KEY || '';
-
-
-    if (!url || !key) {
-
-      throw new Error(
-        'SUPABASE_URL অথবা SUPABASE_ANON_KEY পাওয়া যায়নি।'
-      );
-
-    }
-
-
-    if (!window.supabase) {
-
-      throw new Error(
-        'Supabase library লোড হয়নি।'
-      );
-
-    }
-
-
-    return window.supabase.createClient(
-      url,
-      key
-    );
-
-  }
-
-
-  /* =========================================================
-     DATABASE RECORD → HTML FIELD
-  ========================================================= */
-
-  function fillRecord(record) {
-
-    if (!record) {
-      return;
-    }
-
-
-    /*
-     * তোমার বর্তমান land_records table-এর
-     * field অনুযায়ী mapping।
-     */
-
-    const mapping = {
-
-      khatian:
-        'titleText',
-
-      owner:
-        'owner',
-
-      dag_no:
-        'dag',
-
-      survey:
-        'revisionNo',
-
-      mouza:
-        'mouza',
-
-      upazila:
-        'upazila',
-
-      district:
-        'district',
-
-      division:
-        'division',
-
-      record_date:
-        'printDate'
-
-    };
-
-
-    Object.keys(mapping)
-      .forEach(
-        function (databaseField) {
-
-          const htmlField =
-            mapping[databaseField];
-
-
-          if (
-            Object.prototype.hasOwnProperty.call(
-              record,
-              databaseField
-            )
-          ) {
-
-            setValue(
-              htmlField,
-              safeText(
-                record[databaseField]
-              )
-            );
-
-          }
-
-        }
-      );
-
-
-    /* =====================================================
-       KHATIAN TITLE
-    ===================================================== */
-
-    if (
-      record.khatian !== null &&
-      record.khatian !== undefined
-    ) {
-
-      setValue(
-        'titleText',
-        'আর এস (জোনাল) খতিয়ান নং- ' +
-        safeText(record.khatian)
-      );
-
-    }
-
-
-    /* =====================================================
-       DEFAULT PAGE
-    ===================================================== */
-
-    if (
-      !getValue('pageText').trim()
-    ) {
-
-      setValue(
-        'pageText',
-        'পৃষ্ঠা নং: ১ এর ১'
-      );
-
-    }
-
-
-    /* =====================================================
-       DEFAULT PRINTING
-    ===================================================== */
-
-    if (
-      !getValue('printing').trim()
-    ) {
-
-      setValue(
-        'printing',
-        'সেটেলমেন্ট প্রেস, ঢাকা'
-      );
-
-    }
-
-
-    /* =====================================================
-       QR URL
-    ===================================================== */
-
-    setValue(
-      'qrUrl',
-      window.location.href
-    );
-
-
-    /* =====================================================
-       PREVIEW
-    ===================================================== */
-
-    updatePreview();
-
-  }
-
-
-  /* =========================================================
-     LOAD RECORD
-  ========================================================= */
-
-  async function loadRecord() {
-
-    const id =
-      getRecordId();
-
-
-    /*
-     * ?id= না থাকলে Manual Mode
-     */
-
-    if (!id) {
-
-      setStatus(
-        'ম্যানুয়াল মোড — URL-এ কোনো খতিয়ান ID নেই।',
-        'manual'
-      );
-
-
-      updatePreview();
-
-      return;
-
-    }
-
-
-    setStatus(
-      'খতিয়ানের তথ্য লোড হচ্ছে...',
-      'loading'
-    );
-
-
-    try {
-
-      const client =
-        await prepareSupabase();
-
-
-      /*
-       * ID numeric হলে Number করা হবে।
-       */
-
-      const databaseId =
-        /^\d+$/.test(id)
-          ? Number(id)
-          : id;
-
-
-      const result =
-        await client
-          .from('land_records')
-          .select('*')
-          .eq('id', databaseId)
-          .maybeSingle();
-
-
-      if (result.error) {
-
-        console.error(
-          'Supabase Error:',
-          result.error
-        );
-
-
-        setStatus(
-          'খতিয়ানের তথ্য লোড করা যায়নি: ' +
-          result.error.message,
-          'error'
-        );
-
-
-        return;
-
-      }
-
-
-      if (!result.data) {
-
-        setStatus(
-          'এই ID-এর কোনো খতিয়ান পাওয়া যায়নি। ID: ' +
-          id,
-          'error'
-        );
-
-
-        updatePreview();
-
-        return;
-
-      }
-
-
-      /*
-       * Record পাওয়া গেছে।
-       */
-
-      fillRecord(
-        result.data
-      );
-
-
-      setStatus(
-        '✓ খতিয়ানের তথ্য সফলভাবে অটোফিল হয়েছে। ID: ' +
-        id,
-        'success'
-      );
-
-    }
-
-    catch (error) {
-
-      console.error(
-        'AutoFill Error:',
-        error
-      );
-
-
-      setStatus(
-        'অটোফিল চালু করা যায়নি: ' +
-        error.message,
-        'error'
-      );
-
-
-      updatePreview();
-
-    }
-
-  }
-
-
-  /* =========================================================
-     LIVE PREVIEW
-  ========================================================= */
-
-  fields.forEach(
-    function (field) {
-
-      const input =
-        getField(field);
-
-
-      if (!input) {
-        return;
-      }
-
-
-      input.addEventListener(
-        'input',
-        function () {
-
-          updatePreview();
-
-        }
-      );
-
-    }
-  );
-
-
-  /* =========================================================
-     UPDATE BUTTON
-  ========================================================= */
+  const updateBtn =
+    document.getElementById('updateBtn');
 
   if (updateBtn) {
 
     updateBtn.addEventListener(
       'click',
-      function () {
-
-        updatePreview();
-
-      }
+      updatePreview
     );
 
   }
 
 
-  /* =========================================================
-     PRINT BUTTON
-  ========================================================= */
+  // =====================================================
+  // PRINT BUTTON
+  // =====================================================
+
+  const printBtn =
+    document.getElementById('printBtn');
 
   if (printBtn) {
 
@@ -893,14 +636,11 @@
 
         updatePreview();
 
-
         setTimeout(
           function () {
-
             window.print();
-
           },
-          150
+          200
         );
 
       }
@@ -909,9 +649,12 @@
   }
 
 
-  /* =========================================================
-     RESET BUTTON
-  ========================================================= */
+  // =====================================================
+  // RESET
+  // =====================================================
+
+  const resetBtn =
+    document.getElementById('resetBtn');
 
   if (resetBtn) {
 
@@ -919,25 +662,19 @@
       'click',
       function () {
 
-        const confirmed =
+        const ok =
           window.confirm(
             'সব ঘরের তথ্য খালি করতে চান?'
           );
 
-
-        if (!confirmed) {
+        if (!ok) {
           return;
         }
 
 
         fields.forEach(
           function (field) {
-
-            setValue(
-              field,
-              ''
-            );
-
+            setValue(field, '');
           }
         );
 
@@ -968,15 +705,23 @@
   }
 
 
-  /* =========================================================
-     START
-  ========================================================= */
+  // =====================================================
+  // INITIAL
+  // =====================================================
 
   updatePreview();
 
 
-  loadRecord();
+  // গুরুত্বপূর্ণ:
+  // Supabase/config লোড হওয়ার পর AutoFill চালানো হচ্ছে
 
+  window.addEventListener(
+    'load',
+    function () {
+
+      loadRecord();
+
+    }
+  );
 
 })();
-```
