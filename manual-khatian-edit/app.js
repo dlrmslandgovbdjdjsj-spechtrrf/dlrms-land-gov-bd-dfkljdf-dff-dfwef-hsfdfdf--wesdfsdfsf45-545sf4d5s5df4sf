@@ -3,140 +3,9 @@
 
   "use strict";
 
-  /* =====================================================
-     HELPERS
-  ===================================================== */
-
-  function get(id) {
-    return document.getElementById(id);
-  }
-
-
-  function value(id) {
-    const el = get(id);
-    return el ? String(el.value || "") : "";
-  }
-
-
-  function setValue(id, val) {
-    const el = get(id);
-
-    if (!el) {
-      return;
-    }
-
-    el.value =
-      val === null || val === undefined
-        ? ""
-        : String(val);
-  }
-
 
   /* =====================================================
-     PREVIEW
-  ===================================================== */
-
-  function updatePreview() {
-
-    document
-      .querySelectorAll("[data-out]")
-      .forEach(function (el) {
-
-        const field =
-          el.getAttribute("data-out");
-
-        if (!field) {
-          return;
-        }
-
-        el.textContent =
-          value(field);
-
-      });
-
-
-    updateQR();
-  }
-
-
-  /* =====================================================
-     QR
-  ===================================================== */
-
-  function updateQR() {
-
-    const box = get("qrcode");
-    const input = get("qrUrl");
-
-    if (!box || !input) {
-      return;
-    }
-
-    box.innerHTML = "";
-
-    const url =
-      input.value.trim();
-
-    if (!url) {
-      box.style.display = "none";
-      return;
-    }
-
-    box.style.display = "block";
-
-    if (
-      typeof QRCode === "undefined"
-    ) {
-      return;
-    }
-
-    try {
-
-      new QRCode(
-        box,
-        {
-          text: url,
-          width: 92,
-          height: 92,
-          correctLevel:
-            QRCode.CorrectLevel.M
-        }
-      );
-
-    } catch (err) {
-
-      console.error(
-        "QR Error:",
-        err
-      );
-
-    }
-
-  }
-
-
-  /* =====================================================
-     URL ID
-  ===================================================== */
-
-  function getId() {
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    return (
-      params.get("id") ||
-      params.get("record_id") ||
-      params.get("khatian_id")
-    );
-
-  }
-
-
-  /* =====================================================
-     FIELD EVENTS
+     FIELD LIST
   ===================================================== */
 
   const fieldIds = [
@@ -162,55 +31,241 @@
     "totalLand",
     "remarks",
     "printing",
-    "printDate",
-    "qrUrl"
+    "printDate"
   ];
 
 
-  fieldIds.forEach(function (id) {
-
-    const el = get(id);
-
-    if (!el) {
-      return;
-    }
-
-    el.addEventListener(
-      "input",
-      updatePreview
-    );
-
-    el.addEventListener(
-      "change",
-      updatePreview
-    );
-
-  });
-
-
   /* =====================================================
-     BUTTONS
+     BASIC HELPERS
   ===================================================== */
 
-  const updateBtn =
-    get("updateBtn");
+  function getValue(id) {
 
-  if (updateBtn) {
+    const input =
+      document.getElementById(id);
 
-    updateBtn.addEventListener(
-      "click",
-      function () {
+    if (!input) {
+      return "";
+    }
 
-        updatePreview();
-
-      }
+    return String(
+      input.value || ""
     );
 
   }
 
 
+  function setValue(id, value) {
+
+    const input =
+      document.getElementById(id);
+
+    if (!input) {
+      return;
+    }
+
+    input.value =
+      value === null ||
+      value === undefined
+        ? ""
+        : String(value);
+
+  }
+
+
+  /* =====================================================
+     PREVIEW OUTPUT
+  ===================================================== */
+
+  function setOutputs(id) {
+
+    const input =
+      document.getElementById(id);
+
+    if (!input) {
+      return;
+    }
+
+
+    document
+      .querySelectorAll(
+        '[data-out="' + id + '"]'
+      )
+      .forEach(
+        function (el) {
+
+          el.textContent =
+            input.value;
+
+        }
+      );
+
+  }
+
+
+  /* =====================================================
+     QR
+  ===================================================== */
+
+  function updateQR() {
+
+    const box =
+      document.getElementById("qrcode");
+
+    const input =
+      document.getElementById("qrUrl");
+
+
+    if (!box || !input) {
+      return;
+    }
+
+
+    box.innerHTML = "";
+
+
+    const url =
+      input.value.trim();
+
+
+    if (!url) {
+
+      box.style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    box.style.display =
+      "block";
+
+
+    if (
+      typeof QRCode ===
+      "undefined"
+    ) {
+
+      return;
+
+    }
+
+
+    try {
+
+      new QRCode(
+        box,
+        {
+          text: url,
+          width: 92,
+          height: 92,
+          correctLevel:
+            QRCode.CorrectLevel.M
+        }
+      );
+
+    } catch (error) {
+
+      console.error(
+        "QR Code Error:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     PREVIEW
+  ===================================================== */
+
+  function updatePreview() {
+
+    fieldIds.forEach(
+      setOutputs
+    );
+
+    updateQR();
+
+  }
+
+
+  /* =====================================================
+     LIVE INPUT
+  ===================================================== */
+
+  fieldIds.forEach(
+    function (id) {
+
+      const input =
+        document.getElementById(id);
+
+
+      if (!input) {
+        return;
+      }
+
+
+      input.addEventListener(
+        "input",
+        updatePreview
+      );
+
+    }
+  );
+
+
+  /* =====================================================
+     QR INPUT
+  ===================================================== */
+
+  const qrUrl =
+    document.getElementById(
+      "qrUrl"
+    );
+
+
+  if (qrUrl) {
+
+    qrUrl.addEventListener(
+      "input",
+      updateQR
+    );
+
+  }
+
+
+  /* =====================================================
+     UPDATE BUTTON
+  ===================================================== */
+
+  const updateBtn =
+    document.getElementById(
+      "updateBtn"
+    );
+
+
+  if (updateBtn) {
+
+    updateBtn.addEventListener(
+      "click",
+      updatePreview
+    );
+
+  }
+
+
+  /* =====================================================
+     PRINT BUTTON
+  ===================================================== */
+
   const printBtn =
-    get("printBtn");
+    document.getElementById(
+      "printBtn"
+    );
+
 
   if (printBtn) {
 
@@ -220,9 +275,12 @@
 
         updatePreview();
 
+
         setTimeout(
           function () {
+
             window.print();
+
           },
           100
         );
@@ -233,8 +291,15 @@
   }
 
 
+  /* =====================================================
+     RESET BUTTON
+  ===================================================== */
+
   const resetBtn =
-    get("resetBtn");
+    document.getElementById(
+      "resetBtn"
+    );
+
 
   if (resetBtn) {
 
@@ -245,47 +310,27 @@
         fieldIds.forEach(
           function (id) {
 
-            setValue(
-              id,
-              ""
-            );
+            const input =
+              document.getElementById(id);
+
+
+            if (input) {
+
+              input.value =
+                "";
+
+            }
 
           }
         );
 
 
-        /*
-         * পুরোনো default values
-         */
+        if (qrUrl) {
 
-        setValue(
-          "pageText",
-          "পৃষ্ঠা নং: ১ এর ১"
-        );
+          qrUrl.value =
+            "";
 
-
-        setValue(
-          "division",
-          "চট্টগ্রাম"
-        );
-
-
-        setValue(
-          "district",
-          "নোয়াখালী"
-        );
-
-
-        setValue(
-          "upazila",
-          "বেগমগঞ্জ"
-        );
-
-
-        setValue(
-          "printing",
-          "সেটেলমেন্ট প্রেস, ঢাকা"
-        );
+        }
 
 
         updatePreview();
@@ -297,137 +342,126 @@
 
 
   /* =====================================================
-     STATUS
+     GET ID FROM URL
   ===================================================== */
 
-  function showStatus(text) {
+  function getRecordId() {
 
-    let box =
-      get("auto-fill-status");
-
-    if (!box) {
-
-      box =
-        document.createElement(
-          "div"
-        );
-
-      box.id =
-        "auto-fill-status";
-
-      box.style.marginTop =
-        "8px";
-
-      box.style.fontSize =
-        "13px";
-
-      box.style.fontWeight =
-        "700";
-
-      const head =
-        document.querySelector(
-          ".controls-head"
-        );
-
-      if (head) {
-        head.appendChild(box);
-      }
-
-    }
-
-    if (box) {
-      box.textContent = text;
-    }
-
-  }
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
 
 
-  /* =====================================================
-     LOAD CONFIG
-  ===================================================== */
+    /*
+      Admin → খতিয়ানের PDF
+      সাধারণত ?id=123
 
-  function loadScript(src) {
+      fallback হিসেবে
+      record_id / khatian_id-ও নেওয়া হবে।
+    */
 
-    return new Promise(
-      function (resolve, reject) {
-
-        const script =
-          document.createElement(
-            "script"
-          );
-
-        script.src =
-          src;
-
-        script.onload =
-          resolve;
-
-        script.onerror =
-          function () {
-
-            reject(
-              new Error(
-                "Cannot load " + src
-              )
-            );
-
-          };
-
-        document.head.appendChild(
-          script
-        );
-
-      }
+    return (
+      params.get("id") ||
+      params.get("record_id") ||
+      params.get("khatian_id")
     );
 
   }
 
 
   /* =====================================================
-     SUPABASE
+     STATUS BOX
   ===================================================== */
 
-  async function getSupabase() {
+  function showAutoFillStatus(
+    message,
+    success
+  ) {
 
-    /*
-     * Supabase library
-     */
-
-    if (!window.supabase) {
-
-      await loadScript(
-        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    let status =
+      document.getElementById(
+        "auto-fill-status"
       );
 
-    }
 
+    if (!status) {
 
-    /*
-     * config.js
-     */
-
-    if (
-      !window.APP_CONFIG ||
-      !window.APP_CONFIG.SUPABASE_URL ||
-      !window.APP_CONFIG.SUPABASE_ANON_KEY
-    ) {
-
-      try {
-
-        await loadScript(
-          "../config.js"
+      status =
+        document.createElement(
+          "div"
         );
 
-      } catch (error) {
+      status.id =
+        "auto-fill-status";
 
-        await loadScript(
-          "./config.js"
+      status.style.marginTop =
+        "8px";
+
+      status.style.fontSize =
+        "13px";
+
+      status.style.fontWeight =
+        "700";
+
+
+      const head =
+        document.querySelector(
+          ".controls-head"
+        );
+
+
+      if (head) {
+
+        head.appendChild(
+          status
         );
 
       }
 
     }
 
+
+    if (!status) {
+      return;
+    }
+
+
+    status.textContent =
+      message;
+
+
+    status.style.color =
+      success
+        ? "#087f3d"
+        : "#b3261e";
+
+  }
+
+
+  /* =====================================================
+     SUPABASE AUTO-FILL
+  ===================================================== */
+
+  async function autoFill() {
+
+    const recordId =
+      getRecordId();
+
+
+    /*
+      ID না থাকলে manual editor
+      আগের মতোই চলবে।
+    */
+
+    if (!recordId) {
+      return;
+    }
+
+
+    /*
+      Config check
+    */
 
     const cfg =
       window.APP_CONFIG || {};
@@ -438,165 +472,241 @@
       !cfg.SUPABASE_ANON_KEY
     ) {
 
-      throw new Error(
-        "Supabase config পাওয়া যায়নি"
+      showAutoFillStatus(
+        "Supabase configuration পাওয়া যায়নি।",
+        false
       );
 
+      console.error(
+        "APP_CONFIG missing:",
+        cfg
+      );
+
+      return;
+
     }
 
-
-    return window.supabase.createClient(
-      cfg.SUPABASE_URL,
-      cfg.SUPABASE_ANON_KEY
-    );
-
-  }
-
-
-  /* =====================================================
-     AUTO FILL FROM land_records
-  ===================================================== */
-
-  async function autoFill() {
-
-    const id =
-      getId();
 
     /*
-     * id না থাকলে normal manual mode
-     */
+      Supabase library check
+    */
 
-    if (!id) {
+    if (
+      !window.supabase ||
+      typeof window.supabase.createClient !== "function"
+    ) {
+
+      showAutoFillStatus(
+        "Supabase library লোড হয়নি।",
+        false
+      );
+
+      console.error(
+        "Supabase library missing."
+      );
+
       return;
+
     }
 
 
-    showStatus(
-      "খতিয়ানের তথ্য লোড হচ্ছে..."
+    showAutoFillStatus(
+      "খতিয়ানের তথ্য লোড হচ্ছে...",
+      true
     );
 
 
     try {
 
       const client =
-        await getSupabase();
+        window.supabase.createClient(
+          cfg.SUPABASE_URL,
+          cfg.SUPABASE_ANON_KEY
+        );
 
 
       const dbId =
-        /^\d+$/.test(id)
-          ? Number(id)
-          : id;
+        /^\d+$/.test(
+          String(recordId)
+        )
+          ? Number(recordId)
+          : recordId;
 
 
-      const result =
+      /*
+        land_records থেকে ID অনুযায়ী record
+      */
+
+      const {
+        data,
+        error
+      } =
         await client
+
           .from("land_records")
-          .select("*")
-          .eq("id", dbId)
+
+          .select(
+            [
+              "id",
+              "khatian",
+              "owner",
+              "dag_no",
+              "survey",
+              "mouza",
+              "upazila",
+              "district",
+              "division",
+              "record_date"
+            ].join(",")
+          )
+
+          .eq(
+            "id",
+            dbId
+          )
+
           .maybeSingle();
 
 
-      if (result.error) {
+      /* -----------------------------------------------
+         DATABASE ERROR
+      ------------------------------------------------ */
+
+      if (error) {
 
         console.error(
-          "Supabase:",
-          result.error
+          "Supabase AutoFill Error:",
+          error
         );
 
-        showStatus(
-          "খতিয়ানের তথ্য লোড করা যায়নি"
+
+        showAutoFillStatus(
+          "খতিয়ানের তথ্য লোড করা যায়নি।",
+          false
         );
+
 
         return;
 
       }
-
-
-      if (!result.data) {
-
-        showStatus(
-          "এই ID-এর খতিয়ান পাওয়া যায়নি: " +
-          id
-        );
-
-        return;
-
-      }
-
-
-      const row =
-        result.data;
 
 
       /* -----------------------------------------------
-         Database → Existing Form
-      ----------------------------------------------- */
+         RECORD NOT FOUND
+      ------------------------------------------------ */
 
+      if (!data) {
 
-      if (
-        row.khatian !== null &&
-        row.khatian !== undefined
-      ) {
-
-        setValue(
-          "titleText",
-          "আর এস (জোনাল) খতিয়ান নং- " +
-          row.khatian
+        console.warn(
+          "No land record found for ID:",
+          dbId
         );
+
+
+        showAutoFillStatus(
+          "এই ID-এর কোনো খতিয়ান পাওয়া যায়নি: " +
+          recordId,
+          false
+        );
+
+
+        return;
 
       }
 
 
+      /*
+        ================================================
+        DATABASE → EXISTING FORM
+        ================================================
+      */
+
+
+      /* খতিয়ান */
+
       setValue(
-        "owner",
-        row.owner
+        "titleText",
+        data.khatian
+          ? "আর এস (জোনাল) খতিয়ান নং- " +
+            data.khatian
+          : ""
       );
 
+
+      /* মালিক */
+
+      setValue(
+        "owner",
+        data.owner
+      );
+
+
+      /* দাগ */
 
       setValue(
         "dag",
-        row.dag_no
-      );
-
-
-      setValue(
-        "revisionNo",
-        row.survey
-      );
-
-
-      setValue(
-        "mouza",
-        row.mouza
-      );
-
-
-      setValue(
-        "upazila",
-        row.upazila
-      );
-
-
-      setValue(
-        "district",
-        row.district
-      );
-
-
-      setValue(
-        "division",
-        row.division
-      );
-
-
-      setValue(
-        "printDate",
-        row.record_date
+        data.dag_no
       );
 
 
       /*
-       * QR
+       * Survey
+       *
+       * তোমার বর্তমান form-এ survey নামে field নেই।
+       * তাই existing "রেঃ সা. নং" field-এ রাখা হচ্ছে।
+       */
+
+      setValue(
+        "revisionNo",
+        data.survey
+      );
+
+
+      /* মৌজা */
+
+      setValue(
+        "mouza",
+        data.mouza
+      );
+
+
+      /* উপজেলা */
+
+      setValue(
+        "upazila",
+        data.upazila
+      );
+
+
+      /* জেলা */
+
+      setValue(
+        "district",
+        data.district
+      );
+
+
+      /* বিভাগ */
+
+      setValue(
+        "division",
+        data.division
+      );
+
+
+      /* তারিখ */
+
+      setValue(
+        "printDate",
+        data.record_date
+      );
+
+
+      /*
+       * QR URL
+       *
+       * বর্তমান PDF editor page-এর URL
+       * automatically QR-এর input-এ বসবে।
        */
 
       setValue(
@@ -606,33 +716,38 @@
 
 
       /*
-       * Refresh preview
+       * Preview update
        */
 
       updatePreview();
 
 
-      showStatus(
-        "✓ খতিয়ানের তথ্য অটোফিল হয়েছে"
+      showAutoFillStatus(
+        "✓ খতিয়ানের তথ্য অটোফিল হয়েছে। ID: " +
+        recordId,
+        true
       );
 
 
       console.log(
-        "Khatian loaded:",
-        row
+        "Khatian AutoFill:",
+        data
       );
 
     }
 
+
     catch (error) {
 
       console.error(
-        "AutoFill error:",
+        "AutoFill Exception:",
         error
       );
 
-      showStatus(
-        "AutoFill চালু করা যায়নি"
+
+      showAutoFillStatus(
+        "অটোফিল করতে সমস্যা হয়েছে।",
+        false
       );
 
     }
@@ -641,25 +756,38 @@
 
 
   /* =====================================================
-     INITIAL
+     INITIAL PREVIEW
   ===================================================== */
 
   updatePreview();
 
 
-  /*
-   * Page সম্পূর্ণ load হওয়ার পরে
-   * AutoFill চালু।
-   */
+  /* =====================================================
+     START AUTO-FILL
+  ===================================================== */
 
-  window.addEventListener(
-    "load",
-    function () {
+  if (
+    document.readyState ===
+    "loading"
+  ) {
 
-      autoFill();
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
 
-    }
-  );
+        autoFill();
+
+      },
+      {
+        once: true
+      }
+    );
+
+  } else {
+
+    autoFill();
+
+  }
 
 
 })();
