@@ -3,17 +3,19 @@
 );
 
 
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 * {
   box-sizing: border-box;
 }
-
 
 html,
 body {
   margin: 0;
   padding: 0;
 }
-
 
 body {
   background: #eef1f5;
@@ -31,47 +33,32 @@ body {
 ========================================================= */
 
 .editor-shell {
-
   max-width: 1500px;
-
   margin: 0 auto;
-
   padding: 22px;
-
 }
 
 
 .controls {
-
   background: #fff;
-
   border-radius: 10px;
-
   padding: 18px;
-
   margin-bottom: 20px;
 
   box-shadow:
-    0 2px 12px rgba(0,0,0,.08);
-
+    0 2px 12px rgba(0, 0, 0, .08);
 }
 
 
 .controls-head h1 {
-
   margin: 0 0 4px;
-
   font-size: 24px;
-
 }
 
 
 .controls-head p {
-
   margin: 0 0 16px;
-
   color: #666;
-
 }
 
 
@@ -80,61 +67,47 @@ body {
 ========================================================= */
 
 .form-grid {
-
   display: grid;
 
   grid-template-columns:
     repeat(4, minmax(0, 1fr));
 
   gap: 10px;
-
 }
 
 
 .wide {
-
   grid-column: 1 / -1;
-
 }
 
 
 label {
-
   display: flex;
-
   flex-direction: column;
-
   gap: 4px;
 
   font-size: 14px;
-
   font-weight: 700;
-
 }
 
 
 input,
 textarea {
-
   width: 100%;
 
   border: 1px solid #bbb;
-
   border-radius: 5px;
 
   padding: 8px 9px;
 
   font: inherit;
-
   font-size: 14px;
 
   background: #fff;
-
 }
 
 
 textarea {
-
   min-height: 72px;
 
   resize: vertical;
@@ -142,20 +115,17 @@ textarea {
   white-space: pre-wrap;
 
   line-height: 1.35;
-
 }
 
 
 input:focus,
 textarea:focus {
-
   outline: none;
 
   border-color: #087f3d;
 
   box-shadow:
-    0 0 0 2px rgba(8,127,61,.10);
-
+    0 0 0 2px rgba(8, 127, 61, .10);
 }
 
 
@@ -164,7 +134,6 @@ textarea:focus {
 ========================================================= */
 
 .toolbar {
-
   display: flex;
 
   gap: 9px;
@@ -172,12 +141,10 @@ textarea:focus {
   margin-top: 14px;
 
   flex-wrap: wrap;
-
 }
 
 
 button {
-
   border: 0;
 
   border-radius: 5px;
@@ -193,21 +160,16 @@ button {
   font-weight: 700;
 
   cursor: pointer;
-
 }
 
 
 button:hover {
-
   opacity: .92;
-
 }
 
 
 button.secondary {
-
   background: #777;
-
 }
 
 
@@ -216,27 +178,22 @@ button.secondary {
 ========================================================= */
 
 .preview-area {
-
   overflow: auto;
 
   padding: 8px 0 36px;
-
 }
 
 
 .paper-wrap {
-
   width: 1650px;
 
   height: 1275px;
 
   margin: 0 auto;
-
 }
 
 
 .paper {
-
   width: 1650px;
 
   height: 1275px;
@@ -248,7 +205,6 @@ button.secondary {
   border: 1px solid #ddd;
 
   overflow: hidden;
-
 }
 
 
@@ -257,7 +213,6 @@ button.secondary {
 ========================================================= */
 
 .doc-title {
-
   position: absolute;
 
   top: 53px;
@@ -275,12 +230,10 @@ button.secondary {
   font-weight: 600;
 
   white-space: pre-line;
-
 }
 
 
 .page-no {
-
   position: absolute;
 
   top: 76px;
@@ -294,7 +247,6 @@ button.secondary {
   line-height: 1.15;
 
   text-align: right;
-
 }
 
 
@@ -303,7 +255,6 @@ button.secondary {
 ========================================================= */
 
 .location {
-
   position: absolute;
 
   top: 106px;
@@ -327,12 +278,10 @@ button.secondary {
   font-size: 20px;
 
   white-space: nowrap;
-
 }
 
 
 .location div {
-
   min-width: 0;
 
   white-space: normal;
@@ -340,14 +289,11 @@ button.secondary {
   overflow: hidden;
 
   line-height: 1.15;
-
 }
 
 
 .location .multiline {
-
   white-space: pre-line;
-
 }
 
 
@@ -356,7 +302,6 @@ button.secondary {
 ========================================================= */
 
 .khat-table {
-
   position: absolute;
 
   top: 147px;
@@ -365,7 +310,11 @@ button.secondary {
 
   width: 1280px;
 
-  height: 855px;
+  /*
+    আগের 855px থেকে কমানো হয়েছে।
+    ফলে নিচের অংশ উপরে উঠে আসবে।
+  */
+  height: 820px;
 
   border-collapse: collapse;
 
@@ -374,7 +323,6 @@ button.secondary {
   font-size: 17px;
 
   line-height: 1.08;
-
 }
 
 
@@ -386,56 +334,45 @@ button.secondary {
   width: 279px;
 }
 
-
 .khat-table .c2 {
   width: 81px;
 }
-
 
 .khat-table .c3 {
   width: 61px;
 }
 
-
 .khat-table .c4 {
   width: 77px;
 }
-
 
 .khat-table .c5 {
   width: 77px;
 }
 
-
 .khat-table .c6 {
   width: 145px;
 }
-
 
 .khat-table .c7 {
   width: 73px;
 }
 
-
 .khat-table .c8 {
   width: 73px;
 }
-
 
 .khat-table .c9 {
   width: 174px;
 }
 
-
 .khat-table .c10 {
   width: 70px;
 }
 
-
 .khat-table .c11 {
   width: 71px;
 }
-
 
 .khat-table .c12 {
   width: 175px;
@@ -448,7 +385,6 @@ button.secondary {
 
 .khat-table th,
 .khat-table td {
-
   border: 1px solid #111;
 
   padding: 4px 5px;
@@ -460,7 +396,6 @@ button.secondary {
   overflow: hidden;
 
   white-space: pre-line;
-
 }
 
 
@@ -469,39 +404,47 @@ button.secondary {
 ========================================================= */
 
 .khat-table thead .r1 {
-
   height: 77px;
-
 }
 
 
 .khat-table thead .r2 {
-
   height: 52px;
-
 }
 
 
 /*
- * ১-৯ row intentionally removed
- */
+  ছবিতে লাল দাগ দিয়ে দেখানো
+  ১-৯ নম্বরের row ইচ্ছাকৃতভাবে নেই।
+*/
 
 
 /* =========================================================
-   DATA ROW
+   MAIN DATA ROW
 ========================================================= */
 
 .khat-table tbody .data-row {
 
-  height: 648px;
+  /*
+    আগের 648px থেকে 625px করা হয়েছে।
+    এতে নিচের অংশ প্রায় 23px উপরে উঠবে।
+  */
 
+  height: 625px;
 }
 
 
+/* =========================================================
+   TOTAL ROW
+========================================================= */
+
 .khat-table tbody .total-row {
 
-  height: 50px;
+  /*
+    আগের 50px থেকে 45px।
+  */
 
+  height: 45px;
 }
 
 
@@ -510,22 +453,18 @@ button.secondary {
 ========================================================= */
 
 .khat-table .owner-text {
-
   white-space: pre-line;
 
   line-height: 1.35;
 
   overflow-wrap: anywhere;
-
 }
 
 
 .khat-table td[data-out] {
-
   white-space: pre-line;
 
   overflow-wrap: anywhere;
-
 }
 
 
@@ -534,36 +473,28 @@ button.secondary {
 ========================================================= */
 
 .khat-table .left {
-
   text-align: left;
-
 }
 
 
 .khat-table .right {
-
   text-align: right;
-
 }
 
 
 .khat-table .center {
-
   text-align: center;
 
   vertical-align: middle;
-
 }
 
 
 .khat-table .small {
-
   font-size: 14px;
 
   line-height: 1.2;
 
   vertical-align: middle;
-
 }
 
 
@@ -572,8 +503,8 @@ button.secondary {
 ========================================================= */
 
 /*
- * নিচের আলাদা lower-line ইচ্ছাকৃতভাবে নেই।
- */
+  নিচের আলাদা horizontal line রাখা হয়নি।
+*/
 
 
 .print-note {
@@ -582,10 +513,13 @@ button.secondary {
 
   left: 70px;
 
-  top: 1012px;
+  /*
+    আগের 1012px থেকে 990px।
+  */
+
+  top: 990px;
 
   font-size: 18px;
-
 }
 
 
@@ -595,15 +529,18 @@ button.secondary {
 
   left: 70px;
 
-  top: 1044px;
+  /*
+    আগের 1044px থেকে 1022px।
+  */
+
+  top: 1022px;
 
   font-size: 18px;
-
 }
 
 
 /* =========================================================
-   SEAL
+   GOVERNMENT SEAL
 ========================================================= */
 
 .seal {
@@ -612,14 +549,17 @@ button.secondary {
 
   left: 615px;
 
-  top: 1012px;
+  /*
+    footer-এর সাথে seal-ও উপরে উঠানো হয়েছে।
+  */
+
+  top: 990px;
 
   width: 115px;
 
   height: 90px;
 
   object-fit: contain;
-
 }
 
 
@@ -633,7 +573,11 @@ button.secondary {
 
   left: 1266px;
 
-  top: 1018px;
+  /*
+    QR আগের 1018px থেকে 996px।
+  */
+
+  top: 996px;
 
   width: 92px;
 
@@ -644,16 +588,13 @@ button.secondary {
   align-items: flex-start;
 
   justify-content: flex-end;
-
 }
 
 
 #qrcode {
-
   width: 92px;
 
   height: 92px;
-
 }
 
 
@@ -665,7 +606,6 @@ button.secondary {
   height: 92px !important;
 
   display: block;
-
 }
 
 
@@ -675,12 +615,9 @@ button.secondary {
 
 @media (max-width: 1650px) {
 
-
   .paper-wrap,
   .paper {
-
     transform-origin: top left;
-
   }
 
 
@@ -702,9 +639,7 @@ button.secondary {
         ) -
         1275px
       );
-
   }
-
 }
 
 
@@ -714,11 +649,8 @@ button.secondary {
 
 @media (max-width: 900px) {
 
-
   .editor-shell {
-
     padding: 12px;
-
   }
 
 
@@ -726,35 +658,25 @@ button.secondary {
 
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
-
   }
-
 }
 
 
 @media (max-width: 600px) {
 
-
   .form-grid {
-
     grid-template-columns: 1fr;
-
   }
 
 
   .wide {
-
     grid-column: auto;
-
   }
 
 
   .controls {
-
     padding: 14px;
-
   }
-
 }
 
 
@@ -764,13 +686,11 @@ button.secondary {
 
 @media print {
 
-
   @page {
 
     size: 11in 8.5in;
 
     margin: 0;
-
   }
 
 
@@ -794,16 +714,15 @@ button.secondary {
 
     print-color-adjust:
       exact !important;
-
   }
 
 
-  /* Hide editor */
+  /* =====================================================
+     HIDE EDITOR CONTROLS
+  ====================================================== */
 
   .controls {
-
     display: none !important;
-
   }
 
 
@@ -818,7 +737,6 @@ button.secondary {
     padding: 0 !important;
 
     margin: 0 !important;
-
   }
 
 
@@ -835,7 +753,6 @@ button.secondary {
     overflow: hidden !important;
 
     transform: none !important;
-
   }
 
 
@@ -855,7 +772,6 @@ button.secondary {
           1056px / 1650px
         )
       ) !important;
-
   }
 
 
@@ -866,7 +782,6 @@ button.secondary {
     margin: 0 !important;
 
     padding: 0 !important;
-
   }
 
 
@@ -876,7 +791,5 @@ button.secondary {
   label {
 
     display: none !important;
-
   }
-
 }
