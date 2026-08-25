@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap');
+@import url(
+  'https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap'
+);
+
 
 * {
   box-sizing: border-box;
 }
+
 
 html,
 body {
@@ -10,9 +14,11 @@ body {
   padding: 0;
 }
 
+
 body {
   background: #eef1f5;
   color: #111;
+
   font-family:
     "Noto Serif Bengali",
     "Noto Serif Bengali UI",
@@ -25,30 +31,47 @@ body {
 ========================================================= */
 
 .editor-shell {
+
   max-width: 1500px;
+
   margin: 0 auto;
+
   padding: 22px;
+
 }
 
 
 .controls {
+
   background: #fff;
+
   border-radius: 10px;
+
   padding: 18px;
+
   margin-bottom: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+
+  box-shadow:
+    0 2px 12px rgba(0,0,0,.08);
+
 }
 
 
 .controls-head h1 {
+
   margin: 0 0 4px;
+
   font-size: 24px;
+
 }
 
 
 .controls-head p {
+
   margin: 0 0 16px;
+
   color: #666;
+
 }
 
 
@@ -57,53 +80,82 @@ body {
 ========================================================= */
 
 .form-grid {
+
   display: grid;
+
   grid-template-columns:
     repeat(4, minmax(0, 1fr));
+
   gap: 10px;
+
 }
 
 
 .wide {
+
   grid-column: 1 / -1;
+
 }
 
 
 label {
+
   display: flex;
+
   flex-direction: column;
+
   gap: 4px;
+
   font-size: 14px;
+
   font-weight: 700;
+
 }
 
 
 input,
 textarea {
+
   width: 100%;
+
   border: 1px solid #bbb;
+
   border-radius: 5px;
+
   padding: 8px 9px;
+
   font: inherit;
+
   font-size: 14px;
+
   background: #fff;
+
 }
 
 
 textarea {
+
   min-height: 72px;
+
   resize: vertical;
+
   white-space: pre-wrap;
+
   line-height: 1.35;
+
 }
 
 
 input:focus,
 textarea:focus {
+
   outline: none;
+
   border-color: #087f3d;
+
   box-shadow:
-    0 0 0 2px rgba(8, 127, 61, .10);
+    0 0 0 2px rgba(8,127,61,.10);
+
 }
 
 
@@ -112,70 +164,104 @@ textarea:focus {
 ========================================================= */
 
 .toolbar {
+
   display: flex;
+
   gap: 9px;
+
   margin-top: 14px;
+
   flex-wrap: wrap;
+
 }
 
 
 button {
+
   border: 0;
+
   border-radius: 5px;
+
   padding: 9px 16px;
+
   background: #087f3d;
+
   color: #fff;
+
   font: inherit;
+
   font-weight: 700;
+
   cursor: pointer;
+
 }
 
 
 button:hover {
+
   opacity: .92;
+
 }
 
 
 button.secondary {
+
   background: #777;
+
 }
 
 
 /* =========================================================
-   PREVIEW AREA
+   PREVIEW
 ========================================================= */
 
 .preview-area {
+
   overflow: auto;
+
   padding: 8px 0 36px;
+
 }
 
 
 .paper-wrap {
+
   width: 1650px;
+
   height: 1275px;
+
   margin: 0 auto;
+
 }
 
 
 .paper {
+
   width: 1650px;
+
   height: 1275px;
+
   position: relative;
+
   background: #fff;
+
   border: 1px solid #ddd;
+
   overflow: hidden;
+
 }
 
 
 /* =========================================================
-   KHATIAN HEADER
+   TITLE
 ========================================================= */
 
 .doc-title {
+
   position: absolute;
 
   top: 53px;
+
   left: 430px;
 
   width: 640px;
@@ -183,18 +269,22 @@ button.secondary {
   text-align: center;
 
   font-size: 39px;
+
   line-height: 1.05;
 
   font-weight: 600;
 
   white-space: pre-line;
+
 }
 
 
 .page-no {
+
   position: absolute;
 
   top: 76px;
+
   right: 76px;
 
   font-size: 17px;
@@ -204,6 +294,7 @@ button.secondary {
   line-height: 1.15;
 
   text-align: right;
+
 }
 
 
@@ -212,9 +303,11 @@ button.secondary {
 ========================================================= */
 
 .location {
+
   position: absolute;
 
   top: 106px;
+
   left: 70px;
 
   width: 1280px;
@@ -234,10 +327,12 @@ button.secondary {
   font-size: 20px;
 
   white-space: nowrap;
+
 }
 
 
 .location div {
+
   min-width: 0;
 
   white-space: normal;
@@ -245,11 +340,14 @@ button.secondary {
   overflow: hidden;
 
   line-height: 1.15;
+
 }
 
 
 .location .multiline {
+
   white-space: pre-line;
+
 }
 
 
@@ -258,12 +356,15 @@ button.secondary {
 ========================================================= */
 
 .khat-table {
+
   position: absolute;
 
   top: 147px;
+
   left: 70px;
 
   width: 1280px;
+
   height: 855px;
 
   border-collapse: collapse;
@@ -273,64 +374,81 @@ button.secondary {
   font-size: 17px;
 
   line-height: 1.08;
+
 }
 
 
-/* Column widths */
+/* =========================================================
+   COLUMNS
+========================================================= */
 
 .khat-table .c1 {
   width: 279px;
 }
 
+
 .khat-table .c2 {
   width: 81px;
 }
+
 
 .khat-table .c3 {
   width: 61px;
 }
 
+
 .khat-table .c4 {
   width: 77px;
 }
+
 
 .khat-table .c5 {
   width: 77px;
 }
 
+
 .khat-table .c6 {
   width: 145px;
 }
+
 
 .khat-table .c7 {
   width: 73px;
 }
 
+
 .khat-table .c8 {
   width: 73px;
 }
+
 
 .khat-table .c9 {
   width: 174px;
 }
 
+
 .khat-table .c10 {
   width: 70px;
 }
 
+
 .khat-table .c11 {
   width: 71px;
 }
+
 
 .khat-table .c12 {
   width: 175px;
 }
 
 
-/* Table cells */
+/* =========================================================
+   TABLE CELLS
+========================================================= */
 
 .khat-table th,
 .khat-table td {
+
   border: 1px solid #111;
 
   padding: 4px 5px;
@@ -342,79 +460,110 @@ button.secondary {
   overflow: hidden;
 
   white-space: pre-line;
+
 }
 
 
-/* Header heights */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .khat-table thead .r1 {
+
   height: 77px;
+
 }
+
 
 .khat-table thead .r2 {
+
   height: 52px;
-}
 
-.khat-table thead .r3 {
-  height: 26px;
 }
 
 
-/* Body heights */
+/*
+ * ১-৯ row intentionally removed
+ */
+
+
+/* =========================================================
+   DATA ROW
+========================================================= */
 
 .khat-table tbody .data-row {
-  height: 596px;
+
+  height: 648px;
+
 }
+
 
 .khat-table tbody .total-row {
+
   height: 50px;
+
 }
 
 
-/* Owner */
+/* =========================================================
+   DATA TEXT
+========================================================= */
 
 .khat-table .owner-text {
+
   white-space: pre-line;
 
   line-height: 1.35;
 
   overflow-wrap: anywhere;
+
 }
 
 
-/* All dynamic fields */
-
 .khat-table td[data-out] {
+
   white-space: pre-line;
 
   overflow-wrap: anywhere;
+
 }
 
 
-/* Alignment */
+/* =========================================================
+   ALIGNMENT
+========================================================= */
 
 .khat-table .left {
+
   text-align: left;
+
 }
 
 
 .khat-table .right {
+
   text-align: right;
+
 }
 
 
 .khat-table .center {
+
   text-align: center;
+
   vertical-align: middle;
+
 }
 
 
 .khat-table .small {
+
   font-size: 14px;
 
   line-height: 1.2;
 
   vertical-align: middle;
+
 }
 
 
@@ -422,53 +571,55 @@ button.secondary {
    FOOTER
 ========================================================= */
 
-.lower-line {
-  position: absolute;
-
-  left: 70px;
-  top: 1001px;
-
-  width: 1280px;
-  height: 1px;
-
-  background: #111;
-}
+/*
+ * নিচের আলাদা lower-line ইচ্ছাকৃতভাবে নেই।
+ */
 
 
 .print-note {
+
   position: absolute;
 
   left: 70px;
+
   top: 1012px;
 
   font-size: 18px;
+
 }
 
 
 .form-note {
+
   position: absolute;
 
   left: 70px;
+
   top: 1044px;
 
   font-size: 18px;
+
 }
 
 
 /* =========================================================
-   GOVERNMENT SEAL
+   SEAL
 ========================================================= */
 
 .seal {
+
   position: absolute;
 
   left: 615px;
+
   top: 1012px;
 
   width: 115px;
+
   height: 90px;
 
   object-fit: contain;
+
 }
 
 
@@ -477,12 +628,15 @@ button.secondary {
 ========================================================= */
 
 .qr-zone {
+
   position: absolute;
 
   left: 1266px;
+
   top: 1018px;
 
   width: 92px;
+
   height: 92px;
 
   display: flex;
@@ -490,43 +644,55 @@ button.secondary {
   align-items: flex-start;
 
   justify-content: flex-end;
+
 }
 
 
 #qrcode {
+
   width: 92px;
+
   height: 92px;
+
 }
 
 
 #qrcode img,
 #qrcode canvas {
+
   width: 92px !important;
+
   height: 92px !important;
 
   display: block;
+
 }
 
 
 /* =========================================================
-   RESPONSIVE PREVIEW
+   RESPONSIVE
 ========================================================= */
 
 @media (max-width: 1650px) {
 
+
   .paper-wrap,
   .paper {
+
     transform-origin: top left;
+
   }
 
 
   .paper-wrap {
+
     transform:
       scale(
         calc(
           (100vw - 44px) / 1650
         )
       );
+
 
     margin-bottom:
       calc(
@@ -536,25 +702,31 @@ button.secondary {
         ) -
         1275px
       );
+
   }
 
 }
 
 
 /* =========================================================
-   MOBILE FORM
+   MOBILE
 ========================================================= */
 
 @media (max-width: 900px) {
 
+
   .editor-shell {
+
     padding: 12px;
+
   }
 
 
   .form-grid {
+
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
+
   }
 
 }
@@ -562,18 +734,25 @@ button.secondary {
 
 @media (max-width: 600px) {
 
+
   .form-grid {
+
     grid-template-columns: 1fr;
+
   }
 
 
   .wide {
+
     grid-column: auto;
+
   }
 
 
   .controls {
+
     padding: 14px;
+
   }
 
 }
@@ -585,9 +764,13 @@ button.secondary {
 
 @media print {
 
+
   @page {
+
     size: 11in 8.5in;
+
     margin: 0;
+
   }
 
 
@@ -595,9 +778,11 @@ button.secondary {
   body {
 
     width: 11in;
+
     height: 8.5in;
 
     margin: 0 !important;
+
     padding: 0 !important;
 
     background: #fff !important;
@@ -609,64 +794,60 @@ button.secondary {
 
     print-color-adjust:
       exact !important;
+
   }
 
 
-  /*
-   * Editor controls hide
-   */
+  /* Hide editor */
 
   .controls {
+
     display: none !important;
+
   }
 
-
-  /*
-   * Preview area
-   */
 
   .preview-area {
 
     width: 11in !important;
+
     height: 8.5in !important;
 
     overflow: hidden !important;
 
     padding: 0 !important;
+
     margin: 0 !important;
+
   }
 
-
-  /*
-   * Original 1650x1275
-   * coordinate system
-   *
-   * 11in x 8.5in
-   */
 
   .paper-wrap {
 
     width: 11in !important;
+
     height: 8.5in !important;
 
     margin: 0 !important;
+
     padding: 0 !important;
 
     overflow: hidden !important;
 
     transform: none !important;
+
   }
 
 
   .paper {
 
     width: 1650px !important;
+
     height: 1275px !important;
 
     border: 0 !important;
 
-    transform-origin:
-      top left !important;
+    transform-origin: top left !important;
 
     transform:
       scale(
@@ -674,31 +855,28 @@ button.secondary {
           1056px / 1650px
         )
       ) !important;
+
   }
 
-
-  /*
-   * Browser print area
-   */
 
   .editor-shell {
 
     max-width: none !important;
 
     margin: 0 !important;
+
     padding: 0 !important;
+
   }
 
-
-  /*
-   * Hide unnecessary elements
-   */
 
   button,
   input,
   textarea,
   label {
+
     display: none !important;
+
   }
 
 }
