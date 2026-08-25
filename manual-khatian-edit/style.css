@@ -1,0 +1,657 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #eef1f4;
+  color: #111;
+  font-family:
+    "Noto Serif Bengali",
+    "Noto Sans Bengali",
+    "Noto Sans Bengali UI",
+    serif;
+}
+
+
+/* =========================================================
+   EDITOR
+   ========================================================= */
+
+.editor-shell {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 22px;
+}
+
+
+/* =========================================================
+   CONTROL PANEL
+   ========================================================= */
+
+.controls {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, .08);
+  padding: 22px;
+  margin-bottom: 24px;
+}
+
+.controls-head h1 {
+  margin: 0 0 6px;
+  color: #087a3d;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.controls-head p {
+  margin: 0 0 12px;
+  color: #666;
+  font-size: 14px;
+}
+
+.load-status {
+  min-height: 20px;
+  color: #087a3d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-grid label.wide {
+  grid-column: 1 / -1;
+}
+
+.form-grid textarea {
+  width: 100%;
+  min-height: 68px;
+
+  resize: vertical;
+
+  border: 1px solid #bbb;
+  border-radius: 6px;
+
+  padding: 8px 10px;
+
+  background: #fff;
+  color: #111;
+
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+
+  outline: none;
+}
+
+.form-grid textarea:focus {
+  border-color: #087a3d;
+  box-shadow:
+    0 0 0 2px rgba(8, 122, 61, .10);
+}
+
+.form-grid textarea::placeholder {
+  color: #999;
+}
+
+
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.toolbar button {
+  border: 0;
+  border-radius: 6px;
+
+  padding: 10px 18px;
+
+  background: #087a3d;
+  color: #fff;
+
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: #066b35;
+}
+
+.toolbar button.secondary {
+  background: #777;
+}
+
+.toolbar button.secondary:hover {
+  background: #666;
+}
+
+
+/* =========================================================
+   PREVIEW AREA
+   ========================================================= */
+
+.preview-area {
+  width: 100%;
+  overflow-x: auto;
+  padding: 8px 0 40px;
+}
+
+.paper-wrap {
+  width: max-content;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   PAPER
+   Reference ratio approximately 1650 x 1275
+   ========================================================= */
+
+.paper {
+  position: relative;
+
+  width: 1650px;
+  height: 1275px;
+
+  background: #fff;
+  color: #111;
+
+  border: 1px solid #ddd;
+
+  overflow: hidden;
+
+  padding: 0;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.doc-title {
+  position: absolute;
+
+  top: 42px;
+  left: 420px;
+
+  width: 810px;
+
+  text-align: center;
+
+  font-size: 40px;
+  line-height: 1.08;
+  font-weight: 600;
+
+  white-space: pre-line;
+}
+
+.page-no {
+  position: absolute;
+
+  top: 57px;
+  right: 65px;
+
+  max-width: 230px;
+
+  text-align: right;
+
+  font-size: 17px;
+  line-height: 1.15;
+
+  white-space: pre-line;
+}
+
+
+/* =========================================================
+   LOCATION INFO
+   ========================================================= */
+
+.location {
+  position: absolute;
+
+  top: 102px;
+  left: 58px;
+  right: 58px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    1.25fr
+    1.05fr
+    1fr
+    .9fr;
+
+  gap: 12px;
+
+  align-items: start;
+
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.location div {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.location .multiline {
+  white-space: pre-line;
+}
+
+
+/* =========================================================
+   KHATIAN TABLE
+   ========================================================= */
+
+.khat-table {
+  position: absolute;
+
+  top: 148px;
+  left: 58px;
+  right: 58px;
+
+  width: calc(100% - 116px);
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+
+  font-size: 17px;
+  line-height: 1.18;
+
+  background: #fff;
+}
+
+.khat-table th,
+.khat-table td {
+  border: 1px solid #111;
+
+  padding: 4px 5px;
+
+  text-align: center;
+  vertical-align: top;
+
+  overflow: hidden;
+
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.khat-table th {
+  font-weight: 600;
+}
+
+.khat-table .left {
+  text-align: left;
+}
+
+.khat-table .right {
+  text-align: right;
+}
+
+.khat-table .center {
+  text-align: center;
+}
+
+.khat-table .small {
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+   ========================================================= */
+
+.khat-table .c1 {
+  width: 18%;
+}
+
+.khat-table .c2 {
+  width: 5.3%;
+}
+
+.khat-table .c3 {
+  width: 5.2%;
+}
+
+.khat-table .c4 {
+  width: 4.8%;
+}
+
+.khat-table .c5 {
+  width: 9.2%;
+}
+
+.khat-table .c6 {
+  width: 8.7%;
+}
+
+.khat-table .c7 {
+  width: 5.7%;
+}
+
+.khat-table .c8 {
+  width: 5.7%;
+}
+
+.khat-table .c9 {
+  width: 8.1%;
+}
+
+.khat-table .c10 {
+  width: 5.7%;
+}
+
+.khat-table .c11 {
+  width: 5.7%;
+}
+
+.khat-table .c12 {
+  width: 16%;
+}
+
+
+/* =========================================================
+   TABLE ROW HEIGHTS
+   ========================================================= */
+
+.khat-table thead .r1 th {
+  height: 66px;
+  vertical-align: middle;
+}
+
+.khat-table thead .r2 th {
+  height: 48px;
+  vertical-align: middle;
+}
+
+.khat-table thead .r3 th {
+  height: 38px;
+  vertical-align: middle;
+}
+
+.khat-table .data-row td {
+  height: 595px;
+}
+
+.khat-table .data-row .owner-text {
+  line-height: 1.45;
+}
+
+.khat-table .total-row td {
+  height: 54px;
+  vertical-align: middle;
+}
+
+
+/* =========================================================
+   LOWER AREA
+   ========================================================= */
+
+.lower-line {
+  position: absolute;
+
+  left: 58px;
+  right: 58px;
+
+  top: 855px;
+
+  height: 1px;
+
+  background: #111;
+}
+
+
+/* =========================================================
+   PRINT NOTE
+   ========================================================= */
+
+.print-note {
+  position: absolute;
+
+  left: 58px;
+  top: 918px;
+
+  font-size: 17px;
+  line-height: 1.4;
+
+  white-space: pre-line;
+}
+
+.form-note {
+  position: absolute;
+
+  left: 58px;
+  top: 951px;
+
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   SEAL
+   ========================================================= */
+
+.seal {
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  top: 903px;
+
+  width: 95px;
+  height: 95px;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   QR CODE
+   ========================================================= */
+
+.qr-zone {
+  position: absolute;
+
+  right: 58px;
+  top: 910px;
+
+  width: 112px;
+  height: 112px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+#qrcode {
+  width: 105px;
+  height: 105px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+#qrcode img,
+#qrcode canvas {
+  display: block;
+
+  width: 105px !important;
+  height: 105px !important;
+}
+
+
+/* =========================================================
+   MULTILINE OUTPUT
+   ========================================================= */
+
+[data-out] {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   MOBILE EDITOR
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .editor-shell {
+    padding: 12px;
+  }
+
+  .form-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .preview-area {
+    overflow-x: auto;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREEN
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+  .controls {
+    padding: 15px;
+  }
+
+  .controls-head h1 {
+    font-size: 21px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid label.wide {
+    grid-column: auto;
+  }
+
+  .toolbar {
+    flex-direction: column;
+  }
+
+  .toolbar button {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    background: #fff !important;
+  }
+
+  body {
+    overflow: visible !important;
+  }
+
+  .controls {
+    display: none !important;
+  }
+
+  .editor-shell {
+    width: 100%;
+    max-width: none;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  .preview-area {
+    width: 100%;
+    overflow: visible !important;
+    padding: 0;
+    margin: 0;
+  }
+
+  .paper-wrap {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .paper {
+    width: 1650px !important;
+    height: 1275px !important;
+
+    margin: 0 auto;
+
+    border: 0;
+
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+}
