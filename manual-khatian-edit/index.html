@@ -3,21 +3,36 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
   <title>খতিয়ান ম্যানুয়াল এডিটর</title>
 
-  <link rel="stylesheet" href="style.css?v=10">
+  <link
+    rel="stylesheet"
+    href="style.css?v=20"
+  >
 </head>
+
 
 <body>
 
 <div class="editor-shell">
 
+
+  <!-- =====================================================
+       EDITOR PANEL
+  ====================================================== -->
+
   <section class="controls">
 
     <div class="controls-head">
-      <h1>খতিয়ান ম্যানুয়াল এডিটর</h1>
+
+      <h1>
+        খতিয়ান ম্যানুয়াল এডিটর
+      </h1>
 
       <p>
         আগের খতিয়ানের তথ্য স্বয়ংক্রিয়ভাবে বসবে।
@@ -25,13 +40,16 @@
       </p>
 
       <div id="load-status"></div>
+
     </div>
 
 
     <div class="form-grid">
 
+
       <label class="wide">
         শিরোনাম
+
         <textarea
           id="titleText"
           rows="2"
@@ -42,6 +60,7 @@
 
       <label>
         পৃষ্ঠা তথ্য
+
         <textarea
           id="pageText"
           rows="2"
@@ -51,6 +70,7 @@
 
       <label>
         বিভাগ
+
         <textarea
           id="division"
           rows="2"
@@ -60,6 +80,7 @@
 
       <label>
         জেলা
+
         <textarea
           id="district"
           rows="2"
@@ -69,6 +90,7 @@
 
       <label>
         উপজেলা/থানা
+
         <textarea
           id="upazila"
           rows="2"
@@ -78,6 +100,7 @@
 
       <label>
         মৌজা
+
         <textarea
           id="mouza"
           rows="2"
@@ -87,6 +110,7 @@
 
       <label>
         জে. এল. নং
+
         <textarea
           id="jlNo"
           rows="2"
@@ -96,6 +120,7 @@
 
       <label>
         রেঃ সা. নং
+
         <textarea
           id="revisionNo"
           rows="2"
@@ -105,6 +130,7 @@
 
       <label>
         মালিক
+
         <textarea
           id="owner"
           rows="4"
@@ -115,6 +141,7 @@
 
       <label>
         অংশ
+
         <textarea
           id="share"
           rows="2"
@@ -124,6 +151,7 @@
 
       <label>
         রাজস্ব
+
         <textarea
           id="revenue"
           rows="2"
@@ -133,6 +161,7 @@
 
       <label>
         দাগ
+
         <textarea
           id="dag"
           rows="2"
@@ -142,6 +171,7 @@
 
       <label>
         কৃষি
+
         <textarea
           id="agri"
           rows="2"
@@ -151,6 +181,7 @@
 
       <label>
         অকৃষি
+
         <textarea
           id="nonAgri"
           rows="2"
@@ -160,6 +191,7 @@
 
       <label>
         দাগের মোট পরিমাণ — একর
+
         <textarea
           id="dagTotalAcre"
           rows="2"
@@ -169,6 +201,7 @@
 
       <label>
         দাগের মোট পরিমাণ — শতাংশ
+
         <textarea
           id="dagTotalPercent"
           rows="2"
@@ -178,6 +211,7 @@
 
       <label>
         দাগের মধ্যে অত্র খতিয়ানের অংশ
+
         <textarea
           id="khatianShare"
           rows="2"
@@ -187,6 +221,7 @@
 
       <label>
         অংশানুযায়ী জমির পরিমাণ — একর
+
         <textarea
           id="shareLandAcre"
           rows="2"
@@ -196,6 +231,7 @@
 
       <label>
         অংশানুযায়ী জমির পরিমাণ — শতাংশ
+
         <textarea
           id="shareLandPercent"
           rows="2"
@@ -205,6 +241,7 @@
 
       <label>
         মোট জমি
+
         <textarea
           id="totalLand"
           rows="2"
@@ -214,6 +251,7 @@
 
       <label class="wide">
         দখল বিষয়ক বা অন্যান্য বিশেষ মন্তব্য
+
         <textarea
           id="remarks"
           rows="4"
@@ -224,6 +262,7 @@
 
       <label>
         মুদ্রণ
+
         <textarea
           id="printing"
           rows="2"
@@ -233,6 +272,7 @@
 
       <label>
         তারিখ
+
         <textarea
           id="printDate"
           rows="2"
@@ -242,11 +282,13 @@
 
       <label class="wide">
         QR-এর URL
+
         <input
           id="qrUrl"
           placeholder="URL স্বয়ংক্রিয়ভাবে বসবে"
         >
       </label>
+
 
     </div>
 
@@ -282,9 +324,15 @@
   </section>
 
 
+
+  <!-- =====================================================
+       KHATIAN PREVIEW
+  ====================================================== -->
+
   <section class="preview-area">
 
     <div class="paper-wrap">
+
 
       <svg
         id="khatian-svg"
@@ -293,16 +341,22 @@
         xmlns="http://www.w3.org/2000/svg"
       >
 
+
+        <!-- PAGE -->
+
         <rect
           x="0"
           y="0"
           width="1650"
           height="1275"
-          fill="#ffffff"
+          fill="#fff"
         />
 
 
-        <!-- TITLE -->
+
+        <!-- =================================================
+             TITLE
+        ================================================== -->
 
         <text
           id="out-title"
@@ -313,18 +367,19 @@
         ></text>
 
 
-        <!-- PAGE -->
-
         <text
           id="out-page"
           x="1570"
-          y="85"
+          y="84"
           text-anchor="end"
           class="svg-page"
         ></text>
 
 
-        <!-- LOCATION -->
+
+        <!-- =================================================
+             LOCATION
+        ================================================== -->
 
         <text
           x="60"
@@ -363,7 +418,7 @@
 
 
         <text
-          x="1010"
+          x="990"
           y="128"
           class="svg-location"
         >
@@ -372,7 +427,7 @@
 
 
         <text
-          x="1180"
+          x="1160"
           y="128"
           class="svg-location"
         >
@@ -380,7 +435,19 @@
         </text>
 
 
-        <!-- TABLE BORDER -->
+
+        <!-- =================================================
+             TABLE
+             
+             Reference boundaries:
+             X:
+             70 | 349 | 430 | 491 | 568 | 713 | 859 |
+             946 | 1033 | 1173 | 1261 | 1349
+
+             Y:
+             174 | 251 | 303 | 1001 | 1064
+        ================================================== -->
+
 
         <g
           fill="none"
@@ -388,135 +455,195 @@
           stroke-width="1"
         >
 
+
+          <!-- OUTER -->
+
           <rect
-            x="59"
-            y="148"
-            width="1532"
-            height="761"
+            x="70"
+            y="174"
+            width="1279"
+            height="890"
           />
 
-          <line
-            x1="299"
-            y1="148"
-            x2="299"
-            y2="909"
-          />
+
+          <!-- =================================================
+               VERTICALS
+          ================================================= -->
+
+
+          <!-- Column 1 -->
 
           <line
-            x1="369"
-            y1="148"
-            x2="369"
-            y2="909"
+            x1="349"
+            y1="174"
+            x2="349"
+            y2="1064"
           />
 
-          <line
-            x1="420"
-            y1="148"
-            x2="420"
-            y2="909"
-          />
+
+          <!-- Column 2 -->
 
           <line
-            x1="486"
-            y1="148"
-            x2="486"
-            y2="909"
+            x1="430"
+            y1="174"
+            x2="430"
+            y2="1064"
           />
 
-          <line
-            x1="609"
-            y1="148"
-            x2="609"
-            y2="909"
-          />
+
+          <!-- Column 3 -->
 
           <line
-            x1="733"
-            y1="148"
-            x2="733"
-            y2="909"
+            x1="491"
+            y1="174"
+            x2="491"
+            y2="1001"
           />
 
-          <line
-            x1="809"
-            y1="148"
-            x2="809"
-            y2="909"
-          />
+
+          <!-- Column 4 -->
 
           <line
-            x1="883"
-            y1="148"
-            x2="883"
-            y2="909"
+            x1="568"
+            y1="174"
+            x2="568"
+            y2="1001"
           />
 
-          <line
-            x1="1002"
-            y1="148"
-            x2="1002"
-            y2="909"
-          />
+
+          <!-- Column 5 -->
 
           <line
-            x1="1076"
-            y1="148"
-            x2="1076"
-            y2="909"
+            x1="713"
+            y1="174"
+            x2="713"
+            y2="1001"
           />
 
-          <line
-            x1="1150"
-            y1="148"
-            x2="1150"
-            y2="909"
-          />
+
+          <!-- Column 6 -->
 
           <line
-            x1="59"
-            y1="215"
-            x2="1591"
-            y2="215"
+            x1="859"
+            y1="174"
+            x2="859"
+            y2="1001"
           />
 
-          <line
-            x1="59"
-            y1="259"
-            x2="1591"
-            y2="259"
-          />
+
+          <!-- Column 7 -->
 
           <line
-            x1="59"
-            y1="302"
-            x2="1591"
-            y2="302"
+            x1="946"
+            y1="174"
+            x2="946"
+            y2="1001"
           />
 
-          <line
-            x1="59"
-            y1="855"
-            x2="1591"
-            y2="855"
-          />
+
+          <!-- Column 8 -->
 
           <line
-            x1="59"
-            y1="909"
-            x2="1591"
-            y2="909"
+            x1="1033"
+            y1="174"
+            x2="1033"
+            y2="1001"
           />
+
+
+          <!--
+            Column 9 right boundary
+            and right side of merged family-planning box
+          -->
+
+          <line
+            x1="1173"
+            y1="174"
+            x2="1173"
+            y2="1064"
+          />
+
+
+          <!-- Column 10 -->
+
+          <line
+            x1="1261"
+            y1="174"
+            x2="1261"
+            y2="1064"
+          />
+
+
+
+          <!-- =================================================
+               HORIZONTAL
+          ================================================== -->
+
+
+          <!-- Header line 1 -->
+
+          <line
+            x1="70"
+            y1="251"
+            x2="1349"
+            y2="251"
+          />
+
+
+          <!-- Header line 2 -->
+
+          <line
+            x1="70"
+            y1="303"
+            x2="1349"
+            y2="303"
+          />
+
+
+          <!-- Data / total line -->
+
+          <line
+            x1="70"
+            y1="1001"
+            x2="1349"
+            y2="1001"
+          />
+
+
+          <!-- Bottom -->
+
+          <line
+            x1="70"
+            y1="1064"
+            x2="1349"
+            y2="1064"
+          />
+
+
+          <!--
+            IMPORTANT:
+            At y=1001 the bottom row starts.
+
+            In that row:
+            491 → 1173 is ONE merged box.
+
+            There are NO vertical lines inside it.
+          -->
 
         </g>
 
 
-        <!-- TABLE HEADER -->
+
+        <!-- =================================================
+             HEADER TEXT
+        ================================================== -->
 
         <g class="svg-header">
 
+
           <text
-            x="179"
-            y="173"
+            x="209"
+            y="194"
             text-anchor="middle"
           >
             মালিক, অকৃষি প্রজা বা ইজারাদারের
@@ -524,8 +651,8 @@
 
 
           <text
-            x="179"
-            y="195"
+            x="209"
+            y="216"
             text-anchor="middle"
           >
             নাম ও ঠিকানা
@@ -533,8 +660,8 @@
 
 
           <text
-            x="334"
-            y="196"
+            x="389"
+            y="216"
             text-anchor="middle"
           >
             অংশ
@@ -542,8 +669,8 @@
 
 
           <text
-            x="394"
-            y="196"
+            x="460"
+            y="216"
             text-anchor="middle"
           >
             রাজস্ব
@@ -551,35 +678,41 @@
 
 
           <text
-            x="453"
-            y="196"
+            x="530"
+            y="216"
             text-anchor="middle"
           >
             দাগ
           </text>
 
 
+          <!-- জমির শ্রেণী -->
+
           <text
-            x="609"
-            y="183"
+            x="640"
+            y="205"
             text-anchor="middle"
           >
             জমির শ্রেণী
           </text>
 
 
+          <!-- দাগের মোট পরিমাণ -->
+
           <text
-            x="847"
-            y="183"
+            x="896"
+            y="205"
             text-anchor="middle"
           >
             দাগের মোট পরিমাণ
           </text>
 
 
+          <!-- Column 7 -->
+
           <text
-            x="942"
-            y="173"
+            x="989"
+            y="194"
             text-anchor="middle"
           >
             দাগের মধ্যে
@@ -587,8 +720,8 @@
 
 
           <text
-            x="942"
-            y="192"
+            x="989"
+            y="213"
             text-anchor="middle"
           >
             অত্র খতিয়ানের
@@ -596,17 +729,19 @@
 
 
           <text
-            x="942"
-            y="211"
+            x="989"
+            y="232"
             text-anchor="middle"
           >
             অংশ
           </text>
 
 
+          <!-- অংশানুযায়ী -->
+
           <text
-            x="1108"
-            y="183"
+            x="1103"
+            y="205"
             text-anchor="middle"
           >
             অংশানুযায়ী জমির
@@ -614,17 +749,19 @@
 
 
           <text
-            x="1108"
-            y="202"
+            x="1103"
+            y="224"
             text-anchor="middle"
           >
             পরিমাণ
           </text>
 
 
+          <!-- Remarks -->
+
           <text
-            x="1370"
-            y="173"
+            x="1258"
+            y="194"
             text-anchor="middle"
           >
             দখল বিষয়ক বা অন্যান্য
@@ -632,19 +769,22 @@
 
 
           <text
-            x="1370"
-            y="193"
+            x="1258"
+            y="213"
             text-anchor="middle"
           >
             বিশেষ মন্তব্য
           </text>
 
 
-          <!-- CORRECT SUB HEADERS -->
+
+          <!-- =================================================
+               SUB HEADERS
+          ================================================== -->
 
           <text
-            x="548"
-            y="247"
+            x="640"
+            y="285"
             text-anchor="middle"
           >
             কৃষি
@@ -652,8 +792,8 @@
 
 
           <text
-            x="548"
-            y="256"
+            x="640"
+            y="297"
             text-anchor="middle"
           >
             ৫(ক)
@@ -661,8 +801,8 @@
 
 
           <text
-            x="671"
-            y="247"
+            x="786"
+            y="285"
             text-anchor="middle"
           >
             অকৃষি
@@ -670,8 +810,8 @@
 
 
           <text
-            x="671"
-            y="256"
+            x="786"
+            y="297"
             text-anchor="middle"
           >
             ৫(খ)
@@ -679,8 +819,8 @@
 
 
           <text
-            x="771"
-            y="247"
+            x="902"
+            y="285"
             text-anchor="middle"
           >
             একর
@@ -688,8 +828,8 @@
 
 
           <text
-            x="771"
-            y="256"
+            x="902"
+            y="297"
             text-anchor="middle"
           >
             ৬(ক)
@@ -697,8 +837,8 @@
 
 
           <text
-            x="846"
-            y="247"
+            x="989"
+            y="285"
             text-anchor="middle"
           >
             শতাংশ
@@ -706,8 +846,8 @@
 
 
           <text
-            x="846"
-            y="256"
+            x="989"
+            y="297"
             text-anchor="middle"
           >
             ৬(খ)
@@ -715,8 +855,8 @@
 
 
           <text
-            x="1040"
-            y="247"
+            x="1103"
+            y="285"
             text-anchor="middle"
           >
             একর
@@ -724,8 +864,8 @@
 
 
           <text
-            x="1040"
-            y="256"
+            x="1103"
+            y="297"
             text-anchor="middle"
           >
             ৮(ক)
@@ -733,8 +873,8 @@
 
 
           <text
-            x="1125"
-            y="247"
+            x="1217"
+            y="285"
             text-anchor="middle"
           >
             শতাংশ
@@ -742,39 +882,45 @@
 
 
           <text
-            x="1125"
-            y="256"
+            x="1217"
+            y="297"
             text-anchor="middle"
           >
             ৮(খ)
           </text>
 
 
-          <!-- COLUMN NUMBERS -->
 
-          <text x="179" y="289" text-anchor="middle">১</text>
-          <text x="334" y="289" text-anchor="middle">২</text>
-          <text x="394" y="289" text-anchor="middle">৩</text>
-          <text x="453" y="289" text-anchor="middle">৪</text>
-          <text x="548" y="289" text-anchor="middle">৫(ক)</text>
-          <text x="671" y="289" text-anchor="middle">৫(খ)</text>
-          <text x="771" y="289" text-anchor="middle">৬(ক)</text>
-          <text x="846" y="289" text-anchor="middle">৬(খ)</text>
-          <text x="942" y="289" text-anchor="middle">৭</text>
-          <text x="1040" y="289" text-anchor="middle">৮(ক)</text>
-          <text x="1125" y="289" text-anchor="middle">৮(খ)</text>
-          <text x="1370" y="289" text-anchor="middle">৯</text>
+          <!-- =================================================
+               NUMBER ROW
+          ================================================== -->
+
+          <text x="209" y="318" text-anchor="middle">১</text>
+          <text x="389" y="318" text-anchor="middle">২</text>
+          <text x="460" y="318" text-anchor="middle">৩</text>
+          <text x="530" y="318" text-anchor="middle">৪</text>
+          <text x="640" y="318" text-anchor="middle">৫(ক)</text>
+          <text x="786" y="318" text-anchor="middle">৫(খ)</text>
+          <text x="902" y="318" text-anchor="middle">৬(ক)</text>
+          <text x="989" y="318" text-anchor="middle">৬(খ)</text>
+          <text x="1103" y="318" text-anchor="middle">৭</text>
+          <text x="1217" y="318" text-anchor="middle">৮</text>
+          <text x="1305" y="318" text-anchor="middle">৯</text>
 
         </g>
 
 
-        <!-- DATA -->
+
+        <!-- =================================================
+             DATA
+        ================================================== -->
 
         <g class="svg-data">
 
+
           <text
-            x="69"
-            y="326"
+            x="78"
+            y="350"
           >
             মালিক
           </text>
@@ -782,171 +928,192 @@
 
           <text
             id="out-owner"
-            x="69"
-            y="350"
+            x="78"
+            y="378"
             class="multiline-svg"
           ></text>
 
 
           <text
             id="out-share"
-            x="334"
-            y="330"
+            x="389"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-revenue"
-            x="394"
-            y="330"
+            x="460"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-dag"
-            x="453"
-            y="330"
+            x="530"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-agri"
-            x="548"
-            y="330"
+            x="640"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-nonagri"
-            x="671"
-            y="330"
+            x="786"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-dag-acre"
-            x="771"
-            y="330"
+            x="902"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-dag-percent"
-            x="846"
-            y="330"
+            x="989"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-khatian-share"
-            x="942"
-            y="330"
+            x="1103"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-share-acre"
-            x="1040"
-            y="330"
+            x="1217"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-share-percent"
-            x="1125"
-            y="330"
+            x="1260"
+            y="352"
             text-anchor="middle"
           ></text>
 
 
           <text
             id="out-remarks"
-            x="1160"
-            y="330"
+            x="1179"
+            y="352"
             class="multiline-svg"
           ></text>
 
         </g>
 
 
-        <!-- TOTAL -->
+
+        <!-- =================================================
+             TOTAL ROW — EXACT MERGE
+        ================================================== -->
 
         <g class="svg-total">
 
+
+          <!-- First column -->
+
           <text
-            x="69"
-            y="882"
+            x="78"
+            y="1026"
           >
-            খারিজে নোট বা পরিবর্তন যাহা
+            .........:ধারামতে নোট বা পরিবর্তন মায়
           </text>
 
 
           <text
-            x="69"
-            y="899"
+            x="78"
+            y="1048"
           >
-            যোগ্য নং...... এবং নং.....
+            মোকদমা নং..............এবং সন
           </text>
 
+
+          <!-- Second column -->
 
           <text
             id="out-total-share"
-            x="334"
-            y="885"
+            x="389"
+            y="1038"
             text-anchor="middle"
           ></text>
 
 
+          <!--
+            ONE merged box:
+            491 → 1173
+          -->
+
           <text
-            x="744"
-            y="885"
+            x="832"
+            y="1040"
             text-anchor="middle"
           >
             পরিবার পরিকল্পনা গ্রহণ করুন
           </text>
 
 
+          <!-- মোট জমিঃ -->
+
           <text
-            x="1240"
-            y="885"
-            text-anchor="end"
+            x="1217"
+            y="1040"
+            text-anchor="middle"
           >
             মোট জমিঃ
           </text>
 
 
+          <!-- শেষ ঘর -->
+
           <text
             id="out-total-land"
-            x="1320"
-            y="885"
+            x="1305"
+            y="1040"
             text-anchor="middle"
           ></text>
+
 
         </g>
 
 
-        <!-- FOOTER -->
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
 
         <text
           id="out-printing"
           x="60"
-          y="940"
+          y="1100"
           class="svg-footer"
         ></text>
 
 
         <text
           x="60"
-          y="963"
+          y="1124"
           class="svg-footer"
         >
           বাংলাদেশ ফরম নং ৫৪৬২ (সংশোধিত)
@@ -957,8 +1124,8 @@
 
         <image
           href="seal.png"
-          x="710"
-          y="910"
+          x="620"
+          y="1074"
           width="82"
           height="82"
           preserveAspectRatio="xMidYMid meet"
@@ -968,10 +1135,10 @@
         <!-- QR -->
 
         <foreignObject
-          x="1474"
-          y="913"
-          width="86"
-          height="86"
+          x="1269"
+          y="1077"
+          width="82"
+          height="82"
         >
 
           <div
@@ -991,13 +1158,18 @@
 </div>
 
 
+
+<!-- =====================================================
+     LIBRARIES
+===================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="../config.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-<script src="app.js?v=10"></script>
+<script src="app.js?v=20"></script>
 
 
 </body>
