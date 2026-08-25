@@ -22,7 +22,7 @@ body {
 
 
 /* =========================================================
-   EDITOR
+   EDITOR PANEL
 ========================================================= */
 
 .editor-shell {
@@ -32,18 +32,13 @@ body {
   padding: 22px;
 }
 
-
-/* =========================================================
-   CONTROL PANEL
-========================================================= */
-
 .controls {
   width: 100%;
   background: #fff;
   border-radius: 10px;
   padding: 18px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
 }
 
 .controls-head h1 {
@@ -51,7 +46,6 @@ body {
   color: #087a3d;
   font-size: 24px;
   line-height: 1.2;
-  font-weight: 700;
 }
 
 .controls-head p {
@@ -75,7 +69,7 @@ body {
 .form-grid {
   display: grid;
   grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+    repeat(4, minmax(0,1fr));
   gap: 10px;
 }
 
@@ -116,7 +110,7 @@ input:focus,
 textarea:focus {
   border-color: #087f3d;
   box-shadow:
-    0 0 0 2px rgba(8, 127, 61, .10);
+    0 0 0 2px rgba(8,127,61,.10);
 }
 
 textarea {
@@ -140,7 +134,6 @@ textarea {
 button {
   border: 0;
   border-radius: 5px;
-
   padding: 9px 16px;
 
   background: #087f3d;
@@ -148,7 +141,6 @@ button {
 
   font: inherit;
   font-weight: 700;
-
   cursor: pointer;
 }
 
@@ -166,7 +158,7 @@ button.secondary:hover {
 
 
 /* =========================================================
-   PREVIEW
+   PREVIEW AREA
 ========================================================= */
 
 .preview-area {
@@ -184,8 +176,7 @@ button.secondary:hover {
 
 /* =========================================================
    PAPER
-   Exact reference coordinate system:
-   1650 × 1275
+   Reference image = 1650 x 1275
 ========================================================= */
 
 .paper {
@@ -193,6 +184,8 @@ button.secondary:hover {
 
   width: 1650px;
   height: 1275px;
+
+  margin: 0;
 
   background: #fff;
   border: 1px solid #ddd;
@@ -208,10 +201,10 @@ button.secondary:hover {
 .doc-title {
   position: absolute;
 
-  top: 57px;
-  left: 420px;
+  top: 65px;
+  left: 430px;
 
-  width: 820px;
+  width: 800px;
 
   text-align: center;
 
@@ -222,18 +215,13 @@ button.secondary:hover {
   white-space: pre-line;
 }
 
-
-/* =========================================================
-   PAGE INFO
-========================================================= */
-
 .page-no {
   position: absolute;
 
-  top: 74px;
-  right: 68px;
+  top: 77px;
+  right: 72px;
 
-  width: 250px;
+  width: 245px;
 
   text-align: right;
 
@@ -246,39 +234,42 @@ button.secondary:hover {
 
 /* =========================================================
    LOCATION
+   Reference location baseline around y = 116–145
 ========================================================= */
 
 .location {
   position: absolute;
 
   top: 111px;
-  left: 69px;
+  left: 70px;
 
-  width: 1522px;
+  width: 1521px;
 
   display: grid;
 
   grid-template-columns:
     1.00fr
     1.00fr
-    1.35fr
-    1.10fr
+    1.33fr
+    1.08fr
     .82fr
-    .75fr;
+    .78fr;
 
   gap: 0;
 
   font-size: 18px;
-  line-height: 1.15;
+  line-height: 1.18;
 
   white-space: nowrap;
 }
 
 .location div {
   min-width: 0;
-  padding-right: 8px;
+
+  padding-right: 6px;
 
   white-space: normal;
+
   overflow: hidden;
   overflow-wrap: anywhere;
 }
@@ -289,37 +280,49 @@ button.secondary:hover {
 
 
 /* =========================================================
-   KHATIAN TABLE
-
-   Reference:
-   left  = 69
-   right = 1591
-   width = 1522
+   MAIN TABLE
+   Exact reference:
+   Left  = 70
+   Right = 1591
+   Top   = 174
+   Bottom= 1064
 ========================================================= */
 
 .khat-table {
   position: absolute;
 
-  top: 173px;
-  left: 69px;
+  top: 174px;
+  left: 70px;
 
-  width: 1522px;
-
-  height: 892px;
+  width: 1521px;
+  height: 890px;
 
   border-collapse: collapse;
-
   table-layout: fixed;
+
+  background: #fff;
 
   font-size: 17px;
   line-height: 1.08;
-
-  background: #fff;
 }
 
 
 /* =========================================================
-   EXACT COLUMN BOUNDARIES FROM REFERENCE
+   COLUMN WIDTHS
+   Exact measured reference boundaries:
+   70
+   349
+   430
+   491
+   568
+   713
+   859
+   946
+   1033
+   1174
+   1261
+   1349
+   1591
 ========================================================= */
 
 .khat-table .c1 {
@@ -327,7 +330,7 @@ button.secondary:hover {
 }
 
 .khat-table .c2 {
-  width: 82px;
+  width: 81px;
 }
 
 .khat-table .c3 {
@@ -351,7 +354,7 @@ button.secondary:hover {
 }
 
 .khat-table .c8 {
-  width: 86px;
+  width: 87px;
 }
 
 .khat-table .c9 {
@@ -359,15 +362,15 @@ button.secondary:hover {
 }
 
 .khat-table .c10 {
-  width: 88px;
-}
-
-.khat-table .c11 {
   width: 87px;
 }
 
+.khat-table .c11 {
+  width: 88px;
+}
+
 .khat-table .c12 {
-  width: 243px;
+  width: 242px;
 }
 
 
@@ -396,15 +399,15 @@ button.secondary:hover {
 
 
 /* =========================================================
-   HEADER ROWS
-   Reference:
-   173 → 251
-   251 → 303
-   303 → 1001
+   HEADER
+   Reference horizontal lines:
+   174
+   251
+   303
 ========================================================= */
 
 .khat-table thead .r1 {
-  height: 78px;
+  height: 77px;
 }
 
 .khat-table thead .r2 {
@@ -419,8 +422,9 @@ button.secondary:hover {
 /* =========================================================
    DATA + TOTAL
    Reference:
-   303 → 1001 = 698px
-   1001 → 1065 = 64px
+   Data starts = 303
+   Total starts= 1001
+   Bottom      = 1064
 ========================================================= */
 
 .khat-table tbody .data-row {
@@ -428,12 +432,12 @@ button.secondary:hover {
 }
 
 .khat-table tbody .total-row {
-  height: 64px;
+  height: 63px;
 }
 
 
 /* =========================================================
-   TABLE TEXT
+   CELL TEXT
 ========================================================= */
 
 .khat-table .owner-text {
@@ -472,23 +476,14 @@ button.secondary:hover {
 
 
 /* =========================================================
-   LOWER BORDER / TABLE END
-========================================================= */
-
-.lower-line {
-  display: none;
-}
-
-
-/* =========================================================
-   PRINT NOTE
+   FOOTER AREA
 ========================================================= */
 
 .print-note {
   position: absolute;
 
-  left: 69px;
-  top: 1076px;
+  left: 60px;
+  top: 1078px;
 
   font-size: 18px;
   line-height: 1.35;
@@ -499,8 +494,8 @@ button.secondary:hover {
 .form-note {
   position: absolute;
 
-  left: 69px;
-  top: 1110px;
+  left: 60px;
+  top: 1112px;
 
   font-size: 18px;
   line-height: 1.35;
@@ -509,17 +504,19 @@ button.secondary:hover {
 
 /* =========================================================
    GOVERNMENT SEAL
-   File name must be: seal.png
+   Based on reference:
+   approximately x=728..820
+   y=1068..1160
 ========================================================= */
 
 .seal {
   position: absolute;
 
-  left: 620px;
-  top: 1078px;
+  left: 728px;
+  top: 1068px;
 
-  width: 82px;
-  height: 82px;
+  width: 92px;
+  height: 92px;
 
   object-fit: contain;
 
@@ -528,40 +525,38 @@ button.secondary:hover {
 
 
 /* =========================================================
-   QR
+   QR CODE
+   Based on reference:
+   approximately x=1489..1571
+   y=1074..1156
 ========================================================= */
 
 .qr-zone {
   position: absolute;
 
-  left: 1268px;
-  top: 1079px;
+  left: 1489px;
+  top: 1074px;
 
-  width: 75px;
-  height: 75px;
+  width: 82px;
+  height: 82px;
 
   display: flex;
 
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 #qrcode {
-  width: 75px;
-  height: 75px;
-
-  display: flex;
-
-  align-items: flex-start;
-  justify-content: flex-end;
+  width: 82px;
+  height: 82px;
 }
 
 #qrcode img,
 #qrcode canvas {
-  width: 75px !important;
-  height: 75px !important;
-
   display: block;
+
+  width: 82px !important;
+  height: 82px !important;
 }
 
 
@@ -576,7 +571,7 @@ button.secondary:hover {
 
 
 /* =========================================================
-   SCREEN RESPONSIVE
+   SCREEN SCALING
 ========================================================= */
 
 @media (max-width: 1650px) {
@@ -616,7 +611,7 @@ button.secondary:hover {
 
   .form-grid {
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(2, minmax(0,1fr));
   }
 
 }
@@ -661,8 +656,7 @@ button.secondary:hover {
 
 /* =========================================================
    PRINT
-   Entire 1650×1275 reference is scaled to A4 landscape
-   without cropping.
+   A4 LANDSCAPE — NO CROPPING
 ========================================================= */
 
 @media print {
@@ -700,19 +694,19 @@ button.secondary:hover {
   }
 
   /*
-    A4 Landscape:
-    1122.52 × 793.70 CSS px
+    Reference ratio:
+    1650 / 1275
 
-    Reference:
-    1650 × 1275
+    A4 Landscape height:
+    210mm
 
-    Scale:
-    793.70 / 1275
+    The complete reference page is scaled
+    uniformly by height so nothing is cropped.
   */
 
   .paper-wrap {
-    width: 1026.7px;
-    height: 793.7px;
+    width: 271.765mm;
+    height: 210mm;
 
     margin: 0 auto;
 
@@ -725,13 +719,12 @@ button.secondary:hover {
 
     transform:
       scale(
-        0.6221176471
+        0.6221176470588235
       );
 
     transform-origin: top left;
 
     border: 0 !important;
-
     box-shadow: none !important;
 
     margin: 0 !important;
