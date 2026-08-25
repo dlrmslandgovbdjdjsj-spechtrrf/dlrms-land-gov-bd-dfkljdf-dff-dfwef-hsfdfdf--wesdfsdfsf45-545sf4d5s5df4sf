@@ -9,176 +9,229 @@
     cfg.SUPABASE_ANON_KEY &&
     !cfg.SUPABASE_ANON_KEY.includes("PASTE_");
 
-  const statusEl =
-    document.getElementById("load-status");
+  const statusEl = document.getElementById("load-status");
 
-  const formFields = [
-    "titleText",
-    "pageText",
-    "division",
-    "district",
-    "upazila",
-    "mouza",
-    "jlNo",
-    "revisionNo",
-    "owner",
-    "share",
-    "revenue",
-    "dag",
-    "agri",
-    "nonAgri",
-    "dagTotalAcre",
-    "dagTotalPercent",
-    "khatianShare",
-    "shareLandAcre",
-    "shareLandPercent",
-    "totalLand",
-    "remarks",
-    "printing",
-    "printDate",
-    "qrUrl"
-  ];
+  function setStatus(text, ok) {
+    if (!statusEl) return;
 
-
-  /* =====================================================
-     SUPABASE CHECK
-  ===================================================== */
+    statusEl.textContent = text;
+    statusEl.style.color = ok ? "#087a3d" : "#a40000";
+  }
 
   if (!valid || !window.supabase) {
-
     setStatus(
       "Supabase configuration পাওয়া যায়নি।",
       false
     );
-
     return;
   }
 
-
-  const client =
-    window.supabase.createClient(
-      cfg.SUPABASE_URL,
-      cfg.SUPABASE_ANON_KEY
-    );
-
+  const client = window.supabase.createClient(
+    cfg.SUPABASE_URL,
+    cfg.SUPABASE_ANON_KEY
+  );
 
   /* =====================================================
      URL ID
   ===================================================== */
 
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
+  const params = new URLSearchParams(
+    window.location.search
+  );
 
-  const idParam =
-    params.get("id");
+  const idParam = params.get("id");
 
-
-  if (
-    !idParam ||
-    !/^\d+$/.test(idParam)
-  ) {
-
+  if (!idParam || !/^\d+$/.test(idParam)) {
     setStatus(
-      "এই খতিয়ানের কোনো ID পাওয়া যায়নি।",
+      "খতিয়ানের ID পাওয়া যায়নি।",
       false
     );
-
     return;
   }
 
-
-  const recordId =
-    Number(idParam);
+  const recordId = Number(idParam);
 
 
   /* =====================================================
-     STATUS
-  ===================================================== */
-
-  function setStatus(text, success) {
-
-    if (!statusEl) {
-      return;
-    }
-
-    statusEl.textContent =
-      text;
-
-    statusEl.style.color =
-      success
-        ? "#087a3d"
-        : "#a40000";
-
-  }
-
-
-  /* =====================================================
-     GET INPUT
+     INPUT HELPERS
   ===================================================== */
 
   function getInput(id) {
     return document.getElementById(id);
   }
 
+  function getValue(id) {
+    const el = getInput(id);
+    return el ? el.value : "";
+  }
 
-  /* =====================================================
-     SET INPUT
-  ===================================================== */
+  function setValue(id, value) {
+    const el = getInput(id);
+    if (!el) return;
 
-  function setInput(id, value) {
-
-    const input =
-      getInput(id);
-
-    if (!input) {
-      return;
-    }
-
-    input.value =
-      value ?? "";
-
+    el.value = value == null ? "" : String(value);
   }
 
 
   /* =====================================================
-     PREVIEW UPDATE
+     SVG TEXT HELPERS
+  ===================================================== */
+
+  function setText(id, value) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.textContent =
+      value == null ? "" : String(value);
+  }
+
+
+  /* =====================================================
+     LIVE PREVIEW
   ===================================================== */
 
   function updatePreview() {
 
-    formFields.forEach(
-      function (field) {
+    setText(
+      "out-title",
+      getValue("titleText")
+    );
 
-        const input =
-          getInput(field);
+    setText(
+      "out-page",
+      getValue("pageText")
+    );
 
-        if (!input) {
-          return;
-        }
 
-        document
-          .querySelectorAll(
-            '[data-out="' +
-            field +
-            '"]'
-          )
-          .forEach(
-            function (element) {
+    setText(
+      "out-division",
+      getValue("division")
+    );
 
-              element.textContent =
-                input.value;
+    setText(
+      "out-district",
+      getValue("district")
+    );
 
-            }
-          );
+    setText(
+      "out-upazila",
+      getValue("upazila")
+    );
 
-      }
+    setText(
+      "out-mouza",
+      getValue("mouza")
+    );
+
+    setText(
+      "out-jl",
+      getValue("jlNo")
+    );
+
+    setText(
+      "out-revision",
+      getValue("revisionNo")
+    );
+
+
+    setText(
+      "out-owner",
+      getValue("owner")
+    );
+
+    setText(
+      "out-share",
+      getValue("share")
+    );
+
+    setText(
+      "out-revenue",
+      getValue("revenue")
+    );
+
+    setText(
+      "out-dag",
+      getValue("dag")
+    );
+
+    setText(
+      "out-agri",
+      getValue("agri")
+    );
+
+    setText(
+      "out-nonagri",
+      getValue("nonAgri")
+    );
+
+    setText(
+      "out-dag-acre",
+      getValue("dagTotalAcre")
+    );
+
+    setText(
+      "out-dag-percent",
+      getValue("dagTotalPercent")
+    );
+
+    setText(
+      "out-khatian-share",
+      getValue("khatianShare")
+    );
+
+    setText(
+      "out-share-acre",
+      getValue("shareLandAcre")
+    );
+
+    setText(
+      "out-share-percent",
+      getValue("shareLandPercent")
+    );
+
+    setText(
+      "out-remarks",
+      getValue("remarks")
+    );
+
+    setText(
+      "out-total-share",
+      getValue("share")
+    );
+
+    setText(
+      "out-total-land",
+      getValue("totalLand")
+    );
+
+
+    const printing = getValue("printing");
+    const printDate = getValue("printDate");
+
+    setText(
+      "out-printing",
+      "মুদ্রণঃ " +
+      printing +
+      "   তারিখঃ " +
+      printDate
     );
 
 
     updateQR();
+  }
 
+
+  /* =====================================================
+     PUBLIC KHATIAN URL
+  ===================================================== */
+
+  function getPublicRecordUrl(id) {
+
+    return (
+      window.location.origin +
+      "/index.html?id=" +
+      encodeURIComponent(id)
+    );
   }
 
 
@@ -188,86 +241,31 @@
 
   function updateQR() {
 
-    const qrContainer =
-      document.getElementById(
-        "qrcode"
-      );
+    const holder =
+      document.getElementById("qr-holder");
 
-    if (!qrContainer) {
-      return;
-    }
+    if (!holder) return;
 
-
-    qrContainer.innerHTML =
-      "";
-
-
-    const urlInput =
-      getInput("qrUrl");
-
-
-    if (!urlInput) {
-      return;
-    }
-
+    holder.innerHTML = "";
 
     const url =
-      urlInput.value.trim();
+      getValue("qrUrl").trim();
 
-
-    if (
-      !url ||
-      !window.QRCode
-    ) {
-
+    if (!url || !window.QRCode) {
       return;
-
     }
 
-
-    new QRCode(
-      qrContainer,
-      {
-        text: url,
-        width: 105,
-        height: 105,
-        correctLevel:
-          QRCode.CorrectLevel.M
-      }
-    );
-
+    new QRCode(holder, {
+      text: url,
+      width: 82,
+      height: 82,
+      correctLevel: QRCode.CorrectLevel.M
+    });
   }
 
 
   /* =====================================================
-     EXISTING PUBLIC KHATIAN URL
-  ===================================================== */
-
-  function getPublicRecordUrl(id) {
-
-    const base =
-      window.location.origin +
-      window.location.pathname
-        .replace(
-          "/manual-khatian-edit/index.html",
-          "/index.html"
-        )
-        .replace(
-          "/manual-khatian-edit/",
-          "/index.html"
-        );
-
-    return (
-      base +
-      "?id=" +
-      encodeURIComponent(id)
-    );
-
-  }
-
-
-  /* =====================================================
-     LOAD RECORD
+     LOAD RECORD FROM SUPABASE
   ===================================================== */
 
   async function loadRecord() {
@@ -277,32 +275,27 @@
       true
     );
 
-
     const {
       data,
       error
-    } =
-      await client
-        .from("land_records")
-        .select(
-          [
-            "id",
-            "khatian",
-            "owner",
-            "dag_no",
-            "survey",
-            "mouza",
-            "upazila",
-            "district",
-            "division",
-            "record_date"
-          ].join(",")
-        )
-        .eq(
+    } = await client
+      .from("land_records")
+      .select(
+        [
           "id",
-          recordId
-        )
-        .maybeSingle();
+          "khatian",
+          "owner",
+          "dag_no",
+          "survey",
+          "mouza",
+          "upazila",
+          "district",
+          "division",
+          "record_date"
+        ].join(",")
+      )
+      .eq("id", recordId)
+      .maybeSingle();
 
 
     if (error) {
@@ -332,11 +325,11 @@
     }
 
 
-    /*
-      Existing land record data
-    */
+    /* =================================================
+       AUTO FILL
+    ================================================= */
 
-    setInput(
+    setValue(
       "titleText",
       data.khatian
         ? "আর এস (জোনাল) খতিয়ান নং- " +
@@ -345,69 +338,51 @@
     );
 
 
-    setInput(
+    setValue(
       "division",
       data.division
     );
 
-
-    setInput(
+    setValue(
       "district",
       data.district
     );
 
-
-    setInput(
+    setValue(
       "upazila",
       data.upazila
     );
 
-
-    setInput(
+    setValue(
       "mouza",
       data.mouza
     );
 
-
-    setInput(
+    setValue(
       "owner",
       data.owner
     );
 
-
-    setInput(
+    setValue(
       "dag",
       data.dag_no
     );
 
-
-    setInput(
+    setValue(
       "printDate",
       data.record_date
     );
 
 
-    /*
-      Existing public record URL
-      automatically goes into QR URL.
-    */
+    /* =================================================
+       AUTOMATIC QR URL
+    ================================================= */
 
-    const publicUrl =
-      getPublicRecordUrl(
-        data.id
-      );
-
-
-    setInput(
+    setValue(
       "qrUrl",
-      publicUrl
+      getPublicRecordUrl(data.id)
     );
 
-
-    /*
-      Other manual fields intentionally
-      remain editable/empty.
-    */
 
     setStatus(
       "খতিয়ানের তথ্য সফলভাবে লোড হয়েছে।",
@@ -416,56 +391,39 @@
 
 
     updatePreview();
-
   }
 
 
   /* =====================================================
-     INPUT LIVE UPDATE
+     LIVE INPUT UPDATE
   ===================================================== */
 
-  formFields.forEach(
-    function (field) {
+  document
+    .querySelectorAll(
+      ".controls input, .controls textarea"
+    )
+    .forEach(function (el) {
 
-      const input =
-        getInput(field);
-
-      if (!input) {
-        return;
-      }
-
-      input.addEventListener(
+      el.addEventListener(
         "input",
-        function () {
-
-          updatePreview();
-
-        }
+        updatePreview
       );
 
-    }
-  );
+    });
 
 
   /* =====================================================
-     UPDATE BUTTON
+     PREVIEW BUTTON
   ===================================================== */
 
-  const updateButton =
-    document.getElementById(
-      "updateBtn"
-    );
+  const updateBtn =
+    document.getElementById("updateBtn");
 
+  if (updateBtn) {
 
-  if (updateButton) {
-
-    updateButton.addEventListener(
+    updateBtn.addEventListener(
       "click",
-      function () {
-
-        updatePreview();
-
-      }
+      updatePreview
     );
 
   }
@@ -475,28 +433,20 @@
      PRINT BUTTON
   ===================================================== */
 
-  const printButton =
-    document.getElementById(
-      "printBtn"
-    );
+  const printBtn =
+    document.getElementById("printBtn");
 
+  if (printBtn) {
 
-  if (printButton) {
-
-    printButton.addEventListener(
+    printBtn.addEventListener(
       "click",
       function () {
 
         updatePreview();
 
-        setTimeout(
-          function () {
-
-            window.print();
-
-          },
-          150
-        );
+        setTimeout(function () {
+          window.print();
+        }, 100);
 
       }
     );
@@ -508,61 +458,35 @@
      RESET MANUAL FIELDS
   ===================================================== */
 
-  const resetButton =
-    document.getElementById(
-      "resetBtn"
-    );
+  const resetBtn =
+    document.getElementById("resetBtn");
 
+  if (resetBtn) {
 
-  if (resetButton) {
-
-    resetButton.addEventListener(
+    resetBtn.addEventListener(
       "click",
       function () {
 
-        const confirmed =
-          confirm(
-            "ম্যানুয়ালভাবে দেওয়া তথ্যগুলো খালি করতে চান?"
-          );
-
-
-        if (!confirmed) {
-          return;
-        }
-
-
-        const keepFields = [
-          "titleText",
-          "pageText",
-          "division",
-          "district",
-          "upazila",
-          "mouza",
-          "owner",
-          "dag",
-          "printDate",
-          "qrUrl",
-          "printing"
+        const manualFields = [
+          "jlNo",
+          "revisionNo",
+          "share",
+          "revenue",
+          "agri",
+          "nonAgri",
+          "dagTotalAcre",
+          "dagTotalPercent",
+          "khatianShare",
+          "shareLandAcre",
+          "shareLandPercent",
+          "totalLand",
+          "remarks"
         ];
 
 
-        formFields.forEach(
-          function (field) {
-
-            if (
-              keepFields.includes(field)
-            ) {
-              return;
-            }
-
-
-            const input =
-              getInput(field);
-
-            if (input) {
-              input.value = "";
-            }
-
+        manualFields.forEach(
+          function (id) {
+            setValue(id, "");
           }
         );
 
