@@ -3,13 +3,12 @@
   "use strict";
 
 
-  /*
-   * =========================================================
-   * CONFIG
-   * =========================================================
-   */
+  /* =====================================================
+     CONFIG
+  ====================================================== */
 
-  const cfg = window.APP_CONFIG || {};
+  const cfg =
+    window.APP_CONFIG || {};
 
 
   const SUPABASE_URL =
@@ -20,11 +19,48 @@
     cfg.SUPABASE_ANON_KEY || "";
 
 
-  /*
-   * =========================================================
-   * FIELD LIST
-   * =========================================================
-   */
+  /* =====================================================
+     SUPABASE
+  ====================================================== */
+
+  let client = null;
+
+
+  if (
+    SUPABASE_URL &&
+    SUPABASE_ANON_KEY &&
+    window.supabase
+  ) {
+
+    client =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+  }
+
+
+  /* =====================================================
+     GET ID FROM URL
+     
+     Example:
+     manual-khatian-edit/index.html?id=25
+  ====================================================== */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const recordId =
+    params.get("id");
+
+
+  /* =====================================================
+     ALL FIELD IDS
+  ====================================================== */
 
   const fieldIds = [
 
@@ -65,76 +101,39 @@
   ];
 
 
-  /*
-   * =========================================================
-   * SUPABASE CLIENT
-   * =========================================================
-   */
-
-  let client = null;
-
-
-  if (
-    SUPABASE_URL &&
-    SUPABASE_ANON_KEY &&
-    window.supabase
-  ) {
-
-    client =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
-
-  }
-
-
-  /*
-   * =========================================================
-   * GET RECORD ID
-   *
-   * Admin থেকে URL হবে:
-   *
-   * manual-khatian-edit/index.html?id=123
-   * =========================================================
-   */
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-
-  const recordId =
-    params.get("id");
-
-
-  /*
-   * =========================================================
-   * SET PREVIEW OUTPUT
-   * =========================================================
-   */
+  /* =====================================================
+     UPDATE PREVIEW TEXT
+  ====================================================== */
 
   function setOutputs(id) {
+
 
     const input =
       document.getElementById(id);
 
 
     if (!input) {
+
       return;
+
     }
+
+
+    const value =
+      input.value;
 
 
     document
       .querySelectorAll(
-        '[data-out="' + id + '"]'
+        '[data-out="' +
+        id +
+        '"]'
       )
       .forEach(
-        function (el) {
+        function (element) {
 
-          el.textContent =
-            input.value;
+          element.textContent =
+            value;
 
         }
       );
@@ -142,44 +141,53 @@
   }
 
 
-  /*
-   * =========================================================
-   * UPDATE QR
-   * =========================================================
-   */
+  /* =====================================================
+     UPDATE QR
+  ====================================================== */
 
   function updateQR() {
 
-    const box =
-      document.getElementById("qrcode");
+
+    const qrBox =
+      document.getElementById(
+        "qrcode"
+      );
 
 
-    const input =
-      document.getElementById("qrUrl");
+    const qrInput =
+      document.getElementById(
+        "qrUrl"
+      );
 
 
-    if (!box || !input) {
+    if (
+      !qrBox ||
+      !qrInput
+    ) {
+
       return;
+
     }
 
 
-    box.innerHTML = "";
+    qrBox.innerHTML = "";
 
 
     const url =
-      input.value.trim();
+      qrInput.value.trim();
 
 
     if (!url) {
 
-      box.style.display =
+      qrBox.style.display =
         "none";
 
       return;
+
     }
 
 
-    box.style.display =
+    qrBox.style.display =
       "block";
 
 
@@ -188,17 +196,19 @@
       "undefined"
     ) {
 
-      console.warn(
+      console.error(
         "QRCode library পাওয়া যায়নি।"
       );
 
       return;
+
     }
 
 
     new QRCode(
-      box,
+      qrBox,
       {
+
         text: url,
 
         width: 92,
@@ -207,22 +217,26 @@
 
         correctLevel:
           QRCode.CorrectLevel.M
+
       }
     );
 
   }
 
 
-  /*
-   * =========================================================
-   * UPDATE PREVIEW
-   * =========================================================
-   */
+  /* =====================================================
+     UPDATE EVERYTHING
+  ====================================================== */
 
   function updatePreview() {
 
+
     fieldIds.forEach(
-      setOutputs
+      function (id) {
+
+        setOutputs(id);
+
+      }
     );
 
 
@@ -231,30 +245,26 @@
   }
 
 
-  /*
-   * =========================================================
-   * SET INPUT VALUE
-   * =========================================================
-   */
+  /* =====================================================
+     SET INPUT VALUE
+  ====================================================== */
 
   function setValue(
     id,
     value
   ) {
 
+
     const input =
       document.getElementById(id);
 
 
     if (!input) {
+
       return;
+
     }
 
-
-    /*
-     * null / undefined হলে
-     * field খালি থাকবে।
-     */
 
     if (
       value === null ||
@@ -272,56 +282,55 @@
   }
 
 
-  /*
-   * =========================================================
-   * PUBLIC KHATIAN URL
-   *
-   * Admin-এর getRecordUrl()-এর সমতুল্য।
-   *
-   * উদাহরণ:
-   *
-   * https://example.com/index.html?id=123
-   * =========================================================
-   */
+  /* =====================================================
+     CREATE SAME PUBLIC URL AS ADMIN
+     
+     Admin uses:
+     
+     window.location.origin +
+     admin path → index.html +
+     ?id=record.id
+  ====================================================== */
 
-  function getPublicRecordUrl(
-    id
-  ) {
+  function getPublicRecordUrl(id) {
 
-    const currentPath =
+
+    let publicPath =
       window.location.pathname;
 
 
     /*
-     * manual-khatian-edit/index.html
-     * অংশ বাদ দিয়ে মূল website-এর
-     * index.html তৈরি করা হচ্ছে।
-     */
+     * Example:
+     
+     /manual-khatian-edit/index.html
 
-    let publicPath =
-      currentPath.replace(
+     becomes:
+
+     /index.html
+    */
+
+    publicPath =
+      publicPath.replace(
         /manual-khatian-edit\/index\.html$/i,
         "index.html"
       );
 
 
     /*
-     * যদি কোনো কারণে replace না হয়,
-     * তাহলে fallback হিসেবে
-     * directory ধরে index.html তৈরি করা হবে।
-     */
+     * Fallback
+    */
 
     if (
       publicPath ===
-      currentPath
+      window.location.pathname
     ) {
 
+
       publicPath =
-        currentPath
-          .replace(
-            /\/manual-khatian-edit\/?$/i,
-            "/"
-          );
+        publicPath.replace(
+          /\/manual-khatian-edit\/?$/i,
+          "/"
+        );
 
 
       if (
@@ -340,29 +349,30 @@
 
 
     return (
+
       window.location.origin +
+
       publicPath +
+
       "?id=" +
+
       encodeURIComponent(id)
+
     );
 
   }
 
 
-  /*
-   * =========================================================
-   * AUTO FILL FROM ADMIN RECORD
-   * =========================================================
-   */
+  /* =====================================================
+     LOAD ADMIN RECORD
+  ====================================================== */
 
   async function loadAdminRecord() {
 
+
     /*
-     * URL-এ ID না থাকলে কিছুই করব না।
-     *
-     * ফলে সরাসরি manual page খুললেও
-     * আগের মতো manually কাজ করা যাবে।
-     */
+     * ID না থাকলে manual mode
+    */
 
     if (!recordId) {
 
@@ -375,14 +385,15 @@
 
     /*
      * Supabase config না থাকলে
-     * manual editor কাজ চালিয়ে যাবে।
-     */
+     * manual editor চালু থাকবে।
+    */
 
     if (!client) {
 
-      console.warn(
-        "Supabase config পাওয়া যায়নি। Manual mode চালু থাকবে।"
+      console.error(
+        "Supabase config পাওয়া যায়নি।"
       );
+
 
       updatePreview();
 
@@ -392,6 +403,11 @@
 
 
     try {
+
+
+      /* ===============================================
+         GET RECORD
+      ================================================ */
 
       const result =
         await client
@@ -416,22 +432,18 @@
 
       if (error) {
 
+
         console.error(
-          "খতিয়ানের তথ্য লোড করা যায়নি:",
+          "Record load error:",
           error
         );
 
 
         alert(
-          "এই খতিয়ানের তথ্য লোড করা যায়নি।\n\n" +
+          "খতিয়ানের তথ্য লোড করা যায়নি।\n\n" +
           error.message
         );
 
-
-        /*
-         * Error হলেও manual editor
-         * বন্ধ হবে না।
-         */
 
         updatePreview();
 
@@ -441,6 +453,7 @@
 
 
       if (!data) {
+
 
         alert(
           "এই ID-এর কোনো খতিয়ান পাওয়া যায়নি।"
@@ -454,30 +467,15 @@
       }
 
 
-      /*
-       * =====================================================
-       * ADMIN DATA → MANUAL KHATIAN
-       * =====================================================
-       *
-       * Admin:
-       * khatian
-       * owner
-       * dag_no
-       * mouza
-       * record_date
-       *
-       * এগুলো শুধু অটো ফিল হবে।
-       *
-       * বাকি field untouched থাকবে।
-       */
+      /* ===============================================
+         1. KHATIAN
+         
+         Admin:
+         khatian
 
-
-      /*
-       * ১. খতিয়ান
-       *
-       * Admin-এর khatian →
-       * Manual editor-এর titleText
-       */
+         Manual:
+         titleText
+      ================================================ */
 
       if (
         data.khatian !== null &&
@@ -485,23 +483,29 @@
         String(data.khatian).trim() !== ""
       ) {
 
+
         setValue(
           "titleText",
+
           "খতিয়ান নং- " +
-          String(data.khatian).trim()
+          String(
+            data.khatian
+          ).trim()
+
         );
 
       }
 
 
-      /*
-       * ২. মালিক
-       */
+      /* ===============================================
+         2. OWNER
+      ================================================ */
 
       if (
         data.owner !== null &&
         data.owner !== undefined
       ) {
+
 
         setValue(
           "owner",
@@ -511,17 +515,21 @@
       }
 
 
-      /*
-       * ৩. দাগ নং
-       *
-       * Admin field = dag_no
-       * Manual field = dag
-       */
+      /* ===============================================
+         3. DAG
+         
+         Admin:
+         dag_no
+
+         Manual:
+         dag
+      ================================================ */
 
       if (
         data.dag_no !== null &&
         data.dag_no !== undefined
       ) {
+
 
         setValue(
           "dag",
@@ -531,14 +539,15 @@
       }
 
 
-      /*
-       * ৪. মৌজা
-       */
+      /* ===============================================
+         4. MOUZA
+      ================================================ */
 
       if (
         data.mouza !== null &&
         data.mouza !== undefined
       ) {
+
 
         setValue(
           "mouza",
@@ -548,17 +557,21 @@
       }
 
 
-      /*
-       * ৫. তারিখ
-       *
-       * Admin record_date →
-       * Manual printDate
-       */
+      /* ===============================================
+         5. DATE
+         
+         Admin:
+         record_date
+
+         Manual:
+         printDate
+      ================================================ */
 
       if (
         data.record_date !== null &&
         data.record_date !== undefined
       ) {
+
 
         setValue(
           "printDate",
@@ -568,12 +581,13 @@
       }
 
 
-      /*
-       * ৬. QR URL
-       *
-       * Admin-এর "খতিয়ান দেখুন"
-       * URL একই ID দিয়ে তৈরি হবে।
-       */
+      /* ===============================================
+         6. QR URL
+         
+         EXACT SAME RECORD ID
+         
+         as Admin "খতিয়ান দেখুন"
+      ================================================ */
 
       const publicUrl =
         getPublicRecordUrl(
@@ -587,15 +601,15 @@
       );
 
 
-      /*
-       * সব অটো ফিল হওয়ার পর
-       * preview update
-       */
+      /* ===============================================
+         UPDATE PREVIEW
+      ================================================ */
 
       updatePreview();
 
 
     } catch (error) {
+
 
       console.error(
         "Unexpected error:",
@@ -616,21 +630,22 @@
   }
 
 
-  /*
-   * =========================================================
-   * INPUT EVENTS
-   * =========================================================
-   */
+  /* =====================================================
+     INPUT EVENTS
+  ====================================================== */
 
   fieldIds.forEach(
     function (id) {
+
 
       const input =
         document.getElementById(id);
 
 
       if (!input) {
+
         return;
+
       }
 
 
@@ -643,19 +658,20 @@
   );
 
 
-  /*
-   * QR input
-   */
+  /* =====================================================
+     QR INPUT EVENT
+  ====================================================== */
 
-  const qrUrl =
+  const qrInput =
     document.getElementById(
       "qrUrl"
     );
 
 
-  if (qrUrl) {
+  if (qrInput) {
 
-    qrUrl.addEventListener(
+
+    qrInput.addEventListener(
       "input",
       updateQR
     );
@@ -663,11 +679,9 @@
   }
 
 
-  /*
-   * =========================================================
-   * UPDATE BUTTON
-   * =========================================================
-   */
+  /* =====================================================
+     UPDATE BUTTON
+  ====================================================== */
 
   const updateBtn =
     document.getElementById(
@@ -677,6 +691,7 @@
 
   if (updateBtn) {
 
+
     updateBtn.addEventListener(
       "click",
       updatePreview
@@ -685,11 +700,9 @@
   }
 
 
-  /*
-   * =========================================================
-   * PRINT / PDF
-   * =========================================================
-   */
+  /* =====================================================
+     PRINT / PDF
+  ====================================================== */
 
   const printBtn =
     document.getElementById(
@@ -699,9 +712,11 @@
 
   if (printBtn) {
 
+
     printBtn.addEventListener(
       "click",
       function () {
+
 
         updatePreview();
 
@@ -721,11 +736,9 @@
   }
 
 
-  /*
-   * =========================================================
-   * RESET
-   * =========================================================
-   */
+  /* =====================================================
+     RESET
+  ====================================================== */
 
   const resetBtn =
     document.getElementById(
@@ -735,21 +748,29 @@
 
   if (resetBtn) {
 
+
     resetBtn.addEventListener(
       "click",
       function () {
 
+
+        /*
+         * সব editable field খালি
+        */
+
         fieldIds.forEach(
           function (id) {
 
+
             const input =
-              document.getElementById(id);
+              document.getElementById(
+                id
+              );
 
 
             if (input) {
 
-              input.value =
-                "";
+              input.value = "";
 
             }
 
@@ -757,10 +778,13 @@
         );
 
 
-        if (qrUrl) {
+        /*
+         * QR-ও খালি
+        */
 
-          qrUrl.value =
-            "";
+        if (qrInput) {
+
+          qrInput.value = "";
 
         }
 
@@ -773,17 +797,17 @@
   }
 
 
-  /*
-   * =========================================================
-   * INITIAL LOAD
-   * =========================================================
-   *
-   * প্রথমে existing/manual values render হবে,
-   * তারপর Admin record load হবে।
-   */
+  /* =====================================================
+     INITIAL
+  ====================================================== */
 
   updatePreview();
 
+
+  /*
+   * URL-এ ID থাকলে
+   * Admin data load হবে।
+  */
 
   loadAdminRecord();
 
