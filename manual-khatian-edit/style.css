@@ -22,10 +22,11 @@ body {
 
 
 /* =========================================================
-   EDITOR SHELL
+   EDITOR
 ========================================================= */
 
 .editor-shell {
+  width: 100%;
   max-width: 1500px;
   margin: 0 auto;
   padding: 22px;
@@ -37,6 +38,7 @@ body {
 ========================================================= */
 
 .controls {
+  width: 100%;
   background: #fff;
   border-radius: 10px;
   padding: 18px;
@@ -48,25 +50,26 @@ body {
   margin: 0 0 4px;
   color: #087a3d;
   font-size: 24px;
+  line-height: 1.2;
   font-weight: 700;
 }
 
 .controls-head p {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   color: #666;
   font-size: 14px;
 }
 
 .load-status {
   min-height: 20px;
-  color: #087a3d;
+  color: #087f3d;
   font-size: 13px;
   font-weight: 700;
 }
 
 
 /* =========================================================
-   FORM GRID
+   FORM
 ========================================================= */
 
 .form-grid {
@@ -84,7 +87,6 @@ label {
   display: flex;
   flex-direction: column;
   gap: 4px;
-
   min-width: 0;
 
   font-size: 14px;
@@ -102,9 +104,10 @@ textarea {
 
   font: inherit;
   font-size: 14px;
+  line-height: 1.35;
 
-  background: #fff;
   color: #111;
+  background: #fff;
 
   outline: none;
 }
@@ -119,21 +122,19 @@ textarea:focus {
 textarea {
   min-height: 72px;
   resize: vertical;
-
   white-space: pre-wrap;
-  line-height: 1.35;
 }
 
 
 /* =========================================================
-   TOOLBAR
+   BUTTONS
 ========================================================= */
 
 .toolbar {
   display: flex;
+  flex-wrap: wrap;
   gap: 9px;
   margin-top: 14px;
-  flex-wrap: wrap;
 }
 
 button {
@@ -152,7 +153,7 @@ button {
 }
 
 button:hover {
-  background: #066c34;
+  background: #066d34;
 }
 
 button.secondary {
@@ -169,6 +170,7 @@ button.secondary:hover {
 ========================================================= */
 
 .preview-area {
+  width: 100%;
   overflow: auto;
   padding: 8px 0 36px;
 }
@@ -179,14 +181,20 @@ button.secondary:hover {
   margin: 0 auto;
 }
 
+
+/* =========================================================
+   PAPER
+   Exact reference coordinate system:
+   1650 × 1275
+========================================================= */
+
 .paper {
+  position: relative;
+
   width: 1650px;
   height: 1275px;
 
-  position: relative;
-
   background: #fff;
-
   border: 1px solid #ddd;
 
   overflow: hidden;
@@ -195,38 +203,42 @@ button.secondary:hover {
 
 /* =========================================================
    TITLE
-   Coordinate based on supplied reference
 ========================================================= */
 
 .doc-title {
   position: absolute;
 
-  top: 53px;
-  left: 430px;
+  top: 57px;
+  left: 420px;
 
-  width: 640px;
+  width: 820px;
 
   text-align: center;
 
   font-size: 39px;
-  line-height: 1;
+  line-height: 1.05;
   font-weight: 600;
 
   white-space: pre-line;
 }
 
+
+/* =========================================================
+   PAGE INFO
+========================================================= */
+
 .page-no {
   position: absolute;
 
-  top: 76px;
-  right: 76px;
+  top: 74px;
+  right: 68px;
 
-  max-width: 240px;
+  width: 250px;
+
+  text-align: right;
 
   font-size: 17px;
   line-height: 1.15;
-
-  text-align: right;
 
   white-space: pre-line;
 }
@@ -239,36 +251,36 @@ button.secondary:hover {
 .location {
   position: absolute;
 
-  top: 106px;
-  left: 70px;
+  top: 111px;
+  left: 69px;
 
-  width: 1280px;
+  width: 1522px;
 
   display: grid;
 
   grid-template-columns:
-    1.05fr
-    1fr
+    1.00fr
+    1.00fr
     1.35fr
-    1.08fr
-    .83fr
-    .78fr;
+    1.10fr
+    .82fr
+    .75fr;
 
-  gap: 4px;
+  gap: 0;
 
-  font-size: 20px;
+  font-size: 18px;
+  line-height: 1.15;
 
   white-space: nowrap;
 }
 
 .location div {
   min-width: 0;
+  padding-right: 8px;
 
   white-space: normal;
-
   overflow: hidden;
-
-  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .location .multiline {
@@ -277,17 +289,23 @@ button.secondary:hover {
 
 
 /* =========================================================
-   MAIN TABLE
+   KHATIAN TABLE
+
+   Reference:
+   left  = 69
+   right = 1591
+   width = 1522
 ========================================================= */
 
 .khat-table {
   position: absolute;
 
-  top: 147px;
-  left: 70px;
+  top: 173px;
+  left: 69px;
 
-  width: 1280px;
-  height: 855px;
+  width: 1522px;
+
+  height: 892px;
 
   border-collapse: collapse;
 
@@ -301,7 +319,7 @@ button.secondary:hover {
 
 
 /* =========================================================
-   COLUMN WIDTHS
+   EXACT COLUMN BOUNDARIES FROM REFERENCE
 ========================================================= */
 
 .khat-table .c1 {
@@ -309,7 +327,7 @@ button.secondary:hover {
 }
 
 .khat-table .c2 {
-  width: 81px;
+  width: 82px;
 }
 
 .khat-table .c3 {
@@ -321,35 +339,35 @@ button.secondary:hover {
 }
 
 .khat-table .c5 {
-  width: 77px;
-}
-
-.khat-table .c6 {
   width: 145px;
 }
 
+.khat-table .c6 {
+  width: 146px;
+}
+
 .khat-table .c7 {
-  width: 73px;
+  width: 87px;
 }
 
 .khat-table .c8 {
-  width: 73px;
+  width: 86px;
 }
 
 .khat-table .c9 {
-  width: 174px;
+  width: 141px;
 }
 
 .khat-table .c10 {
-  width: 70px;
+  width: 88px;
 }
 
 .khat-table .c11 {
-  width: 71px;
+  width: 87px;
 }
 
 .khat-table .c12 {
-  width: 175px;
+  width: 243px;
 }
 
 
@@ -378,11 +396,15 @@ button.secondary:hover {
 
 
 /* =========================================================
-   HEADER ROW HEIGHTS
+   HEADER ROWS
+   Reference:
+   173 → 251
+   251 → 303
+   303 → 1001
 ========================================================= */
 
 .khat-table thead .r1 {
-  height: 77px;
+  height: 78px;
 }
 
 .khat-table thead .r2 {
@@ -390,20 +412,23 @@ button.secondary:hover {
 }
 
 .khat-table thead .r3 {
-  height: 26px;
+  height: 52px;
 }
 
 
 /* =========================================================
-   BODY ROW HEIGHTS
+   DATA + TOTAL
+   Reference:
+   303 → 1001 = 698px
+   1001 → 1065 = 64px
 ========================================================= */
 
 .khat-table tbody .data-row {
-  height: 596px;
+  height: 698px;
 }
 
 .khat-table tbody .total-row {
-  height: 50px;
+  height: 64px;
 }
 
 
@@ -412,8 +437,12 @@ button.secondary:hover {
 ========================================================= */
 
 .khat-table .owner-text {
+  text-align: left;
+
   white-space: pre-line;
-  line-height: 1.35;
+
+  line-height: 1.38;
+
   overflow-wrap: anywhere;
 }
 
@@ -443,20 +472,11 @@ button.secondary:hover {
 
 
 /* =========================================================
-   LOWER LINE
+   LOWER BORDER / TABLE END
 ========================================================= */
 
 .lower-line {
-  position: absolute;
-
-  left: 70px;
-  top: 1001px;
-
-  width: 1280px;
-
-  height: 1px;
-
-  background: #111;
+  display: none;
 }
 
 
@@ -467,11 +487,10 @@ button.secondary:hover {
 .print-note {
   position: absolute;
 
-  left: 70px;
-  top: 1012px;
+  left: 69px;
+  top: 1076px;
 
   font-size: 18px;
-
   line-height: 1.35;
 
   white-space: pre-line;
@@ -480,28 +499,27 @@ button.secondary:hover {
 .form-note {
   position: absolute;
 
-  left: 70px;
-  top: 1044px;
+  left: 69px;
+  top: 1110px;
 
   font-size: 18px;
-
   line-height: 1.35;
 }
 
 
 /* =========================================================
    GOVERNMENT SEAL
-   File: seal.png
+   File name must be: seal.png
 ========================================================= */
 
 .seal {
   position: absolute;
 
-  left: 615px;
-  top: 1012px;
+  left: 620px;
+  top: 1078px;
 
-  width: 115px;
-  height: 90px;
+  width: 82px;
+  height: 82px;
 
   object-fit: contain;
 
@@ -516,11 +534,11 @@ button.secondary:hover {
 .qr-zone {
   position: absolute;
 
-  left: 1266px;
-  top: 1018px;
+  left: 1268px;
+  top: 1079px;
 
-  width: 92px;
-  height: 92px;
+  width: 75px;
+  height: 75px;
 
   display: flex;
 
@@ -529,21 +547,26 @@ button.secondary:hover {
 }
 
 #qrcode {
-  width: 92px;
-  height: 92px;
+  width: 75px;
+  height: 75px;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 
 #qrcode img,
 #qrcode canvas {
-  width: 92px !important;
-  height: 92px !important;
+  width: 75px !important;
+  height: 75px !important;
 
   display: block;
 }
 
 
 /* =========================================================
-   OUTPUT TEXT
+   OUTPUT
 ========================================================= */
 
 [data-out] {
@@ -553,7 +576,7 @@ button.secondary:hover {
 
 
 /* =========================================================
-   RESPONSIVE PREVIEW
+   SCREEN RESPONSIVE
 ========================================================= */
 
 @media (max-width: 1650px) {
@@ -577,6 +600,7 @@ button.secondary:hover {
         - 1275px
       );
   }
+
 }
 
 
@@ -637,6 +661,8 @@ button.secondary:hover {
 
 /* =========================================================
    PRINT
+   Entire 1650×1275 reference is scaled to A4 landscape
+   without cropping.
 ========================================================= */
 
 @media print {
@@ -644,7 +670,7 @@ button.secondary:hover {
   html,
   body {
     width: 100%;
-    min-width: 0;
+    height: 100%;
 
     margin: 0;
     padding: 0;
@@ -665,15 +691,28 @@ button.secondary:hover {
   }
 
   .preview-area {
+    width: 100%;
+
     overflow: visible !important;
 
     padding: 0 !important;
     margin: 0 !important;
   }
 
+  /*
+    A4 Landscape:
+    1122.52 × 793.70 CSS px
+
+    Reference:
+    1650 × 1275
+
+    Scale:
+    793.70 / 1275
+  */
+
   .paper-wrap {
-    width: 277mm;
-    height: 190mm;
+    width: 1026.7px;
+    height: 793.7px;
 
     margin: 0 auto;
 
@@ -681,20 +720,26 @@ button.secondary:hover {
   }
 
   .paper {
-    width: 277mm !important;
-    height: 190mm !important;
+    width: 1650px !important;
+    height: 1275px !important;
 
-    margin: 0 auto !important;
+    transform:
+      scale(
+        0.6221176471
+      );
+
+    transform-origin: top left;
 
     border: 0 !important;
 
     box-shadow: none !important;
 
-    overflow: hidden !important;
+    margin: 0 !important;
   }
 
   @page {
     size: A4 landscape;
     margin: 0;
   }
+
 }
