@@ -311,8 +311,7 @@ button.secondary {
   width: 1280px;
 
   /*
-    আগের 855px থেকে কমানো হয়েছে।
-    ফলে নিচের অংশ উপরে উঠে আসবে।
+    মূল খতিয়ানের বক্সের উচ্চতা
   */
   height: 820px;
 
@@ -400,7 +399,7 @@ button.secondary {
 
 
 /* =========================================================
-   HEADER
+   TABLE HEADER
 ========================================================= */
 
 .khat-table thead .r1 {
@@ -414,8 +413,7 @@ button.secondary {
 
 
 /*
-  ছবিতে লাল দাগ দিয়ে দেখানো
-  ১-৯ নম্বরের row ইচ্ছাকৃতভাবে নেই।
+  এখানে ১-৯ নম্বরের আলাদা row রাখা হয়নি।
 */
 
 
@@ -424,12 +422,6 @@ button.secondary {
 ========================================================= */
 
 .khat-table tbody .data-row {
-
-  /*
-    আগের 648px থেকে 625px করা হয়েছে।
-    এতে নিচের অংশ প্রায় 23px উপরে উঠবে।
-  */
-
   height: 625px;
 }
 
@@ -439,11 +431,6 @@ button.secondary {
 ========================================================= */
 
 .khat-table tbody .total-row {
-
-  /*
-    আগের 50px থেকে 45px।
-  */
-
   height: 45px;
 }
 
@@ -503,39 +490,48 @@ button.secondary {
 ========================================================= */
 
 /*
-  নিচের আলাদা horizontal line রাখা হয়নি।
+  খতিয়ানের বক্সের নিচে:
+
+  ১. মুদ্রণ এবং তারিখ
+  ২. বাংলাদেশ ফর্ম নং ৫৪৬২ (সংশোধিত)
+
+  এখানে আলাদা কোনো horizontal line দেওয়া হয়নি।
 */
 
 
 .print-note {
-
   position: absolute;
 
   left: 70px;
 
   /*
-    আগের 1012px থেকে 990px।
+    খতিয়ানের বক্স শেষ হওয়ার ঠিক নিচে
   */
-
-  top: 990px;
+  top: 985px;
 
   font-size: 18px;
+
+  line-height: 1.35;
+
+  white-space: pre-line;
 }
 
 
 .form-note {
-
   position: absolute;
 
   left: 70px;
 
   /*
-    আগের 1044px থেকে 1022px।
+    মুদ্রণ এবং তারিখের নিচে
   */
-
-  top: 1022px;
+  top: 1015px;
 
   font-size: 18px;
+
+  line-height: 1.35;
+
+  white-space: pre-line;
 }
 
 
@@ -544,14 +540,9 @@ button.secondary {
 ========================================================= */
 
 .seal {
-
   position: absolute;
 
   left: 615px;
-
-  /*
-    footer-এর সাথে seal-ও উপরে উঠানো হয়েছে।
-  */
 
   top: 990px;
 
@@ -564,18 +555,13 @@ button.secondary {
 
 
 /* =========================================================
-   QR
+   QR AREA
 ========================================================= */
 
 .qr-zone {
-
   position: absolute;
 
   left: 1266px;
-
-  /*
-    QR আগের 1018px থেকে 996px।
-  */
 
   top: 996px;
 
@@ -600,7 +586,6 @@ button.secondary {
 
 #qrcode img,
 #qrcode canvas {
-
   width: 92px !important;
 
   height: 92px !important;
@@ -622,14 +607,12 @@ button.secondary {
 
 
   .paper-wrap {
-
     transform:
       scale(
         calc(
           (100vw - 44px) / 1650
         )
       );
-
 
     margin-bottom:
       calc(
@@ -644,7 +627,7 @@ button.secondary {
 
 
 /* =========================================================
-   MOBILE
+   TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -655,12 +638,15 @@ button.secondary {
 
 
   .form-grid {
-
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
   }
 }
 
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -687,7 +673,6 @@ button.secondary {
 @media print {
 
   @page {
-
     size: 11in 8.5in;
 
     margin: 0;
@@ -696,7 +681,6 @@ button.secondary {
 
   html,
   body {
-
     width: 11in;
 
     height: 8.5in;
@@ -709,17 +693,15 @@ button.secondary {
 
     overflow: hidden !important;
 
-    -webkit-print-color-adjust:
-      exact !important;
+    -webkit-print-color-adjust: exact !important;
 
-    print-color-adjust:
-      exact !important;
+    print-color-adjust: exact !important;
   }
 
 
-  /* =====================================================
-     HIDE EDITOR CONTROLS
-  ====================================================== */
+  /* -------------------------------------------------------
+     EDITOR CONTROLS HIDE
+  ------------------------------------------------------- */
 
   .controls {
     display: none !important;
@@ -727,7 +709,6 @@ button.secondary {
 
 
   .preview-area {
-
     width: 11in !important;
 
     height: 8.5in !important;
@@ -741,7 +722,6 @@ button.secondary {
 
 
   .paper-wrap {
-
     width: 11in !important;
 
     height: 8.5in !important;
@@ -757,7 +737,6 @@ button.secondary {
 
 
   .paper {
-
     width: 1650px !important;
 
     height: 1275px !important;
@@ -776,7 +755,6 @@ button.secondary {
 
 
   .editor-shell {
-
     max-width: none !important;
 
     margin: 0 !important;
@@ -789,7 +767,6 @@ button.secondary {
   input,
   textarea,
   label {
-
     display: none !important;
   }
 }
