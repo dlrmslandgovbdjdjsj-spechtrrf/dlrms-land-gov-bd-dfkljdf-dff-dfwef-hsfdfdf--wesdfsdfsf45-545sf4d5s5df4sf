@@ -247,7 +247,7 @@ button.secondary { background: #777; }
 .seal {
   position: absolute;
   left: 615px;
-  top: 1012px;
+  top: 1100px;
   width: 115px;
   height: 90px;
   object-fit: contain;
@@ -256,7 +256,7 @@ button.secondary { background: #777; }
 .qr-zone {
   position: absolute;
   left: 1266px;
-  top: 1080px;
+  top: 1100px;
   width: 92px;
   height: 92px;
   display: flex;
