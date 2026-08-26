@@ -256,7 +256,7 @@ button.secondary { background: #777; }
 .qr-zone {
   position: absolute;
   left: 1266px;
-  top: 1018px;
+  top: 1080px;
   width: 92px;
   height: 92px;
   display: flex;
