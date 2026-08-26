@@ -200,7 +200,7 @@ button.secondary { background: #777; }
 .khat-table thead .r3 { height: 15px; }
 
 .khat-table tbody .data-row { height: 596px; }
-.khat-table tbody .total-row { height: 50px; }
+.khat-table tbody .total-row { height: 35px; }
 
 .khat-table .owner-text {
   white-space: pre-line;
@@ -245,7 +245,7 @@ button.secondary { background: #777; }
 
 .seal {
   position: absolute;
-  left: 615px;
+  left: 711px;
   top: 1100px;
   width: 115px;
   height: 90px;
@@ -254,7 +254,7 @@ button.secondary { background: #777; }
 
 .qr-zone {
   position: absolute;
-  left: 1362px;
+  left: 1430px;
   top: 1100px;
   width: 92px;
   height: 92px;
