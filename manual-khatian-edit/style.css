@@ -195,9 +195,9 @@ button.secondary { background: #777; }
   white-space: pre-line;
 }
 
-.khat-table thead .r1 { height: 30px; }
-.khat-table thead .r2 { height: 15px; }
-.khat-table thead .r3 { height: 15px; }
+.khat-table thead .r1 { height: 15px; }
+.khat-table thead .r2 { height: 7px; }
+.khat-table thead .r3 { height: 7px; }
 
 .khat-table tbody .data-row { height: 596px; }
 .khat-table tbody .total-row { height: 35px; }
