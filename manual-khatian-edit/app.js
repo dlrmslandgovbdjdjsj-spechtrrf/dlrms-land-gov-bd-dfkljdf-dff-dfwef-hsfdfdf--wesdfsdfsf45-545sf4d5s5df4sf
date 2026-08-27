@@ -1,9 +1,11 @@
 (function () {
   "use strict";
 
+
   // =========================================================
-  // এই ID-গুলোর মাধ্যমে HTML-এর ইনপুট/প্রিভিউ ফিল্ড নিয়ন্ত্রণ করা হয়
+  // HTML INPUT FIELD IDs
   // =========================================================
+
   const fieldIds = [
     "titleText",
     "pageText",
@@ -32,300 +34,506 @@
 
 
   // =========================================================
-  // ইনপুটের লেখা Preview-তে বসানো
+  // INPUT → PREVIEW
   // =========================================================
-  function setOutputs(id) {
-    const input = document.getElementById(id);
 
-    if (!input) return;
+  function setOutputs(id) {
+
+    const input =
+      document.getElementById(id);
+
+
+    if (!input) {
+      return;
+    }
+
 
     document
-      .querySelectorAll('[data-out="' + id + '"]')
-      .forEach(function (el) {
-        el.textContent = input.value;
-      });
+      .querySelectorAll(
+        '[data-out="' + id + '"]'
+      )
+      .forEach(
+        function (el) {
+
+          el.textContent =
+            input.value;
+
+        }
+      );
+
   }
 
 
   // =========================================================
-  // QR Code তৈরি / আপডেট
+  // QR CODE UPDATE
   // =========================================================
+
   function updateQR() {
-    const box = document.getElementById("qrcode");
-    const input = document.getElementById("qrUrl");
 
-    if (!box || !input) return;
+    const box =
+      document.getElementById("qrcode");
 
-    box.innerHTML = "";
+    const input =
+      document.getElementById("qrUrl");
 
-    const url = input.value.trim();
 
-    // URL না থাকলে QR লুকিয়ে রাখবে
-    if (!url) {
-      box.style.display = "none";
+    if (!box || !input) {
       return;
     }
 
-    box.style.display = "block";
 
-    // QRCode library পাওয়া না গেলে কিছু করবে না
+    box.innerHTML = "";
+
+
+    const url =
+      input.value.trim();
+
+
+    // URL না থাকলে QR লুকাবে
+    if (!url) {
+
+      box.style.display =
+        "none";
+
+      return;
+    }
+
+
+    box.style.display =
+      "block";
+
+
+    // QRCode library পাওয়া না গেলে
+    // আর কিছু করবে না
     if (typeof QRCode === "undefined") {
       return;
     }
 
-    new QRCode(box, {
-      text: url,
-      width: 92,
-      height: 92,
-      correctLevel: QRCode.CorrectLevel.M
-    });
+
+    new QRCode(
+      box,
+      {
+        text: url,
+        width: 92,
+        height: 92,
+        correctLevel:
+          QRCode.CorrectLevel.M
+      }
+    );
+
   }
 
 
   // =========================================================
-  // পুরোনো সাইট থেকে URL Query Parameter-এর মাধ্যমে তথ্য নেওয়া
+  // OLD SITE / ADMIN থেকে IMPORT DATA
   //
-  // উদাহরণ:
+  // Query Parameters:
   //
-  // index.html?
-  // khatian=আরএস%20খতিয়ান%20নং-৩০২&
-  // owner=জানিন&
-  // dag=১২৩&
-  // date=২৭-০৮-২০২৬&
-  // url=https://example.com
+  // ?id=123
+  // &khatian=...
+  // &owner=...
+  // &dag=...
+  // &date=...
+  // &url=...
   //
+  // Mapping:
+  //
+  // khatian → titleText
+  // owner   → owner
+  // dag     → dag
+  // date    → printDate
+  // url     → qrUrl
   // =========================================================
+
   function getImportedData() {
-    const params = new URLSearchParams(window.location.search);
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
 
 
-    // একাধিক সম্ভাব্য parameter name পরীক্ষা করবে
+    // =======================================================
+    // প্রথম পাওয়া valid parameter return করবে
+    // =======================================================
+
     function firstValue(keys) {
-      for (const key of keys) {
-        const value = params.get(key);
 
-        if (value !== null && value !== "") {
+      for (
+        const key of keys
+      ) {
+
+        const value =
+          params.get(key);
+
+
+        if (
+          value !== null &&
+          value !== ""
+        ) {
+
           return value;
+
         }
+
       }
 
+
       return "";
+
     }
 
 
     // =======================================================
-    // পুরোনো সাইটের তথ্য → এই সাইটের input ID
+    // IMPORT DATA
     // =======================================================
+
     return {
-      // পুরোনো সাইটের "খতিয়ান" → শিরোনাম
-      titleText: firstValue([
-        "khatian",
-        "title",
-        "titleText"
-      ]),
 
-      // পুরোনো সাইটের "মালিক" → মালিক
-      owner: firstValue([
-        "owner",
-        "malik",
-        "ownerText"
-      ]),
+      // -----------------------------------------------------
+      // খতিয়ান → শিরোনাম
+      // -----------------------------------------------------
 
-      // পুরোনো সাইটের "দাগ নং" → দাগ
-      dag: firstValue([
-        "dag",
-        "dagNo",
-        "dag_no",
-        "dagNumber"
-      ]),
+      titleText:
+        firstValue([
+          "khatian",
+          "title",
+          "titleText"
+        ]),
 
-      // পুরোনো সাইটের "তারিখ" → তারিখ
-      printDate: firstValue([
-        "date",
-        "printDate",
-        "tarikh"
-      ]),
 
-      // পুরোনো সাইটের "URL" → QR-এর URL
-      qrUrl: firstValue([
-        "url",
-        "qrUrl",
-        "qr_url"
-      ])
+      // -----------------------------------------------------
+      // মালিক → মালিক
+      // -----------------------------------------------------
+
+      owner:
+        firstValue([
+          "owner",
+          "malik",
+          "ownerText"
+        ]),
+
+
+      // -----------------------------------------------------
+      // দাগ নং → দাগ
+      // -----------------------------------------------------
+
+      dag:
+        firstValue([
+          "dag",
+          "dagNo",
+          "dag_no",
+          "dagNumber"
+        ]),
+
+
+      // -----------------------------------------------------
+      // তারিখ → তারিখ
+      // -----------------------------------------------------
+
+      printDate:
+        firstValue([
+          "date",
+          "printDate",
+          "tarikh",
+          "record_date"
+        ]),
+
+
+      // -----------------------------------------------------
+      // URL → QR-এর URL
+      // -----------------------------------------------------
+
+      qrUrl:
+        firstValue([
+          "url",
+          "qrUrl",
+          "qr_url"
+        ])
+
     };
+
   }
 
 
   // =========================================================
-  // URL থেকে পাওয়া তথ্য HTML-এর ঘরে বসানো
+  // IMPORT DATA INTO INPUT FIELDS
   // =========================================================
+
   function importFromOldSite() {
-    const data = getImportedData();
 
-    let imported = false;
-
-
-    Object.keys(data).forEach(function (id) {
-      const input = document.getElementById(id);
-
-      // input না থাকলে বা data খালি হলে skip
-      if (!input || data[id] === "") {
-        return;
-      }
-
-      input.value = data[id];
-
-      imported = true;
-    });
+    const data =
+      getImportedData();
 
 
-    // অন্তত একটি তথ্য পাওয়া গেলে Preview আপডেট
+    let imported =
+      false;
+
+
+    Object.keys(data)
+      .forEach(
+        function (id) {
+
+          const input =
+            document.getElementById(id);
+
+
+          // Input না থাকলে অথবা data খালি হলে skip
+          if (
+            !input ||
+            data[id] === ""
+          ) {
+
+            return;
+
+          }
+
+
+          input.value =
+            data[id];
+
+
+          imported =
+            true;
+
+        }
+      );
+
+
+    // =======================================================
+    // Data পাওয়া গেলে Preview আপডেট
+    // =======================================================
+
     if (imported) {
+
       updatePreview();
 
 
       // =====================================================
-      // তথ্য নেওয়ার পর URL-এর ?khatian=... এগুলো সরিয়ে দেবে
-      // এতে address bar পরিষ্কার থাকবে
+      // Query parameters address bar থেকে সরিয়ে দেওয়া
       //
-      // NOTE:
-      // Form-এর ভিতরের data মুছে যাবে না
+      // কিন্তু input-এর data থাকবে।
       // =====================================================
+
       try {
+
         const cleanUrl =
           window.location.origin +
           window.location.pathname +
           window.location.hash;
+
 
         window.history.replaceState(
           {},
           document.title,
           cleanUrl
         );
+
       } catch (e) {
-        // কিছু browser-এ history পরিবর্তন না হলে
-        // এখানে error ignore করবে
+
+        // Browser history update না হলে
+        // কোনো সমস্যা হবে না।
+
       }
+
     }
+
   }
 
 
   // =========================================================
-  // পুরো Preview আপডেট
+  // UPDATE COMPLETE PREVIEW
   // =========================================================
+
   function updatePreview() {
-    fieldIds.forEach(setOutputs);
+
+    fieldIds.forEach(
+      setOutputs
+    );
+
 
     updateQR();
+
   }
 
 
   // =========================================================
-  // Input পরিবর্তন হলে সঙ্গে সঙ্গে Preview আপডেট
+  // LIVE PREVIEW UPDATE
   // =========================================================
-  fieldIds.forEach(function (id) {
-    const input = document.getElementById(id);
 
-    if (input) {
-      input.addEventListener(
-        "input",
-        updatePreview
-      );
+  fieldIds.forEach(
+    function (id) {
+
+      const input =
+        document.getElementById(id);
+
+
+      if (input) {
+
+        input.addEventListener(
+          "input",
+          updatePreview
+        );
+
+      }
+
     }
-  });
+  );
 
 
   // =========================================================
-  // QR URL পরিবর্তন হলে QR আপডেট
+  // QR URL LIVE UPDATE
   // =========================================================
-  const qrUrl = document.getElementById("qrUrl");
+
+  const qrUrl =
+    document.getElementById(
+      "qrUrl"
+    );
+
 
   if (qrUrl) {
+
     qrUrl.addEventListener(
       "input",
       updateQR
     );
+
   }
 
 
   // =========================================================
-  // "প্রিভিউ আপডেট" button
+  // PREVIEW UPDATE BUTTON
   // =========================================================
-  const updateBtn = document.getElementById("updateBtn");
+
+  const updateBtn =
+    document.getElementById(
+      "updateBtn"
+    );
+
 
   if (updateBtn) {
+
     updateBtn.addEventListener(
       "click",
       updatePreview
     );
+
   }
 
 
   // =========================================================
-  // "প্রিন্ট / PDF" button
+  // PRINT / PDF BUTTON
   // =========================================================
-  const printBtn = document.getElementById("printBtn");
+
+  const printBtn =
+    document.getElementById(
+      "printBtn"
+    );
+
 
   if (printBtn) {
+
     printBtn.addEventListener(
       "click",
       function () {
 
-        // আগে Preview আপডেট
+        // Print করার আগে Preview update
         updatePreview();
 
-        // তারপর print
-        setTimeout(function () {
-          window.print();
-        }, 100);
+
+        // QR এবং Preview render হওয়ার
+        // জন্য সামান্য সময় দেওয়া
+        setTimeout(
+          function () {
+
+            window.print();
+
+          },
+          100
+        );
+
       }
     );
+
   }
 
 
   // =========================================================
-  // "সব ঘর খালি করুন" button
+  // RESET BUTTON
   // =========================================================
-  const resetBtn = document.getElementById("resetBtn");
+
+  const resetBtn =
+    document.getElementById(
+      "resetBtn"
+    );
+
 
   if (resetBtn) {
+
     resetBtn.addEventListener(
       "click",
       function () {
 
-        // সব input খালি
-        fieldIds.forEach(function (id) {
-          const input =
-            document.getElementById(id);
 
-          if (input) {
-            input.value = "";
+        // ===================================================
+        // সব field খালি
+        // ===================================================
+
+        fieldIds.forEach(
+          function (id) {
+
+            const input =
+              document.getElementById(id);
+
+
+            if (input) {
+
+              input.value =
+                "";
+
+            }
+
           }
-        });
+        );
 
 
+        // ===================================================
         // QR URL খালি
+        // ===================================================
+
         if (qrUrl) {
-          qrUrl.value = "";
+
+          qrUrl.value =
+            "";
+
         }
 
 
-        // Preview আপডেট
+        // ===================================================
+        // Preview update
+        // ===================================================
+
         updatePreview();
+
       }
     );
+
   }
 
 
   // =========================================================
-  // PAGE LOAD হওয়ার সঙ্গে সঙ্গে:
+  // PAGE LOAD
   //
-  // 1. পুরোনো সাইট থেকে তথ্য নেবে
-  // 2. input-এ বসাবে
-  // 3. Preview আপডেট করবে
+  // 1. Admin/পুরোনো URL থেকে data নেবে
+  // 2. Input field-এ বসাবে
+  // 3. Preview update করবে
+  // 4. QR তৈরি করবে
   // =========================================================
+
   importFromOldSite();
 
+
   updatePreview();
+
 
 })();
