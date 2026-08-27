@@ -1,4 +1,5 @@
 (function () {
+  "use strict";
 
   const cfg = window.APP_CONFIG || {};
 
@@ -11,6 +12,10 @@
   const ADMIN_EMAIL =
     "dlrms.land.gov.bd.jdjsj@gmail.com";
 
+
+  // =========================================================
+  // HTML ELEMENTS
+  // =========================================================
 
   const loginCard =
     document.getElementById("login-card");
@@ -43,6 +48,10 @@
     document.getElementById("record-url-link");
 
 
+  // =========================================================
+  // DATABASE FIELDS
+  // =========================================================
+
   const fields = [
     "khatian",
     "owner",
@@ -56,6 +65,10 @@
   ];
 
 
+  // =========================================================
+  // MESSAGE
+  // =========================================================
+
   function msg(el, text, ok) {
 
     if (!el) {
@@ -68,6 +81,10 @@
       "msg " + (ok ? "ok" : "err");
   }
 
+
+  // =========================================================
+  // SUPABASE CONFIG CHECK
+  // =========================================================
 
   if (!valid || !window.supabase) {
 
@@ -88,6 +105,10 @@
   }
 
 
+  // =========================================================
+  // SUPABASE CLIENT
+  // =========================================================
+
   const client =
     window.supabase.createClient(
       cfg.SUPABASE_URL,
@@ -95,9 +116,12 @@
     );
 
 
-  /*
-    Existing public record URL
-  */
+  // =========================================================
+  // PUBLIC RECORD URL
+  //
+  // এই URL-টাই Admin-এর "URL" হিসেবে ব্যবহার হচ্ছে।
+  // একই URL পরে Manual Khatian-এর QR-এর URL হবে।
+  // =========================================================
 
   function getRecordUrl(id) {
 
@@ -112,29 +136,87 @@
   }
 
 
-  /*
-    Manual Khatian Editor URL
-  */
+  // =========================================================
+  // MANUAL KHATIAN EDITOR URL
+  //
+  // গুরুত্বপূর্ণ:
+  // Admin থেকে Manual Khatian Editor-এ শুধু ID নয়,
+  // প্রয়োজনীয় সব তথ্য Query Parameter হিসেবে পাঠানো হচ্ছে।
+  //
+  // khatian   → titleText
+  // owner     → owner
+  // dag_no    → dag
+  // record_date → printDate
+  // publicUrl → qrUrl
+  // =========================================================
 
-  function getManualKhatianUrl(id) {
+  function getManualKhatianUrl(record) {
 
-    return (
+    const baseUrl =
       window.location.origin +
-      window.location.pathname
-        .replace(
-          "admin.html",
-          "manual-khatian-edit/index.html"
-        ) +
-      "?id=" +
-      encodeURIComponent(id)
+      window.location.pathname.replace(
+        "admin.html",
+        "manual-khatian-edit/index.html"
+      );
+
+    const publicUrl =
+      getRecordUrl(record.id);
+
+
+    const params =
+      new URLSearchParams();
+
+
+    // পুরোনো / মূল record ID
+    params.set(
+      "id",
+      record.id ?? ""
     );
+
+
+    // খতিয়ান → Manual Editor-এর শিরোনাম
+    params.set(
+      "khatian",
+      record.khatian ?? ""
+    );
+
+
+    // মালিক → মালিক
+    params.set(
+      "owner",
+      record.owner ?? ""
+    );
+
+
+    // দাগ নং → দাগ
+    params.set(
+      "dag",
+      record.dag_no ?? ""
+    );
+
+
+    // তারিখ → তারিখ
+    params.set(
+      "date",
+      record.record_date ?? ""
+    );
+
+
+    // Admin-এর Public URL → QR-এর URL
+    params.set(
+      "url",
+      publicUrl
+    );
+
+
+    return baseUrl + "?" + params.toString();
 
   }
 
 
-  /*
-    Load all records
-  */
+  // =========================================================
+  // LOAD ALL RECORDS
+  // =========================================================
 
   async function loadHistory() {
 
@@ -172,9 +254,9 @@
           document.createElement("tr");
 
 
-        /*
-          ID
-        */
+        // ===================================================
+        // ID
+        // ===================================================
 
         const idTd =
           document.createElement("td");
@@ -185,9 +267,9 @@
         tr.appendChild(idTd);
 
 
-        /*
-          Basic information
-        */
+        // ===================================================
+        // BASIC INFORMATION
+        // ===================================================
 
         const values = [
           record.khatian,
@@ -214,9 +296,9 @@
         );
 
 
-        /*
-          Public URL
-        */
+        // ===================================================
+        // PUBLIC URL
+        // ===================================================
 
         const urlTd =
           document.createElement("td");
@@ -254,9 +336,9 @@
         );
 
 
-        /*
-          Manual Khatian PDF
-        */
+        // ===================================================
+        // MANUAL KHATIAN PDF
+        // ===================================================
 
         const pdfTd =
           document.createElement("td");
@@ -268,10 +350,24 @@
         pdfLink.className =
           "pdf-btn";
 
+
+        // ===================================================
+        // এখানে record পুরোটা পাঠানো হচ্ছে।
+        //
+        // ফলে:
+        //
+        // khatian
+        // owner
+        // dag_no
+        // record_date
+        // id
+        //
+        // সবকিছু Manual Editor-এ যাবে।
+        // ===================================================
+
         pdfLink.href =
-          getManualKhatianUrl(
-            record.id
-          );
+          getManualKhatianUrl(record);
+
 
         pdfLink.target =
           "_blank";
@@ -293,9 +389,9 @@
         );
 
 
-        /*
-          Action / Delete
-        */
+        // ===================================================
+        // ACTION / DELETE
+        // ===================================================
 
         const actionTd =
           document.createElement("td");
@@ -407,6 +503,10 @@
     );
 
 
+    // ===================================================
+    // RECORD COUNT
+    // ===================================================
+
     const count =
       (data || []).length;
 
@@ -429,9 +529,9 @@
   }
 
 
-  /*
-    Login session
-  */
+  // =========================================================
+  // LOGIN SESSION
+  // =========================================================
 
   async function enter(session) {
 
@@ -477,9 +577,9 @@
   }
 
 
-  /*
-    Existing session check
-  */
+  // =========================================================
+  // EXISTING SESSION CHECK
+  // =========================================================
 
   client.auth
     .getSession()
@@ -494,9 +594,9 @@
     );
 
 
-  /*
-    Login
-  */
+  // =========================================================
+  // LOGIN
+  // =========================================================
 
   const loginButton =
     document.getElementById("login");
@@ -556,9 +656,9 @@
   }
 
 
-  /*
-    New record
-  */
+  // =========================================================
+  // NEW RECORD
+  // =========================================================
 
   if (newRecordButton) {
 
@@ -609,9 +709,9 @@
   }
 
 
-  /*
-    Cancel
-  */
+  // =========================================================
+  // CANCEL
+  // =========================================================
 
   if (cancelNewButton) {
 
@@ -651,9 +751,9 @@
   }
 
 
-  /*
-    Save new record
-  */
+  // =========================================================
+  // SAVE NEW RECORD
+  // =========================================================
 
   const saveButton =
     document.getElementById("save");
@@ -787,9 +887,9 @@
   }
 
 
-  /*
-    Logout
-  */
+  // =========================================================
+  // LOGOUT
+  // =========================================================
 
   const logoutButton =
     document.getElementById("logout");
