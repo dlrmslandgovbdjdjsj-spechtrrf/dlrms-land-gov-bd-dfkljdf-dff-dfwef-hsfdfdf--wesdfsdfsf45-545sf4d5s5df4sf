@@ -1,815 +1,331 @@
 (function () {
-
   "use strict";
 
-
-  /* =====================================================
-     CONFIG
-  ====================================================== */
-
-  const cfg =
-    window.APP_CONFIG || {};
-
-
-  const SUPABASE_URL =
-    cfg.SUPABASE_URL || "";
-
-
-  const SUPABASE_ANON_KEY =
-    cfg.SUPABASE_ANON_KEY || "";
-
-
-  /* =====================================================
-     SUPABASE
-  ====================================================== */
-
-  let client = null;
-
-
-  if (
-    SUPABASE_URL &&
-    SUPABASE_ANON_KEY &&
-    window.supabase
-  ) {
-
-    client =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
-
-  }
-
-
-  /* =====================================================
-     GET ID FROM URL
-     
-     Example:
-     manual-khatian-edit/index.html?id=25
-  ====================================================== */
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-
-  const recordId =
-    params.get("id");
-
-
-  /* =====================================================
-     ALL FIELD IDS
-  ====================================================== */
-
+  // =========================================================
+  // এই ID-গুলোর মাধ্যমে HTML-এর ইনপুট/প্রিভিউ ফিল্ড নিয়ন্ত্রণ করা হয়
+  // =========================================================
   const fieldIds = [
-
     "titleText",
     "pageText",
-
     "division",
     "district",
     "upazila",
     "mouza",
-
     "jlNo",
     "revisionNo",
-
     "owner",
     "share",
     "revenue",
     "dag",
-
     "agri",
     "nonAgri",
-
     "dagTotalAcre",
     "dagTotalPercent",
-
     "khatianShare",
-
     "shareLandAcre",
     "shareLandPercent",
-
     "totalLand",
-
     "remarks",
-
     "printing",
     "printDate"
-
   ];
 
 
-  /* =====================================================
-     UPDATE PREVIEW TEXT
-  ====================================================== */
-
+  // =========================================================
+  // ইনপুটের লেখা Preview-তে বসানো
+  // =========================================================
   function setOutputs(id) {
+    const input = document.getElementById(id);
 
-
-    const input =
-      document.getElementById(id);
-
-
-    if (!input) {
-
-      return;
-
-    }
-
-
-    const value =
-      input.value;
-
+    if (!input) return;
 
     document
-      .querySelectorAll(
-        '[data-out="' +
-        id +
-        '"]'
-      )
-      .forEach(
-        function (element) {
-
-          element.textContent =
-            value;
-
-        }
-      );
-
+      .querySelectorAll('[data-out="' + id + '"]')
+      .forEach(function (el) {
+        el.textContent = input.value;
+      });
   }
 
 
-  /* =====================================================
-     UPDATE QR
-  ====================================================== */
-
+  // =========================================================
+  // QR Code তৈরি / আপডেট
+  // =========================================================
   function updateQR() {
+    const box = document.getElementById("qrcode");
+    const input = document.getElementById("qrUrl");
 
+    if (!box || !input) return;
 
-    const qrBox =
-      document.getElementById(
-        "qrcode"
-      );
+    box.innerHTML = "";
 
+    const url = input.value.trim();
 
-    const qrInput =
-      document.getElementById(
-        "qrUrl"
-      );
-
-
-    if (
-      !qrBox ||
-      !qrInput
-    ) {
-
-      return;
-
-    }
-
-
-    qrBox.innerHTML = "";
-
-
-    const url =
-      qrInput.value.trim();
-
-
+    // URL না থাকলে QR লুকিয়ে রাখবে
     if (!url) {
-
-      qrBox.style.display =
-        "none";
-
+      box.style.display = "none";
       return;
-
     }
 
+    box.style.display = "block";
 
-    qrBox.style.display =
-      "block";
-
-
-    if (
-      typeof QRCode ===
-      "undefined"
-    ) {
-
-      console.error(
-        "QRCode library পাওয়া যায়নি।"
-      );
-
+    // QRCode library পাওয়া না গেলে কিছু করবে না
+    if (typeof QRCode === "undefined") {
       return;
-
     }
 
-
-    new QRCode(
-      qrBox,
-      {
-
-        text: url,
-
-        width: 92,
-
-        height: 92,
-
-        correctLevel:
-          QRCode.CorrectLevel.M
-
-      }
-    );
-
+    new QRCode(box, {
+      text: url,
+      width: 92,
+      height: 92,
+      correctLevel: QRCode.CorrectLevel.M
+    });
   }
 
 
-  /* =====================================================
-     UPDATE EVERYTHING
-  ====================================================== */
+  // =========================================================
+  // পুরোনো সাইট থেকে URL Query Parameter-এর মাধ্যমে তথ্য নেওয়া
+  //
+  // উদাহরণ:
+  //
+  // index.html?
+  // khatian=আরএস%20খতিয়ান%20নং-৩০২&
+  // owner=জানিন&
+  // dag=১২৩&
+  // date=২৭-০৮-২০২৬&
+  // url=https://example.com
+  //
+  // =========================================================
+  function getImportedData() {
+    const params = new URLSearchParams(window.location.search);
 
-  function updatePreview() {
 
+    // একাধিক সম্ভাব্য parameter name পরীক্ষা করবে
+    function firstValue(keys) {
+      for (const key of keys) {
+        const value = params.get(key);
 
-    fieldIds.forEach(
-      function (id) {
-
-        setOutputs(id);
-
+        if (value !== null && value !== "") {
+          return value;
+        }
       }
-    );
 
+      return "";
+    }
+
+
+    // =======================================================
+    // পুরোনো সাইটের তথ্য → এই সাইটের input ID
+    // =======================================================
+    return {
+      // পুরোনো সাইটের "খতিয়ান" → শিরোনাম
+      titleText: firstValue([
+        "khatian",
+        "title",
+        "titleText"
+      ]),
+
+      // পুরোনো সাইটের "মালিক" → মালিক
+      owner: firstValue([
+        "owner",
+        "malik",
+        "ownerText"
+      ]),
+
+      // পুরোনো সাইটের "দাগ নং" → দাগ
+      dag: firstValue([
+        "dag",
+        "dagNo",
+        "dag_no",
+        "dagNumber"
+      ]),
+
+      // পুরোনো সাইটের "তারিখ" → তারিখ
+      printDate: firstValue([
+        "date",
+        "printDate",
+        "tarikh"
+      ]),
+
+      // পুরোনো সাইটের "URL" → QR-এর URL
+      qrUrl: firstValue([
+        "url",
+        "qrUrl",
+        "qr_url"
+      ])
+    };
+  }
+
+
+  // =========================================================
+  // URL থেকে পাওয়া তথ্য HTML-এর ঘরে বসানো
+  // =========================================================
+  function importFromOldSite() {
+    const data = getImportedData();
+
+    let imported = false;
+
+
+    Object.keys(data).forEach(function (id) {
+      const input = document.getElementById(id);
+
+      // input না থাকলে বা data খালি হলে skip
+      if (!input || data[id] === "") {
+        return;
+      }
+
+      input.value = data[id];
+
+      imported = true;
+    });
+
+
+    // অন্তত একটি তথ্য পাওয়া গেলে Preview আপডেট
+    if (imported) {
+      updatePreview();
+
+
+      // =====================================================
+      // তথ্য নেওয়ার পর URL-এর ?khatian=... এগুলো সরিয়ে দেবে
+      // এতে address bar পরিষ্কার থাকবে
+      //
+      // NOTE:
+      // Form-এর ভিতরের data মুছে যাবে না
+      // =====================================================
+      try {
+        const cleanUrl =
+          window.location.origin +
+          window.location.pathname +
+          window.location.hash;
+
+        window.history.replaceState(
+          {},
+          document.title,
+          cleanUrl
+        );
+      } catch (e) {
+        // কিছু browser-এ history পরিবর্তন না হলে
+        // এখানে error ignore করবে
+      }
+    }
+  }
+
+
+  // =========================================================
+  // পুরো Preview আপডেট
+  // =========================================================
+  function updatePreview() {
+    fieldIds.forEach(setOutputs);
 
     updateQR();
-
   }
 
 
-  /* =====================================================
-     SET INPUT VALUE
-  ====================================================== */
-
-  function setValue(
-    id,
-    value
-  ) {
-
-
-    const input =
-      document.getElementById(id);
-
-
-    if (!input) {
-
-      return;
-
-    }
-
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
-
-      return;
-
-    }
-
-
-    input.value =
-      String(value);
-
-  }
-
-
-  /* =====================================================
-     CREATE SAME PUBLIC URL AS ADMIN
-     
-     Admin uses:
-     
-     window.location.origin +
-     admin path → index.html +
-     ?id=record.id
-  ====================================================== */
-
-  function getPublicRecordUrl(id) {
-
-
-    let publicPath =
-      window.location.pathname;
-
-
-    /*
-     * Example:
-     
-     /manual-khatian-edit/index.html
-
-     becomes:
-
-     /index.html
-    */
-
-    publicPath =
-      publicPath.replace(
-        /manual-khatian-edit\/index\.html$/i,
-        "index.html"
-      );
-
-
-    /*
-     * Fallback
-    */
-
-    if (
-      publicPath ===
-      window.location.pathname
-    ) {
-
-
-      publicPath =
-        publicPath.replace(
-          /\/manual-khatian-edit\/?$/i,
-          "/"
-        );
-
-
-      if (
-        !publicPath.endsWith("/")
-      ) {
-
-        publicPath += "/";
-
-      }
-
-
-      publicPath +=
-        "index.html";
-
-    }
-
-
-    return (
-
-      window.location.origin +
-
-      publicPath +
-
-      "?id=" +
-
-      encodeURIComponent(id)
-
-    );
-
-  }
-
-
-  /* =====================================================
-     LOAD ADMIN RECORD
-  ====================================================== */
-
-  async function loadAdminRecord() {
-
-
-    /*
-     * ID না থাকলে manual mode
-    */
-
-    if (!recordId) {
-
-      updatePreview();
-
-      return;
-
-    }
-
-
-    /*
-     * Supabase config না থাকলে
-     * manual editor চালু থাকবে।
-    */
-
-    if (!client) {
-
-      console.error(
-        "Supabase config পাওয়া যায়নি।"
-      );
-
-
-      updatePreview();
-
-      return;
-
-    }
-
-
-    try {
-
-
-      /* ===============================================
-         GET RECORD
-      ================================================ */
-
-      const result =
-        await client
-          .from("land_records")
-          .select(
-            "id,khatian,owner,dag_no,mouza,record_date"
-          )
-          .eq(
-            "id",
-            recordId
-          )
-          .single();
-
-
-      const data =
-        result.data;
-
-
-      const error =
-        result.error;
-
-
-      if (error) {
-
-
-        console.error(
-          "Record load error:",
-          error
-        );
-
-
-        alert(
-          "খতিয়ানের তথ্য লোড করা যায়নি।\n\n" +
-          error.message
-        );
-
-
-        updatePreview();
-
-        return;
-
-      }
-
-
-      if (!data) {
-
-
-        alert(
-          "এই ID-এর কোনো খতিয়ান পাওয়া যায়নি।"
-        );
-
-
-        updatePreview();
-
-        return;
-
-      }
-
-
-      /* ===============================================
-         1. KHATIAN
-         
-         Admin:
-         khatian
-
-         Manual:
-         titleText
-      ================================================ */
-
-      if (
-        data.khatian !== null &&
-        data.khatian !== undefined &&
-        String(data.khatian).trim() !== ""
-      ) {
-
-
-        setValue(
-          "titleText",
-
-          "খতিয়ান নং- " +
-          String(
-            data.khatian
-          ).trim()
-
-        );
-
-      }
-
-
-      /* ===============================================
-         2. OWNER
-      ================================================ */
-
-      if (
-        data.owner !== null &&
-        data.owner !== undefined
-      ) {
-
-
-        setValue(
-          "owner",
-          data.owner
-        );
-
-      }
-
-
-      /* ===============================================
-         3. DAG
-         
-         Admin:
-         dag_no
-
-         Manual:
-         dag
-      ================================================ */
-
-      if (
-        data.dag_no !== null &&
-        data.dag_no !== undefined
-      ) {
-
-
-        setValue(
-          "dag",
-          data.dag_no
-        );
-
-      }
-
-
-      /* ===============================================
-         4. MOUZA
-      ================================================ */
-
-      if (
-        data.mouza !== null &&
-        data.mouza !== undefined
-      ) {
-
-
-        setValue(
-          "mouza",
-          data.mouza
-        );
-
-      }
-
-
-      /* ===============================================
-         5. DATE
-         
-         Admin:
-         record_date
-
-         Manual:
-         printDate
-      ================================================ */
-
-      if (
-        data.record_date !== null &&
-        data.record_date !== undefined
-      ) {
-
-
-        setValue(
-          "printDate",
-          data.record_date
-        );
-
-      }
-
-
-      /* ===============================================
-         6. QR URL
-         
-         EXACT SAME RECORD ID
-         
-         as Admin "খতিয়ান দেখুন"
-      ================================================ */
-
-      const publicUrl =
-        getPublicRecordUrl(
-          data.id
-        );
-
-
-      setValue(
-        "qrUrl",
-        publicUrl
-      );
-
-
-      /* ===============================================
-         UPDATE PREVIEW
-      ================================================ */
-
-      updatePreview();
-
-
-    } catch (error) {
-
-
-      console.error(
-        "Unexpected error:",
-        error
-      );
-
-
-      alert(
-        "খতিয়ানের তথ্য লোড করার সময় সমস্যা হয়েছে।\n\n" +
-        error.message
-      );
-
-
-      updatePreview();
-
-    }
-
-  }
-
-
-  /* =====================================================
-     INPUT EVENTS
-  ====================================================== */
-
-  fieldIds.forEach(
-    function (id) {
-
-
-      const input =
-        document.getElementById(id);
-
-
-      if (!input) {
-
-        return;
-
-      }
-
-
+  // =========================================================
+  // Input পরিবর্তন হলে সঙ্গে সঙ্গে Preview আপডেট
+  // =========================================================
+  fieldIds.forEach(function (id) {
+    const input = document.getElementById(id);
+
+    if (input) {
       input.addEventListener(
         "input",
         updatePreview
       );
-
     }
-  );
+  });
 
 
-  /* =====================================================
-     QR INPUT EVENT
-  ====================================================== */
+  // =========================================================
+  // QR URL পরিবর্তন হলে QR আপডেট
+  // =========================================================
+  const qrUrl = document.getElementById("qrUrl");
 
-  const qrInput =
-    document.getElementById(
-      "qrUrl"
-    );
-
-
-  if (qrInput) {
-
-
-    qrInput.addEventListener(
+  if (qrUrl) {
+    qrUrl.addEventListener(
       "input",
       updateQR
     );
-
   }
 
 
-  /* =====================================================
-     UPDATE BUTTON
-  ====================================================== */
-
-  const updateBtn =
-    document.getElementById(
-      "updateBtn"
-    );
-
+  // =========================================================
+  // "প্রিভিউ আপডেট" button
+  // =========================================================
+  const updateBtn = document.getElementById("updateBtn");
 
   if (updateBtn) {
-
-
     updateBtn.addEventListener(
       "click",
       updatePreview
     );
-
   }
 
 
-  /* =====================================================
-     PRINT / PDF
-  ====================================================== */
-
-  const printBtn =
-    document.getElementById(
-      "printBtn"
-    );
-
+  // =========================================================
+  // "প্রিন্ট / PDF" button
+  // =========================================================
+  const printBtn = document.getElementById("printBtn");
 
   if (printBtn) {
-
-
     printBtn.addEventListener(
       "click",
       function () {
 
-
+        // আগে Preview আপডেট
         updatePreview();
 
-
-        setTimeout(
-          function () {
-
-            window.print();
-
-          },
-          100
-        );
-
+        // তারপর print
+        setTimeout(function () {
+          window.print();
+        }, 100);
       }
     );
-
   }
 
 
-  /* =====================================================
-     RESET
-  ====================================================== */
-
-  const resetBtn =
-    document.getElementById(
-      "resetBtn"
-    );
-
+  // =========================================================
+  // "সব ঘর খালি করুন" button
+  // =========================================================
+  const resetBtn = document.getElementById("resetBtn");
 
   if (resetBtn) {
-
-
     resetBtn.addEventListener(
       "click",
       function () {
 
+        // সব input খালি
+        fieldIds.forEach(function (id) {
+          const input =
+            document.getElementById(id);
 
-        /*
-         * সব editable field খালি
-        */
-
-        fieldIds.forEach(
-          function (id) {
-
-
-            const input =
-              document.getElementById(
-                id
-              );
-
-
-            if (input) {
-
-              input.value = "";
-
-            }
-
+          if (input) {
+            input.value = "";
           }
-        );
+        });
 
 
-        /*
-         * QR-ও খালি
-        */
-
-        if (qrInput) {
-
-          qrInput.value = "";
-
+        // QR URL খালি
+        if (qrUrl) {
+          qrUrl.value = "";
         }
 
 
+        // Preview আপডেট
         updatePreview();
-
       }
     );
-
   }
 
 
-  /* =====================================================
-     INITIAL
-  ====================================================== */
+  // =========================================================
+  // PAGE LOAD হওয়ার সঙ্গে সঙ্গে:
+  //
+  // 1. পুরোনো সাইট থেকে তথ্য নেবে
+  // 2. input-এ বসাবে
+  // 3. Preview আপডেট করবে
+  // =========================================================
+  importFromOldSite();
 
   updatePreview();
-
-
-  /*
-   * URL-এ ID থাকলে
-   * Admin data load হবে।
-  */
-
-  loadAdminRecord();
-
 
 })();
