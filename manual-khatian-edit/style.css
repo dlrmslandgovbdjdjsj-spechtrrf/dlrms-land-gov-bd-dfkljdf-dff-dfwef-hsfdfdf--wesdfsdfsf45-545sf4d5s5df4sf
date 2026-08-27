@@ -49,6 +49,7 @@ label {
   font-weight: 700;
 }
 
+
 input, textarea {
   width: 100%;
   border: 1px solid #bbb;
@@ -70,7 +71,6 @@ textarea {
   display: flex;
   gap: 9px;
   margin-top: 14px;
-  flex-wrap: wrap;
 }
 
 button {
@@ -84,16 +84,9 @@ button {
   cursor: pointer;
 }
 
-button.secondary { background: #777; }
-
-.status {
-  margin-top: 10px;
-  min-height: 20px;
-  font-size: 14px;
-  color: #087f3d;
+button.secondary {
+  background: #777;
 }
-
-.status.error { color: #b00020; }
 
 .preview-area {
   overflow: auto;
@@ -114,6 +107,8 @@ button.secondary { background: #777; }
   border: 1px solid #ddd;
   overflow: hidden;
 }
+
+/* Exact coordinate system based on the supplied 1650 x 1275 reference. */
 
 .doc-title {
   position: absolute;
@@ -183,7 +178,7 @@ button.secondary { background: #777; }
 .khat-table .c9 { width: 174px; }
 .khat-table .c10 { width: 70px; }
 .khat-table .c11 { width: 71px; }
-.khat-table .c12 { width: 271px; }
+.khat-table .c12 { width: 175px; }
 
 .khat-table th,
 .khat-table td {
@@ -195,16 +190,12 @@ button.secondary { background: #777; }
   white-space: pre-line;
 }
 
-.khat-table thead .r1 { height: 15px !; }
-.khat-table thead .r2 { height: 7px !; }
-.khat-table thead .r3 { height: 7px !; }
-
-.khat-table thead th {
-  padding: 1px 3px !;
-}
+.khat-table thead .r1 { height: 77px; }
+.khat-table thead .r2 { height: 52px; }
+.khat-table thead .r3 { height: 26px; }
 
 .khat-table tbody .data-row { height: 596px; }
-.khat-table tbody .total-row { height: 35px; }
+.khat-table tbody .total-row { height: 50px; }
 
 .khat-table .owner-text {
   white-space: pre-line;
@@ -217,8 +208,13 @@ button.secondary { background: #777; }
   overflow-wrap: anywhere;
 }
 
-.khat-table .left { text-align: left; }
-.khat-table .right { text-align: right; }
+.khat-table .left {
+  text-align: left;
+}
+
+.khat-table .right {
+  text-align: right;
+}
 
 .khat-table .center {
   text-align: center;
@@ -231,26 +227,33 @@ button.secondary { background: #777; }
   vertical-align: middle;
 }
 
-/* নিচের horizontal line বাদ */
+.lower-line {
+  position: absolute;
+  left: 70px;
+  top: 1001px;
+  width: 1280px;
+  height: 1px;
+  background: #111;
+}
 
 .print-note {
   position: absolute;
   left: 70px;
-  top: 1100px;
+  top: 1012px;
   font-size: 18px;
-  line-height: 1.45;
 }
+
 .form-note {
   position: absolute;
   left: 70px;
-  top: 1127px;
+  top: 1044px;
   font-size: 18px;
 }
 
 .seal {
   position: absolute;
-  left: 759px;
-  top: 1100px;
+  left: 615px;
+  top: 1012px;
   width: 115px;
   height: 90px;
   object-fit: contain;
@@ -258,8 +261,8 @@ button.secondary { background: #777; }
 
 .qr-zone {
   position: absolute;
-  left: 1430px;
-  top: 1100px;
+  left: 1266px;
+  top: 1018px;
   width: 92px;
   height: 92px;
   display: flex;
@@ -297,7 +300,8 @@ button.secondary { background: #777; }
     margin: 0;
   }
 
-  html, body {
+  html,
+  body {
     width: 11in;
     height: 8.5in;
     margin: 0 !important;
@@ -308,18 +312,19 @@ button.secondary { background: #777; }
     print-color-adjust: exact !important;
   }
 
-  .editor-shell {
+  .editor-page {
     width: 11in !important;
     max-width: none !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
+  .editor-header,
   .controls {
     display: none !important;
   }
 
-  .preview-area {
+  .preview-wrap {
     width: 11in !important;
     height: 8.5in !important;
     overflow: hidden !important;
@@ -347,7 +352,8 @@ button.secondary { background: #777; }
   }
 }
 
+
 .doc-title:empty,
-.page-no:empty {
-  display: none;
+.page-no:empty{
+  display:none;
 }
