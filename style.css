@@ -1048,3 +1048,9 @@ a{
     font-size:8px !important;
   }
 }
+
+@media (max-width: 900px) {
+  .login {
+    transform: translateX(96px) !important;
+  }
+}
