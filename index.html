@@ -102,7 +102,11 @@
         display:flex !important;
         align-items:center !important;
         gap:8px !important;
-        transform:translateX(5px) !important;
+      }
+
+      .login{
+        position:relative !important;
+        left:10px !important;
       }
 
       .cart{
@@ -412,6 +416,10 @@
         font-size:28px !important;
       }
 
+      .login{
+        left:10px !important;
+      }
+
       .record-area{
         padding:22px 10px 18px !important;
       }
@@ -487,7 +495,19 @@
         font-size:8px !important;
       }
     }
-  </style>
+  
+    <style>
+      @media (max-width: 900px) {
+        .nav-cart {
+          transform: translateX(96px);
+        }
+        .nav-cart::after {
+          transform: translateX(96px);
+        }
+      }
+    </style>
+
+</style>
 </head>
 
 <body>
